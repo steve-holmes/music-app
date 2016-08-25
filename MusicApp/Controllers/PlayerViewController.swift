@@ -124,6 +124,8 @@ class PlayerViewController: UIViewController {
     }
     
     private var tooltip = TooltipView.sharedTooltipView
+    private var marginTooltipConstraint: NSLayoutConstraint!
+    private var verticalTooltipConstraint: NSLayoutConstraint!
     
     // MARK: - View Controller Lifecycle
     
@@ -385,6 +387,37 @@ extension PlayerViewController {
             return Date.getStringFormatFromTime(currentTime)
         }
         
+        func getTooltip() {
+            marginTooltipConstraint = NSLayoutConstraint(
+                item: self.sliderView,
+                attribute: .CenterX,
+                relatedBy: .Equal,
+                toItem: self.tooltip,
+                attribute: .CenterX,
+                multiplier: 1,
+                constant: 0
+            )
+            
+            verticalTooltipConstraint = NSLayoutConstraint(
+                item: self.sliderView,
+                attribute: .Top,
+                relatedBy: .Equal,
+                toItem: self.tooltip,
+                attribute: .Bottom,
+                multiplier: 1,
+                constant: 0.5 * self.sliderView.frame.size.height
+            )
+            
+            self.view.addConstraints([marginTooltipConstraint, verticalTooltipConstraint])
+            self.view.layoutIfNeeded()
+        }
+        
+        func removeTooltip() {
+            self.view.removeConstraints([marginTooltipConstraint, verticalTooltipConstraint])
+            marginTooltipConstraint = nil
+            verticalTooltipConstraint = nil
+        }
+        
         switch panGestureRecognizer.state {
         case .Began:
             changeLeadingSpaceConstraint()
@@ -394,9 +427,8 @@ extension PlayerViewController {
             currentTimeLabel.text = currentTimeFormatter
             
             tooltip.title = currentTimeFormatter
-            tooltip.frame = self.sliderView.frame
-            tooltip.originY -= 1.5 * self.sliderView.frame.size.height
             self.view.addSubview(tooltip)
+            getTooltip()
         case .Changed:
             changeLeadingSpaceConstraint()
             
@@ -404,18 +436,20 @@ extension PlayerViewController {
             currentTimeLabel.text = currentTimeFormatter
             
             tooltip.title = currentTimeFormatter
-            tooltip.originX = self.sliderView.frame.origin.x
         case .Ended:
             changeLeadingSpaceConstraint()
             if self.sliderViewLeadingSpaceConstraint.constant > unloadProgressBarWidthConstant {
                 self.sliderViewLeadingSpaceConstraint.constant = oldSliderViewConstant
+                removeTooltip()
                 tooltip.removeFromSuperview()
                 return
             }
             currentTime = Int(CGFloat(duration) * sliderViewLeadingSpaceConstraint.constant / (progressBar.frame.size.width - sliderView.frame.size.width))
+            removeTooltip()
             tooltip.removeFromSuperview()
         case .Cancelled:
             changeLeadingSpaceConstraint()
+            removeTooltip()
             tooltip.removeFromSuperview()
             self.sliderViewLeadingSpaceConstraint.constant = oldSliderViewConstant
         default:

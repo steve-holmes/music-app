@@ -24,54 +24,39 @@ class TooltipView: UIView {
     
     private func commonInit() {
         self.backgroundColor = UIColor.blackColor()
-        self.layer.cornerRadius = self.bounds.size.height / 4
         
         titleLabel = UILabel(frame: bounds)
         titleLabel.text = title
         titleLabel.textAlignment = .Center
         titleLabel.textColor = UIColor.whiteColor()
-        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.font = UIFont(name: "AvenirNext-Regular", size: 11)
+        
         self.addSubview(titleLabel)
-    }
-    
-    var originX: CGFloat {
-        get {
-            return self.frame.origin.x
-        }
-        set {
-            self.frame.origin.x = newValue
-            titleLabel.frame = bounds
-        }
-    }
-    
-    var originY: CGFloat {
-        get {
-            return self.frame.origin.y
-        }
-        set {
-            self.frame.origin.y = newValue
-            titleLabel.frame = bounds
-        }
-    }
-    
-    var sizeWidth: CGFloat {
-        get {
-            return self.frame.size.width
-        }
-        set {
-            self.frame.size.width = newValue
-            titleLabel.frame = bounds
-        }
-    }
-    
-    var sizeHeight: CGFloat {
-        get {
-            return self.frame.size.height
-        }
-        set {
-            self.frame.size.height = newValue
-            titleLabel.frame = bounds
-        }
+        
+        self.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        let horizontalContraints = NSLayoutConstraint.constraintsWithVisualFormat(
+            "H:|-(5)-[titleLabel]-(5)-|",
+            options: [],
+            metrics: nil,
+            views: ["titleLabel": titleLabel]
+        )
+        
+        let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
+            "V:|[titleLabel]|",
+            options: [],
+            metrics: nil,
+            views: ["titleLabel": titleLabel]
+        )
+        
+        self.addConstraints(horizontalContraints)
+        self.addConstraints(verticalConstraints)
+        
+        self.layoutIfNeeded()
+        
+        self.layer.cornerRadius = self.bounds.size.height / 4
     }
     
     var title: String {
@@ -81,5 +66,13 @@ class TooltipView: UIView {
     }
     
     var titleLabel: UILabel!
+    
+    private var targetRect: CGRect?
+    private var containerView: UIView?
+    
+    func setTargetRect(targetRect: CGRect, inView targetView: UIView) {
+        self.targetRect = targetRect
+        self.containerView = targetView
+    }
     
 }

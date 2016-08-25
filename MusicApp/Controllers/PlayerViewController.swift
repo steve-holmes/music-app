@@ -36,9 +36,7 @@ class PlayerViewController: UIViewController {
             guard playedProgressBarWidthConstrant != nil else { return }
             guard sliderViewLeadingSpaceConstraint != nil else { return }
             
-            let currentMinute = Date.getMinuteFromTime(currentTime)
-            let currentSecond = Date.getSecondFromTime(currentTime)
-            currentTimeLabel?.text = String(format: "%02d:%02d", currentMinute, currentSecond)
+            currentTimeLabel?.text = Date.getStringFormatFromTime(currentTime)
             
             let multiplier = CGFloat(Float(currentTime) / Float(duration))
             
@@ -125,6 +123,8 @@ class PlayerViewController: UIViewController {
         return self.progressBar.frame.size.width - self.unloadProgressBar.frame.size.width
     }
     
+    private var tooltip = TooltipView.sharedTooltipView
+    
     // MARK: - View Controller Lifecycle
     
     override func viewDidLoad() {
@@ -173,10 +173,8 @@ class PlayerViewController: UIViewController {
         
         sliderView.layer.cornerRadius = sliderView.bounds.size.height / 2
         sliderView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(didRecognizeByGestureForSlider(_:))))
-        
-        let durationMinute = Date.getMinuteFromTime(duration)
-        let durationSecond = Date.getSecondFromTime(duration)
-        durationLabel.text = String(format: "%02d:%02d", durationMinute, durationSecond)
+
+        durationLabel.text = Date.getStringFormatFromTime(duration)
         
         // Call the observer of currentTime
         currentTime = currentTime - 1 + 1
@@ -313,6 +311,12 @@ class PlayerViewController: UIViewController {
             return time % 60
         }
         
+        static func getStringFormatFromTime(time: Int) -> String {
+            let minute = Date.getMinuteFromTime(time)
+            let second = Date.getSecondFromTime(time)
+            return String(format: "%02d:%02d", minute, second)
+        }
+        
     }
 
 }
@@ -376,21 +380,43 @@ extension PlayerViewController {
             self.sliderViewLeadingSpaceConstraint.constant = newPosition
         }
         
+        func getTimeFormaterFromSliderViewConstraint() -> String {
+            let currentTime = Int(CGFloat(duration) * sliderViewLeadingSpaceConstraint.constant / (progressBar.frame.size.width - sliderView.frame.size.width))
+            return Date.getStringFormatFromTime(currentTime)
+        }
+        
         switch panGestureRecognizer.state {
         case .Began:
             changeLeadingSpaceConstraint()
             oldSliderViewConstant = self.sliderViewLeadingSpaceConstraint.constant
+            
+            let currentTimeFormatter = Date.getStringFormatFromTime(currentTime)
+            currentTimeLabel.text = currentTimeFormatter
+            
+            tooltip.title = currentTimeFormatter
+            tooltip.frame = self.sliderView.frame
+            tooltip.originY -= 1.5 * self.sliderView.frame.size.height
+            self.view.addSubview(tooltip)
         case .Changed:
             changeLeadingSpaceConstraint()
+            
+            let currentTimeFormatter = getTimeFormaterFromSliderViewConstraint()
+            currentTimeLabel.text = currentTimeFormatter
+            
+            tooltip.title = currentTimeFormatter
+            tooltip.originX = self.sliderView.frame.origin.x
         case .Ended:
             changeLeadingSpaceConstraint()
             if self.sliderViewLeadingSpaceConstraint.constant > unloadProgressBarWidthConstant {
                 self.sliderViewLeadingSpaceConstraint.constant = oldSliderViewConstant
+                tooltip.removeFromSuperview()
                 return
             }
             currentTime = Int(CGFloat(duration) * sliderViewLeadingSpaceConstraint.constant / (progressBar.frame.size.width - sliderView.frame.size.width))
+            tooltip.removeFromSuperview()
         case .Cancelled:
             changeLeadingSpaceConstraint()
+            tooltip.removeFromSuperview()
             self.sliderViewLeadingSpaceConstraint.constant = oldSliderViewConstant
         default:
             break

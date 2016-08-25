@@ -319,6 +319,7 @@
                         <outlet property="sliderViewLeadingSpaceConstraint" destination="K8B-An-CPt" id="GY8-sk-xO9"/>
                         <outlet property="topVisualEffectView" destination="OSv-hj-aH0" id="RJN-OD-OCK"/>
                         <outlet property="unloadProgressBar" destination="6oX-tU-R25" id="3CL-4N-NvF"/>
+                        <outlet property="unloadProgressBarTrailingWidthConstraint" destination="OU7-Q0-gHQ" id="Q4D-84-5Yu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TTr-xR-Xbb" userLabel="First Responder" sceneMemberID="firstResponder"/>

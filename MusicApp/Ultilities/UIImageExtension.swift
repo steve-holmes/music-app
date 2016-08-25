@@ -39,16 +39,16 @@ extension UIImage {
         return image
     }
     
-    func imageWithInnerImage(innerImage: UIImage, inRect frame: CGRect) -> UIImage {
+    func imageWithInnerImage(innerImage: UIImage, inRect rect: CGRect) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(self.size, false, 0.0)
         drawInRect(CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
         
         if let context = UIGraphicsGetCurrentContext() {
             UIGraphicsPushContext(context)
-            innerImage.drawInRect(frame)
+            innerImage.drawInRect(rect)
             UIGraphicsPopContext()
         } else {
-            innerImage.drawInRect(frame)
+            innerImage.drawInRect(rect)
         }
     
         let image = UIGraphicsGetImageFromCurrentImageContext()
@@ -56,9 +56,13 @@ extension UIImage {
         return image
     }
     
-    func imageWithoutInnerImage(innerImage: UIImage, inRect frame: CGRect) -> UIImage {
-        let image = innerImage.imageWithColor(UIColor.clearColor())
-        return imageWithInnerImage(image, inRect: frame)
+    func imageWithoutInnerImage(innerImage: UIImage, inRect rect: CGRect) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(self.size, false, 0.0)
+        self.drawInRect(CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
+        innerImage.drawInRect(rect, blendMode: .DestinationIn, alpha: 1.0)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
     
     func imageWithInnerImage(innerImage: UIImage, atCenter center: CGPoint) -> UIImage {

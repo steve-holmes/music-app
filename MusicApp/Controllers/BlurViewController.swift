@@ -42,11 +42,11 @@ class BlurViewController: UIViewController {
         circleImage = circleImage.imageWithRadius(circleImageView.bounds.size.width / 2)
         
         let playImage = UIImage(named: "Play")!
-        circleImage.imageWithoutInnerImage(playImage, inRect: CGRect(
-            x: circleImage.size.height / 2,
-            y: circleImage.size.width / 2,
-            width: circleImage.size.width / 4,
-            height: circleImage.size.height / 4
+        circleImage = circleImage.imageWithoutInnerImage(playImage, inRect: CGRect(
+            x: circleImage.size.height / 4,
+            y: circleImage.size.width / 4,
+            width: circleImage.size.width / 2,
+            height: circleImage.size.height / 2
         ))
         
         circleImageView.image = circleImage

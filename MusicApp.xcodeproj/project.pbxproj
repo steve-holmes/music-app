@@ -17,7 +17,7 @@
 		9E6DFB831D585A7D004EB139 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E6DFB821D585A7D004EB139 /* Assets.xcassets */; };
 		9E6DFB861D585A7D004EB139 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E6DFB841D585A7D004EB139 /* LaunchScreen.storyboard */; };
 		9E7C2D8B1D6B5BF300639129 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2D8A1D6B5BF300639129 /* UIImageExtension.swift */; };
-		9E91B9B41D6E81F30063285D /* BlurViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E91B9B31D6E81F30063285D /* BlurViewController.swift */; };
+		9E91B9B61D6EC4300063285D /* BlurViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E91B9B51D6EC4300063285D /* BlurViewController.swift */; };
 		9E97D7BA1D6D8EF4006675D3 /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E97D7B91D6D8EF4006675D3 /* VideoPlayerViewController.swift */; };
 		9E97D7BC1D6D8F20006675D3 /* NSNumberExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E97D7BB1D6D8F20006675D3 /* NSNumberExtension.swift */; };
 		9E9B89541D699C5E00EC0DBF /* SinglePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9B89531D699C5E00EC0DBF /* SinglePlayerViewController.swift */; };
@@ -44,7 +44,7 @@
 		9E6DFB851D585A7D004EB139 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9E6DFB871D585A7D004EB139 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E7C2D8A1D6B5BF300639129 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageExtension.swift; path = Ultilities/UIImageExtension.swift; sourceTree = "<group>"; };
-		9E91B9B31D6E81F30063285D /* BlurViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurViewController.swift; sourceTree = "<group>"; };
+		9E91B9B51D6EC4300063285D /* BlurViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlurViewController.swift; path = Controllers/BlurViewController.swift; sourceTree = "<group>"; };
 		9E97D7B91D6D8EF4006675D3 /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoPlayerViewController.swift; path = Controllers/VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		9E97D7BB1D6D8F20006675D3 /* NSNumberExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSNumberExtension.swift; path = Ultilities/NSNumberExtension.swift; sourceTree = "<group>"; };
 		9E9B89531D699C5E00EC0DBF /* SinglePlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SinglePlayerViewController.swift; path = Controllers/SinglePlayerViewController.swift; sourceTree = "<group>"; };
@@ -89,9 +89,9 @@
 		9E5E73B21D58983200E7A9AF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9E91B9B51D6EC4300063285D /* BlurViewController.swift */,
 				9E49E29A1D6D445200CCBE2E /* VisualViewController.swift */,
 				9EF938C71D6A182A009D3E68 /* TempViewController.swift */,
-				9E91B9B31D6E81F30063285D /* BlurViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -411,7 +411,7 @@
 				9E5F13761D66C3A00036529D /* PlayerViewController.swift in Sources */,
 				9E97D7BC1D6D8F20006675D3 /* NSNumberExtension.swift in Sources */,
 				9EF938C81D6A182A009D3E68 /* TempViewController.swift in Sources */,
-				9E91B9B41D6E81F30063285D /* BlurViewController.swift in Sources */,
+				9E91B9B61D6EC4300063285D /* BlurViewController.swift in Sources */,
 				9E7C2D8B1D6B5BF300639129 /* UIImageExtension.swift in Sources */,
 				9EBA8EA71D598E6C0084E44A /* TableCellsIdentifier.swift in Sources */,
 				9E97D7BA1D6D8EF4006675D3 /* VideoPlayerViewController.swift in Sources */,

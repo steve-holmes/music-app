@@ -29,7 +29,34 @@ class PlayerViewController: UIViewController {
     // MARK: - Models
     
     var duration: Int = 752
-    var currentTime: Int = 175
+    
+    var currentTime: Int = 175 {
+        didSet {
+            guard playedProgressBar != nil else { return }
+            guard playedProgressBarWidthConstrant != nil else { return }
+            guard sliderViewLeadingSpaceConstraint != nil else { return }
+            
+            let currentMinute = Date.getMinuteFromTime(currentTime)
+            let currentSecond = Date.getSecondFromTime(currentTime)
+            currentTimeLabel?.text = String(format: "%02d:%02d", currentMinute, currentSecond)
+            
+            let multiplier = CGFloat(Float(currentTime) / Float(duration))
+            
+            self.view?.removeConstraint(playedProgressBarWidthConstrant)
+            playedProgressBarWidthConstrant = NSLayoutConstraint(
+                item: playedProgressBar,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: progressBar,
+                attribute: .Width,
+                multiplier: multiplier,
+                constant: 0
+            )
+            self.view.addConstraint(playedProgressBarWidthConstrant)
+            
+            sliderViewLeadingSpaceConstraint?.constant = (progressBar.frame.size.width - sliderView.frame.size.width) * multiplier
+        }
+    }
     
     var backgroundImage: UIImage = UIImage(named: "background")!
     
@@ -71,6 +98,7 @@ class PlayerViewController: UIViewController {
     
     @IBOutlet weak var sliderViewLeadingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var playedProgressBarWidthConstrant: NSLayoutConstraint!
+    @IBOutlet weak var unloadProgressBarTrailingWidthConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var backwardButtonLeadingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var forwardButtonTrailingConstraint: NSLayoutConstraint!
@@ -87,6 +115,14 @@ class PlayerViewController: UIViewController {
     
     @IBAction func forwardButtonTapped() {
         print(#function)
+    }
+    
+    // MARK: Private properties
+    
+    private var oldSliderViewConstant: CGFloat = 0
+    
+    private var unloadProgressBarWidthConstant: CGFloat {
+        return self.progressBar.frame.size.width - self.unloadProgressBar.frame.size.width
     }
     
     // MARK: - View Controller Lifecycle
@@ -136,31 +172,14 @@ class PlayerViewController: UIViewController {
         }
         
         sliderView.layer.cornerRadius = sliderView.bounds.size.height / 2
-        sliderViewLeadingSpaceConstraint.constant = progressBar.bounds.size.width * 0.3
+        sliderView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(didRecognizeByGestureForSlider(_:))))
         
         let durationMinute = Date.getMinuteFromTime(duration)
         let durationSecond = Date.getSecondFromTime(duration)
         durationLabel.text = String(format: "%02d:%02d", durationMinute, durationSecond)
         
-        let currentMinute = Date.getMinuteFromTime(currentTime)
-        let currentSecond = Date.getSecondFromTime(currentTime)
-        currentTimeLabel.text = String(format: "%02d:%02d", currentMinute, currentSecond)
-        
-        let multiplier = CGFloat(Float(currentTime) / Float(duration))
-        
-        self.view.removeConstraint(playedProgressBarWidthConstrant)
-        playedProgressBarWidthConstrant = NSLayoutConstraint(
-            item: playedProgressBar,
-            attribute: .Width,
-            relatedBy: .Equal,
-            toItem: progressBar,
-            attribute: .Width,
-            multiplier: multiplier,
-            constant: 0
-        )
-        self.view.addConstraint(playedProgressBarWidthConstrant)
-        
-        sliderViewLeadingSpaceConstraint.constant = (progressBar.frame.size.width - sliderView.frame.size.width) * multiplier
+        // Call the observer of currentTime
+        currentTime = currentTime - 1 + 1
     }
     
     private func setupButtons() {
@@ -277,6 +296,24 @@ class PlayerViewController: UIViewController {
             }
         )
     }
+    
+    // MARK: Internal struct Date - An helper structure
+    
+    private struct Date {
+        
+        static func getHourFromTime(time: Int) -> Int {
+            return time / 60 / 60
+        }
+        
+        static func getMinuteFromTime(time: Int) -> Int {
+            return time / 60 % 60
+        }
+        
+        static func getSecondFromTime(time: Int) -> Int {
+            return time % 60
+        }
+        
+    }
 
 }
 
@@ -320,22 +357,44 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
         }
     }
     
-    // MARK: Internal struct Date - An helper structure
+}
+
+// MARK: Gesture Recognizer
+
+extension PlayerViewController {
     
-    private struct Date {
+    func didRecognizeByGestureForSlider(panGestureRecognizer: UIPanGestureRecognizer) {
         
-        static func getHourFromTime(time: Int) -> Int {
-            return time / 60 / 60
+        func changeLeadingSpaceConstraint() {
+            let newPosition = self.sliderViewLeadingSpaceConstraint.constant + panGestureRecognizer.translationInView(self.sliderView).x
+            panGestureRecognizer.setTranslation(CGPointZero, inView: self.sliderView)
+            
+            if newPosition < 0 || newPosition > self.progressBar.frame.size.width - self.sliderView.frame.size.width {
+                return
+            }
+            
+            self.sliderViewLeadingSpaceConstraint.constant = newPosition
         }
         
-        static func getMinuteFromTime(time: Int) -> Int {
-            return time / 60 % 60
+        switch panGestureRecognizer.state {
+        case .Began:
+            changeLeadingSpaceConstraint()
+            oldSliderViewConstant = self.sliderViewLeadingSpaceConstraint.constant
+        case .Changed:
+            changeLeadingSpaceConstraint()
+        case .Ended:
+            changeLeadingSpaceConstraint()
+            if self.sliderViewLeadingSpaceConstraint.constant > unloadProgressBarWidthConstant {
+                self.sliderViewLeadingSpaceConstraint.constant = oldSliderViewConstant
+                return
+            }
+            currentTime = Int(CGFloat(duration) * sliderViewLeadingSpaceConstraint.constant / (progressBar.frame.size.width - sliderView.frame.size.width))
+        case .Cancelled:
+            changeLeadingSpaceConstraint()
+            self.sliderViewLeadingSpaceConstraint.constant = oldSliderViewConstant
+        default:
+            break
         }
-        
-        static func getSecondFromTime(time: Int) -> Int {
-            return time % 60
-        }
-        
     }
     
 }

@@ -91,10 +91,9 @@ class HomeViewController: UIViewController {
     var animationInProgressInCallbackOfPanGestureRecognizer = false
     
     func didRecognizeOnMiddleViewByTapGestureRecognizer(gestureRecognizer: UITapGestureRecognizer) {
-        print(#function)
-        
         if animationInProgressInCallbackOfPanGestureRecognizer { return }
         
+        playButtonImageView.hidden = true
         UIView.animateWithDuration(
             3,
             delay: 0,
@@ -106,6 +105,7 @@ class HomeViewController: UIViewController {
             completion: { completed in
                 guard completed else {
                     self.animationInProgressInCallbackOfPanGestureRecognizer = false
+                    self.playButtonImageView.hidden = false
                     return
                 }
                 
@@ -116,8 +116,9 @@ class HomeViewController: UIViewController {
                     animations: {
                         self.playImageView.layer.transform = CATransform3DIdentity
                     },
-                    completion: { competed in
+                    completion: { completed in
                         self.animationInProgressInCallbackOfPanGestureRecognizer = false
+                        self.playButtonImageView.hidden = false
                     }
                 )
             }

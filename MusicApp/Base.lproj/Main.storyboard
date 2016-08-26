@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="WOf-6M-eZ7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EJ1-Jo-al4">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -242,13 +242,13 @@
                                         <rect key="frame" x="150" y="0.0" width="75" height="75"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zmb-H3-u1Y">
-                                                <rect key="frame" x="12" y="12" width="50" height="50"/>
+                                                <rect key="frame" x="11" y="11" width="52.5" height="52.5"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="nIV-uE-b7X">
-                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                        <rect key="frame" x="0.0" y="0.5" width="52.5" height="52.5"/>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Play" translatesAutoresizingMaskIntoConstraints="NO" id="rAU-Y4-Pj6">
-                                                        <rect key="frame" x="8" y="8" width="34" height="34"/>
+                                                        <rect key="frame" x="8.5" y="9" width="35.5" height="35.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="rAU-Y4-Pj6" secondAttribute="height" id="3T2-cy-y05"/>
                                                         </constraints>
@@ -268,7 +268,7 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="zmb-H3-u1Y" firstAttribute="width" secondItem="0VV-kc-YgX" secondAttribute="width" multiplier="2:3" id="8MT-ZE-09n"/>
+                                            <constraint firstItem="zmb-H3-u1Y" firstAttribute="width" secondItem="0VV-kc-YgX" secondAttribute="width" multiplier="7:10" id="8MT-ZE-09n"/>
                                             <constraint firstItem="zmb-H3-u1Y" firstAttribute="centerY" secondItem="0VV-kc-YgX" secondAttribute="centerY" id="CBK-Y4-0Pg"/>
                                             <constraint firstAttribute="width" secondItem="0VV-kc-YgX" secondAttribute="height" id="Kcf-FL-xC4"/>
                                             <constraint firstItem="zmb-H3-u1Y" firstAttribute="centerX" secondItem="0VV-kc-YgX" secondAttribute="centerX" id="zck-8j-CVs"/>
@@ -821,7 +821,7 @@
                         <outlet property="sliderViewLeadingSpaceConstraint" destination="K8B-An-CPt" id="GY8-sk-xO9"/>
                         <outlet property="topVisualEffectView" destination="OSv-hj-aH0" id="RJN-OD-OCK"/>
                         <outlet property="unloadProgressBar" destination="6oX-tU-R25" id="3CL-4N-NvF"/>
-                        <outlet property="unloadProgressBarTrailingWidthConstraint" destination="OU7-Q0-gHQ" id="Q4D-84-5Yu"/>
+                        <outlet property="unloadProgressBarWidthConstraint" destination="OU7-Q0-gHQ" id="RSz-Il-3yi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TTr-xR-Xbb" userLabel="First Responder" sceneMemberID="firstResponder"/>

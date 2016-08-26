@@ -74,7 +74,7 @@ class PlayerViewController: UIViewController {
                 multiplier: multiplier,
                 constant: 0
             )
-            self.view.addConstraint(playedProgressBarWidthConstrant)
+            self.view?.addConstraint(playedProgressBarWidthConstrant)
             
             sliderViewLeadingSpaceConstraint?.constant = (progressBar.frame.size.width - sliderView.frame.size.width) * multiplier
         }
@@ -120,7 +120,7 @@ class PlayerViewController: UIViewController {
     
     @IBOutlet weak var sliderViewLeadingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var playedProgressBarWidthConstrant: NSLayoutConstraint!
-    @IBOutlet weak var unloadProgressBarTrailingWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var unloadProgressBarWidthConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var backwardButtonLeadingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var forwardButtonTrailingConstraint: NSLayoutConstraint!
@@ -179,8 +179,6 @@ class PlayerViewController: UIViewController {
         self.leftView.alpha = 1
         self.middleView.alpha = 0.5
         self.rightView.alpha = 0.5
-        
-        self.topVisualEffectView.alpha = 0.9
     }
     
     private func setupProgressBar() {
@@ -420,6 +418,23 @@ extension PlayerViewController {
     
     func didRecognizeByGestureForSlider(panGestureRecognizer: UIPanGestureRecognizer) {
         
+        func updateProgressBarWithConstant(constant: CGFloat) {
+            let multiplier = constant / self.progressBar.frame.size.width
+            self.view.removeConstraint(playedProgressBarWidthConstrant)
+            playedProgressBarWidthConstrant = NSLayoutConstraint(
+                item: playedProgressBar,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: progressBar,
+                attribute: .Width,
+                multiplier: multiplier,
+                constant: 0
+            )
+            self.view.addConstraint(playedProgressBarWidthConstrant)
+            
+            self.sliderViewLeadingSpaceConstraint.constant = constant
+        }
+        
         func changeLeadingSpaceConstraint() {
             let newPosition = self.sliderViewLeadingSpaceConstraint.constant + panGestureRecognizer.translationInView(self.sliderView).x
             panGestureRecognizer.setTranslation(CGPointZero, inView: self.sliderView)
@@ -428,7 +443,7 @@ extension PlayerViewController {
                 return
             }
             
-            self.sliderViewLeadingSpaceConstraint.constant = newPosition
+            updateProgressBarWithConstant(newPosition)
         }
         
         func getTimeFormaterFromSliderViewConstraint() -> String {
@@ -477,8 +492,8 @@ extension PlayerViewController {
             
             let currentTimeFormatter = Date.getStringFormatFromTime(currentTime)
             currentTimeLabel.text = currentTimeFormatter
-            
             tooltip.title = currentTimeFormatter
+            
             self.view.addSubview(tooltip)
             getTooltip()
         case .Changed:
@@ -486,24 +501,29 @@ extension PlayerViewController {
             
             let currentTimeFormatter = getTimeFormaterFromSliderViewConstraint()
             currentTimeLabel.text = currentTimeFormatter
-            
             tooltip.title = currentTimeFormatter
         case .Ended:
             changeLeadingSpaceConstraint()
+            
             if self.sliderViewLeadingSpaceConstraint.constant > unloadProgressBarWidthConstant {
-                self.sliderViewLeadingSpaceConstraint.constant = oldSliderViewConstant
+                updateProgressBarWithConstant(oldSliderViewConstant)
+                currentTimeLabel.text = getTimeFormaterFromSliderViewConstraint()
+                
                 removeTooltip()
                 tooltip.removeFromSuperview()
+                
                 return
             }
+            
             currentTime = Int(CGFloat(duration) * sliderViewLeadingSpaceConstraint.constant / (progressBar.frame.size.width - sliderView.frame.size.width))
             removeTooltip()
             tooltip.removeFromSuperview()
         case .Cancelled:
             changeLeadingSpaceConstraint()
+            currentTimeLabel.text = getTimeFormaterFromSliderViewConstraint()
+            
             removeTooltip()
             tooltip.removeFromSuperview()
-            self.sliderViewLeadingSpaceConstraint.constant = oldSliderViewConstant
         default:
             break
         }

@@ -520,22 +520,3 @@ extension PlayerViewController {
     }
     
 }
-
-// MARK: Add or remove a child view controller
-
-private extension UIViewController {
-    
-    func displayContentController(controller: UIViewController, inView view: UIView) {
-        self.addChildViewController(controller)
-        controller.view.frame = view.bounds
-        view.addSubview(controller.view)
-        controller.didMoveToParentViewController(self)
-    }
-    
-    func hideContentController(controller: UIViewController) {
-        controller.willMoveToParentViewController(nil)
-        controller.view.removeFromSuperview()
-        controller.removeFromParentViewController()
-    }
-    
-}

@@ -12,7 +12,16 @@ import UIKit
 
 protocol PlayerChildViewControllerDelegate {
     
-    func playerChildViewController(controller: PlayerChildViewController, didRecognizeBySwipeGestureRecognizer swipeGestureRecognizer: UISwipeGestureRecognizer)
+    func playerChildViewController(
+        controller: PlayerChildViewController,
+        didRecognizeBySwipeGestureRecognizer swipeGestureRecognizer: UISwipeGestureRecognizer
+    )
+    
+    func playerChildViewController(
+        controller: PlayerChildViewController,
+        options: PlayerChildViewControllerPanGestureRecognizerDirection?,
+        didRecognizeByPanGestureRecognizer panGestureRecognizer: UIPanGestureRecognizer
+    )
     
 }
 
@@ -20,6 +29,19 @@ protocol PlayerChildViewController {
     
     var delegate: PlayerChildViewControllerDelegate? { get }
     
+}
+
+struct PlayerChildViewControllerPanGestureRecognizerDirection: OptionSetType {
+    static let Left     = PlayerChildViewControllerPanGestureRecognizerDirection(rawValue: 1)
+    static let Right    = PlayerChildViewControllerPanGestureRecognizerDirection(rawValue: 2)
+    static let Top      = PlayerChildViewControllerPanGestureRecognizerDirection(rawValue: 4)
+    static let Bottom   = PlayerChildViewControllerPanGestureRecognizerDirection(rawValue: 8)
+    
+    static let All: PlayerChildViewControllerPanGestureRecognizerDirection = [Left, Right, Top, Bottom]
+    
+    let rawValue: Int
+    
+    init(rawValue: Int) { self.rawValue = rawValue }
 }
 
 // MARK: Class PlayerViewController
@@ -341,14 +363,12 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
     }
     
     private func listPlayerViewController(listPlayerController: ListPlayerViewController, didRecognizeBySwipeGestureRecognizer swipeGestureRecognizer: UISwipeGestureRecognizer) {
-        print(#function)
         if swipeGestureRecognizer.direction == .Left {
             position = .Middle
         }
     }
     
     private func singlePlayerViewController(singlePlayerController: SinglePlayerViewController, didRecognizeBySwipeGestureRecognizer swipeGestureRecognizer: UISwipeGestureRecognizer) {
-        print(#function)
         if swipeGestureRecognizer.direction == .Left {
             position = .Right
         } else if swipeGestureRecognizer.direction == .Right {
@@ -357,10 +377,37 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
     }
     
     private func lyricPlayerViewController(lyricController: LyricPlayerViewController, didRecognizeBySwipeGestureRecognizer swipeGestureRecognizer: UISwipeGestureRecognizer) {
-        print(#function)
         if swipeGestureRecognizer.direction == .Right {
             position = .Middle
         }
+    }
+    
+    func playerChildViewController(controller: PlayerChildViewController, options: PlayerChildViewControllerPanGestureRecognizerDirection?, didRecognizeByPanGestureRecognizer panGestureRecognizer: UIPanGestureRecognizer) {
+        guard let options = options else { return }
+        
+        if let controller = controller as? ListPlayerViewController where !options.isEmpty && options.isSubsetOf(PlayerChildViewControllerPanGestureRecognizerDirection.Left) {
+            self.listPlayerViewController(controller, didRecognizeByPanGestureRecognizer: panGestureRecognizer)
+        }
+        
+        if let controller = controller as? SinglePlayerViewController where PlayerChildViewControllerPanGestureRecognizerDirection.All.subtract(options).isEmpty {
+            self.singlePlayerViewController(controller, didRecognizeByPanGestureRecognizer: panGestureRecognizer)
+        }
+        
+        if let controller = controller as? LyricPlayerViewController where !options.isEmpty && options.isSubsetOf(PlayerChildViewControllerPanGestureRecognizerDirection.Right) {
+            self.lyricPlayerViewController(controller, didRecognizeByPanGestureRecognizer: panGestureRecognizer)
+        }
+    }
+    
+    private func listPlayerViewController(listPlayerController: ListPlayerViewController, didRecognizeByPanGestureRecognizer panGestureRecognizer: UIPanGestureRecognizer) {
+        print(#function)
+    }
+    
+    private func singlePlayerViewController(singlePlayerController: SinglePlayerViewController, didRecognizeByPanGestureRecognizer panGestureRecognizer: UIPanGestureRecognizer) {
+        print(#function)
+    }
+    
+    private func lyricPlayerViewController(lyricPlayerController: LyricPlayerViewController, didRecognizeByPanGestureRecognizer panGestureRecognizer: UIPanGestureRecognizer) {
+        print(#function)
     }
     
 }

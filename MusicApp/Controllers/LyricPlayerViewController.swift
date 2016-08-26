@@ -114,6 +114,14 @@ class LyricPlayerViewController: UIViewController, PlayerChildViewController {
         self.delegate?.playerChildViewController(self, didRecognizeBySwipeGestureRecognizer: gestureRecognizer)
     }
     
+    func performPanGestureRecognzier(gestureRecognizer: UIPanGestureRecognizer) {
+        self.delegate?.playerChildViewController(
+            self,
+            options: PlayerChildViewControllerPanGestureRecognizerDirection.Right,
+            didRecognizeByPanGestureRecognizer: gestureRecognizer
+        )
+    }
+    
     // MARK: View Controller life cycle
     
     override func viewDidLoad() {
@@ -128,6 +136,9 @@ class LyricPlayerViewController: UIViewController, PlayerChildViewController {
         let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(performSwipeGestureRecognizer(_:)))
         swipeGestureRecognizer.direction = .Right
         self.view.addGestureRecognizer(swipeGestureRecognizer)
+        
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(performPanGestureRecognzier(_:)))
+        self.view.addGestureRecognizer(panGestureRecognizer)
     }
     
     // MARK: Timer

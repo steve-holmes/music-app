@@ -20,6 +20,14 @@ class SinglePlayerViewController: UIViewController, PlayerChildViewController {
         self.delegate?.playerChildViewController(self, didRecognizeBySwipeGestureRecognizer: gestureRecognizer)
     }
     
+    func performPanGestureRecognzier(gestureRecognizer: UIPanGestureRecognizer) {
+        self.delegate?.playerChildViewController(
+            self,
+            options: PlayerChildViewControllerPanGestureRecognizerDirection.All,
+            didRecognizeByPanGestureRecognizer: gestureRecognizer
+        )
+    }
+    
     // MARK: View Controller Lifecycle
     
     override func viewDidLoad() {
@@ -32,6 +40,9 @@ class SinglePlayerViewController: UIViewController, PlayerChildViewController {
         let rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(performSwipeGestureRecognizer(_:)))
         rightSwipeGestureRecognizer.direction = .Right
         self.view.addGestureRecognizer(rightSwipeGestureRecognizer)
+        
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(performPanGestureRecognzier(_:)))
+        self.view.addGestureRecognizer(panGestureRecognizer)
     }
 
 }

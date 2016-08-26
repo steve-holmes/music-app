@@ -41,23 +41,23 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setupChildViewControllers()
+        
         state = .Online
     }
     
     // MARK: Child View Controllers
     
-    private var mineViewController: OfflineViewController!
-    private var onlineViewController: OnlineViewController!
+    private lazy var mineViewController: OfflineViewController = {
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.OfflineController) as! OfflineViewController
+        self.displayContentController(controller, inView: self.backgroundView)
+        return controller
+    }()
     
-    private func setupChildViewControllers() {
-        mineViewController = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.OfflineController) as? OfflineViewController
-        onlineViewController = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.OnlineController) as? OnlineViewController
-        
-        self.displayContentController(mineViewController, inView: backgroundView)
-        self.displayContentController(onlineViewController, inView: backgroundView)
-    }
+    private lazy var onlineViewController: OnlineViewController = {
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.OnlineController) as! OnlineViewController
+        self.displayContentController(controller, inView: self.backgroundView)
+        return controller
+    }()
     
     // MARK: State
     

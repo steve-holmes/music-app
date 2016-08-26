@@ -19,6 +19,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var onlineButtonLabel: UILabel!
     @IBOutlet weak var onlineButtonBackgroundView: UIView!
     
+    @IBOutlet weak var middleView: UIView!
+    
     @IBOutlet weak var backgroundView: UIView!
     
     // MARK: Actions

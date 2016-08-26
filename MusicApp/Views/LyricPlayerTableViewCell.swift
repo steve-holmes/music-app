@@ -24,6 +24,8 @@ protocol LyricPlayerTableViewCellDelegate {
     
 }
 
+// MARK: Class LyricPlayerTableViewCell
+
 class LyricPlayerTableViewCell: UITableViewCell {
 
     // MARK: Outlets

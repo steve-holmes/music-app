@@ -31,6 +31,8 @@ protocol PlayerChildViewController {
     
 }
 
+// MARK: PlayerChildViewControllerPanGestureRecognizerDirection
+
 struct PlayerChildViewControllerPanGestureRecognizerDirection: OptionSetType {
     static let Left     = PlayerChildViewControllerPanGestureRecognizerDirection(rawValue: 1)
     static let Right    = PlayerChildViewControllerPanGestureRecognizerDirection(rawValue: 2)
@@ -178,7 +180,7 @@ class PlayerViewController: UIViewController {
         self.middleView.alpha = 0.5
         self.rightView.alpha = 0.5
         
-        self.topVisualEffectView.alpha = 1
+        self.topVisualEffectView.alpha = 0.9
     }
     
     private func setupProgressBar() {

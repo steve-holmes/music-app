@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0299CF08DA7B454310F8CF5D /* Pods_MusicApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 066655126BE71B6E86727D28 /* Pods_MusicApp.framework */; };
 		9E1AB30B1D68D1F100AF584F /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1AB30A1D68D1F100AF584F /* CircleButton.swift */; };
-		9E49E29B1D6D445200CCBE2E /* VisualViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E49E29A1D6D445200CCBE2E /* VisualViewController.swift */; };
 		9E5F13761D66C3A00036529D /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5F13751D66C3A00036529D /* PlayerViewController.swift */; };
 		9E625F171D6A009200010938 /* ListPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E625F161D6A009200010938 /* ListPlayerTableViewCell.swift */; };
 		9E6DFB7C1D585A7D004EB139 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6DFB7B1D585A7D004EB139 /* AppDelegate.swift */; };
@@ -17,7 +16,7 @@
 		9E6DFB831D585A7D004EB139 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E6DFB821D585A7D004EB139 /* Assets.xcassets */; };
 		9E6DFB861D585A7D004EB139 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E6DFB841D585A7D004EB139 /* LaunchScreen.storyboard */; };
 		9E7C2D8B1D6B5BF300639129 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2D8A1D6B5BF300639129 /* UIImageExtension.swift */; };
-		9E91B9B61D6EC4300063285D /* BlurViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E91B9B51D6EC4300063285D /* BlurViewController.swift */; };
+		9E7CA4DB1D6FEA640017B6A7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7CA4DA1D6FEA640017B6A7 /* HomeViewController.swift */; };
 		9E97D7BA1D6D8EF4006675D3 /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E97D7B91D6D8EF4006675D3 /* VideoPlayerViewController.swift */; };
 		9E97D7BC1D6D8F20006675D3 /* NSNumberExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E97D7BB1D6D8F20006675D3 /* NSNumberExtension.swift */; };
 		9E9B89541D699C5E00EC0DBF /* SinglePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9B89531D699C5E00EC0DBF /* SinglePlayerViewController.swift */; };
@@ -28,14 +27,12 @@
 		9EBA8EA71D598E6C0084E44A /* TableCellsIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBA8EA61D598E6C0084E44A /* TableCellsIdentifier.swift */; };
 		9EBA8EAE1D5994900084E44A /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBA8EAD1D5994900084E44A /* UIFontExtension.swift */; };
 		9ED6CC411D6F1D170052708C /* TooltipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED6CC401D6F1D170052708C /* TooltipView.swift */; };
-		9EF938C81D6A182A009D3E68 /* TempViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF938C71D6A182A009D3E68 /* TempViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		066655126BE71B6E86727D28 /* Pods_MusicApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		59F1784B8D13BF1B706C0FB5 /* Pods-MusicApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MusicApp/Pods-MusicApp.debug.xcconfig"; sourceTree = "<group>"; };
 		9E1AB30A1D68D1F100AF584F /* CircleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleButton.swift; path = Ultilities/Views/CircleButton.swift; sourceTree = "<group>"; };
-		9E49E29A1D6D445200CCBE2E /* VisualViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VisualViewController.swift; path = Controllers/VisualViewController.swift; sourceTree = "<group>"; };
 		9E5F13751D66C3A00036529D /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerViewController.swift; path = Controllers/PlayerViewController.swift; sourceTree = "<group>"; };
 		9E625F161D6A009200010938 /* ListPlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListPlayerTableViewCell.swift; path = Views/ListPlayerTableViewCell.swift; sourceTree = "<group>"; };
 		9E6DFB781D585A7D004EB139 /* MusicApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,7 +42,7 @@
 		9E6DFB851D585A7D004EB139 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9E6DFB871D585A7D004EB139 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E7C2D8A1D6B5BF300639129 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageExtension.swift; path = Ultilities/UIImageExtension.swift; sourceTree = "<group>"; };
-		9E91B9B51D6EC4300063285D /* BlurViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlurViewController.swift; path = Controllers/BlurViewController.swift; sourceTree = "<group>"; };
+		9E7CA4DA1D6FEA640017B6A7 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		9E97D7B91D6D8EF4006675D3 /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoPlayerViewController.swift; path = Controllers/VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		9E97D7BB1D6D8F20006675D3 /* NSNumberExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSNumberExtension.swift; path = Ultilities/NSNumberExtension.swift; sourceTree = "<group>"; };
 		9E9B89531D699C5E00EC0DBF /* SinglePlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SinglePlayerViewController.swift; path = Controllers/SinglePlayerViewController.swift; sourceTree = "<group>"; };
@@ -56,7 +53,6 @@
 		9EBA8EA61D598E6C0084E44A /* TableCellsIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableCellsIdentifier.swift; path = Ultilities/TableCellsIdentifier.swift; sourceTree = "<group>"; };
 		9EBA8EAD1D5994900084E44A /* UIFontExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIFontExtension.swift; path = Ultilities/UIFontExtension.swift; sourceTree = "<group>"; };
 		9ED6CC401D6F1D170052708C /* TooltipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TooltipView.swift; path = Ultilities/Views/TooltipView.swift; sourceTree = "<group>"; };
-		9EF938C71D6A182A009D3E68 /* TempViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TempViewController.swift; path = Controllers/TempViewController.swift; sourceTree = "<group>"; };
 		C84D930697B925119F2A5B39 /* Pods-MusicApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-MusicApp/Pods-MusicApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,9 +88,7 @@
 		9E5E73B21D58983200E7A9AF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				9E91B9B51D6EC4300063285D /* BlurViewController.swift */,
-				9E49E29A1D6D445200CCBE2E /* VisualViewController.swift */,
-				9EF938C71D6A182A009D3E68 /* TempViewController.swift */,
+				9E7CA4DA1D6FEA640017B6A7 /* HomeViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -403,7 +397,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E49E29B1D6D445200CCBE2E /* VisualViewController.swift in Sources */,
 				9EBA8EA51D598E1F0084E44A /* ControllersIdentifier.swift in Sources */,
 				9E9B89561D699C7F00EC0DBF /* ListPlayerViewController.swift in Sources */,
 				9EBA8E9F1D598D250084E44A /* LyricPlayerTableViewCell.swift in Sources */,
@@ -414,9 +407,8 @@
 				9ED6CC411D6F1D170052708C /* TooltipView.swift in Sources */,
 				9E5F13761D66C3A00036529D /* PlayerViewController.swift in Sources */,
 				9E97D7BC1D6D8F20006675D3 /* NSNumberExtension.swift in Sources */,
-				9EF938C81D6A182A009D3E68 /* TempViewController.swift in Sources */,
-				9E91B9B61D6EC4300063285D /* BlurViewController.swift in Sources */,
 				9E7C2D8B1D6B5BF300639129 /* UIImageExtension.swift in Sources */,
+				9E7CA4DB1D6FEA640017B6A7 /* HomeViewController.swift in Sources */,
 				9EBA8EA71D598E6C0084E44A /* TableCellsIdentifier.swift in Sources */,
 				9E97D7BA1D6D8EF4006675D3 /* VideoPlayerViewController.swift in Sources */,
 				9E6DFB7C1D585A7D004EB139 /* AppDelegate.swift in Sources */,

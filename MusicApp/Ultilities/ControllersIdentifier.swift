@@ -8,6 +8,9 @@
 
 struct ControllersIdentifiers {
     
+    // Home View Controller
+    static let HomeController = "HomeController"
+    
     // Player View Controller
     static let PlayerViewController         = "PlayerController"
     static let ListPlayerViewController     = "ListPlayerController"

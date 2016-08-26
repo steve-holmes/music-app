@@ -225,20 +225,20 @@ class PlayerViewController: UIViewController {
     // MARK: Child View Controllers
     
     private lazy var listPlayerViewController: ListPlayerViewController = {
-        let controller = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.ListPlayerViewController) as! ListPlayerViewController
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.ListPlayerController) as! ListPlayerViewController
         controller.delegate = self
         return controller
     }()
     
     private lazy var singlePlayerViewController: SinglePlayerViewController = {
-        let controller = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.SinglePlayerViewController) as! SinglePlayerViewController
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.SinglePlayerController) as! SinglePlayerViewController
         controller.delegate = self
         return controller
     }()
     
     
     private lazy var lyricPlayerViewController: LyricPlayerViewController = {
-        let controller = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.LyricPlayerViewController) as! LyricPlayerViewController
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.LyricPlayerController) as! LyricPlayerViewController
         controller.delegate = self
         return controller
     }()

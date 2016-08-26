@@ -22,6 +22,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var middleView: UIView!
     @IBOutlet weak var innerView: UIView!
     @IBOutlet weak var playImageView: UIImageView!
+    @IBOutlet weak var playButtonImageView: UIImageView!
     
     @IBOutlet weak var backgroundView: UIView!
     
@@ -64,6 +65,12 @@ class HomeViewController: UIViewController {
         return controller
     }()
     
+    private lazy var playerViewController: PlayerViewController = {
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.PlayerController) as! PlayerViewController
+        self.displayContentController(controller, inView: self.backgroundView)
+        return controller
+    }()
+    
     // MARK: Play Button
     private func setupPlayButton() {
         middleView.layer.borderColor = ColorConstants.toolbarBorderColor.CGColor
@@ -75,14 +82,46 @@ class HomeViewController: UIViewController {
         innerView.layer.cornerRadius = innerView.layer.frame.size.width / 2
         innerView.clipsToBounds = true
         
-        let image = playImageView.image?.imageWithColor(UIColor.whiteColor())
-        playImageView.image = image
+        let playImage = playButtonImageView.image?.imageWithColor(UIColor.whiteColor())
+        playButtonImageView.image = playImage
     }
     
     // MARK: Gesture Recognizer
     
+    var animationInProgressInCallbackOfPanGestureRecognizer = false
+    
     func didRecognizeOnMiddleViewByTapGestureRecognizer(gestureRecognizer: UITapGestureRecognizer) {
         print(#function)
+        
+        if animationInProgressInCallbackOfPanGestureRecognizer { return }
+        
+        UIView.animateWithDuration(
+            3,
+            delay: 0,
+            options: .CurveLinear,
+            animations: {
+                self.animationInProgressInCallbackOfPanGestureRecognizer = true
+                self.playImageView.layer.transform = CATransform3DRotate(CATransform3DIdentity, CGFloat(M_PI), 0, 0, 1)
+            },
+            completion: { completed in
+                guard completed else {
+                    self.animationInProgressInCallbackOfPanGestureRecognizer = false
+                    return
+                }
+                
+                UIView.animateWithDuration(
+                    3,
+                    delay: 0,
+                    options: .CurveLinear,
+                    animations: {
+                        self.playImageView.layer.transform = CATransform3DIdentity
+                    },
+                    completion: { competed in
+                        self.animationInProgressInCallbackOfPanGestureRecognizer = false
+                    }
+                )
+            }
+        )
     }
     
     // MARK: State

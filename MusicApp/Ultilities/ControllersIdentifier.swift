@@ -23,10 +23,10 @@ struct ControllersIdentifiers {
     static let OfflineController            = "OfflineController"
     
     // Player View Controller
-    static let PlayerViewController         = "PlayerController"
-    static let ListPlayerViewController     = "ListPlayerController"
-    static let SinglePlayerViewController   = "SinglePlayerController"
-    static let LyricPlayerViewController    = "LyricPlayerController"
+    static let PlayerController             = "PlayerController"
+    static let ListPlayerController         = "ListPlayerController"
+    static let SinglePlayerController       = "SinglePlayerController"
+    static let LyricPlayerController        = "LyricPlayerController"
     static let VideoPlayerController        = "VideoPlayerController"
     
 }

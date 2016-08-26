@@ -266,7 +266,7 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="zmb-H3-u1Y" firstAttribute="width" secondItem="0VV-kc-YgX" secondAttribute="width" multiplier="2:3" id="8MT-ZE-09n"/>
                                             <constraint firstItem="zmb-H3-u1Y" firstAttribute="centerY" secondItem="0VV-kc-YgX" secondAttribute="centerY" id="CBK-Y4-0Pg"/>
@@ -317,7 +317,8 @@
                         <outlet property="onlineButtonBackgroundView" destination="gMS-nK-QYm" id="pDo-dW-FKV"/>
                         <outlet property="onlineButtonImageView" destination="Cls-c8-5IL" id="tln-TE-VHm"/>
                         <outlet property="onlineButtonLabel" destination="XNs-Hs-dyz" id="cVy-sQ-cWo"/>
-                        <outlet property="playImageView" destination="rAU-Y4-Pj6" id="STa-G1-yZ0"/>
+                        <outlet property="playButtonImageView" destination="rAU-Y4-Pj6" id="yGD-Fr-G5x"/>
+                        <outlet property="playImageView" destination="nIV-uE-b7X" id="KvC-eC-W0s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RUB-pc-l58" userLabel="First Responder" sceneMemberID="firstResponder"/>

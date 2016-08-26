@@ -244,6 +244,9 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zmb-H3-u1Y">
                                                 <rect key="frame" x="12" y="12" width="50" height="50"/>
                                                 <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="nIV-uE-b7X">
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    </imageView>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Play" translatesAutoresizingMaskIntoConstraints="NO" id="rAU-Y4-Pj6">
                                                         <rect key="frame" x="8" y="8" width="34" height="34"/>
                                                         <constraints>
@@ -251,16 +254,19 @@
                                                         </constraints>
                                                     </imageView>
                                                 </subviews>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="rAU-Y4-Pj6" firstAttribute="centerX" secondItem="zmb-H3-u1Y" secondAttribute="centerX" id="BX0-ob-Ooz"/>
                                                     <constraint firstItem="rAU-Y4-Pj6" firstAttribute="centerY" secondItem="zmb-H3-u1Y" secondAttribute="centerY" id="JSu-Kl-mpp"/>
+                                                    <constraint firstAttribute="trailing" secondItem="nIV-uE-b7X" secondAttribute="trailing" id="LLA-6g-Vgl"/>
+                                                    <constraint firstAttribute="bottom" secondItem="nIV-uE-b7X" secondAttribute="bottom" id="MrR-Aj-wcO"/>
+                                                    <constraint firstItem="nIV-uE-b7X" firstAttribute="leading" secondItem="zmb-H3-u1Y" secondAttribute="leading" id="PIc-M4-nn3"/>
                                                     <constraint firstItem="rAU-Y4-Pj6" firstAttribute="width" secondItem="zmb-H3-u1Y" secondAttribute="width" multiplier="2:3" id="dGk-Gb-SrG"/>
+                                                    <constraint firstItem="nIV-uE-b7X" firstAttribute="top" secondItem="zmb-H3-u1Y" secondAttribute="top" id="gIz-Ac-AfG"/>
                                                     <constraint firstAttribute="width" secondItem="zmb-H3-u1Y" secondAttribute="height" multiplier="1:1" id="n2v-nG-whV"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="zmb-H3-u1Y" firstAttribute="width" secondItem="0VV-kc-YgX" secondAttribute="width" multiplier="2:3" id="8MT-ZE-09n"/>
                                             <constraint firstItem="zmb-H3-u1Y" firstAttribute="centerY" secondItem="0VV-kc-YgX" secondAttribute="centerY" id="CBK-Y4-0Pg"/>
@@ -303,6 +309,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="backgroundView" destination="vJU-tb-NyP" id="hGA-Vf-3Sx"/>
+                        <outlet property="innerView" destination="zmb-H3-u1Y" id="d0l-kJ-nCm"/>
                         <outlet property="middleView" destination="0VV-kc-YgX" id="jW2-hi-LsR"/>
                         <outlet property="mineButtonBackgroundView" destination="UdC-SJ-rdz" id="Mvm-tl-Z1l"/>
                         <outlet property="mineButtonImageView" destination="j26-n9-jrV" id="sgv-iZ-MQo"/>
@@ -310,6 +317,7 @@
                         <outlet property="onlineButtonBackgroundView" destination="gMS-nK-QYm" id="pDo-dW-FKV"/>
                         <outlet property="onlineButtonImageView" destination="Cls-c8-5IL" id="tln-TE-VHm"/>
                         <outlet property="onlineButtonLabel" destination="XNs-Hs-dyz" id="cVy-sQ-cWo"/>
+                        <outlet property="playImageView" destination="rAU-Y4-Pj6" id="STa-G1-yZ0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RUB-pc-l58" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -532,7 +540,7 @@
                     <view key="view" contentMode="scaleToFill" id="heI-Mk-536">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>

@@ -20,6 +20,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var onlineButtonBackgroundView: UIView!
     
     @IBOutlet weak var middleView: UIView!
+    @IBOutlet weak var innerView: UIView!
+    @IBOutlet weak var playImageView: UIImageView!
     
     @IBOutlet weak var backgroundView: UIView!
     
@@ -42,6 +44,9 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        middleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didRecognizeOnMiddleViewByTapGestureRecognizer(_:))))
+        
+        setupPlayButton()
         state = .Online
     }
     
@@ -58,6 +63,27 @@ class HomeViewController: UIViewController {
         self.displayContentController(controller, inView: self.backgroundView)
         return controller
     }()
+    
+    // MARK: Play Button
+    private func setupPlayButton() {
+        middleView.layer.borderColor = ColorConstants.toolbarBorderColor.CGColor
+        middleView.layer.borderWidth = 1
+        middleView.layer.cornerRadius = middleView.frame.size.width / 2
+        
+        innerView.layer.borderColor = ColorConstants.toolbarHighlightedBackgroundColor.CGColor
+        innerView.layer.borderWidth = 2
+        innerView.layer.cornerRadius = innerView.layer.frame.size.width / 2
+        innerView.clipsToBounds = true
+        
+        let image = playImageView.image?.imageWithColor(UIColor.whiteColor())
+        playImageView.image = image
+    }
+    
+    // MARK: Gesture Recognizer
+    
+    func didRecognizeOnMiddleViewByTapGestureRecognizer(gestureRecognizer: UITapGestureRecognizer) {
+        print(#function)
+    }
     
     // MARK: State
     

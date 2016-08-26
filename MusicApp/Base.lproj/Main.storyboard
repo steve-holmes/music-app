@@ -83,7 +83,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q04-m5-yrd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1500.5" y="1309.5"/>
+            <point key="canvasLocation" x="1500.5" y="2073.5"/>
         </scene>
         <!--Video Player View Controller-->
         <scene sceneID="94W-3j-WR4">
@@ -102,7 +102,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aNL-bi-VkL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1956.5" y="1309.5"/>
+            <point key="canvasLocation" x="1956.5" y="2073.5"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="2qW-ME-rvc">
@@ -122,6 +122,139 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RUB-pc-l58" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="166.5" y="556.5"/>
+        </scene>
+        <!--Home Online View Controller-->
+        <scene sceneID="FX3-Gk-nfh">
+            <objects>
+                <viewController storyboardIdentifier="HomeOnlineController" id="QV3-T1-vII" customClass="HomeOnlineViewController" customModule="MusicApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LbW-XO-Hyq"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zsc-rh-mhu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Itx-qa-GTi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CVn-V4-mKl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="166.5" y="1301.5"/>
+        </scene>
+        <!--Playlist Online View Controller-->
+        <scene sceneID="QCt-E7-xy1">
+            <objects>
+                <viewController storyboardIdentifier="PlaylistOnlineController" id="xc5-oN-OoG" customClass="PlaylistOnlineViewController" customModule="MusicApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nbj-S6-gNR"/>
+                        <viewControllerLayoutGuide type="bottom" id="Peb-Th-Keg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3mi-ez-S9B">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fvi-pI-9KP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="616.5" y="1301.5"/>
+        </scene>
+        <!--Song Online View Controller-->
+        <scene sceneID="Wcf-FX-sPr">
+            <objects>
+                <viewController storyboardIdentifier="SongOnlineController" id="pPi-Cw-UDW" customClass="SongOnlineViewController" customModule="MusicApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HVc-3B-OIV"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZZv-Gs-ZDo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="alj-3v-lGG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Rp-8e-aDE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1055.5" y="1301.5"/>
+        </scene>
+        <!--Rank Online View Controller-->
+        <scene sceneID="0H2-lE-3rx">
+            <objects>
+                <viewController storyboardIdentifier="RankOnlineController" id="PbI-7k-Gd2" customClass="RankOnlineViewController" customModule="MusicApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GcN-ST-oso"/>
+                        <viewControllerLayoutGuide type="bottom" id="SrV-HN-aUE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8gQ-rA-les">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PUA-Pt-OK8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1500.5" y="1301.5"/>
+        </scene>
+        <!--Singer Online View Controller-->
+        <scene sceneID="YO6-q2-MVl">
+            <objects>
+                <viewController storyboardIdentifier="SingerOnlineController" id="qKO-d9-OHw" customClass="SingerOnlineViewController" customModule="MusicApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4Jr-GL-0uy"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ddj-Ju-e0R"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bOJ-xN-1ON">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zC6-Ux-c2v" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1969.5" y="1301.5"/>
+        </scene>
+        <!--Online View Controller-->
+        <scene sceneID="76i-0N-3GM">
+            <objects>
+                <viewController storyboardIdentifier="OnlineController" id="Mb1-MN-96V" customClass="OnlineViewController" customModule="MusicApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bsz-ot-EKa"/>
+                        <viewControllerLayoutGuide type="bottom" id="07W-Ir-BqY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="heI-Mk-536">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ssb-ZG-Cg8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="616.5" y="556.5"/>
+        </scene>
+        <!--Offline View Controller-->
+        <scene sceneID="AhX-lD-fjN">
+            <objects>
+                <viewController storyboardIdentifier="OfflineController" id="SwR-z7-hap" customClass="OfflineViewController" customModule="MusicApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BtV-nn-4Op"/>
+                        <viewControllerLayoutGuide type="bottom" id="IoS-Xy-Zsz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xAH-f0-aph">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9jd-rr-UeR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1055.5" y="556.5"/>
         </scene>
         <!--Player View Controller-->
         <scene sceneID="lbr-3P-avs">
@@ -343,7 +476,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TTr-xR-Xbb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="166.5" y="1309.5"/>
+            <point key="canvasLocation" x="166.5" y="2073.5"/>
         </scene>
         <!--List Player View Controller-->
         <scene sceneID="Q5q-zQ-Glc">
@@ -386,7 +519,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KIZ-kx-7Qc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="616.5" y="1309.5"/>
+            <point key="canvasLocation" x="616.5" y="2073.5"/>
         </scene>
         <!--Single Player View Controller-->
         <scene sceneID="zcq-U9-prt">
@@ -424,7 +557,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gSp-91-CqX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1055.5" y="1309.5"/>
+            <point key="canvasLocation" x="1055.5" y="2073.5"/>
         </scene>
     </scenes>
     <resources>

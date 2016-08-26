@@ -1,5 +1,5 @@
 //
-//  TableCellsIdentifier.swift
+//  CellsIdentifier.swift
 //  MusicApp
 //
 //  Created by HungDo on 8/9/16.

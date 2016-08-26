@@ -9,7 +9,18 @@
 struct ControllersIdentifiers {
     
     // Home View Controller
-    static let HomeController = "HomeController"
+    static let HomeController               = "HomeController"
+    
+    // Online View Controller
+    static let OnlineController             = "OnlineController"
+    static let HomeOnlineController         = "HomeOnlineController"
+    static let PlaylistOnlineController     = "PlaylistOnlineController"
+    static let SongOnlineController         = "SongOnlineController"
+    static let RankOnlineController         = "RankOnlineController"
+    static let SingerOnlineController       = "SingerOnlineController"
+    
+    // Offline View Controller
+    
     
     // Player View Controller
     static let PlayerViewController         = "PlayerController"

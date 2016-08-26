@@ -17,6 +17,14 @@
 		9E6DFB861D585A7D004EB139 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E6DFB841D585A7D004EB139 /* LaunchScreen.storyboard */; };
 		9E7C2D8B1D6B5BF300639129 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2D8A1D6B5BF300639129 /* UIImageExtension.swift */; };
 		9E7CA4DD1D6FEB6B0017B6A7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7CA4DC1D6FEB6B0017B6A7 /* HomeViewController.swift */; };
+		9E7CA4E01D6FECE50017B6A7 /* OnlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7CA4DF1D6FECE50017B6A7 /* OnlineViewController.swift */; };
+		9E7CA4E31D6FED030017B6A7 /* OfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7CA4E21D6FED030017B6A7 /* OfflineViewController.swift */; };
+		9E7CA4E71D6FEDC50017B6A7 /* PlaylistOnlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7CA4E61D6FEDC50017B6A7 /* PlaylistOnlineViewController.swift */; };
+		9E7CA4E91D6FEDD50017B6A7 /* SongOnlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7CA4E81D6FEDD50017B6A7 /* SongOnlineViewController.swift */; };
+		9E7CA4EB1D6FEE000017B6A7 /* HomeOnlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7CA4EA1D6FEE000017B6A7 /* HomeOnlineViewController.swift */; };
+		9E7CA4F11D6FEF370017B6A7 /* RankOnlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7CA4F01D6FEF370017B6A7 /* RankOnlineViewController.swift */; };
+		9E7CA4F31D6FEF6D0017B6A7 /* SingerOnlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7CA4F21D6FEF6D0017B6A7 /* SingerOnlineViewController.swift */; };
+		9E7CA4F51D6FEFBC0017B6A7 /* CellsIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7CA4F41D6FEFBC0017B6A7 /* CellsIdentifier.swift */; };
 		9E97D7BA1D6D8EF4006675D3 /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E97D7B91D6D8EF4006675D3 /* VideoPlayerViewController.swift */; };
 		9E97D7BC1D6D8F20006675D3 /* NSNumberExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E97D7BB1D6D8F20006675D3 /* NSNumberExtension.swift */; };
 		9E9B89541D699C5E00EC0DBF /* SinglePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9B89531D699C5E00EC0DBF /* SinglePlayerViewController.swift */; };
@@ -24,7 +32,6 @@
 		9EBA8E9F1D598D250084E44A /* LyricPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBA8E9E1D598D250084E44A /* LyricPlayerTableViewCell.swift */; };
 		9EBA8EA11D598DAF0084E44A /* LyricPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBA8EA01D598DAF0084E44A /* LyricPlayerViewController.swift */; };
 		9EBA8EA51D598E1F0084E44A /* ControllersIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBA8EA41D598E1F0084E44A /* ControllersIdentifier.swift */; };
-		9EBA8EA71D598E6C0084E44A /* TableCellsIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBA8EA61D598E6C0084E44A /* TableCellsIdentifier.swift */; };
 		9EBA8EAE1D5994900084E44A /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBA8EAD1D5994900084E44A /* UIFontExtension.swift */; };
 		9ED6CC411D6F1D170052708C /* TooltipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED6CC401D6F1D170052708C /* TooltipView.swift */; };
 /* End PBXBuildFile section */
@@ -43,6 +50,14 @@
 		9E6DFB871D585A7D004EB139 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E7C2D8A1D6B5BF300639129 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageExtension.swift; path = Ultilities/UIImageExtension.swift; sourceTree = "<group>"; };
 		9E7CA4DC1D6FEB6B0017B6A7 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = Controllers/HomeViewController.swift; sourceTree = "<group>"; };
+		9E7CA4DF1D6FECE50017B6A7 /* OnlineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnlineViewController.swift; path = Controllers/OnlineViewController.swift; sourceTree = "<group>"; };
+		9E7CA4E21D6FED030017B6A7 /* OfflineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OfflineViewController.swift; path = Controllers/OfflineViewController.swift; sourceTree = "<group>"; };
+		9E7CA4E61D6FEDC50017B6A7 /* PlaylistOnlineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaylistOnlineViewController.swift; path = Controllers/PlaylistOnlineViewController.swift; sourceTree = "<group>"; };
+		9E7CA4E81D6FEDD50017B6A7 /* SongOnlineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SongOnlineViewController.swift; path = Controllers/SongOnlineViewController.swift; sourceTree = "<group>"; };
+		9E7CA4EA1D6FEE000017B6A7 /* HomeOnlineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeOnlineViewController.swift; path = Controllers/HomeOnlineViewController.swift; sourceTree = "<group>"; };
+		9E7CA4F01D6FEF370017B6A7 /* RankOnlineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RankOnlineViewController.swift; path = Controllers/RankOnlineViewController.swift; sourceTree = "<group>"; };
+		9E7CA4F21D6FEF6D0017B6A7 /* SingerOnlineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingerOnlineViewController.swift; path = Controllers/SingerOnlineViewController.swift; sourceTree = "<group>"; };
+		9E7CA4F41D6FEFBC0017B6A7 /* CellsIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CellsIdentifier.swift; path = Ultilities/CellsIdentifier.swift; sourceTree = "<group>"; };
 		9E97D7B91D6D8EF4006675D3 /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoPlayerViewController.swift; path = Controllers/VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		9E97D7BB1D6D8F20006675D3 /* NSNumberExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSNumberExtension.swift; path = Ultilities/NSNumberExtension.swift; sourceTree = "<group>"; };
 		9E9B89531D699C5E00EC0DBF /* SinglePlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SinglePlayerViewController.swift; path = Controllers/SinglePlayerViewController.swift; sourceTree = "<group>"; };
@@ -50,7 +65,6 @@
 		9EBA8E9E1D598D250084E44A /* LyricPlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LyricPlayerTableViewCell.swift; path = Views/LyricPlayerTableViewCell.swift; sourceTree = "<group>"; };
 		9EBA8EA01D598DAF0084E44A /* LyricPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LyricPlayerViewController.swift; path = Controllers/LyricPlayerViewController.swift; sourceTree = "<group>"; };
 		9EBA8EA41D598E1F0084E44A /* ControllersIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControllersIdentifier.swift; path = Ultilities/ControllersIdentifier.swift; sourceTree = "<group>"; };
-		9EBA8EA61D598E6C0084E44A /* TableCellsIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableCellsIdentifier.swift; path = Ultilities/TableCellsIdentifier.swift; sourceTree = "<group>"; };
 		9EBA8EAD1D5994900084E44A /* UIFontExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIFontExtension.swift; path = Ultilities/UIFontExtension.swift; sourceTree = "<group>"; };
 		9ED6CC401D6F1D170052708C /* TooltipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TooltipView.swift; path = Ultilities/Views/TooltipView.swift; sourceTree = "<group>"; };
 		C84D930697B925119F2A5B39 /* Pods-MusicApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-MusicApp/Pods-MusicApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -136,6 +150,27 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		9E7CA4DE1D6FECCE0017B6A7 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9E7CA4DF1D6FECE50017B6A7 /* OnlineViewController.swift */,
+				9E7CA4EA1D6FEE000017B6A7 /* HomeOnlineViewController.swift */,
+				9E7CA4E61D6FEDC50017B6A7 /* PlaylistOnlineViewController.swift */,
+				9E7CA4E81D6FEDD50017B6A7 /* SongOnlineViewController.swift */,
+				9E7CA4F01D6FEF370017B6A7 /* RankOnlineViewController.swift */,
+				9E7CA4F21D6FEF6D0017B6A7 /* SingerOnlineViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		9E7CA4E11D6FECF00017B6A7 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9E7CA4E21D6FED030017B6A7 /* OfflineViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		9EBA8E9D1D598D0B0084E44A /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,7 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				9EBA8EA41D598E1F0084E44A /* ControllersIdentifier.swift */,
-				9EBA8EA61D598E6C0084E44A /* TableCellsIdentifier.swift */,
+				9E7CA4F41D6FEFBC0017B6A7 /* CellsIdentifier.swift */,
 			);
 			name = Constants;
 			sourceTree = "<group>";
@@ -214,53 +249,15 @@
 		9EF377B91D67F5B400B07266 /* Online MVCs */ = {
 			isa = PBXGroup;
 			children = (
-				9EF377BA1D67F5C200B07266 /* Home */,
-				9EF377BB1D67F5FE00B07266 /* Song */,
-				9EF377BE1D67F61D00B07266 /* Rank */,
-				9EF377BD1D67F61400B07266 /* Video */,
-				9EF377BC1D67F60B00B07266 /* Artist */,
+				9E7CA4DE1D6FECCE0017B6A7 /* Controllers */,
 			);
 			name = "Online MVCs";
-			sourceTree = "<group>";
-		};
-		9EF377BA1D67F5C200B07266 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Home;
-			sourceTree = "<group>";
-		};
-		9EF377BB1D67F5FE00B07266 /* Song */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Song;
-			sourceTree = "<group>";
-		};
-		9EF377BC1D67F60B00B07266 /* Artist */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Artist;
-			sourceTree = "<group>";
-		};
-		9EF377BD1D67F61400B07266 /* Video */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Video;
-			sourceTree = "<group>";
-		};
-		9EF377BE1D67F61D00B07266 /* Rank */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Rank;
 			sourceTree = "<group>";
 		};
 		9EF377C01D67F6A200B07266 /* Offline MVCs */ = {
 			isa = PBXGroup;
 			children = (
+				9E7CA4E11D6FECF00017B6A7 /* Controllers */,
 			);
 			name = "Offline MVCs";
 			sourceTree = "<group>";
@@ -398,18 +395,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				9EBA8EA51D598E1F0084E44A /* ControllersIdentifier.swift in Sources */,
+				9E7CA4F31D6FEF6D0017B6A7 /* SingerOnlineViewController.swift in Sources */,
 				9E9B89561D699C7F00EC0DBF /* ListPlayerViewController.swift in Sources */,
+				9E7CA4EB1D6FEE000017B6A7 /* HomeOnlineViewController.swift in Sources */,
 				9EBA8E9F1D598D250084E44A /* LyricPlayerTableViewCell.swift in Sources */,
 				9EBA8EAE1D5994900084E44A /* UIFontExtension.swift in Sources */,
+				9E7CA4F11D6FEF370017B6A7 /* RankOnlineViewController.swift in Sources */,
 				9E9B89541D699C5E00EC0DBF /* SinglePlayerViewController.swift in Sources */,
+				9E7CA4E01D6FECE50017B6A7 /* OnlineViewController.swift in Sources */,
+				9E7CA4E71D6FEDC50017B6A7 /* PlaylistOnlineViewController.swift in Sources */,
+				9E7CA4E91D6FEDD50017B6A7 /* SongOnlineViewController.swift in Sources */,
 				9EBA8EA11D598DAF0084E44A /* LyricPlayerViewController.swift in Sources */,
 				9E1AB30B1D68D1F100AF584F /* CircleButton.swift in Sources */,
 				9ED6CC411D6F1D170052708C /* TooltipView.swift in Sources */,
 				9E5F13761D66C3A00036529D /* PlayerViewController.swift in Sources */,
 				9E97D7BC1D6D8F20006675D3 /* NSNumberExtension.swift in Sources */,
 				9E7C2D8B1D6B5BF300639129 /* UIImageExtension.swift in Sources */,
+				9E7CA4F51D6FEFBC0017B6A7 /* CellsIdentifier.swift in Sources */,
+				9E7CA4E31D6FED030017B6A7 /* OfflineViewController.swift in Sources */,
 				9E7CA4DD1D6FEB6B0017B6A7 /* HomeViewController.swift in Sources */,
-				9EBA8EA71D598E6C0084E44A /* TableCellsIdentifier.swift in Sources */,
 				9E97D7BA1D6D8EF4006675D3 /* VideoPlayerViewController.swift in Sources */,
 				9E6DFB7C1D585A7D004EB139 /* AppDelegate.swift in Sources */,
 				9E625F171D6A009200010938 /* ListPlayerTableViewCell.swift in Sources */,

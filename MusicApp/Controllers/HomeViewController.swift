@@ -71,28 +71,28 @@ class HomeViewController: UIViewController {
                 backgroundView.bringSubviewToFront(mineViewController.view)
                 
                 let mineImage = mineButtonImageView.image?.imageWithColor(UIColor.whiteColor())
-                let onlineImage = onlineButtonImageView.image?.imageWithColor(UIColor.blackColor())
+                let onlineImage = onlineButtonImageView.image?.imageWithColor(ColorConstants.toolbarImageColor)
                 mineButtonImageView.image = mineImage
                 onlineButtonImageView.image = onlineImage
                 
                 mineButtonLabel.textColor = UIColor.whiteColor()
-                onlineButtonLabel.textColor = UIColor(red: 102/255, green: 102/255, blue: 102/255, alpha: 1)
+                onlineButtonLabel.textColor = ColorConstants.toolbarTextColor
                 
-                mineButtonBackgroundView.backgroundColor = UIColor.blueColor()
-                onlineButtonBackgroundView.backgroundColor = UIColor.whiteColor()
+                mineButtonBackgroundView.backgroundColor = ColorConstants.toolbarHighlightedBackgroundColor
+                onlineButtonBackgroundView.backgroundColor = ColorConstants.toolbarNormalBackgroundColor
             case .Online:
                 backgroundView.bringSubviewToFront(onlineViewController.view)
                 
-                let mineImage = mineButtonImageView.image?.imageWithColor(UIColor.blackColor())
+                let mineImage = mineButtonImageView.image?.imageWithColor(ColorConstants.toolbarImageColor)
                 let onlineImage = onlineButtonImageView.image?.imageWithColor(UIColor.whiteColor())
                 mineButtonImageView.image = mineImage
                 onlineButtonImageView.image = onlineImage
                 
-                mineButtonLabel.textColor = UIColor(red: 102/255, green: 102/255, blue: 102/255, alpha: 1)
+                mineButtonLabel.textColor = ColorConstants.toolbarTextColor
                 onlineButtonLabel.textColor = UIColor.whiteColor()
                 
-                mineButtonBackgroundView.backgroundColor = UIColor.whiteColor()
-                onlineButtonBackgroundView.backgroundColor = UIColor.blueColor()
+                mineButtonBackgroundView.backgroundColor = ColorConstants.toolbarNormalBackgroundColor
+                onlineButtonBackgroundView.backgroundColor = ColorConstants.toolbarHighlightedBackgroundColor
             }
         }
     }

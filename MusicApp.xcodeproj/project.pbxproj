@@ -30,6 +30,7 @@
 		9E9B89541D699C5E00EC0DBF /* SinglePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9B89531D699C5E00EC0DBF /* SinglePlayerViewController.swift */; };
 		9E9B89561D699C7F00EC0DBF /* ListPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9B89551D699C7F00EC0DBF /* ListPlayerViewController.swift */; };
 		9EB194F01D703DA0007E2FD1 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB194EF1D703DA0007E2FD1 /* UIViewControllerExtension.swift */; };
+		9EB194F41D705612007E2FD1 /* ColorConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB194F31D705612007E2FD1 /* ColorConstant.swift */; };
 		9EBA8E9F1D598D250084E44A /* LyricPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBA8E9E1D598D250084E44A /* LyricPlayerTableViewCell.swift */; };
 		9EBA8EA11D598DAF0084E44A /* LyricPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBA8EA01D598DAF0084E44A /* LyricPlayerViewController.swift */; };
 		9EBA8EA51D598E1F0084E44A /* ControllersIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBA8EA41D598E1F0084E44A /* ControllersIdentifier.swift */; };
@@ -64,6 +65,7 @@
 		9E9B89531D699C5E00EC0DBF /* SinglePlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SinglePlayerViewController.swift; path = Controllers/SinglePlayerViewController.swift; sourceTree = "<group>"; };
 		9E9B89551D699C7F00EC0DBF /* ListPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListPlayerViewController.swift; path = Controllers/ListPlayerViewController.swift; sourceTree = "<group>"; };
 		9EB194EF1D703DA0007E2FD1 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewControllerExtension.swift; path = Ultilities/UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		9EB194F31D705612007E2FD1 /* ColorConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorConstant.swift; path = Ultilities/ColorConstant.swift; sourceTree = "<group>"; };
 		9EBA8E9E1D598D250084E44A /* LyricPlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LyricPlayerTableViewCell.swift; path = Views/LyricPlayerTableViewCell.swift; sourceTree = "<group>"; };
 		9EBA8EA01D598DAF0084E44A /* LyricPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LyricPlayerViewController.swift; path = Controllers/LyricPlayerViewController.swift; sourceTree = "<group>"; };
 		9EBA8EA41D598E1F0084E44A /* ControllersIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControllersIdentifier.swift; path = Ultilities/ControllersIdentifier.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			children = (
 				9EBA8EA41D598E1F0084E44A /* ControllersIdentifier.swift */,
 				9E7CA4F41D6FEFBC0017B6A7 /* CellsIdentifier.swift */,
+				9EB194F31D705612007E2FD1 /* ColorConstant.swift */,
 			);
 			name = Constants;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				9E97D7BA1D6D8EF4006675D3 /* VideoPlayerViewController.swift in Sources */,
 				9E6DFB7C1D585A7D004EB139 /* AppDelegate.swift in Sources */,
 				9E625F171D6A009200010938 /* ListPlayerTableViewCell.swift in Sources */,
+				9EB194F41D705612007E2FD1 /* ColorConstant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

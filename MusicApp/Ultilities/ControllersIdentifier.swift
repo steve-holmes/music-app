@@ -20,7 +20,7 @@ struct ControllersIdentifiers {
     static let SingerOnlineController       = "SingerOnlineController"
     
     // Offline View Controller
-    
+    static let OfflineController            = "OfflineController"
     
     // Player View Controller
     static let PlayerViewController         = "PlayerController"

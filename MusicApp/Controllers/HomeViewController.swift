@@ -88,51 +88,65 @@ class HomeViewController: UIViewController {
     
     // MARK: Gesture Recognizer
     
-    var animationInProgressInCallbackOfPanGestureRecognizer = false
-    
     func didRecognizeOnMiddleViewByTapGestureRecognizer(gestureRecognizer: UITapGestureRecognizer) {
-        if animationInProgressInCallbackOfPanGestureRecognizer { return }
-        
+        if animationEnabled { return }
+        animatePlayButton() {
+            if let controller = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.PlayerController) as? PlayerViewController {
+                self.presentViewController(controller, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    // MARK: The Animation of Play Button
+    
+    private var animationEnabled = false
+    private var animationCount = 0
+    private var animationTotal = 4
+    private var animationDuration: NSTimeInterval = 6
+    
+    private func animatePlayButton(completion: (() -> Void)?) {
         playButtonImageView.hidden = true
         UIView.animateWithDuration(
-            3,
+            animationDuration / NSTimeInterval(animationTotal),
             delay: 0,
             options: .CurveLinear,
             animations: {
-                self.animationInProgressInCallbackOfPanGestureRecognizer = true
-                self.playImageView.layer.transform = CATransform3DRotate(CATransform3DIdentity, CGFloat(M_PI), 0, 0, 1)
+                self.animationEnabled = true
+                self.animationCount += 1
+                
+                self.playImageView.layer.transform = CATransform3DRotate(self.playImageView.layer.transform, CGFloat(2.0 * M_PI / Double(self.animationTotal)), 0, 0, 1)
             },
             completion: { completed in
                 guard completed else {
-                    self.animationInProgressInCallbackOfPanGestureRecognizer = false
+                    self.animationEnabled = false
+                    self.animationCount = 0
                     self.playButtonImageView.hidden = false
                     return
                 }
                 
-                UIView.animateWithDuration(
-                    3,
-                    delay: 0,
-                    options: .CurveLinear,
-                    animations: {
-                        self.playImageView.layer.transform = CATransform3DIdentity
-                    },
-                    completion: { completed in
-                        self.animationInProgressInCallbackOfPanGestureRecognizer = false
-                        self.playButtonImageView.hidden = false
-                    }
-                )
+                guard self.animationCount == self.animationTotal else {
+                    self.animatePlayButton(completion)
+                    return
+                }
+                
+                self.animationEnabled = false
+                self.animationCount = 0
+                self.playButtonImageView.hidden = false
+                
+                // The last completion
+                if let completion = completion { completion() }
             }
         )
     }
     
     // MARK: State
     
-    enum State {
+    private enum State {
         case Mine
         case Online
     }
     
-    var state: State = .Online {
+    private var state: State = .Online {
         didSet {
             switch state {
             case .Mine:

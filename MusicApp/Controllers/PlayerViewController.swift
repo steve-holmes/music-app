@@ -126,6 +126,9 @@ class PlayerViewController: UIViewController {
     @IBOutlet weak var forwardButtonTrailingConstraint: NSLayoutConstraint!
     
     // MARK: - Actions
+    @IBAction func dismissButtonTapped() {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
     @IBAction func playPauseButtonTapped(button: UIButton) {
         print(#function)

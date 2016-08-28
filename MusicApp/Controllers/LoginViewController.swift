@@ -123,7 +123,7 @@ class LoginViewController: UIViewController {
                 registerBarButton.setTitleColor(UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1), forState: .Normal)
                 registerBarButton.titleLabel?.font = UIFont(name: "AvenirNext-Regular", size: 17)
                 
-                loginLabel.text = "LOGIN"
+                loginLabel.text = "Login"
             case .Register:
                 loginBarButton.setTitleColor(UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1), forState: .Normal)
                 loginBarButton.titleLabel?.font = UIFont(name: "AvenirNext-Regular", size: 17)
@@ -131,7 +131,7 @@ class LoginViewController: UIViewController {
                 registerBarButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
                 registerBarButton.titleLabel?.font = UIFont(name: "AvenirNext-Medium", size: 20)
                 
-                loginLabel.text = "REGISTER"
+                loginLabel.text = "Register"
             }
         }
     }

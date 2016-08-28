@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		0299CF08DA7B454310F8CF5D /* Pods_MusicApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 066655126BE71B6E86727D28 /* Pods_MusicApp.framework */; };
+		9E1A5AC11D72953F000336B9 /* VideoMineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1A5AC01D72953F000336B9 /* VideoMineViewController.swift */; };
+		9E1A5AC31D729564000336B9 /* PlaylistMineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1A5AC21D729564000336B9 /* PlaylistMineViewController.swift */; };
+		9E1A5AC51D729580000336B9 /* SongOfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1A5AC41D729580000336B9 /* SongOfflineViewController.swift */; };
+		9E1A5AC71D729598000336B9 /* PlaylistOfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1A5AC61D729598000336B9 /* PlaylistOfflineViewController.swift */; };
+		9E1A5AC91D7295B7000336B9 /* VideoOfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1A5AC81D7295B7000336B9 /* VideoOfflineViewController.swift */; };
 		9E1AB30B1D68D1F100AF584F /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1AB30A1D68D1F100AF584F /* CircleButton.swift */; };
 		9E5F13761D66C3A00036529D /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5F13751D66C3A00036529D /* PlayerViewController.swift */; };
 		9E625F171D6A009200010938 /* ListPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E625F161D6A009200010938 /* ListPlayerTableViewCell.swift */; };
@@ -41,6 +46,11 @@
 /* Begin PBXFileReference section */
 		066655126BE71B6E86727D28 /* Pods_MusicApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		59F1784B8D13BF1B706C0FB5 /* Pods-MusicApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MusicApp/Pods-MusicApp.debug.xcconfig"; sourceTree = "<group>"; };
+		9E1A5AC01D72953F000336B9 /* VideoMineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoMineViewController.swift; path = Controllers/VideoMineViewController.swift; sourceTree = "<group>"; };
+		9E1A5AC21D729564000336B9 /* PlaylistMineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaylistMineViewController.swift; path = Controllers/PlaylistMineViewController.swift; sourceTree = "<group>"; };
+		9E1A5AC41D729580000336B9 /* SongOfflineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SongOfflineViewController.swift; path = Controllers/SongOfflineViewController.swift; sourceTree = "<group>"; };
+		9E1A5AC61D729598000336B9 /* PlaylistOfflineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaylistOfflineViewController.swift; path = Controllers/PlaylistOfflineViewController.swift; sourceTree = "<group>"; };
+		9E1A5AC81D7295B7000336B9 /* VideoOfflineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoOfflineViewController.swift; path = Controllers/VideoOfflineViewController.swift; sourceTree = "<group>"; };
 		9E1AB30A1D68D1F100AF584F /* CircleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleButton.swift; path = Ultilities/Views/CircleButton.swift; sourceTree = "<group>"; };
 		9E5F13751D66C3A00036529D /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerViewController.swift; path = Controllers/PlayerViewController.swift; sourceTree = "<group>"; };
 		9E625F161D6A009200010938 /* ListPlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListPlayerTableViewCell.swift; path = Views/ListPlayerTableViewCell.swift; sourceTree = "<group>"; };
@@ -171,6 +181,11 @@
 			isa = PBXGroup;
 			children = (
 				9E7CA4E21D6FED030017B6A7 /* OfflineViewController.swift */,
+				9E1A5AC21D729564000336B9 /* PlaylistMineViewController.swift */,
+				9E1A5AC01D72953F000336B9 /* VideoMineViewController.swift */,
+				9E1A5AC41D729580000336B9 /* SongOfflineViewController.swift */,
+				9E1A5AC61D729598000336B9 /* PlaylistOfflineViewController.swift */,
+				9E1A5AC81D7295B7000336B9 /* VideoOfflineViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -406,12 +421,17 @@
 				9E7CA4EB1D6FEE000017B6A7 /* HomeOnlineViewController.swift in Sources */,
 				9EBA8E9F1D598D250084E44A /* LyricPlayerTableViewCell.swift in Sources */,
 				9EBA8EAE1D5994900084E44A /* UIFontExtension.swift in Sources */,
+				9E1A5AC31D729564000336B9 /* PlaylistMineViewController.swift in Sources */,
 				9E7CA4F11D6FEF370017B6A7 /* RankOnlineViewController.swift in Sources */,
 				9E9B89541D699C5E00EC0DBF /* SinglePlayerViewController.swift in Sources */,
 				9E7CA4E01D6FECE50017B6A7 /* OnlineViewController.swift in Sources */,
 				9E7CA4E71D6FEDC50017B6A7 /* PlaylistOnlineViewController.swift in Sources */,
+				9E1A5AC51D729580000336B9 /* SongOfflineViewController.swift in Sources */,
+				9E1A5AC71D729598000336B9 /* PlaylistOfflineViewController.swift in Sources */,
 				9E7CA4E91D6FEDD50017B6A7 /* SongOnlineViewController.swift in Sources */,
+				9E1A5AC91D7295B7000336B9 /* VideoOfflineViewController.swift in Sources */,
 				9EBA8EA11D598DAF0084E44A /* LyricPlayerViewController.swift in Sources */,
+				9E1A5AC11D72953F000336B9 /* VideoMineViewController.swift in Sources */,
 				9E1AB30B1D68D1F100AF584F /* CircleButton.swift in Sources */,
 				9ED6CC411D6F1D170052708C /* TooltipView.swift in Sources */,
 				9E5F13761D66C3A00036529D /* PlayerViewController.swift in Sources */,

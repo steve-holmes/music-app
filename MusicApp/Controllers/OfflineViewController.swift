@@ -20,6 +20,7 @@ class OfflineViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.sectionFooterHeight = 0.01
     }
 
@@ -75,6 +76,43 @@ extension OfflineViewController: UITableViewDataSource {
         case 1: return "My Song"
         case 2: return "Offline"
         default: return nil
+        }
+    }
+    
+}
+
+extension OfflineViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let section = indexPath.section
+        let row = indexPath.row
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        switch section {
+        case 0:
+            break
+        case 1:
+            switch row {
+            case 0: self.pushChildOfflineViewControllerWithIdentifier(ControllersIdentifiers.PlaylistMineController)
+            case 1: self.pushChildOfflineViewControllerWithIdentifier(ControllersIdentifiers.VideoMineController)
+            default: break
+            }
+        case 2:
+            switch row {
+            case 0: self.pushChildOfflineViewControllerWithIdentifier(ControllersIdentifiers.SongOfflineController)
+            case 1: self.pushChildOfflineViewControllerWithIdentifier(ControllersIdentifiers.PlaylistOfflineController)
+            case 2: self.pushChildOfflineViewControllerWithIdentifier(ControllersIdentifiers.VideoOfflineController)
+            default: break
+            }
+        default:
+            break
+        }
+    }
+    
+    private func pushChildOfflineViewControllerWithIdentifier(identifier: String) {
+        if let controller = self.storyboard?.instantiateViewControllerWithIdentifier(identifier) {
+            self.navigationController?.pushViewController(controller, animated: true)
         }
     }
     

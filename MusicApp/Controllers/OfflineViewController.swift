@@ -47,8 +47,6 @@ extension OfflineViewController: UITableViewDataSource {
         let section = indexPath.section
         let row = indexPath.row
         
-        cell.textLabel?.textColor = ColorConstants.textColor
-        
         switch section {
         case 0:
             cell.textLabel?.text = "All Songs"

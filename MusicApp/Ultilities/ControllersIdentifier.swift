@@ -34,4 +34,7 @@ struct ControllersIdentifiers {
     static let LyricPlayerController        = "LyricPlayerController"
     static let VideoPlayerController        = "VideoPlayerController"
     
+    // Login View Controller
+    static let LoginController              = "LoginController"
+    
 }

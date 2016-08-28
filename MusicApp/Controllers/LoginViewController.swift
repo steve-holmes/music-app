@@ -1,14 +1,14 @@
 //
-//  SingerOnlineViewController.swift
+//  LoginViewController.swift
 //  MusicApp
 //
-//  Created by HungDo on 8/26/16.
+//  Created by HungDo on 8/28/16.
 //  Copyright © 2016 HungDo. All rights reserved.
 //
 
 import UIKit
 
-class SingerOnlineViewController: UIViewController {
+class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

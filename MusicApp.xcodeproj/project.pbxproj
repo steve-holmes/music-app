@@ -13,6 +13,7 @@
 		9E1A5AC51D729580000336B9 /* SongOfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1A5AC41D729580000336B9 /* SongOfflineViewController.swift */; };
 		9E1A5AC71D729598000336B9 /* PlaylistOfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1A5AC61D729598000336B9 /* PlaylistOfflineViewController.swift */; };
 		9E1A5AC91D7295B7000336B9 /* VideoOfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1A5AC81D7295B7000336B9 /* VideoOfflineViewController.swift */; };
+		9E1A5ACB1D729E94000336B9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1A5ACA1D729E94000336B9 /* LoginViewController.swift */; };
 		9E1AB30B1D68D1F100AF584F /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1AB30A1D68D1F100AF584F /* CircleButton.swift */; };
 		9E5F13761D66C3A00036529D /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5F13751D66C3A00036529D /* PlayerViewController.swift */; };
 		9E625F171D6A009200010938 /* ListPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E625F161D6A009200010938 /* ListPlayerTableViewCell.swift */; };
@@ -51,6 +52,7 @@
 		9E1A5AC41D729580000336B9 /* SongOfflineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SongOfflineViewController.swift; path = Controllers/SongOfflineViewController.swift; sourceTree = "<group>"; };
 		9E1A5AC61D729598000336B9 /* PlaylistOfflineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaylistOfflineViewController.swift; path = Controllers/PlaylistOfflineViewController.swift; sourceTree = "<group>"; };
 		9E1A5AC81D7295B7000336B9 /* VideoOfflineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoOfflineViewController.swift; path = Controllers/VideoOfflineViewController.swift; sourceTree = "<group>"; };
+		9E1A5ACA1D729E94000336B9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Controllers/LoginViewController.swift; sourceTree = "<group>"; };
 		9E1AB30A1D68D1F100AF584F /* CircleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleButton.swift; path = Ultilities/Views/CircleButton.swift; sourceTree = "<group>"; };
 		9E5F13751D66C3A00036529D /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerViewController.swift; path = Controllers/PlayerViewController.swift; sourceTree = "<group>"; };
 		9E625F161D6A009200010938 /* ListPlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListPlayerTableViewCell.swift; path = Views/ListPlayerTableViewCell.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				9E7CA4DC1D6FEB6B0017B6A7 /* HomeViewController.swift */,
+				9E1A5ACA1D729E94000336B9 /* LoginViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				9E7CA4E71D6FEDC50017B6A7 /* PlaylistOnlineViewController.swift in Sources */,
 				9E1A5AC51D729580000336B9 /* SongOfflineViewController.swift in Sources */,
 				9E1A5AC71D729598000336B9 /* PlaylistOfflineViewController.swift in Sources */,
+				9E1A5ACB1D729E94000336B9 /* LoginViewController.swift in Sources */,
 				9E7CA4E91D6FEDD50017B6A7 /* SongOnlineViewController.swift in Sources */,
 				9E1A5AC91D7295B7000336B9 /* VideoOfflineViewController.swift in Sources */,
 				9EBA8EA11D598DAF0084E44A /* LyricPlayerViewController.swift in Sources */,

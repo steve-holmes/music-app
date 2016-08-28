@@ -712,6 +712,25 @@
             </objects>
             <point key="canvasLocation" x="1969.5" y="536.5"/>
         </scene>
+        <!--Login View Controller-->
+        <scene sceneID="7Al-nF-7Bg">
+            <objects>
+                <viewController storyboardIdentifier="LoginController" id="hAi-PC-ozi" customClass="LoginViewController" customModule="MusicApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3ld-Kd-Vmg"/>
+                        <viewControllerLayoutGuide type="bottom" id="jan-S6-ySJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="y4O-Ai-zwh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Gs-nJ-o4o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1969.5" y="-225.5"/>
+        </scene>
         <!--Player View Controller-->
         <scene sceneID="lbr-3P-avs">
             <objects>

@@ -8,8 +8,20 @@
 
 import UIKit
 
-class ListPlayerTableViewCell: UITableViewCell {
+protocol ListPlayerTableViewCellDelegate {
+    
+    
+    
+}
 
+class ListPlayerTableViewCell: UITableViewCell {
+    
+    // MARK: Delegation
+    
+    var delegate: ListPlayerTableViewCellDelegate?
+
+    // MARK: Table View Cell Lifecycle
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -475,7 +475,7 @@ extension PlayerViewController {
                 toItem: self.tooltip,
                 attribute: .Bottom,
                 multiplier: 1,
-                constant: 0.2 * self.sliderView.frame.size.height
+                constant: 0.5 * self.sliderView.frame.size.height
             )
             
             self.view.addConstraints([marginTooltipConstraint, verticalTooltipConstraint])

@@ -552,7 +552,7 @@
         <!--Offline View Controller-->
         <scene sceneID="AhX-lD-fjN">
             <objects>
-                <viewController storyboardIdentifier="OfflineController" id="SwR-z7-hap" customClass="OfflineViewController" customModule="MusicApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="SwR-z7-hap" customClass="OfflineViewController" customModule="MusicApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BtV-nn-4Op"/>
                         <viewControllerLayoutGuide type="bottom" id="IoS-Xy-Zsz"/>
@@ -566,7 +566,7 @@
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OfflineTableCell" textLabel="nwd-FC-0Vi" imageView="m1c-dq-0tV" style="IBUITableViewCellStyleDefault" id="N0v-mE-pjA">
-                                        <rect key="frame" x="0.0" y="49.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="113.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="N0v-mE-pjA" id="sVx-vc-ocj">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -597,6 +597,17 @@
                             <constraint firstAttribute="trailing" secondItem="jzD-uy-rmb" secondAttribute="trailing" id="tfo-nV-ydP"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="p42-Rf-lE2">
+                        <barButtonItem key="leftBarButtonItem" title="Username" id="Ta5-ep-VpJ">
+                            <color key="tintColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="organize" id="yvF-wW-Xff">
+                            <color key="tintColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="settingBarButtonTapped:" destination="SwR-z7-hap" id="qeH-v2-xwJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="tableView" destination="jzD-uy-rmb" id="UU8-gG-z06"/>
@@ -604,7 +615,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9jd-rr-UeR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1055.5" y="556.5"/>
+            <point key="canvasLocation" x="1500.5" y="555.5"/>
         </scene>
         <!--Player View Controller-->
         <scene sceneID="lbr-3P-avs">
@@ -922,6 +933,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gSp-91-CqX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1055.5" y="2073.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="dLb-TY-5BS">
+            <objects>
+                <navigationController storyboardIdentifier="OfflineController" automaticallyAdjustsScrollViewInsets="NO" id="hxM-es-OF4" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="u7u-z2-n75">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="SwR-z7-hap" kind="relationship" relationship="rootViewController" id="jIk-dA-h4T"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="daV-4e-lly" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1055" y="556"/>
         </scene>
     </scenes>
     <resources>

@@ -53,8 +53,8 @@ class HomeViewController: UIViewController {
     
     // MARK: Child View Controllers
     
-    private lazy var mineViewController: OfflineViewController = {
-        let controller = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.OfflineController) as! OfflineViewController
+    private lazy var mineViewController: UINavigationController = {
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.OfflineController) as! UINavigationController
         self.displayContentController(controller, inView: self.backgroundView)
         return controller
     }()
@@ -65,11 +65,7 @@ class HomeViewController: UIViewController {
         return controller
     }()
     
-    private lazy var playerViewController: PlayerViewController = {
-        let controller = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.PlayerController) as! PlayerViewController
-        self.displayContentController(controller, inView: self.backgroundView)
-        return controller
-    }()
+    private lazy var playerViewController: PlayerViewController = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.PlayerController) as! PlayerViewController
     
     // MARK: Play Button
     private func setupPlayButton() {
@@ -91,9 +87,7 @@ class HomeViewController: UIViewController {
     func didRecognizeOnMiddleViewByTapGestureRecognizer(gestureRecognizer: UITapGestureRecognizer) {
         if animationEnabled { return }
         animatePlayButton() {
-            if let controller = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.PlayerController) as? PlayerViewController {
-                self.presentViewController(controller, animated: true, completion: nil)
-            }
+            self.presentViewController(self.playerViewController, animated: true, completion: nil)
         }
     }
     
@@ -158,7 +152,7 @@ class HomeViewController: UIViewController {
                 onlineButtonImageView.image = onlineImage
                 
                 mineButtonLabel.textColor = UIColor.whiteColor()
-                onlineButtonLabel.textColor = ColorConstants.toolbarTextColor
+                onlineButtonLabel.textColor = ColorConstants.textColor
                 
                 mineButtonBackgroundView.backgroundColor = ColorConstants.toolbarHighlightedBackgroundColor
                 onlineButtonBackgroundView.backgroundColor = ColorConstants.toolbarNormalBackgroundColor
@@ -170,7 +164,7 @@ class HomeViewController: UIViewController {
                 mineButtonImageView.image = mineImage
                 onlineButtonImageView.image = onlineImage
                 
-                mineButtonLabel.textColor = ColorConstants.toolbarTextColor
+                mineButtonLabel.textColor = ColorConstants.textColor
                 onlineButtonLabel.textColor = UIColor.whiteColor()
                 
                 mineButtonBackgroundView.backgroundColor = ColorConstants.toolbarNormalBackgroundColor

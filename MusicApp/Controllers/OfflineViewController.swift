@@ -12,10 +12,15 @@ class OfflineViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    @IBAction func settingBarButtonTapped(settingItem: UIBarButtonItem) {
+        print(#function)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.dataSource = self
+        tableView.sectionFooterHeight = 0.01
     }
 
 }
@@ -41,6 +46,8 @@ extension OfflineViewController: UITableViewDataSource {
         let section = indexPath.section
         let row = indexPath.row
         
+        cell.textLabel?.textColor = ColorConstants.textColor
+        
         switch section {
         case 0:
             cell.textLabel?.text = "All Songs"
@@ -61,6 +68,14 @@ extension OfflineViewController: UITableViewDataSource {
         }
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 1: return "My Song"
+        case 2: return "Offline"
+        default: return nil
+        }
     }
     
 }

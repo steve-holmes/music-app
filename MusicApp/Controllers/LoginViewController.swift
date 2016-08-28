@@ -14,6 +14,12 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var logoImageView: UIImageView!
     
+    // MARK: Actions
+    
+    @IBAction func backButtonTapped() {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
     // MARK: View Controller Lifecycle
     
     override func viewDidLoad() {
@@ -21,6 +27,18 @@ class LoginViewController: UIViewController {
 
         setupLogo()
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    // MARK: Initialization
     
     private func setupLogo() {
         let image = logoImageView.image?.imageWithColor(UIColor.whiteColor())

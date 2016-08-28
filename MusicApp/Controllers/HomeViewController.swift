@@ -73,7 +73,7 @@ class HomeViewController: UIViewController {
         middleView.layer.borderWidth = 1
         middleView.layer.cornerRadius = middleView.frame.size.width / 2
         
-        innerView.layer.borderColor = ColorConstants.toolbarHighlightedBackgroundColor.CGColor
+        innerView.layer.borderColor = ColorConstants.mainColor.CGColor
         innerView.layer.borderWidth = 2
         innerView.layer.cornerRadius = innerView.layer.frame.size.width / 2
         innerView.clipsToBounds = true
@@ -154,7 +154,7 @@ class HomeViewController: UIViewController {
                 mineButtonLabel.textColor = UIColor.whiteColor()
                 onlineButtonLabel.textColor = ColorConstants.textColor
                 
-                mineButtonBackgroundView.backgroundColor = ColorConstants.toolbarHighlightedBackgroundColor
+                mineButtonBackgroundView.backgroundColor = ColorConstants.mainColor
                 onlineButtonBackgroundView.backgroundColor = ColorConstants.toolbarNormalBackgroundColor
             case .Online:
                 backgroundView.bringSubviewToFront(onlineViewController.view)
@@ -168,7 +168,7 @@ class HomeViewController: UIViewController {
                 onlineButtonLabel.textColor = UIColor.whiteColor()
                 
                 mineButtonBackgroundView.backgroundColor = ColorConstants.toolbarNormalBackgroundColor
-                onlineButtonBackgroundView.backgroundColor = ColorConstants.toolbarHighlightedBackgroundColor
+                onlineButtonBackgroundView.backgroundColor = ColorConstants.mainColor
             }
         }
     }

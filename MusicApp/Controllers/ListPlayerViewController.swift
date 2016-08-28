@@ -70,7 +70,7 @@ extension ListPlayerViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier(CellsIdentifier.ListPlayerTableCell, forIndexPath: indexPath)
         
         if let listCell = cell as? ListPlayerTableViewCell {
-            listCell.backgroundColor = UIColor.brownColor()
+            listCell.backgroundColor = UIColor.clearColor()
         }
         
         return cell

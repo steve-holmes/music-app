@@ -16,6 +16,7 @@
 		9E1A5ACB1D729E94000336B9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1A5ACA1D729E94000336B9 /* LoginViewController.swift */; };
 		9E1AB30B1D68D1F100AF584F /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1AB30A1D68D1F100AF584F /* CircleButton.swift */; };
 		9E5F13761D66C3A00036529D /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5F13751D66C3A00036529D /* PlayerViewController.swift */; };
+		9E5F1FF01D72DB8F005B8F6C /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5F1FEF1D72DB8F005B8F6C /* Authentication.swift */; };
 		9E625F171D6A009200010938 /* ListPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E625F161D6A009200010938 /* ListPlayerTableViewCell.swift */; };
 		9E6DFB7C1D585A7D004EB139 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6DFB7B1D585A7D004EB139 /* AppDelegate.swift */; };
 		9E6DFB811D585A7D004EB139 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E6DFB7F1D585A7D004EB139 /* Main.storyboard */; };
@@ -55,6 +56,7 @@
 		9E1A5ACA1D729E94000336B9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Controllers/LoginViewController.swift; sourceTree = "<group>"; };
 		9E1AB30A1D68D1F100AF584F /* CircleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleButton.swift; path = Ultilities/Views/CircleButton.swift; sourceTree = "<group>"; };
 		9E5F13751D66C3A00036529D /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerViewController.swift; path = Controllers/PlayerViewController.swift; sourceTree = "<group>"; };
+		9E5F1FEF1D72DB8F005B8F6C /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Authentication.swift; path = Models/Authentication.swift; sourceTree = "<group>"; };
 		9E625F161D6A009200010938 /* ListPlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListPlayerTableViewCell.swift; path = Views/ListPlayerTableViewCell.swift; sourceTree = "<group>"; };
 		9E6DFB781D585A7D004EB139 /* MusicApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E6DFB7B1D585A7D004EB139 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +126,14 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		9E5F1FEB1D72DB32005B8F6C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9E5F1FEF1D72DB8F005B8F6C /* Authentication.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		9E6DFB6F1D585A7D004EB139 = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				9EBA8EA21D598DDE0084E44A /* Helpers */,
+				9E5F1FEB1D72DB32005B8F6C /* Models */,
 				9EF377B91D67F5B400B07266 /* Online MVCs */,
 				9EF377C01D67F6A200B07266 /* Offline MVCs */,
 				9EF377B81D67F58200B07266 /* Generic MVCs */,
@@ -433,6 +444,7 @@
 				9E1A5AC71D729598000336B9 /* PlaylistOfflineViewController.swift in Sources */,
 				9E1A5ACB1D729E94000336B9 /* LoginViewController.swift in Sources */,
 				9E7CA4E91D6FEDD50017B6A7 /* SongOnlineViewController.swift in Sources */,
+				9E5F1FF01D72DB8F005B8F6C /* Authentication.swift in Sources */,
 				9E1A5AC91D7295B7000336B9 /* VideoOfflineViewController.swift in Sources */,
 				9EBA8EA11D598DAF0084E44A /* LyricPlayerViewController.swift in Sources */,
 				9E1A5AC11D72953F000336B9 /* VideoMineViewController.swift in Sources */,

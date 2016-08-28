@@ -10,10 +10,29 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    // MARK: Outlets
+    
+    @IBOutlet weak var logoImageView: UIImageView!
+    
+    // MARK: View Controller Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        setupLogo()
+    }
+    
+    private func setupLogo() {
+        let image = logoImageView.image?.imageWithColor(UIColor.whiteColor())
+        logoImageView.image = image
     }
 
+}
+
+extension LoginViewController {
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
+    
 }

@@ -456,7 +456,7 @@ extension PlayerViewController {
         
         func getTooltip() {
             let image = UIImage.imageWithColor(UIColor.blackColor(), withSize: self.sliderView.frame.size)
-            self.tooltip.backgroundImageView.image = image.imageWithRadius(self.sliderView.frame.size.height / 4)
+            self.tooltip.backgroundImageView.image = image.imageWithRadius(self.sliderView.frame.size.height / 2)
             
             marginTooltipConstraint = NSLayoutConstraint(
                 item: self.sliderView,
@@ -475,7 +475,7 @@ extension PlayerViewController {
                 toItem: self.tooltip,
                 attribute: .Bottom,
                 multiplier: 1,
-                constant: 0.5 * self.sliderView.frame.size.height
+                constant: 0.2 * self.sliderView.frame.size.height
             )
             
             self.view.addConstraints([marginTooltipConstraint, verticalTooltipConstraint])

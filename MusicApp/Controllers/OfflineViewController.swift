@@ -93,10 +93,17 @@ extension OfflineViewController: UITableViewDelegate {
         case 0:
             break
         case 1:
-            switch row {
-            case 0: self.pushChildOfflineViewControllerWithIdentifier(ControllersIdentifiers.PlaylistMineController)
-            case 1: self.pushChildOfflineViewControllerWithIdentifier(ControllersIdentifiers.VideoMineController)
-            default: break
+            if Authentication.sharedAuthentication.validated {
+                switch row {
+                case 0: self.pushChildOfflineViewControllerWithIdentifier(ControllersIdentifiers.PlaylistMineController)
+                case 1: self.pushChildOfflineViewControllerWithIdentifier(ControllersIdentifiers.VideoMineController)
+                default: break
+                }
+            } else {
+                switch row {
+                case 0, 1: self.pushChildOfflineViewControllerWithIdentifier(ControllersIdentifiers.LoginController)
+                default: break
+                }
             }
         case 2:
             switch row {

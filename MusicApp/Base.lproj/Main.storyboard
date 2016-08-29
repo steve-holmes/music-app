@@ -989,9 +989,6 @@
                                         <state key="normal" title="Login with Google">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <connections>
-                                            <action selector="googleLoginButtonTapped" destination="hAi-PC-ozi" eventType="touchUpInside" id="P6a-Nk-Bzi"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GLq-YU-LmC">
                                         <rect key="frame" x="20" y="127" width="335" height="44"/>

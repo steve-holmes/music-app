@@ -931,33 +931,6 @@
                                             <constraint firstItem="HWZ-pb-1jY" firstAttribute="leading" secondItem="rlI-nG-pCO" secondAttribute="leading" id="uO3-OL-JkF"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DHJ-US-0Nj">
-                                        <rect key="frame" x="20" y="127" width="335" height="44"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8AC-5s-oXg">
-                                                <rect key="frame" x="142" y="8" width="52" height="27.5"/>
-                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iwj-At-bsW">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="44"/>
-                                                <connections>
-                                                    <action selector="loginButtonTapped" destination="hAi-PC-ozi" eventType="touchUpInside" id="jk8-1Z-pqC"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.39215686274509803" green="0.67843137254901964" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstItem="8AC-5s-oXg" firstAttribute="centerY" secondItem="DHJ-US-0Nj" secondAttribute="centerY" id="2vR-YP-PrU"/>
-                                            <constraint firstAttribute="height" constant="44" id="5AO-LN-Nma"/>
-                                            <constraint firstItem="8AC-5s-oXg" firstAttribute="centerX" secondItem="DHJ-US-0Nj" secondAttribute="centerX" id="WlY-R8-Jsv"/>
-                                            <constraint firstAttribute="bottom" secondItem="Iwj-At-bsW" secondAttribute="bottom" id="Yhf-Ql-Wtu"/>
-                                            <constraint firstItem="Iwj-At-bsW" firstAttribute="leading" secondItem="DHJ-US-0Nj" secondAttribute="leading" id="lUk-rz-XEh"/>
-                                            <constraint firstAttribute="trailing" secondItem="Iwj-At-bsW" secondAttribute="trailing" id="qTk-p2-hKe"/>
-                                            <constraint firstItem="Iwj-At-bsW" firstAttribute="top" secondItem="DHJ-US-0Nj" secondAttribute="top" id="rJl-LX-91W"/>
-                                        </constraints>
-                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="65N-ca-P89">
                                         <rect key="frame" x="8" y="196" width="359" height="21"/>
                                         <subviews>
@@ -992,78 +965,66 @@
                                             <constraint firstItem="8Tt-r3-5q4" firstAttribute="height" secondItem="QgA-FB-8Jl" secondAttribute="height" id="ziQ-0a-e8g"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D0X-cM-D5n">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eJN-nt-34v">
                                         <rect key="frame" x="20" y="242" width="335" height="44"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login with Facebook" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VgW-cg-KiB">
-                                                <rect key="frame" x="72" y="8" width="191" height="28"/>
-                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="77D-He-Rkj">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="44"/>
-                                                <connections>
-                                                    <action selector="facebookLoginButtonTapped" destination="hAi-PC-ozi" eventType="touchUpInside" id="RfZ-76-asg"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.0" green="0.25098039215686274" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="77D-He-Rkj" firstAttribute="top" secondItem="D0X-cM-D5n" secondAttribute="top" id="H7F-SN-3Ic"/>
-                                            <constraint firstAttribute="bottom" secondItem="77D-He-Rkj" secondAttribute="bottom" id="Pca-f2-fNC"/>
-                                            <constraint firstAttribute="trailing" secondItem="77D-He-Rkj" secondAttribute="trailing" id="WTr-PT-azD"/>
-                                            <constraint firstItem="77D-He-Rkj" firstAttribute="leading" secondItem="D0X-cM-D5n" secondAttribute="leading" id="a1t-uF-ftY"/>
-                                            <constraint firstAttribute="height" constant="44" id="b6G-E1-iHG"/>
-                                            <constraint firstItem="VgW-cg-KiB" firstAttribute="centerX" secondItem="D0X-cM-D5n" secondAttribute="centerX" id="gci-m9-7m5"/>
-                                            <constraint firstItem="VgW-cg-KiB" firstAttribute="centerY" secondItem="D0X-cM-D5n" secondAttribute="centerY" id="wKs-LG-Ksi"/>
+                                            <constraint firstAttribute="height" constant="44" id="IeA-3P-Rn9"/>
                                         </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NYB-vg-Srt">
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
+                                        <state key="normal" title="Login with Facebook">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="facebookLoginButtonTapped" destination="hAi-PC-ozi" eventType="touchUpInside" id="8YK-LO-AS0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zOB-H1-2aG">
                                         <rect key="frame" x="20" y="301" width="335" height="44"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login with Google" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BWE-YK-3ga">
-                                                <rect key="frame" x="82" y="8" width="170" height="28"/>
-                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Gf-ds-6Tp">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="44"/>
-                                                <connections>
-                                                    <action selector="googleLoginButtonTapped" destination="hAi-PC-ozi" eventType="touchUpInside" id="teW-gG-6tq"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.82120479060913709" green="0.17724857233502539" blue="0.019412277918781726" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.81960784313725488" green="0.1764705882352941" blue="0.019607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="2Gf-ds-6Tp" firstAttribute="top" secondItem="NYB-vg-Srt" secondAttribute="top" id="1RM-b2-o8T"/>
-                                            <constraint firstAttribute="bottom" secondItem="2Gf-ds-6Tp" secondAttribute="bottom" id="BfU-YA-fgb"/>
-                                            <constraint firstAttribute="height" constant="44" id="EFp-r0-tyF"/>
-                                            <constraint firstItem="2Gf-ds-6Tp" firstAttribute="leading" secondItem="NYB-vg-Srt" secondAttribute="leading" id="KBW-tH-dTp"/>
-                                            <constraint firstItem="BWE-YK-3ga" firstAttribute="centerY" secondItem="NYB-vg-Srt" secondAttribute="centerY" id="MGA-do-May"/>
-                                            <constraint firstItem="BWE-YK-3ga" firstAttribute="centerX" secondItem="NYB-vg-Srt" secondAttribute="centerX" id="cLE-4Z-xZj"/>
-                                            <constraint firstAttribute="trailing" secondItem="2Gf-ds-6Tp" secondAttribute="trailing" id="dNx-Og-DGW"/>
+                                            <constraint firstAttribute="height" constant="44" id="Mgx-bu-tsr"/>
                                         </constraints>
-                                    </view>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
+                                        <state key="normal" title="Login with Google">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="googleLoginButtonTapped" destination="hAi-PC-ozi" eventType="touchUpInside" id="P6a-Nk-Bzi"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GLq-YU-LmC">
+                                        <rect key="frame" x="20" y="127" width="335" height="44"/>
+                                        <color key="backgroundColor" red="0.39215686274509803" green="0.67843137254901964" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="VVB-nI-bGt"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
+                                        <state key="normal" title="Login">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loginButtonTapped" destination="hAi-PC-ozi" eventType="touchUpInside" id="Ngc-Jl-bK5"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="D0X-cM-D5n" firstAttribute="trailing" secondItem="rlI-nG-pCO" secondAttribute="trailing" id="0Py-dl-5KK"/>
+                                    <constraint firstItem="GLq-YU-LmC" firstAttribute="trailing" secondItem="rlI-nG-pCO" secondAttribute="trailing" id="2py-KH-01D"/>
+                                    <constraint firstItem="65N-ca-P89" firstAttribute="top" secondItem="GLq-YU-LmC" secondAttribute="bottom" constant="25" id="60s-n5-lQY"/>
+                                    <constraint firstItem="eJN-nt-34v" firstAttribute="top" secondItem="65N-ca-P89" secondAttribute="bottom" constant="25" id="7Wa-u8-Dfl"/>
                                     <constraint firstAttribute="trailing" secondItem="65N-ca-P89" secondAttribute="trailing" constant="8" id="Ccb-0x-vkN"/>
-                                    <constraint firstItem="DHJ-US-0Nj" firstAttribute="leading" secondItem="rlI-nG-pCO" secondAttribute="leading" id="Ddj-G1-gO6"/>
                                     <constraint firstItem="65N-ca-P89" firstAttribute="leading" secondItem="7Fm-mi-a3z" secondAttribute="leading" constant="8" id="EGh-It-dQG"/>
                                     <constraint firstAttribute="trailing" secondItem="rlI-nG-pCO" secondAttribute="trailing" constant="20" id="Eua-Nl-88B"/>
-                                    <constraint firstItem="DHJ-US-0Nj" firstAttribute="trailing" secondItem="rlI-nG-pCO" secondAttribute="trailing" id="Phc-Bu-Axi"/>
-                                    <constraint firstItem="65N-ca-P89" firstAttribute="top" secondItem="DHJ-US-0Nj" secondAttribute="bottom" constant="25" id="Pk1-Kd-npJ"/>
+                                    <constraint firstItem="zOB-H1-2aG" firstAttribute="leading" secondItem="rlI-nG-pCO" secondAttribute="leading" id="KgF-Xa-wRk"/>
+                                    <constraint firstItem="zOB-H1-2aG" firstAttribute="trailing" secondItem="rlI-nG-pCO" secondAttribute="trailing" id="Re1-C4-obI"/>
+                                    <constraint firstItem="eJN-nt-34v" firstAttribute="trailing" secondItem="rlI-nG-pCO" secondAttribute="trailing" id="Tj7-zv-H5g"/>
+                                    <constraint firstItem="zOB-H1-2aG" firstAttribute="top" secondItem="eJN-nt-34v" secondAttribute="bottom" constant="15" id="VLh-dL-CFB"/>
                                     <constraint firstItem="rlI-nG-pCO" firstAttribute="top" secondItem="7Fm-mi-a3z" secondAttribute="top" constant="25" id="Wom-Ae-CrT"/>
-                                    <constraint firstItem="D0X-cM-D5n" firstAttribute="top" secondItem="65N-ca-P89" secondAttribute="bottom" constant="25" id="eBD-mm-wTx"/>
+                                    <constraint firstItem="GLq-YU-LmC" firstAttribute="top" secondItem="rlI-nG-pCO" secondAttribute="bottom" constant="20" id="fNK-xy-DQj"/>
                                     <constraint firstItem="rlI-nG-pCO" firstAttribute="leading" secondItem="7Fm-mi-a3z" secondAttribute="leading" constant="20" id="fRc-7y-RWr"/>
-                                    <constraint firstItem="DHJ-US-0Nj" firstAttribute="top" secondItem="rlI-nG-pCO" secondAttribute="bottom" constant="20" id="hdf-fL-YPi"/>
-                                    <constraint firstItem="NYB-vg-Srt" firstAttribute="top" secondItem="D0X-cM-D5n" secondAttribute="bottom" constant="15" id="obk-9G-6IE"/>
-                                    <constraint firstItem="D0X-cM-D5n" firstAttribute="leading" secondItem="rlI-nG-pCO" secondAttribute="leading" id="qiu-Kj-in5"/>
-                                    <constraint firstItem="NYB-vg-Srt" firstAttribute="leading" secondItem="rlI-nG-pCO" secondAttribute="leading" id="s3g-GB-lKu"/>
-                                    <constraint firstItem="NYB-vg-Srt" firstAttribute="trailing" secondItem="rlI-nG-pCO" secondAttribute="trailing" id="yf7-yR-lra"/>
+                                    <constraint firstItem="GLq-YU-LmC" firstAttribute="leading" secondItem="rlI-nG-pCO" secondAttribute="leading" id="oFZ-KD-eg0"/>
+                                    <constraint firstItem="eJN-nt-34v" firstAttribute="leading" secondItem="rlI-nG-pCO" secondAttribute="leading" id="zHK-MQ-y53"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1085,7 +1046,7 @@
                         <outlet property="emailTextField" destination="IFf-r9-Cze" id="LyW-DU-R9o"/>
                         <outlet property="loginBarButton" destination="v1N-7A-sVv" id="CRd-Yf-zfP"/>
                         <outlet property="loginBarButtonCenterXConstraint" destination="Ftd-8l-qnc" id="C6D-7e-yJZ"/>
-                        <outlet property="loginLabel" destination="8AC-5s-oXg" id="IO3-5Q-yCJ"/>
+                        <outlet property="loginButton" destination="GLq-YU-LmC" id="5eZ-a1-OQX"/>
                         <outlet property="logoImageView" destination="u6a-bB-0mA" id="orQ-51-hMQ"/>
                         <outlet property="passwordImageView" destination="hce-Ko-spU" id="cX6-xZ-o8Z"/>
                         <outlet property="passwordTextField" destination="laK-is-cCC" id="TN0-ce-O2A"/>

@@ -25,20 +25,6 @@ class ListPlayerViewController: UIViewController, PlayerChildViewController {
     
     var delegate: PlayerChildViewControllerDelegate?
     
-    // MARK: Gesture Recognizer
-    
-    func performSwipeGestureRecognizer(gestureRecognizer: UISwipeGestureRecognizer) {
-        self.delegate?.playerChildViewController(self, didRecognizeBySwipeGestureRecognizer: gestureRecognizer)
-    }
-    
-    func performPanGestureRecognzier(gestureRecognizer: UIPanGestureRecognizer) {
-        self.delegate?.playerChildViewController(
-            self,
-            options: PlayerChildViewControllerPanGestureRecognizerDirection.Left,
-            didRecognizeByPanGestureRecognizer: gestureRecognizer
-        )
-    }
-    
     // MARK: - View Controller Lifecycle
     
     override func viewDidLoad() {
@@ -47,13 +33,6 @@ class ListPlayerViewController: UIViewController, PlayerChildViewController {
         songTableView.dataSource = self
         songTableView.rowHeight = UITableViewAutomaticDimension
         songTableView.estimatedRowHeight = 20
-        
-        let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(performSwipeGestureRecognizer(_:)))
-        swipeGestureRecognizer.direction = .Left
-        self.view.addGestureRecognizer(swipeGestureRecognizer)
-        
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(performPanGestureRecognzier(_:)))
-        self.view.addGestureRecognizer(panGestureRecognizer)
     }
 
 }

@@ -12,17 +12,6 @@ import UIKit
 
 protocol PlayerChildViewControllerDelegate {
     
-    func playerChildViewController(
-        controller: PlayerChildViewController,
-        didRecognizeBySwipeGestureRecognizer swipeGestureRecognizer: UISwipeGestureRecognizer
-    )
-    
-    func playerChildViewController(
-        controller: PlayerChildViewController,
-        options: PlayerChildViewControllerPanGestureRecognizerDirection?,
-        didRecognizeByPanGestureRecognizer panGestureRecognizer: UIPanGestureRecognizer
-    )
-    
 }
 
 protocol PlayerChildViewController {
@@ -114,10 +103,6 @@ class PlayerViewController: UIViewController {
     @IBOutlet weak var currentTimeLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
     
-    @IBOutlet private weak var leftViewCenterXConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var middleViewCenterXConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var rightViewCenterXConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var sliderViewLeadingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var playedProgressBarWidthConstrant: NSLayoutConstraint!
     @IBOutlet weak var unloadProgressBarWidthConstraint: NSLayoutConstraint!
@@ -143,6 +128,12 @@ class PlayerViewController: UIViewController {
     }
     
     // MARK: Private properties
+    
+    private var previousOffsetX: CGFloat = 0
+    
+    private var startAlpha: CGFloat = 0.2
+    private var endAlpha: CGFloat = 1.0
+    private lazy var scaleAlphaFactor: CGFloat = self.endAlpha - self.startAlpha
     
     private var oldSliderViewConstant: CGFloat = 0
     
@@ -175,13 +166,9 @@ class PlayerViewController: UIViewController {
         self.displayContentController(singlePlayerViewController, inView: middleView)
         self.displayContentController(lyricPlayerViewController, inView: rightView)
         
-        let width = self.view.bounds.size.width
-        self.middleViewCenterXConstraint.constant = width
-        self.rightViewCenterXConstraint.constant = 2 * width
-        
-        self.leftView.alpha = 1
-        self.middleView.alpha = 0.5
-        self.rightView.alpha = 0.5
+        self.leftView.alpha = self.endAlpha
+        self.middleView.alpha = self.startAlpha
+        self.rightView.alpha = self.startAlpha
     }
     
     private func setupProgressBar() {
@@ -254,72 +241,26 @@ class PlayerViewController: UIViewController {
     }
     
     private var detailPosition: Position = .Left {
-        didSet(oldPosition) {
-            self.changeChildPlayerViewFromPosition(oldPosition, toPosition: detailPosition)
-        }
-    }
-    
-    // MARK: Change Detail Player Subviews
-    
-    private var translatedDuration: NSTimeInterval = 0.35
-    
-    private func changeChildPlayerViewFromPosition(fromPosition: Position, toPosition: Position) {
-        if (fromPosition == .Left && toPosition == .Right) || (fromPosition == .Right && toPosition == .Left) {
-            return
-        }
-        
-        let width = self.view.bounds.size.width
-        
-        func setCenterXConstraintConstantForLeftView(leftConstant: CGFloat, forMiddleView middleConstant: CGFloat, forRightView rightConstant: CGFloat) {
-            self.leftViewCenterXConstraint.constant = leftConstant
-            self.middleViewCenterXConstraint.constant = middleConstant
-            self.rightViewCenterXConstraint.constant = rightConstant
-        }
-        
-        func setAlphaPropertyForLeftView(leftAlpha: CGFloat, forMiddleView middleAlpha: CGFloat, forRightView rightAlpha: CGFloat) {
-            self.leftView.alpha = leftAlpha
-            self.middleView.alpha = middleAlpha
-            self.rightView.alpha = rightAlpha
-        }
-        
-        func changeToMiddle() {
-            setCenterXConstraintConstantForLeftView(-width, forMiddleView: 0, forRightView: width)
-            setAlphaPropertyForLeftView(0.5, forMiddleView: 1.0, forRightView: 0.5)
-            self.topVisualEffectView.alpha = 0
-        }
-        
-        func changeToLeft() {
-            setCenterXConstraintConstantForLeftView(0, forMiddleView: width, forRightView: 2 * width)
-            setAlphaPropertyForLeftView(1.0, forMiddleView: 0.5, forRightView: 0.5)
-            self.topVisualEffectView.alpha = 1
-        }
-        
-        func changeToRight() {
-            setCenterXConstraintConstantForLeftView(-2 * width, forMiddleView: -width, forRightView: 0)
-            setAlphaPropertyForLeftView(0.5, forMiddleView: 0.5, forRightView: 1.0)
-            self.topVisualEffectView.alpha = 1
-        }
-        
-        UIView.animateWithDuration(
-            translatedDuration, delay: 0, options: .CurveEaseIn,
-            animations: {
-                switch toPosition {
-                case .Left:     changeToLeft()
-                case .Middle:   changeToMiddle()
-                case .Right:    changeToRight()
-                }
-                
-                self.view.layoutIfNeeded()
-            },
-            completion: { completed in
-                guard completed else { return }
-                switch toPosition {
-                case .Left:   self.pageControl.currentPage = 0
-                case .Middle: self.pageControl.currentPage = 1
-                case .Right:  self.pageControl.currentPage = 2
-                }
+        didSet {
+//            self.changeChildPlayerViewFromPosition(oldPosition, toPosition: detailPosition)
+            func setAlphaPropertyForLeftView(leftAlpha: CGFloat, forMiddleView middleAlpha: CGFloat, forRightView rightAlpha: CGFloat) {
+                self.leftView.alpha = leftAlpha
+                self.middleView.alpha = middleAlpha
+                self.rightView.alpha = rightAlpha
             }
-        )
+            
+            switch detailPosition {
+            case .Left:
+                setAlphaPropertyForLeftView(self.endAlpha, forMiddleView: self.startAlpha, forRightView: self.startAlpha)
+                self.topVisualEffectView.alpha = 1
+            case .Middle:
+                setAlphaPropertyForLeftView(self.startAlpha, forMiddleView: self.endAlpha, forRightView: self.startAlpha)
+                self.topVisualEffectView.alpha = 0
+            case .Right:
+                setAlphaPropertyForLeftView(self.startAlpha, forMiddleView: self.startAlpha, forRightView: self.endAlpha)
+                self.topVisualEffectView.alpha = 1
+            }
+        }
     }
     
     // MARK: Internal struct Date - An helper structure
@@ -352,65 +293,66 @@ class PlayerViewController: UIViewController {
 
 extension PlayerViewController: PlayerChildViewControllerDelegate {
     
-    func playerChildViewController(controller: PlayerChildViewController, didRecognizeBySwipeGestureRecognizer swipeGestureRecognizer: UISwipeGestureRecognizer) {
+}
+
+// MARK: UIScrollViewDelegate
+
+extension PlayerViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let offsetX = scrollView.contentOffset.x - previousOffsetX
+        var multiplier = offsetX / self.view.bounds.size.width
+        let sign: CGFloat = multiplier < 0 ? -1 : 1
+        multiplier = abs(multiplier)
+        let alphaDuration = self.scaleAlphaFactor * multiplier
+        
+        func scrollViewDidScrollFromLeftViewToMiddleView() {
+            self.leftView.alpha = self.endAlpha - alphaDuration
+            self.middleView.alpha = self.startAlpha + alphaDuration
+            self.topVisualEffectView.alpha = 1.0 - multiplier
+        }
+        
+        func scrollViewDidScrollFromMiddleViewToLeftView() {
+            self.leftView.alpha = self.startAlpha + alphaDuration
+            self.middleView.alpha = self.endAlpha - alphaDuration
+            self.topVisualEffectView.alpha = multiplier
+        }
+        
+        func scrollViewDidScrollFromMiddleViewToRightView() {
+            self.middleView.alpha = self.endAlpha - alphaDuration
+            self.rightView.alpha = self.startAlpha + alphaDuration
+            self.topVisualEffectView.alpha = multiplier
+        }
+        
+        func scrollViewDidScrollFromRightViewToMiddleView() {
+            self.middleView.alpha = self.startAlpha + alphaDuration
+            self.rightView.alpha = self.endAlpha - alphaDuration
+            self.topVisualEffectView.alpha = 1.0 - multiplier
+        }
+        
         switch position {
-        case .Left where controller is ListPlayerViewController:
-            self.listPlayerViewController(controller as! ListPlayerViewController, didRecognizeBySwipeGestureRecognizer: swipeGestureRecognizer)
-        case .Middle where controller is SinglePlayerViewController:
-            self.singlePlayerViewController(controller as! SinglePlayerViewController, didRecognizeBySwipeGestureRecognizer: swipeGestureRecognizer)
-        case .Right where controller is LyricPlayerViewController:
-            self.lyricPlayerViewController(controller as! LyricPlayerViewController, didRecognizeBySwipeGestureRecognizer: swipeGestureRecognizer)
-        default:
-            break
+        case .Left: scrollViewDidScrollFromLeftViewToMiddleView()
+        case .Middle where sign < 0: scrollViewDidScrollFromMiddleViewToLeftView()
+        case .Middle where sign > 0: scrollViewDidScrollFromMiddleViewToRightView()
+        case .Right: scrollViewDidScrollFromRightViewToMiddleView()
+        default: break
         }
     }
     
-    private func listPlayerViewController(listPlayerController: ListPlayerViewController, didRecognizeBySwipeGestureRecognizer swipeGestureRecognizer: UISwipeGestureRecognizer) {
-        if swipeGestureRecognizer.direction == .Left {
-            position = .Middle
-        }
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        self.previousOffsetX = scrollView.contentOffset.x
     }
     
-    private func singlePlayerViewController(singlePlayerController: SinglePlayerViewController, didRecognizeBySwipeGestureRecognizer swipeGestureRecognizer: UISwipeGestureRecognizer) {
-        if swipeGestureRecognizer.direction == .Left {
-            position = .Right
-        } else if swipeGestureRecognizer.direction == .Right {
-            position = .Left
-        }
-    }
-    
-    private func lyricPlayerViewController(lyricController: LyricPlayerViewController, didRecognizeBySwipeGestureRecognizer swipeGestureRecognizer: UISwipeGestureRecognizer) {
-        if swipeGestureRecognizer.direction == .Right {
-            position = .Middle
-        }
-    }
-    
-    func playerChildViewController(controller: PlayerChildViewController, options: PlayerChildViewControllerPanGestureRecognizerDirection?, didRecognizeByPanGestureRecognizer panGestureRecognizer: UIPanGestureRecognizer) {
-        guard let options = options else { return }
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        let offsetX = scrollView.contentOffset.x
+        self.pageControl.currentPage = Int(offsetX / self.view.bounds.size.width)
         
-        if let controller = controller as? ListPlayerViewController where !options.isEmpty && options.isSubsetOf(PlayerChildViewControllerPanGestureRecognizerDirection.Left) {
-            self.listPlayerViewController(controller, didRecognizeByPanGestureRecognizer: panGestureRecognizer)
+        switch self.pageControl.currentPage {
+        case 0: position = .Left
+        case 1: position = .Middle
+        case 2: position = .Right
+        default: break
         }
-        
-        if let controller = controller as? SinglePlayerViewController where PlayerChildViewControllerPanGestureRecognizerDirection.All.subtract(options).isEmpty {
-            self.singlePlayerViewController(controller, didRecognizeByPanGestureRecognizer: panGestureRecognizer)
-        }
-        
-        if let controller = controller as? LyricPlayerViewController where !options.isEmpty && options.isSubsetOf(PlayerChildViewControllerPanGestureRecognizerDirection.Right) {
-            self.lyricPlayerViewController(controller, didRecognizeByPanGestureRecognizer: panGestureRecognizer)
-        }
-    }
-    
-    private func listPlayerViewController(listPlayerController: ListPlayerViewController, didRecognizeByPanGestureRecognizer panGestureRecognizer: UIPanGestureRecognizer) {
-        print(#function)
-    }
-    
-    private func singlePlayerViewController(singlePlayerController: SinglePlayerViewController, didRecognizeByPanGestureRecognizer panGestureRecognizer: UIPanGestureRecognizer) {
-        print(#function)
-    }
-    
-    private func lyricPlayerViewController(lyricPlayerController: LyricPlayerViewController, didRecognizeByPanGestureRecognizer panGestureRecognizer: UIPanGestureRecognizer) {
-        print(#function)
     }
     
 }

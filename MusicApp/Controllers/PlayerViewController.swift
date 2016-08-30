@@ -285,8 +285,6 @@ extension PlayerViewController: UIScrollViewDelegate {
             self.leftView.alpha = self.endAlpha - alphaDuration
             self.middleView.alpha = self.startAlpha + alphaDuration
             self.topVisualEffectView.alpha = 1.0 - multiplier
-            
-            self.panGestureRecognizer.enabled = true
         }
         
         func scrollViewDidScrollFromMiddleViewToLeftView() {
@@ -305,8 +303,6 @@ extension PlayerViewController: UIScrollViewDelegate {
             self.middleView.alpha = self.startAlpha + alphaDuration
             self.rightView.alpha = self.endAlpha - alphaDuration
             self.topVisualEffectView.alpha = 1.0 - multiplier
-            
-            self.panGestureRecognizer.enabled = true
         }
         
         switch position {
@@ -323,10 +319,16 @@ extension PlayerViewController: UIScrollViewDelegate {
         self.previousOffsetX = scrollView.contentOffset.x
     }
     
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        guard scrollView === self.scrollView else { return }
+        self.panGestureRecognizer.enabled = true
+    }
+    
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         guard scrollView === self.scrollView else { return }
         
         let offsetX = scrollView.contentOffset.x
+        self.previousOffsetX = offsetX
         self.pageControl.currentPage = Int(offsetX / self.view.bounds.size.width)
         
         switch self.pageControl.currentPage {

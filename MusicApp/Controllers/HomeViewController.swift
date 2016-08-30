@@ -231,7 +231,7 @@ extension HomeViewController: PlayerViewControllerDelegate {
                 playerViewTopConstraint.constant = offsetY
                 playerView.alpha = opacity
             }
-        case .Ended:
+        case .Began, .Ended, .Cancelled:
             if offsetY < height / 2 {
                 UIView.animateWithDuration(transitionDuration) {
                     self.playerViewTopConstraint.constant = 0
@@ -247,8 +247,10 @@ extension HomeViewController: PlayerViewControllerDelegate {
                     self.view.layoutIfNeeded()
                 }
             }
-        default:
-            break
+        case .Failed:
+            print("Failed")
+        case .Possible:
+            print("Possible")
         }
     }
     

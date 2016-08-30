@@ -248,7 +248,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="52.5" height="53"/>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Play" translatesAutoresizingMaskIntoConstraints="NO" id="rAU-Y4-Pj6">
-                                                        <rect key="frame" x="8.5" y="9" width="35.5" height="35.5"/>
+                                                        <rect key="frame" x="8" y="9" width="35.5" height="35.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="rAU-Y4-Pj6" secondAttribute="height" id="3T2-cy-y05"/>
                                                         </constraints>
@@ -294,13 +294,20 @@
                                     <constraint firstAttribute="bottom" secondItem="UdC-SJ-rdz" secondAttribute="bottom" id="xnd-a6-Lwz"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0RX-Pc-9qU">
+                                <rect key="frame" x="-0.5" y="0.0" width="375" height="667"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="vJU-tb-NyP" firstAttribute="leading" secondItem="o2t-rB-UvS" secondAttribute="leading" id="3LP-Xl-gtc"/>
                             <constraint firstAttribute="bottom" secondItem="Tbu-G3-V4a" secondAttribute="bottom" id="AHw-4C-k7P"/>
+                            <constraint firstItem="0RX-Pc-9qU" firstAttribute="height" secondItem="o2t-rB-UvS" secondAttribute="height" id="E3G-zu-0Wt"/>
                             <constraint firstAttribute="trailing" secondItem="Tbu-G3-V4a" secondAttribute="trailing" id="GRO-P0-Z7S"/>
+                            <constraint firstItem="0RX-Pc-9qU" firstAttribute="top" secondItem="o2t-rB-UvS" secondAttribute="top" id="T9a-dJ-GSH"/>
+                            <constraint firstItem="0RX-Pc-9qU" firstAttribute="centerX" secondItem="o2t-rB-UvS" secondAttribute="centerX" id="Vck-l2-vut"/>
                             <constraint firstItem="Tbu-G3-V4a" firstAttribute="leading" secondItem="o2t-rB-UvS" secondAttribute="leading" id="cxy-sA-bgf"/>
+                            <constraint firstItem="0RX-Pc-9qU" firstAttribute="width" secondItem="o2t-rB-UvS" secondAttribute="width" id="evQ-wb-66m"/>
                             <constraint firstItem="vJU-tb-NyP" firstAttribute="top" secondItem="o2t-rB-UvS" secondAttribute="top" id="f9j-qC-cYN"/>
                             <constraint firstAttribute="trailing" secondItem="vJU-tb-NyP" secondAttribute="trailing" id="het-US-Fed"/>
                             <constraint firstAttribute="bottom" secondItem="vJU-tb-NyP" secondAttribute="bottom" id="pPK-OS-8Cs"/>
@@ -319,6 +326,8 @@
                         <outlet property="onlineButtonLabel" destination="XNs-Hs-dyz" id="cVy-sQ-cWo"/>
                         <outlet property="playButtonImageView" destination="rAU-Y4-Pj6" id="yGD-Fr-G5x"/>
                         <outlet property="playImageView" destination="nIV-uE-b7X" id="KvC-eC-W0s"/>
+                        <outlet property="playerView" destination="0RX-Pc-9qU" id="z8s-XR-2fn"/>
+                        <outlet property="playerViewTopConstraint" destination="T9a-dJ-GSH" id="os7-IU-eic"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RUB-pc-l58" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -377,7 +386,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="g3J-53-Kff">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PageHomeOnlineTableCell" id="gBu-3h-M0z" customClass="PageHomeOnlineTableViewCell" customModule="MusicApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="49.5" width="375" height="44"/>
@@ -1369,6 +1378,7 @@
                         <outlet property="playedProgressBarWidthConstrant" destination="5zM-zs-Blr" id="k20-Cf-2bZ"/>
                         <outlet property="progressBar" destination="HT2-Co-vUZ" id="iuu-4v-Axi"/>
                         <outlet property="rightView" destination="7B3-SW-6r3" id="Xeh-4s-31b"/>
+                        <outlet property="scrollView" destination="emj-bL-36k" id="h76-z9-63C"/>
                         <outlet property="sliderView" destination="exv-1a-QWK" id="NoA-lC-HGP"/>
                         <outlet property="sliderViewLeadingSpaceConstraint" destination="K8B-An-CPt" id="GY8-sk-xO9"/>
                         <outlet property="topVisualEffectView" destination="OSv-hj-aH0" id="RJN-OD-OCK"/>

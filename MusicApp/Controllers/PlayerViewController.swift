@@ -20,19 +20,10 @@ protocol PlayerChildViewController {
     
 }
 
-// MARK: PlayerChildViewControllerPanGestureRecognizerDirection
-
-struct PlayerChildViewControllerPanGestureRecognizerDirection: OptionSetType {
-    static let Left     = PlayerChildViewControllerPanGestureRecognizerDirection(rawValue: 1)
-    static let Right    = PlayerChildViewControllerPanGestureRecognizerDirection(rawValue: 2)
-    static let Top      = PlayerChildViewControllerPanGestureRecognizerDirection(rawValue: 4)
-    static let Bottom   = PlayerChildViewControllerPanGestureRecognizerDirection(rawValue: 8)
+protocol PlayerViewControllerDelegate {
     
-    static let All: PlayerChildViewControllerPanGestureRecognizerDirection = [Left, Right, Top, Bottom]
+    func dismissPlayerViewController(controller: PlayerViewController, completion: (() -> Void)?)
     
-    let rawValue: Int
-    
-    init(rawValue: Int) { self.rawValue = rawValue }
 }
 
 // MARK: Class PlayerViewController
@@ -71,23 +62,13 @@ class PlayerViewController: UIViewController {
     
     var backgroundImage: UIImage = UIImage(named: "background")!
     
-    // MARK: Public APIs
-    
-    var position: Position {
-        get {
-            return self.detailPosition
-        }
-        set {
-            self.detailPosition = newValue
-        }
-    }
-    
     // MARK: Outlets
     
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var topVisualEffectView: UIVisualEffectView!
     @IBOutlet weak var pageControl: UIPageControl!
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet private weak var leftView: UIView!
     @IBOutlet private weak var middleView: UIView!
     @IBOutlet private weak var rightView: UIView!
@@ -112,7 +93,7 @@ class PlayerViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func dismissButtonTapped() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.delegate?.dismissPlayerViewController(self, completion: nil)
     }
     
     @IBAction func playPauseButtonTapped(button: UIButton) {
@@ -126,6 +107,10 @@ class PlayerViewController: UIViewController {
     @IBAction func forwardButtonTapped() {
         print(#function)
     }
+    
+    // MARK: Delegation
+    
+    var delegate: PlayerViewControllerDelegate?
     
     // MARK: Private properties
     
@@ -240,16 +225,15 @@ class PlayerViewController: UIViewController {
         case Right
     }
     
-    private var detailPosition: Position = .Left {
+    private var position: Position = .Left {
         didSet {
-//            self.changeChildPlayerViewFromPosition(oldPosition, toPosition: detailPosition)
             func setAlphaPropertyForLeftView(leftAlpha: CGFloat, forMiddleView middleAlpha: CGFloat, forRightView rightAlpha: CGFloat) {
                 self.leftView.alpha = leftAlpha
                 self.middleView.alpha = middleAlpha
                 self.rightView.alpha = rightAlpha
             }
             
-            switch detailPosition {
+            switch position {
             case .Left:
                 setAlphaPropertyForLeftView(self.endAlpha, forMiddleView: self.startAlpha, forRightView: self.startAlpha)
                 self.topVisualEffectView.alpha = 1
@@ -300,6 +284,8 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
 extension PlayerViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
+        guard scrollView === self.scrollView else { return }
+        
         let offsetX = scrollView.contentOffset.x - previousOffsetX
         var multiplier = offsetX / self.view.bounds.size.width
         let sign: CGFloat = multiplier < 0 ? -1 : 1
@@ -340,10 +326,13 @@ extension PlayerViewController: UIScrollViewDelegate {
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        guard scrollView === self.scrollView else { return }
         self.previousOffsetX = scrollView.contentOffset.x
     }
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        guard scrollView === self.scrollView else { return }
+        
         let offsetX = scrollView.contentOffset.x
         self.pageControl.currentPage = Int(offsetX / self.view.bounds.size.width)
         

@@ -25,6 +25,9 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var playButtonImageView: UIImageView!
     
     @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet weak var playerView: UIView!
+    
+    @IBOutlet weak var playerViewTopConstraint: NSLayoutConstraint!
     
     // MARK: Actions
     
@@ -44,6 +47,8 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        playerViewTopConstraint.constant = self.view.bounds.height
         
         middleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didRecognizeOnMiddleViewByTapGestureRecognizer(_:))))
         
@@ -65,7 +70,7 @@ class HomeViewController: UIViewController {
         return controller
     }()
     
-    private lazy var playerViewController: PlayerViewController = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.PlayerController) as! PlayerViewController
+    private var playerViewController: PlayerViewController!
     
     // MARK: Play Button
     private func setupPlayButton() {
@@ -86,8 +91,18 @@ class HomeViewController: UIViewController {
     
     func didRecognizeOnMiddleViewByTapGestureRecognizer(gestureRecognizer: UITapGestureRecognizer) {
         if animationEnabled { return }
+        
+        if playerViewController == nil {
+            playerViewController = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.PlayerController) as! PlayerViewController
+            self.displayContentController(playerViewController, inView: self.playerView)
+            playerViewController.delegate = self
+        }
+        
         animatePlayButton() {
-            self.presentViewController(self.playerViewController, animated: true, completion: nil)
+            UIView.animateWithDuration(0.5) {
+                self.playerViewTopConstraint.constant = 0
+                self.view.layoutIfNeeded()
+            }
         }
     }
     
@@ -98,7 +113,7 @@ class HomeViewController: UIViewController {
     private var animationTotal = 4
     private var animationDuration: NSTimeInterval = 6
     
-    private func animatePlayButton(completion: (() -> Void)?) {
+    private func animatePlayButton(completion: (() -> Void)? = nil) {
         playButtonImageView.hidden = true
         UIView.animateWithDuration(
             animationDuration / NSTimeInterval(animationTotal),
@@ -173,4 +188,22 @@ class HomeViewController: UIViewController {
         }
     }
 
+}
+
+extension HomeViewController: PlayerViewControllerDelegate {
+    
+    func dismissPlayerViewController(controller: PlayerViewController, completion: (() -> Void)?) {
+        UIView.animateWithDuration(
+            0.5,
+            animations: {
+                self.playerViewTopConstraint.constant = self.view.bounds.size.height
+                self.view.layoutIfNeeded()
+            },
+            completion: { completed in
+                guard completed else { return }
+                if let completion = completion { completion() }
+            }
+        )
+    }
+    
 }

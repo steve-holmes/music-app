@@ -10,18 +10,9 @@ import UIKit
 
 // MARK: Protocols
 
-protocol PlayerChildViewControllerDelegate {
-    
-}
-
-protocol PlayerChildViewController {
-    
-    var delegate: PlayerChildViewControllerDelegate? { get }
-    
-}
-
 protocol PlayerViewControllerDelegate {
     
+    func playerViewController(controller: PlayerViewController, fromChildViewController childController: SinglePlayerViewController, didRecognizeByGesture gestureRecognizer: UIPanGestureRecognizer)
     func dismissPlayerViewController(controller: PlayerViewController, completion: (() -> Void)?)
     
 }
@@ -114,11 +105,17 @@ class PlayerViewController: UIViewController {
     
     // MARK: Private properties
     
+    var panGestureRecognizer: UIPanGestureRecognizer {
+        return singlePlayerViewController.panGestureRecognizer
+    }
+    
     private var previousOffsetX: CGFloat = 0
     
     private var startAlpha: CGFloat = 0.2
     private var endAlpha: CGFloat = 1.0
     private lazy var scaleAlphaFactor: CGFloat = self.endAlpha - self.startAlpha
+    
+    private var transitionDuration: NSTimeInterval = 0.5
     
     private var oldSliderViewConstant: CGFloat = 0
     
@@ -199,7 +196,6 @@ class PlayerViewController: UIViewController {
     
     private lazy var listPlayerViewController: ListPlayerViewController = {
         let controller = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.ListPlayerController) as! ListPlayerViewController
-        controller.delegate = self
         return controller
     }()
     
@@ -212,7 +208,6 @@ class PlayerViewController: UIViewController {
     
     private lazy var lyricPlayerViewController: LyricPlayerViewController = {
         let controller = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.LyricPlayerController) as! LyricPlayerViewController
-        controller.delegate = self
         return controller
     }()
     
@@ -273,12 +268,6 @@ class PlayerViewController: UIViewController {
 
 }
 
-// MARK: PlayerChildViewControllerDelegate
-
-extension PlayerViewController: PlayerChildViewControllerDelegate {
-    
-}
-
 // MARK: UIScrollViewDelegate
 
 extension PlayerViewController: UIScrollViewDelegate {
@@ -296,6 +285,8 @@ extension PlayerViewController: UIScrollViewDelegate {
             self.leftView.alpha = self.endAlpha - alphaDuration
             self.middleView.alpha = self.startAlpha + alphaDuration
             self.topVisualEffectView.alpha = 1.0 - multiplier
+            
+            self.panGestureRecognizer.enabled = true
         }
         
         func scrollViewDidScrollFromMiddleViewToLeftView() {
@@ -314,6 +305,8 @@ extension PlayerViewController: UIScrollViewDelegate {
             self.middleView.alpha = self.startAlpha + alphaDuration
             self.rightView.alpha = self.endAlpha - alphaDuration
             self.topVisualEffectView.alpha = 1.0 - multiplier
+            
+            self.panGestureRecognizer.enabled = true
         }
         
         switch position {
@@ -342,6 +335,16 @@ extension PlayerViewController: UIScrollViewDelegate {
         case 2: position = .Right
         default: break
         }
+    }
+    
+}
+
+// MARK: SinglePlayerViewControllerDelegate
+
+extension PlayerViewController: SinglePlayerViewControllerDelegate {
+    
+    func singlePlayerViewController(controller: SinglePlayerViewController, didRecognizeByTapGesture gestureRecognizer: UIPanGestureRecognizer) {
+        self.delegate?.playerViewController(self, fromChildViewController: controller, didRecognizeByGesture: gestureRecognizer)
     }
     
 }

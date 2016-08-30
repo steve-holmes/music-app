@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListPlayerViewController: UIViewController, PlayerChildViewController {
+class ListPlayerViewController: UIViewController {
 
     // MARK: - Models
     
@@ -20,10 +20,6 @@ class ListPlayerViewController: UIViewController, PlayerChildViewController {
     // MARK: - Outlets
     
     @IBOutlet weak var songTableView: UITableView!
-    
-    // MARK: - Delegation
-    
-    var delegate: PlayerChildViewControllerDelegate?
     
     // MARK: - View Controller Lifecycle
     

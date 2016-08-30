@@ -43,11 +43,16 @@ class HomeViewController: UIViewController {
         }
     }
     
+    // MARK: Private properties
+    
+    let transitionDuration: NSTimeInterval = 0.35
+    
     // MARK: View Controller Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        playerView.alpha = 0
         playerViewTopConstraint.constant = self.view.bounds.height
         
         middleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didRecognizeOnMiddleViewByTapGestureRecognizer(_:))))
@@ -89,20 +94,33 @@ class HomeViewController: UIViewController {
     
     // MARK: Gesture Recognizer
     
+    private var tapCount = 0
+    private var maximumNumberOfTap = 2
+    
     func didRecognizeOnMiddleViewByTapGestureRecognizer(gestureRecognizer: UITapGestureRecognizer) {
-        if animationEnabled { return }
-        
         if playerViewController == nil {
             playerViewController = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.PlayerController) as! PlayerViewController
             self.displayContentController(playerViewController, inView: self.playerView)
             playerViewController.delegate = self
         }
         
-        animatePlayButton() {
-            UIView.animateWithDuration(0.5) {
+        tapCount += 1
+        if tapCount == maximumNumberOfTap {
+            tapCount = 0
+            maximumNumberOfTap = 1
+            UIView.animateWithDuration(transitionDuration) {
                 self.playerViewTopConstraint.constant = 0
+                self.playerView.alpha = 1
+                self.playerViewController.panGestureRecognizer.enabled = true
+                
                 self.view.layoutIfNeeded()
             }
+        }
+        
+        if animationEnabled { return }
+        animatePlayButton() {
+            self.tapCount = 0
+            self.maximumNumberOfTap = 2
         }
     }
     
@@ -190,13 +208,56 @@ class HomeViewController: UIViewController {
 
 }
 
+// MARK: PlayerViewControllerDelegate
+
 extension HomeViewController: PlayerViewControllerDelegate {
+    
+    func playerViewController(controller: PlayerViewController, fromChildViewController childController: SinglePlayerViewController, didRecognizeByGesture gestureRecognizer: UIPanGestureRecognizer) {
+        let translation = gestureRecognizer.translationInView(self.view)
+        if abs(translation.x) > abs(translation.y) { gestureRecognizer.enabled = false }
+        
+        let offsetY = translation.y
+        guard offsetY > 0 else { return }
+        
+        let height = self.view.bounds.size.height
+        let opacity = 1.0 - offsetY / height
+        
+        switch gestureRecognizer.state {
+        case .Changed:
+            if offsetY > height {
+                playerViewTopConstraint.constant = height
+                playerView.alpha = 0
+            } else {
+                playerViewTopConstraint.constant = offsetY
+                playerView.alpha = opacity
+            }
+        case .Ended:
+            if offsetY < height / 2 {
+                UIView.animateWithDuration(transitionDuration) {
+                    self.playerViewTopConstraint.constant = 0
+                    self.playerView.alpha = 1
+                    self.playerViewController.panGestureRecognizer.enabled = true
+                    
+                    self.view.layoutIfNeeded()
+                }
+            } else if offsetY < height {
+                UIView.animateWithDuration(transitionDuration) {
+                    self.playerViewTopConstraint.constant = height
+                    self.playerView.alpha = 0
+                    self.view.layoutIfNeeded()
+                }
+            }
+        default:
+            break
+        }
+    }
     
     func dismissPlayerViewController(controller: PlayerViewController, completion: (() -> Void)?) {
         UIView.animateWithDuration(
-            0.5,
+            transitionDuration,
             animations: {
                 self.playerViewTopConstraint.constant = self.view.bounds.size.height
+                self.playerView.alpha = 0
                 self.view.layoutIfNeeded()
             },
             completion: { completed in

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LyricPlayerViewController: UIViewController, PlayerChildViewController {
+class LyricPlayerViewController: UIViewController {
     
     
     // MARK: Models
@@ -103,10 +103,6 @@ class LyricPlayerViewController: UIViewController, PlayerChildViewController {
     @IBAction func scrollEnabledButtonTapped() {
         print(#function)
     }
-    
-    // MARK: - Delegation
-    
-    var delegate: PlayerChildViewControllerDelegate?
     
     // MARK: View Controller life cycle
     

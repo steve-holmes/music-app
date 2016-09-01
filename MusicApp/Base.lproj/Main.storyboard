@@ -1165,31 +1165,44 @@
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emj-bL-36k">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="500.5"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YRy-SE-jv7">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="500.5"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jVG-9a-BWU">
-                                                <rect key="frame" x="375" y="0.0" width="375" height="500.5"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7B3-SW-6r3">
-                                                <rect key="frame" x="750" y="0.0" width="375" height="500.5"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3xr-M0-D6V" userLabel="Content View">
+                                                <rect key="frame" x="0.0" y="0.0" width="1125" height="500.5"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CXn-78-H81">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="500.5"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DUg-w3-FRa">
+                                                        <rect key="frame" x="375" y="0.0" width="375" height="500.5"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kio-JI-ERP">
+                                                        <rect key="frame" x="750" y="0.0" width="375" height="500.5"/>
+                                                    </view>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="DUg-w3-FRa" firstAttribute="width" secondItem="CXn-78-H81" secondAttribute="width" id="44n-0O-FVh"/>
+                                                    <constraint firstItem="Kio-JI-ERP" firstAttribute="leading" secondItem="DUg-w3-FRa" secondAttribute="trailing" id="AAy-o3-4ji"/>
+                                                    <constraint firstItem="DUg-w3-FRa" firstAttribute="height" secondItem="CXn-78-H81" secondAttribute="height" id="BY5-pA-u7O"/>
+                                                    <constraint firstAttribute="bottom" secondItem="CXn-78-H81" secondAttribute="bottom" id="Dl8-WP-rKt"/>
+                                                    <constraint firstItem="CXn-78-H81" firstAttribute="top" secondItem="3xr-M0-D6V" secondAttribute="top" id="Hdg-fF-e2D"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Kio-JI-ERP" secondAttribute="trailing" id="PZv-ZO-w56"/>
+                                                    <constraint firstItem="Kio-JI-ERP" firstAttribute="top" secondItem="3xr-M0-D6V" secondAttribute="top" id="Zf6-Z6-wrI"/>
+                                                    <constraint firstItem="Kio-JI-ERP" firstAttribute="width" secondItem="DUg-w3-FRa" secondAttribute="width" id="aZn-BI-Bnb"/>
+                                                    <constraint firstItem="Kio-JI-ERP" firstAttribute="height" secondItem="DUg-w3-FRa" secondAttribute="height" id="ahL-T2-Wiz"/>
+                                                    <constraint firstAttribute="bottom" secondItem="DUg-w3-FRa" secondAttribute="bottom" id="bbl-rU-3S2"/>
+                                                    <constraint firstItem="CXn-78-H81" firstAttribute="leading" secondItem="3xr-M0-D6V" secondAttribute="leading" id="fJt-BS-ExT"/>
+                                                    <constraint firstItem="DUg-w3-FRa" firstAttribute="leading" secondItem="CXn-78-H81" secondAttribute="trailing" id="gaZ-vW-BCN"/>
+                                                    <constraint firstItem="DUg-w3-FRa" firstAttribute="top" secondItem="3xr-M0-D6V" secondAttribute="top" id="jQm-MG-E8P"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Kio-JI-ERP" secondAttribute="bottom" id="uQ7-dl-GiV"/>
+                                                </constraints>
                                             </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="YRy-SE-jv7" firstAttribute="top" secondItem="emj-bL-36k" secondAttribute="top" id="0rt-md-Oao"/>
-                                            <constraint firstItem="7B3-SW-6r3" firstAttribute="width" secondItem="jVG-9a-BWU" secondAttribute="width" id="9q2-Ge-yus"/>
-                                            <constraint firstItem="jVG-9a-BWU" firstAttribute="top" secondItem="emj-bL-36k" secondAttribute="top" id="C9c-C6-8LR"/>
-                                            <constraint firstItem="jVG-9a-BWU" firstAttribute="width" secondItem="YRy-SE-jv7" secondAttribute="width" id="Lhb-rM-I5B"/>
-                                            <constraint firstItem="7B3-SW-6r3" firstAttribute="leading" secondItem="jVG-9a-BWU" secondAttribute="trailing" id="OpQ-Ob-ozn"/>
-                                            <constraint firstItem="jVG-9a-BWU" firstAttribute="leading" secondItem="YRy-SE-jv7" secondAttribute="trailing" id="RWe-gn-17i"/>
-                                            <constraint firstItem="7B3-SW-6r3" firstAttribute="top" secondItem="emj-bL-36k" secondAttribute="top" id="deT-Oq-dn6"/>
-                                            <constraint firstAttribute="bottom" secondItem="jVG-9a-BWU" secondAttribute="bottom" id="ewE-S5-TqG"/>
-                                            <constraint firstAttribute="trailing" secondItem="7B3-SW-6r3" secondAttribute="trailing" id="hBI-3s-sHJ"/>
-                                            <constraint firstAttribute="bottom" secondItem="7B3-SW-6r3" secondAttribute="bottom" id="ikh-mg-GRV"/>
-                                            <constraint firstAttribute="bottom" secondItem="YRy-SE-jv7" secondAttribute="bottom" id="jPz-nm-njd"/>
-                                            <constraint firstItem="7B3-SW-6r3" firstAttribute="height" secondItem="jVG-9a-BWU" secondAttribute="height" id="nJp-KR-4Yf"/>
-                                            <constraint firstItem="YRy-SE-jv7" firstAttribute="leading" secondItem="emj-bL-36k" secondAttribute="leading" id="q4J-Xx-tUU"/>
-                                            <constraint firstItem="jVG-9a-BWU" firstAttribute="height" secondItem="YRy-SE-jv7" secondAttribute="height" id="z2S-Zj-ffF"/>
+                                            <constraint firstAttribute="bottom" secondItem="3xr-M0-D6V" secondAttribute="bottom" id="2Ag-IX-LCB"/>
+                                            <constraint firstItem="CXn-78-H81" firstAttribute="height" secondItem="emj-bL-36k" secondAttribute="height" id="436-7o-diO"/>
+                                            <constraint firstItem="3xr-M0-D6V" firstAttribute="leading" secondItem="emj-bL-36k" secondAttribute="leading" id="CR8-4B-Qaq"/>
+                                            <constraint firstAttribute="trailing" secondItem="3xr-M0-D6V" secondAttribute="trailing" id="Nbc-B8-Q16"/>
+                                            <constraint firstItem="3xr-M0-D6V" firstAttribute="top" secondItem="emj-bL-36k" secondAttribute="top" id="Wau-WV-Ycy"/>
+                                            <constraint firstItem="CXn-78-H81" firstAttribute="width" secondItem="emj-bL-36k" secondAttribute="width" id="xX1-uf-B9W"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="delegate" destination="EJ1-Jo-al4" id="Bqx-TK-1Az"/>
@@ -1197,11 +1210,9 @@
                                     </scrollView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="YRy-SE-jv7" firstAttribute="width" secondItem="XIk-f3-Wvy" secondAttribute="width" id="378-e1-gBa"/>
                                     <constraint firstAttribute="trailing" secondItem="emj-bL-36k" secondAttribute="trailing" id="FMd-RY-9hl"/>
                                     <constraint firstAttribute="bottom" secondItem="emj-bL-36k" secondAttribute="bottom" id="hqW-Zx-hUT"/>
                                     <constraint firstItem="emj-bL-36k" firstAttribute="top" secondItem="XIk-f3-Wvy" secondAttribute="top" id="jOa-Oa-Q2z"/>
-                                    <constraint firstItem="YRy-SE-jv7" firstAttribute="height" secondItem="XIk-f3-Wvy" secondAttribute="height" id="oXJ-Nv-CvU"/>
                                     <constraint firstItem="emj-bL-36k" firstAttribute="leading" secondItem="XIk-f3-Wvy" secondAttribute="leading" id="xOE-hY-gFf"/>
                                 </constraints>
                             </view>
@@ -1370,14 +1381,15 @@
                         <outlet property="durationLabel" destination="d06-oB-3VN" id="AT8-9x-yVn"/>
                         <outlet property="forwardButton" destination="55d-aI-cwT" id="Sdu-iN-Qi6"/>
                         <outlet property="forwardButtonTrailingConstraint" destination="9gA-eA-rJK" id="wj7-vl-kBY"/>
-                        <outlet property="leftView" destination="YRy-SE-jv7" id="rAi-QW-TaD"/>
-                        <outlet property="middleView" destination="jVG-9a-BWU" id="Mal-zI-izF"/>
+                        <outlet property="leftView" destination="CXn-78-H81" id="irk-Zu-ih9"/>
+                        <outlet property="middleView" destination="DUg-w3-FRa" id="0Y9-6P-KNe"/>
+                        <outlet property="outerView" destination="XIk-f3-Wvy" id="rIV-aD-3SR"/>
                         <outlet property="pageControl" destination="aAO-55-Yg7" id="tEq-cu-SqM"/>
                         <outlet property="playButton" destination="aa4-Ge-hHw" id="LVh-iv-tDd"/>
                         <outlet property="playedProgressBar" destination="9Lw-1A-pTJ" id="hdj-6t-LdF"/>
                         <outlet property="playedProgressBarWidthConstrant" destination="5zM-zs-Blr" id="k20-Cf-2bZ"/>
                         <outlet property="progressBar" destination="HT2-Co-vUZ" id="iuu-4v-Axi"/>
-                        <outlet property="rightView" destination="7B3-SW-6r3" id="Xeh-4s-31b"/>
+                        <outlet property="rightView" destination="Kio-JI-ERP" id="NTD-AH-kX9"/>
                         <outlet property="scrollView" destination="emj-bL-36k" id="h76-z9-63C"/>
                         <outlet property="sliderView" destination="exv-1a-QWK" id="NoA-lC-HGP"/>
                         <outlet property="sliderViewLeadingSpaceConstraint" destination="K8B-An-CPt" id="GY8-sk-xO9"/>

@@ -12,7 +12,7 @@ import UIKit
 
 protocol PlayerViewControllerDelegate {
     
-    func playerViewController(controller: PlayerViewController, fromChildViewController childController: SinglePlayerViewController, didRecognizeByGesture gestureRecognizer: UIPanGestureRecognizer)
+    func playerViewController(controller: PlayerViewController, onOuterView outerView: UIView, didRecognizeByPanGestureRecognizer gestureRecognizer: UIPanGestureRecognizer)
     func dismissPlayerViewController(controller: PlayerViewController, completion: (() -> Void)?)
     
 }
@@ -53,12 +53,25 @@ class PlayerViewController: UIViewController {
     
     var backgroundImage: UIImage = UIImage(named: "background")!
     
+    // MARK: Public APIs
+    
+    func selectedIndexOfScrollView() -> Int {
+        return Int(self.scrollView.contentOffset.x / self.scrollView.bounds.size.width)
+    }
+    
+    func isMiddleViewOfScrollView() -> Bool {
+//        let offsetX = self.scrollView.contentOffset.x / self.scrollView.bounds.size.width
+//        return abs(offsetX - 1) < 0.3
+        return selectedIndexOfScrollView() == 1
+    }
+    
     // MARK: Outlets
     
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var topVisualEffectView: UIVisualEffectView!
     @IBOutlet weak var pageControl: UIPageControl!
     
+    @IBOutlet weak var outerView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet private weak var leftView: UIView!
     @IBOutlet private weak var middleView: UIView!
@@ -83,6 +96,7 @@ class PlayerViewController: UIViewController {
     @IBOutlet weak var forwardButtonTrailingConstraint: NSLayoutConstraint!
     
     // MARK: - Actions
+    
     @IBAction func dismissButtonTapped() {
         self.delegate?.dismissPlayerViewController(self, completion: nil)
     }
@@ -104,10 +118,6 @@ class PlayerViewController: UIViewController {
     var delegate: PlayerViewControllerDelegate?
     
     // MARK: Private properties
-    
-    var panGestureRecognizer: UIPanGestureRecognizer {
-        return singlePlayerViewController.panGestureRecognizer
-    }
     
     private var previousOffsetX: CGFloat = 0
     
@@ -151,6 +161,10 @@ class PlayerViewController: UIViewController {
         self.leftView.alpha = self.endAlpha
         self.middleView.alpha = self.startAlpha
         self.rightView.alpha = self.startAlpha
+        
+        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didRecognizeByPanGestureForOuterView(_:)))
+        gestureRecognizer.delegate = self
+        self.outerView.addGestureRecognizer(gestureRecognizer)
     }
     
     private func setupProgressBar() {
@@ -201,7 +215,6 @@ class PlayerViewController: UIViewController {
     
     private lazy var singlePlayerViewController: SinglePlayerViewController = {
         let controller = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.SinglePlayerController) as! SinglePlayerViewController
-        controller.delegate = self
         return controller
     }()
     
@@ -321,7 +334,6 @@ extension PlayerViewController: UIScrollViewDelegate {
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         guard scrollView === self.scrollView else { return }
-        self.panGestureRecognizer.enabled = true
     }
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
@@ -341,19 +353,13 @@ extension PlayerViewController: UIScrollViewDelegate {
     
 }
 
-// MARK: SinglePlayerViewControllerDelegate
-
-extension PlayerViewController: SinglePlayerViewControllerDelegate {
-    
-    func singlePlayerViewController(controller: SinglePlayerViewController, didRecognizeByTapGesture gestureRecognizer: UIPanGestureRecognizer) {
-        self.delegate?.playerViewController(self, fromChildViewController: controller, didRecognizeByGesture: gestureRecognizer)
-    }
-    
-}
-
 // MARK: Gesture Recognizer
 
 extension PlayerViewController {
+    
+    func didRecognizeByPanGestureForOuterView(gestureRecongizer: UIPanGestureRecognizer) {
+        self.delegate?.playerViewController(self, onOuterView: self.outerView, didRecognizeByPanGestureRecognizer: gestureRecongizer)
+    }
     
     func didRecognizeByGestureForSlider(panGestureRecognizer: UIPanGestureRecognizer) {
         
@@ -467,6 +473,14 @@ extension PlayerViewController {
             break
         }
     }
+    
+}
+
+extension PlayerViewController: UIGestureRecognizerDelegate {
+    
+//    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+//        return otherGestureRecognizer == self.scrollView.panGestureRecognizer
+//    }
     
 }
 

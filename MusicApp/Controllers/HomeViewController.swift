@@ -11,6 +11,7 @@ import UIKit
 class HomeViewController: UIViewController {
 
     // MARK: Outlets
+    
     @IBOutlet weak var mineButtonImageView: UIImageView!
     @IBOutlet weak var mineButtonLabel: UILabel!
     @IBOutlet weak var mineButtonBackgroundView: UIView!
@@ -43,20 +44,14 @@ class HomeViewController: UIViewController {
         }
     }
     
-    // MARK: Private properties
-    
-    let transitionDuration: NSTimeInterval = 0.35
-    
     // MARK: View Controller Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        playerView.alpha = 0
-        playerViewTopConstraint.constant = self.view.bounds.height
-        
         middleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didRecognizeOnMiddleViewByTapGestureRecognizer(_:))))
         
+        setupPlayerView()
         setupPlayButton()
         state = .Online
     }
@@ -77,7 +72,74 @@ class HomeViewController: UIViewController {
     
     private var playerViewController: PlayerViewController!
     
+    // MARK: Player View
+    
+    private let transitionDuration: NSTimeInterval = 0.35
+    
+    private func setupPlayerView() {
+        playerView.alpha = 0
+        playerViewTopConstraint.constant = self.view.bounds.height
+        
+//        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didRecognizeOnPlayerViewByPanGestureRecognizer(_:)))
+//        panGestureRecognizer.delegate = self
+//        playerView.addGestureRecognizer(panGestureRecognizer)
+    }
+    
+    func didRecognizeOnPlayerViewByPanGestureRecognizer(gestureRecognizer: UIPanGestureRecognizer) {
+        guard playerViewController.isMiddleViewOfScrollView() else { return }
+        
+        let offsetY = gestureRecognizer.translationInView(self.view).y
+        guard offsetY > 0 else { return }
+        
+        let height = self.view.bounds.size.height
+        let opacity = 1.0 - offsetY / height
+        
+        switch gestureRecognizer.state {
+        case .Changed:
+            if offsetY > height {
+                playerViewTopConstraint.constant = height
+                playerView.alpha = 0
+            } else {
+                playerViewTopConstraint.constant = offsetY
+                playerView.alpha = opacity
+            }
+        case .Ended:
+            if offsetY < height / 2 {
+                UIView.animateWithDuration(
+                    transitionDuration,
+                    animations: {
+                        self.playerViewTopConstraint.constant = 0
+                        self.playerView.alpha = 1
+                        self.view.layoutIfNeeded()
+                    },
+                    completion: { finished in
+                        guard finished else { return }
+                        self.statusBarStyle = .LightContent
+                        self.setNeedsStatusBarAppearanceUpdate()
+                    }
+                )
+            } else if offsetY < height {
+                UIView.animateWithDuration(
+                    transitionDuration,
+                    animations: {
+                        self.playerViewTopConstraint.constant = height
+                        self.playerView.alpha = 0
+                        self.view.layoutIfNeeded()
+                    },
+                    completion: { finished in
+                        guard finished else { return }
+                        self.statusBarStyle = .Default
+                        self.setNeedsStatusBarAppearanceUpdate()
+                    }
+                )
+            }
+        default:
+            break
+        }
+    }
+    
     // MARK: Play Button
+    
     private func setupPlayButton() {
         middleView.layer.borderColor = ColorConstants.toolbarBorderColor.CGColor
         middleView.layer.borderWidth = 1
@@ -111,10 +173,22 @@ class HomeViewController: UIViewController {
             UIView.animateWithDuration(transitionDuration) {
                 self.playerViewTopConstraint.constant = 0
                 self.playerView.alpha = 1
-                self.playerViewController.panGestureRecognizer.enabled = true
                 
                 self.view.layoutIfNeeded()
             }
+            UIView.animateWithDuration(
+                transitionDuration,
+                animations: {
+                    self.playerViewTopConstraint.constant = 0
+                    self.playerView.alpha = 1
+                    self.view.layoutIfNeeded()
+                },
+                completion: { finished in
+                    guard finished else { return }
+                    self.statusBarStyle = .LightContent
+                    self.setNeedsStatusBarAppearanceUpdate()
+                }
+            )
         }
         
         if animationEnabled { return }
@@ -166,6 +240,14 @@ class HomeViewController: UIViewController {
         )
     }
     
+    // MARK: Status bar
+    
+    private var statusBarStyle: UIStatusBarStyle = .Default
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return self.statusBarStyle
+    }
+    
     // MARK: State
     
     private enum State {
@@ -212,46 +294,9 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: PlayerViewControllerDelegate {
     
-    func playerViewController(controller: PlayerViewController, fromChildViewController childController: SinglePlayerViewController, didRecognizeByGesture gestureRecognizer: UIPanGestureRecognizer) {
-        let translation = gestureRecognizer.translationInView(self.view)
-        if abs(translation.x) > abs(translation.y) { gestureRecognizer.enabled = false }
-        
-        let offsetY = translation.y
-        guard offsetY > 0 else { return }
-        
-        let height = self.view.bounds.size.height
-        let opacity = 1.0 - offsetY / height
-        
-        switch gestureRecognizer.state {
-        case .Changed:
-            if offsetY > height {
-                playerViewTopConstraint.constant = height
-                playerView.alpha = 0
-            } else {
-                playerViewTopConstraint.constant = offsetY
-                playerView.alpha = opacity
-            }
-        case .Began, .Ended, .Cancelled:
-            if offsetY < height / 2 {
-                UIView.animateWithDuration(transitionDuration) {
-                    self.playerViewTopConstraint.constant = 0
-                    self.playerView.alpha = 1
-                    self.playerViewController.panGestureRecognizer.enabled = true
-                    
-                    self.view.layoutIfNeeded()
-                }
-            } else if offsetY < height {
-                UIView.animateWithDuration(transitionDuration) {
-                    self.playerViewTopConstraint.constant = height
-                    self.playerView.alpha = 0
-                    self.view.layoutIfNeeded()
-                }
-            }
-        case .Failed:
-            print("Failed")
-        case .Possible:
-            print("Possible")
-        }
+    func playerViewController(controller: PlayerViewController, onOuterView outerView: UIView, didRecognizeByPanGestureRecognizer gestureRecognizer: UIPanGestureRecognizer) {
+        print(#function)
+        didRecognizeOnPlayerViewByPanGestureRecognizer(gestureRecognizer)
     }
     
     func dismissPlayerViewController(controller: PlayerViewController, completion: (() -> Void)?) {
@@ -264,6 +309,8 @@ extension HomeViewController: PlayerViewControllerDelegate {
             },
             completion: { completed in
                 guard completed else { return }
+                self.statusBarStyle = .Default
+                self.setNeedsStatusBarAppearanceUpdate()
                 if let completion = completion { completion() }
             }
         )

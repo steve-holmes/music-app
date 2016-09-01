@@ -110,8 +110,8 @@ class LyricPlayerViewController: UIViewController, PlayerChildViewController {
     
     // MARK: Gesture Recognizer
     
-    func performSwipeGesureRecognizer(gestureRecognizer: UISwipeGestureRecognizer) {
-        self.delegate?.playerChildViewController(self, didRecognizeBySwipeGestureRecognizer: gestureRecognizer)
+    func performPanGestureRecognizer(gestureRecognizer: UIPanGestureRecognizer) {
+        self.delegate?.playerChildViewController(self, options: .Right, didRecognizeByPanGestureRecognizer: gestureRecognizer)
     }
     
     // MARK: View Controller life cycle
@@ -125,9 +125,8 @@ class LyricPlayerViewController: UIViewController, PlayerChildViewController {
         lyricTableView.rowHeight = UITableViewAutomaticDimension
         lyricTableView.estimatedRowHeight = 20
         
-        let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(performSwipeGesureRecognizer(_:)))
-        swipeGestureRecognizer.direction = .Right
-        self.view.addGestureRecognizer(swipeGestureRecognizer)
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(performPanGestureRecognizer(_:)))
+        self.view.addGestureRecognizer(panGestureRecognizer)
     }
     
     // MARK: Timer

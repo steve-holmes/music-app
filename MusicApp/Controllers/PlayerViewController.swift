@@ -21,10 +21,6 @@ protocol PlayerChildViewControllerDelegate {
     
     func playerChildViewController(
         controller: PlayerChildViewController,
-        didRecognizeBySwipeGestureRecognizer swipeGestureRecognizer: UISwipeGestureRecognizer
-    )
-    func playerChildViewController(
-        controller: PlayerChildViewController,
         options: PlayerChildViewControllerPanGestureRecognizerDirection?,
         didRecognizeByPanGestureRecognizer panGestureRecognizer: UIPanGestureRecognizer
     )
@@ -46,6 +42,7 @@ struct PlayerChildViewControllerPanGestureRecognizerDirection: OptionSetType {
     static let Top      = PlayerChildViewControllerPanGestureRecognizerDirection(rawValue: 4)
     static let Bottom   = PlayerChildViewControllerPanGestureRecognizerDirection(rawValue: 8)
     
+    static let All: PlayerChildViewControllerPanGestureRecognizerDirection = [Left, Right, Top, Bottom]
     
     let rawValue: Int
     init(rawValue: Int) { self.rawValue = rawValue }
@@ -272,71 +269,8 @@ class PlayerViewController: UIViewController {
     
     private var position: Position = .Left {
         didSet(oldPosition) {
-            changeChildPlayerViewFromPosition(oldPosition, toPosition: position)
+            
         }
-    }
-    
-    // MARK: Change Detail Player Subviews
-    
-    private var translatedDuration: NSTimeInterval = 0.35
-    
-    private func changeChildPlayerViewFromPosition(fromPosition: Position, toPosition: Position) {
-        if (fromPosition == .Left && toPosition == .Right) || (fromPosition == .Right && toPosition == .Left) {
-            return
-        }
-        
-        let width = self.view.bounds.size.width
-        
-        func setCenterXConstraintConstantForLeftView(leftConstant: CGFloat, forMiddleView middleConstant: CGFloat, forRightView rightConstant: CGFloat) {
-            self.leftViewCenterXConstraint.constant = leftConstant
-            self.middleViewCenterXConstraint.constant = middleConstant
-            self.rightViewCenterXConstraint.constant = rightConstant
-        }
-        
-        func setAlphaPropertyForLeftView(leftAlpha: CGFloat, forMiddleView middleAlpha: CGFloat, forRightView rightAlpha: CGFloat) {
-            self.leftView.alpha = leftAlpha
-            self.middleView.alpha = middleAlpha
-            self.rightView.alpha = rightAlpha
-        }
-        
-        func changeToMiddle() {
-            setCenterXConstraintConstantForLeftView(-width, forMiddleView: 0, forRightView: width)
-            setAlphaPropertyForLeftView(self.startAlpha, forMiddleView: self.endAlpha, forRightView: self.startAlpha)
-            self.topVisualEffectView.alpha = 0
-        }
-        
-        func changeToLeft() {
-            setCenterXConstraintConstantForLeftView(0, forMiddleView: width, forRightView: 2 * width)
-            setAlphaPropertyForLeftView(self.endAlpha, forMiddleView: self.startAlpha, forRightView: self.endAlpha)
-            self.topVisualEffectView.alpha = 1
-        }
-        
-        func changeToRight() {
-            setCenterXConstraintConstantForLeftView(-2 * width, forMiddleView: -width, forRightView: 0)
-            setAlphaPropertyForLeftView(self.startAlpha, forMiddleView: self.startAlpha, forRightView: self.endAlpha)
-            self.topVisualEffectView.alpha = 1
-        }
-        
-        UIView.animateWithDuration(
-            translatedDuration, delay: 0, options: .CurveEaseIn,
-            animations: {
-                switch toPosition {
-                case .Left:     changeToLeft()
-                case .Middle:   changeToMiddle()
-                case .Right:    changeToRight()
-                }
-                
-                self.view.layoutIfNeeded()
-            },
-            completion: { completed in
-                guard completed else { return }
-                switch toPosition {
-                case .Left:   self.pageControl.currentPage = 0
-                case .Middle: self.pageControl.currentPage = 1
-                case .Right:  self.pageControl.currentPage = 2
-                }
-            }
-        )
     }
     
     // MARK: Internal struct Date - An helper structure
@@ -369,39 +303,6 @@ class PlayerViewController: UIViewController {
 
 extension PlayerViewController: PlayerChildViewControllerDelegate {
     
-    func playerChildViewController(controller: PlayerChildViewController, didRecognizeBySwipeGestureRecognizer swipeGestureRecognizer: UISwipeGestureRecognizer) {
-        switch position {
-        case .Left where controller is ListPlayerViewController:
-            self.listPlayerViewController(controller as! ListPlayerViewController, didRecognizeBySwipeGestureRecognizer: swipeGestureRecognizer)
-        case .Middle where controller is SinglePlayerViewController:
-            self.singlePlayerViewController(controller as! SinglePlayerViewController, didRecognizeBySwipeGestureRecognizer: swipeGestureRecognizer)
-        case .Right where controller is LyricPlayerViewController:
-            self.lyricPlayerViewController(controller as! LyricPlayerViewController, didRecognizeBySwipeGestureRecognizer: swipeGestureRecognizer)
-        default:
-            break
-        }
-    }
-    
-    private func listPlayerViewController(listPlayerController: ListPlayerViewController, didRecognizeBySwipeGestureRecognizer swipeGestureRecognizer: UISwipeGestureRecognizer) {
-        if swipeGestureRecognizer.direction == .Left {
-            position = .Middle
-        }
-    }
-    
-    private func singlePlayerViewController(singlePlayerController: SinglePlayerViewController, didRecognizeBySwipeGestureRecognizer swipeGestureRecognizer: UISwipeGestureRecognizer) {
-        if swipeGestureRecognizer.direction == .Left {
-            position = .Right
-        } else if swipeGestureRecognizer.direction == .Right {
-            position = .Left
-        }
-    }
-    
-    private func lyricPlayerViewController(lyricPlayerController: LyricPlayerViewController, didRecognizeBySwipeGestureRecognizer swipeGestureRecognizer: UISwipeGestureRecognizer) {
-        if swipeGestureRecognizer.direction == .Right {
-            position = .Middle
-        }
-    }
-    
     func playerChildViewController(controller: PlayerChildViewController, options: PlayerChildViewControllerPanGestureRecognizerDirection?, didRecognizeByPanGestureRecognizer panGestureRecognizer: UIPanGestureRecognizer) {
         
     }
@@ -411,10 +312,6 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
 // MARK: Gesture Recognizer
 
 extension PlayerViewController {
-    
-    func didRecognizeByPanGestureForOuterView(gestureRecongizer: UIPanGestureRecognizer) {
-        self.delegate?.playerViewController(self, onOuterView: self.outerView, didRecognizeByPanGestureRecognizer: gestureRecongizer)
-    }
     
     func didRecognizeByGestureForSlider(panGestureRecognizer: UIPanGestureRecognizer) {
         

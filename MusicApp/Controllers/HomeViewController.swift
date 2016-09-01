@@ -130,7 +130,6 @@ class HomeViewController: UIViewController {
                 completion: { finished in
                     guard finished else { return }
                     self.statusBarStyle = .LightContent
-                    self.setNeedsStatusBarAppearanceUpdate()
                 }
             )
         }
@@ -186,7 +185,11 @@ class HomeViewController: UIViewController {
     
     // MARK: Status bar
     
-    private var statusBarStyle: UIStatusBarStyle = .Default
+    private var statusBarStyle: UIStatusBarStyle = .Default {
+        didSet {
+            self.setNeedsStatusBarAppearanceUpdate()
+        }
+    }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return self.statusBarStyle
@@ -238,7 +241,7 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: PlayerViewControllerDelegate {
     
-    func playerViewController(controller: PlayerViewController, onOuterView outerView: UIView, didRecognizeByPanGestureRecognizer gestureRecognizer: UIPanGestureRecognizer) {
+    func playerViewController(controller: PlayerViewController, didRecognizeByPanGestureRecognizer gestureRecognizer: UIPanGestureRecognizer, completion: (() -> Void)? = nil) {
         guard playerViewController.isMiddleViewOfScrollView() else { return }
         
         let offsetY = gestureRecognizer.translationInView(self.view).y
@@ -268,7 +271,7 @@ extension HomeViewController: PlayerViewControllerDelegate {
                     completion: { finished in
                         guard finished else { return }
                         self.statusBarStyle = .LightContent
-                        self.setNeedsStatusBarAppearanceUpdate()
+                        completion?()
                     }
                 )
             } else if offsetY < height {
@@ -282,7 +285,7 @@ extension HomeViewController: PlayerViewControllerDelegate {
                     completion: { finished in
                         guard finished else { return }
                         self.statusBarStyle = .Default
-                        self.setNeedsStatusBarAppearanceUpdate()
+                        completion?()
                     }
                 )
             }
@@ -302,7 +305,6 @@ extension HomeViewController: PlayerViewControllerDelegate {
             completion: { completed in
                 guard completed else { return }
                 self.statusBarStyle = .Default
-                self.setNeedsStatusBarAppearanceUpdate()
                 if let completion = completion { completion() }
             }
         )

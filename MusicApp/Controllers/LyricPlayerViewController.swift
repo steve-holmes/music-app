@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LyricPlayerViewController: UIViewController {
+class LyricPlayerViewController: UIViewController, PlayerChildViewController {
     
     
     // MARK: Models
@@ -104,6 +104,16 @@ class LyricPlayerViewController: UIViewController {
         print(#function)
     }
     
+    // MARK: Delegation
+    
+    var delegate: PlayerChildViewControllerDelegate?
+    
+    // MARK: Gesture Recognizer
+    
+    func performSwipeGesureRecognizer(gestureRecognizer: UISwipeGestureRecognizer) {
+        self.delegate?.playerChildViewController(self, didRecognizeBySwipeGestureRecognizer: gestureRecognizer)
+    }
+    
     // MARK: View Controller life cycle
     
     override func viewDidLoad() {
@@ -114,6 +124,10 @@ class LyricPlayerViewController: UIViewController {
         
         lyricTableView.rowHeight = UITableViewAutomaticDimension
         lyricTableView.estimatedRowHeight = 20
+        
+        let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(performSwipeGesureRecognizer(_:)))
+        swipeGestureRecognizer.direction = .Right
+        self.view.addGestureRecognizer(swipeGestureRecognizer)
     }
     
     // MARK: Timer

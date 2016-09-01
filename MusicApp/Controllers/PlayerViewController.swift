@@ -17,6 +17,41 @@ protocol PlayerViewControllerDelegate {
     
 }
 
+protocol PlayerChildViewControllerDelegate {
+    
+    func playerChildViewController(
+        controller: PlayerChildViewController,
+        didRecognizeBySwipeGestureRecognizer swipeGestureRecognizer: UISwipeGestureRecognizer
+    )
+    func playerChildViewController(
+        controller: PlayerChildViewController,
+        options: PlayerChildViewControllerPanGestureRecognizerDirection?,
+        didRecognizeByPanGestureRecognizer panGestureRecognizer: UIPanGestureRecognizer
+    )
+    
+}
+
+protocol PlayerChildViewController {
+    
+    var delegate: PlayerChildViewControllerDelegate? { get }
+    
+}
+
+// MARK: PlayerChildViewControllerPanGestureRecognizerDirection
+
+struct PlayerChildViewControllerPanGestureRecognizerDirection: OptionSetType {
+    
+    static let Left     = PlayerChildViewControllerPanGestureRecognizerDirection(rawValue: 1)
+    static let Right    = PlayerChildViewControllerPanGestureRecognizerDirection(rawValue: 2)
+    static let Top      = PlayerChildViewControllerPanGestureRecognizerDirection(rawValue: 4)
+    static let Bottom   = PlayerChildViewControllerPanGestureRecognizerDirection(rawValue: 8)
+    
+    
+    let rawValue: Int
+    init(rawValue: Int) { self.rawValue = rawValue }
+    
+}
+
 // MARK: Class PlayerViewController
 
 class PlayerViewController: UIViewController {
@@ -60,8 +95,6 @@ class PlayerViewController: UIViewController {
     }
     
     func isMiddleViewOfScrollView() -> Bool {
-//        let offsetX = self.scrollView.contentOffset.x / self.scrollView.bounds.size.width
-//        return abs(offsetX - 1) < 0.3
         return selectedIndexOfScrollView() == 1
     }
     
@@ -76,6 +109,10 @@ class PlayerViewController: UIViewController {
     @IBOutlet private weak var leftView: UIView!
     @IBOutlet private weak var middleView: UIView!
     @IBOutlet private weak var rightView: UIView!
+    
+    @IBOutlet weak var leftViewCenterXConstraint: NSLayoutConstraint!
+    @IBOutlet weak var middleViewCenterXConstraint: NSLayoutConstraint!
+    @IBOutlet weak var rightViewCenterXConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var playButton: CircleButton!
     @IBOutlet weak var backwardButton: UIButton!
@@ -119,13 +156,9 @@ class PlayerViewController: UIViewController {
     
     // MARK: Private properties
     
-    private var previousOffsetX: CGFloat = 0
-    
     private var startAlpha: CGFloat = 0.2
     private var endAlpha: CGFloat = 1.0
     private lazy var scaleAlphaFactor: CGFloat = self.endAlpha - self.startAlpha
-    
-    private var transitionDuration: NSTimeInterval = 0.5
     
     private var oldSliderViewConstant: CGFloat = 0
     
@@ -162,9 +195,10 @@ class PlayerViewController: UIViewController {
         self.middleView.alpha = self.startAlpha
         self.rightView.alpha = self.startAlpha
         
-        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didRecognizeByPanGestureForOuterView(_:)))
-        gestureRecognizer.delegate = self
-        self.outerView.addGestureRecognizer(gestureRecognizer)
+        let width = self.view.bounds.size.width
+        self.leftViewCenterXConstraint.constant = 0
+        self.middleViewCenterXConstraint.constant = width
+        self.rightViewCenterXConstraint.constant = 2 * width
     }
     
     private func setupProgressBar() {
@@ -210,17 +244,20 @@ class PlayerViewController: UIViewController {
     
     private lazy var listPlayerViewController: ListPlayerViewController = {
         let controller = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.ListPlayerController) as! ListPlayerViewController
+        controller.delegate = self
         return controller
     }()
     
     private lazy var singlePlayerViewController: SinglePlayerViewController = {
         let controller = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.SinglePlayerController) as! SinglePlayerViewController
+        controller.delegate = self
         return controller
     }()
     
     
     private lazy var lyricPlayerViewController: LyricPlayerViewController = {
         let controller = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.LyricPlayerController) as! LyricPlayerViewController
+        controller.delegate = self
         return controller
     }()
     
@@ -234,25 +271,72 @@ class PlayerViewController: UIViewController {
     }
     
     private var position: Position = .Left {
-        didSet {
-            func setAlphaPropertyForLeftView(leftAlpha: CGFloat, forMiddleView middleAlpha: CGFloat, forRightView rightAlpha: CGFloat) {
-                self.leftView.alpha = leftAlpha
-                self.middleView.alpha = middleAlpha
-                self.rightView.alpha = rightAlpha
-            }
-            
-            switch position {
-            case .Left:
-                setAlphaPropertyForLeftView(self.endAlpha, forMiddleView: self.startAlpha, forRightView: self.startAlpha)
-                self.topVisualEffectView.alpha = 1
-            case .Middle:
-                setAlphaPropertyForLeftView(self.startAlpha, forMiddleView: self.endAlpha, forRightView: self.startAlpha)
-                self.topVisualEffectView.alpha = 0
-            case .Right:
-                setAlphaPropertyForLeftView(self.startAlpha, forMiddleView: self.startAlpha, forRightView: self.endAlpha)
-                self.topVisualEffectView.alpha = 1
-            }
+        didSet(oldPosition) {
+            changeChildPlayerViewFromPosition(oldPosition, toPosition: position)
         }
+    }
+    
+    // MARK: Change Detail Player Subviews
+    
+    private var translatedDuration: NSTimeInterval = 0.35
+    
+    private func changeChildPlayerViewFromPosition(fromPosition: Position, toPosition: Position) {
+        if (fromPosition == .Left && toPosition == .Right) || (fromPosition == .Right && toPosition == .Left) {
+            return
+        }
+        
+        let width = self.view.bounds.size.width
+        
+        func setCenterXConstraintConstantForLeftView(leftConstant: CGFloat, forMiddleView middleConstant: CGFloat, forRightView rightConstant: CGFloat) {
+            self.leftViewCenterXConstraint.constant = leftConstant
+            self.middleViewCenterXConstraint.constant = middleConstant
+            self.rightViewCenterXConstraint.constant = rightConstant
+        }
+        
+        func setAlphaPropertyForLeftView(leftAlpha: CGFloat, forMiddleView middleAlpha: CGFloat, forRightView rightAlpha: CGFloat) {
+            self.leftView.alpha = leftAlpha
+            self.middleView.alpha = middleAlpha
+            self.rightView.alpha = rightAlpha
+        }
+        
+        func changeToMiddle() {
+            setCenterXConstraintConstantForLeftView(-width, forMiddleView: 0, forRightView: width)
+            setAlphaPropertyForLeftView(self.startAlpha, forMiddleView: self.endAlpha, forRightView: self.startAlpha)
+            self.topVisualEffectView.alpha = 0
+        }
+        
+        func changeToLeft() {
+            setCenterXConstraintConstantForLeftView(0, forMiddleView: width, forRightView: 2 * width)
+            setAlphaPropertyForLeftView(self.endAlpha, forMiddleView: self.startAlpha, forRightView: self.endAlpha)
+            self.topVisualEffectView.alpha = 1
+        }
+        
+        func changeToRight() {
+            setCenterXConstraintConstantForLeftView(-2 * width, forMiddleView: -width, forRightView: 0)
+            setAlphaPropertyForLeftView(self.startAlpha, forMiddleView: self.startAlpha, forRightView: self.endAlpha)
+            self.topVisualEffectView.alpha = 1
+        }
+        
+        UIView.animateWithDuration(
+            translatedDuration, delay: 0, options: .CurveEaseIn,
+            animations: {
+                switch toPosition {
+                case .Left:     changeToLeft()
+                case .Middle:   changeToMiddle()
+                case .Right:    changeToRight()
+                }
+                
+                self.view.layoutIfNeeded()
+            },
+            completion: { completed in
+                guard completed else { return }
+                switch toPosition {
+                case .Left:   self.pageControl.currentPage = 0
+                case .Middle: self.pageControl.currentPage = 1
+                case .Right:  self.pageControl.currentPage = 2
+                }
+            }
+        )
     }
     
     // MARK: Internal struct Date - An helper structure
@@ -281,74 +365,45 @@ class PlayerViewController: UIViewController {
 
 }
 
-// MARK: UIScrollViewDelegate
+// MARK: PlayerChildViewControllerDelegate
 
-extension PlayerViewController: UIScrollViewDelegate {
+extension PlayerViewController: PlayerChildViewControllerDelegate {
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        guard scrollView === self.scrollView else { return }
-        
-        let offsetX = scrollView.contentOffset.x - previousOffsetX
-        var multiplier = offsetX / self.view.bounds.size.width
-        let sign: CGFloat = multiplier < 0 ? -1 : 1
-        multiplier = abs(multiplier)
-        let alphaDuration = self.scaleAlphaFactor * multiplier
-        
-        func scrollViewDidScrollFromLeftViewToMiddleView() {
-            self.leftView.alpha = self.endAlpha - alphaDuration
-            self.middleView.alpha = self.startAlpha + alphaDuration
-            self.topVisualEffectView.alpha = 1.0 - multiplier
-        }
-        
-        func scrollViewDidScrollFromMiddleViewToLeftView() {
-            self.leftView.alpha = self.startAlpha + alphaDuration
-            self.middleView.alpha = self.endAlpha - alphaDuration
-            self.topVisualEffectView.alpha = multiplier
-        }
-        
-        func scrollViewDidScrollFromMiddleViewToRightView() {
-            self.middleView.alpha = self.endAlpha - alphaDuration
-            self.rightView.alpha = self.startAlpha + alphaDuration
-            self.topVisualEffectView.alpha = multiplier
-        }
-        
-        func scrollViewDidScrollFromRightViewToMiddleView() {
-            self.middleView.alpha = self.startAlpha + alphaDuration
-            self.rightView.alpha = self.endAlpha - alphaDuration
-            self.topVisualEffectView.alpha = 1.0 - multiplier
-        }
-        
+    func playerChildViewController(controller: PlayerChildViewController, didRecognizeBySwipeGestureRecognizer swipeGestureRecognizer: UISwipeGestureRecognizer) {
         switch position {
-        case .Left: scrollViewDidScrollFromLeftViewToMiddleView()
-        case .Middle where sign < 0: scrollViewDidScrollFromMiddleViewToLeftView()
-        case .Middle where sign > 0: scrollViewDidScrollFromMiddleViewToRightView()
-        case .Right: scrollViewDidScrollFromRightViewToMiddleView()
-        default: break
+        case .Left where controller is ListPlayerViewController:
+            self.listPlayerViewController(controller as! ListPlayerViewController, didRecognizeBySwipeGestureRecognizer: swipeGestureRecognizer)
+        case .Middle where controller is SinglePlayerViewController:
+            self.singlePlayerViewController(controller as! SinglePlayerViewController, didRecognizeBySwipeGestureRecognizer: swipeGestureRecognizer)
+        case .Right where controller is LyricPlayerViewController:
+            self.lyricPlayerViewController(controller as! LyricPlayerViewController, didRecognizeBySwipeGestureRecognizer: swipeGestureRecognizer)
+        default:
+            break
         }
     }
     
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-        guard scrollView === self.scrollView else { return }
-        self.previousOffsetX = scrollView.contentOffset.x
-    }
-    
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        guard scrollView === self.scrollView else { return }
-    }
-    
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        guard scrollView === self.scrollView else { return }
-        
-        let offsetX = scrollView.contentOffset.x
-        self.previousOffsetX = offsetX
-        self.pageControl.currentPage = Int(offsetX / self.view.bounds.size.width)
-        
-        switch self.pageControl.currentPage {
-        case 0: position = .Left
-        case 1: position = .Middle
-        case 2: position = .Right
-        default: break
+    private func listPlayerViewController(listPlayerController: ListPlayerViewController, didRecognizeBySwipeGestureRecognizer swipeGestureRecognizer: UISwipeGestureRecognizer) {
+        if swipeGestureRecognizer.direction == .Left {
+            position = .Middle
         }
+    }
+    
+    private func singlePlayerViewController(singlePlayerController: SinglePlayerViewController, didRecognizeBySwipeGestureRecognizer swipeGestureRecognizer: UISwipeGestureRecognizer) {
+        if swipeGestureRecognizer.direction == .Left {
+            position = .Right
+        } else if swipeGestureRecognizer.direction == .Right {
+            position = .Left
+        }
+    }
+    
+    private func lyricPlayerViewController(lyricPlayerController: LyricPlayerViewController, didRecognizeBySwipeGestureRecognizer swipeGestureRecognizer: UISwipeGestureRecognizer) {
+        if swipeGestureRecognizer.direction == .Right {
+            position = .Middle
+        }
+    }
+    
+    func playerChildViewController(controller: PlayerChildViewController, options: PlayerChildViewControllerPanGestureRecognizerDirection?, didRecognizeByPanGestureRecognizer panGestureRecognizer: UIPanGestureRecognizer) {
+        
     }
     
 }
@@ -472,24 +527,6 @@ extension PlayerViewController {
         default:
             break
         }
-    }
-    
-}
-
-extension PlayerViewController: UIGestureRecognizerDelegate {
-    
-//    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-//        return otherGestureRecognizer == self.scrollView.panGestureRecognizer
-//    }
-    
-}
-
-// MARK: - Status bar
-
-extension PlayerViewController {
-    
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
     }
     
 }

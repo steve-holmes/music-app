@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListPlayerViewController: UIViewController {
+class ListPlayerViewController: UIViewController, PlayerChildViewController {
 
     // MARK: - Models
     
@@ -21,6 +21,16 @@ class ListPlayerViewController: UIViewController {
     
     @IBOutlet weak var songTableView: UITableView!
     
+    // MARK: Delegation
+    
+    var delegate: PlayerChildViewControllerDelegate?
+    
+    // MARK: Gesture Recognizer
+    
+    func performSwipeGesureRecognizer(gestureRecognizer: UISwipeGestureRecognizer) {
+        self.delegate?.playerChildViewController(self, didRecognizeBySwipeGestureRecognizer: gestureRecognizer)
+    }
+    
     // MARK: - View Controller Lifecycle
     
     override func viewDidLoad() {
@@ -29,6 +39,10 @@ class ListPlayerViewController: UIViewController {
         songTableView.dataSource = self
         songTableView.rowHeight = UITableViewAutomaticDimension
         songTableView.estimatedRowHeight = 20
+        
+        let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(performSwipeGesureRecognizer(_:)))
+        swipeGestureRecognizer.direction = .Left
+        self.view.addGestureRecognizer(swipeGestureRecognizer)
     }
 
 }

@@ -135,7 +135,9 @@ class PlayerViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func dismissButtonTapped() {
-        self.delegate?.dismissPlayerViewController(self, completion: nil)
+        self.delegate?.dismissPlayerViewController(self) {
+            self.animationVerticalEnabled = nil
+        }
     }
     
     @IBAction func playPauseButtonTapped(button: UIButton) {
@@ -158,6 +160,9 @@ class PlayerViewController: UIViewController {
     
     private var animationDuration: NSTimeInterval = 0.35
     private var animationVerticalEnabled: Bool?
+    
+    private var swipeGestureEnabled = false
+    private let swipeVelocityX: CGFloat = 1500
     
     private var startAlpha: CGFloat = 0.2
     private var endAlpha: CGFloat = 1.0
@@ -260,6 +265,29 @@ class PlayerViewController: UIViewController {
         return controller
     }()
     
+    // MARK: Change Detail Player Subviews
+    
+    private func changeChildPlayerViewFromPosition(fromPosition: Position, toPosition: Position, completion: (() -> Void)? = nil) {
+        if (fromPosition == .Left && toPosition == .Right) || (fromPosition == .Right && toPosition == .Left) {
+            return
+        }
+        
+        UIView.animateWithDuration(
+            animationDuration, delay: 0, options: .CurveEaseIn,
+            animations: {
+                switch toPosition {
+                case .Left:     self.position = .Left
+                case .Middle:   self.position = .Middle
+                case .Right:    self.position = .Right
+                }
+                self.view.layoutIfNeeded()
+            },
+            completion: { completed in
+                guard completed else { return }
+                completion?()
+            }
+        )
+    }
     
     // MARK: Detail Player View Position
     
@@ -335,6 +363,19 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
     }
     
     private func listPlayerViewController(controller: ListPlayerViewController, didRecognizeByPanGestureRecognizer panGestureRecognizer: UIPanGestureRecognizer) {
+        // Swipe Gesture
+        if swipeGestureEnabled { return }
+        
+        if panGestureRecognizer.velocityInView(self.view).x < -swipeVelocityX {
+            swipeGestureEnabled = true
+            self.changeChildPlayerViewFromPosition(.Left, toPosition: .Middle) {
+                self.setPropertiesForEndedStateAtPosition(self.position)
+                self.swipeGestureEnabled = false
+            }
+            return
+        }
+        
+        // Pan Gesture
         let offsetX = panGestureRecognizer.translationInView(self.view).x
         guard offsetX < 0 else { return }
         
@@ -382,6 +423,30 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
         }
         
         func moveHorizontally() {
+            // Swipe Gesture
+            if swipeGestureEnabled { return }
+            
+            let velocityX = panGestureRecognizer.velocityInView(self.view).x
+            
+            if velocityX > swipeVelocityX {
+                swipeGestureEnabled = true
+                self.changeChildPlayerViewFromPosition(.Middle, toPosition: .Left) {
+                    self.setPropertiesForEndedStateAtPosition(self.position)
+                    self.swipeGestureEnabled = false
+                    self.animationVerticalEnabled = nil
+                }
+                return
+            } else if velocityX < -swipeVelocityX {
+                swipeGestureEnabled = true
+                self.changeChildPlayerViewFromPosition(.Middle, toPosition: .Right) {
+                    self.setPropertiesForEndedStateAtPosition(self.position)
+                    self.swipeGestureEnabled = false
+                    self.animationVerticalEnabled = nil
+                }
+                return
+            }
+            
+            // Pan Gesture
             let offsetX = translation.x
             
             if offsetX < 0 {
@@ -466,10 +531,22 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
         } else if animationVerticalEnabled == true {
             moveVertically()
         }
-        
     }
     
     private func lyricPlayerViewController(controller: LyricPlayerViewController, didRecognizeByPanGestureRecognizer panGestureRecognizer: UIPanGestureRecognizer) {
+        // Swipe Gesture
+        if swipeGestureEnabled { return }
+        
+        if panGestureRecognizer.velocityInView(self.view).x > swipeVelocityX {
+            swipeGestureEnabled = true
+            self.changeChildPlayerViewFromPosition(.Right, toPosition: .Middle) {
+                self.setPropertiesForEndedStateAtPosition(self.position)
+                self.swipeGestureEnabled = false
+            }
+            return
+        }
+        
+        // Pan Gesture
         let offsetX = panGestureRecognizer.translationInView(self.view).x
         guard offsetX > 0 else { return }
         

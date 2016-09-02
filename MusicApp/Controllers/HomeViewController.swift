@@ -305,7 +305,7 @@ extension HomeViewController: PlayerViewControllerDelegate {
             completion: { completed in
                 guard completed else { return }
                 self.statusBarStyle = .Default
-                if let completion = completion { completion() }
+                completion?()
             }
         )
     }

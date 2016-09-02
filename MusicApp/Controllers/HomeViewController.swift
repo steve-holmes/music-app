@@ -64,8 +64,8 @@ class HomeViewController: UIViewController {
         return controller
     }()
     
-    private lazy var onlineViewController: OnlineViewController = {
-        let controller = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.OnlineController) as! OnlineViewController
+    private lazy var onlineViewController: UINavigationController = {
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.OnlineController) as! UINavigationController
         self.displayContentController(controller, inView: self.backgroundView)
         return controller
     }()

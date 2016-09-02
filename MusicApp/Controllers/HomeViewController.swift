@@ -49,7 +49,9 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        middleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didRecognizeOnMiddleViewByTapGestureRecognizer(_:))))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didRecognizeOnMiddleViewByTapGestureRecognizer(_:)))
+        middleView.addGestureRecognizer(tapGestureRecognizer)
+        innerView.addGestureRecognizer(tapGestureRecognizer)
         
         setupPlayerView()
         setupPlayButton()

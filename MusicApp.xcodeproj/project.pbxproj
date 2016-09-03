@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0299CF08DA7B454310F8CF5D /* Pods_MusicApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 066655126BE71B6E86727D28 /* Pods_MusicApp.framework */; };
+		9E02F3C11D7B381800F323EB /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E02F3BD1D7B381800F323EB /* Bolts.framework */; };
+		9E02F3C21D7B381800F323EB /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E02F3BE1D7B381800F323EB /* FBSDKCoreKit.framework */; };
+		9E02F3C31D7B381800F323EB /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E02F3BF1D7B381800F323EB /* FBSDKLoginKit.framework */; };
+		9E02F3C41D7B381800F323EB /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E02F3C01D7B381800F323EB /* FBSDKShareKit.framework */; };
 		9E1192951D7417420026349F /* PageHomeOnlineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1192941D7417420026349F /* PageHomeOnlineTableViewCell.swift */; };
 		9E1192971D74175C0026349F /* PlaylistHomeOnlineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1192961D74175C0026349F /* PlaylistHomeOnlineTableViewCell.swift */; };
 		9E1192991D7417720026349F /* VideoHomeOnlineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1192981D7417720026349F /* VideoHomeOnlineTableViewCell.swift */; };
@@ -52,6 +56,10 @@
 /* Begin PBXFileReference section */
 		066655126BE71B6E86727D28 /* Pods_MusicApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		59F1784B8D13BF1B706C0FB5 /* Pods-MusicApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MusicApp/Pods-MusicApp.debug.xcconfig"; sourceTree = "<group>"; };
+		9E02F3BD1D7B381800F323EB /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Frameworks/Bolts.framework; sourceTree = "<group>"; };
+		9E02F3BE1D7B381800F323EB /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Frameworks/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		9E02F3BF1D7B381800F323EB /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Frameworks/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		9E02F3C01D7B381800F323EB /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = Frameworks/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		9E1192941D7417420026349F /* PageHomeOnlineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PageHomeOnlineTableViewCell.swift; path = Views/PageHomeOnlineTableViewCell.swift; sourceTree = "<group>"; };
 		9E1192961D74175C0026349F /* PlaylistHomeOnlineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaylistHomeOnlineTableViewCell.swift; path = Views/PlaylistHomeOnlineTableViewCell.swift; sourceTree = "<group>"; };
 		9E1192981D7417720026349F /* VideoHomeOnlineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoHomeOnlineTableViewCell.swift; path = Views/VideoHomeOnlineTableViewCell.swift; sourceTree = "<group>"; };
@@ -102,6 +110,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0299CF08DA7B454310F8CF5D /* Pods_MusicApp.framework in Frameworks */,
+				9E02F3C21D7B381800F323EB /* FBSDKCoreKit.framework in Frameworks */,
+				9E02F3C41D7B381800F323EB /* FBSDKShareKit.framework in Frameworks */,
+				9E02F3C31D7B381800F323EB /* FBSDKLoginKit.framework in Frameworks */,
+				9E02F3C11D7B381800F323EB /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +126,25 @@
 				066655126BE71B6E86727D28 /* Pods_MusicApp.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9E02F3AD1D7B359000F323EB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9E02F3B41D7B37BE00F323EB /* Facebook */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9E02F3B41D7B37BE00F323EB /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				9E02F3BD1D7B381800F323EB /* Bolts.framework */,
+				9E02F3BE1D7B381800F323EB /* FBSDKCoreKit.framework */,
+				9E02F3BF1D7B381800F323EB /* FBSDKLoginKit.framework */,
+				9E02F3C01D7B381800F323EB /* FBSDKShareKit.framework */,
+			);
+			name = Facebook;
 			sourceTree = "<group>";
 		};
 		9E1192931D74170E0026349F /* Views */ = {
@@ -234,6 +265,7 @@
 		9EBA8EA21D598DDE0084E44A /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				9E02F3AD1D7B359000F323EB /* Frameworks */,
 				9E1AB3071D68CB5C00AF584F /* Custom Views */,
 				9EBA8EA81D5994540084E44A /* Extensions */,
 				9EBA8EA31D598DEA0084E44A /* Constants */,
@@ -601,6 +633,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/MusicApp",
+					"$(PROJECT_DIR)/MusicApp/Frameworks",
+				);
 				INFOPLIST_FILE = MusicApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hungdo.MusicApp;
@@ -614,6 +652,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/MusicApp",
+					"$(PROJECT_DIR)/MusicApp/Frameworks",
+				);
 				INFOPLIST_FILE = MusicApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hungdo.MusicApp;

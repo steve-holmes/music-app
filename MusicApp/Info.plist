@@ -46,5 +46,28 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <!-- Facebook SDK Framework -->
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>fb331834827158807</string>
+            </array>
+        </dict>
+    </array>
+    <key>FacebookAppID</key>
+    <string>331834827158807</string>
+    <key>FacebookDisplayName</key>
+    <string>MusicAppv01</string>
+    <!-- Use Facebook dialogs -->
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>fbapi</string>
+        <string>fb-messenger-api</string>
+        <string>fbauth2</string>
+        <string>fbshareextension</string>
+    </array>
+    <!-- End: Facebook SDK Framework -->
 </dict>
 </plist>

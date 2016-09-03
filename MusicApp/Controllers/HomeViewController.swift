@@ -122,7 +122,7 @@ class HomeViewController: UIViewController {
     
     func didRecognizeOnMiddleViewByTapGestureRecognizer(gestureRecognizer: UITapGestureRecognizer) {
         if playerViewController == nil {
-            playerViewController = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.PlayerController) as! PlayerViewController
+            playerViewController = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.PlayerController) as? PlayerViewController
             self.displayContentController(playerViewController, inView: self.playerView)
             playerViewController.delegate = self
             panGestureRecognizer.enabled = true
@@ -133,9 +133,7 @@ class HomeViewController: UIViewController {
             tapCount = 0
             maximumNumberOfTap = 1
             UIView.animateWithDuration(transitionDuration) {
-                self.playerViewTopConstraint.constant = 0
-                self.playerView.alpha = 1
-                self.view.layoutIfNeeded()
+                self.setPropertiesForEndedState()
             }
             UIView.animateWithDuration(
                 transitionDuration,
@@ -220,9 +218,11 @@ class HomeViewController: UIViewController {
             if offset < centerPointBottomConstant {
                 middleViewBottomConstraint.constant = -bottomConstant
                 innerViewBottomConstraint.constant = outerRadius - bottomConstant
+                middleView.alpha = 1
             } else if offset > centerPointBottomConstant {
                 middleViewBottomConstraint.constant = offset - bottomConstant - centerPointBottomConstant
-                innerViewBottomConstraint.constant = outerRadius - bottomConstant - offset
+                innerViewBottomConstraint.constant = centerPointBottomConstant + outerRadius - bottomConstant - offset
+                middleView.alpha = playerView.alpha
             }
         }
         
@@ -234,19 +234,21 @@ class HomeViewController: UIViewController {
     
     private func setPropertiesForEndedState() {
         let height = self.view.bounds.size.height
-        self.playerViewTopConstraint.constant = 0
-        self.playerView.alpha = 1
-        self.middleViewBottomConstraint.constant = height - self.bottomConstant
-        self.innerViewBottomConstraint.constant = self.outerRadius - self.bottomConstant - height
+        playerViewTopConstraint.constant = 0
+        playerView.alpha = 1
+        middleView.alpha = 0
+        middleViewBottomConstraint.constant = height - bottomConstant
+        innerViewBottomConstraint.constant = outerRadius - bottomConstant - height
         self.view.layoutIfNeeded()
     }
     
     private func setPropertiesForBeganState() {
         let height = self.view.bounds.size.height
-        self.playerViewTopConstraint.constant = height
-        self.playerView.alpha = 0
-        self.middleViewBottomConstraint.constant = -self.bottomConstant
-        self.innerViewBottomConstraint.constant = self.outerRadius - self.bottomConstant
+        playerViewTopConstraint.constant = height
+        playerView.alpha = 0
+        middleView.alpha = 1
+        middleViewBottomConstraint.constant = -bottomConstant
+        innerViewBottomConstraint.constant = outerRadius - bottomConstant
         self.view.layoutIfNeeded()
     }
     

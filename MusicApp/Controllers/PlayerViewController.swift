@@ -161,8 +161,7 @@ class PlayerViewController: UIViewController {
     private var animationDuration: NSTimeInterval = 0.35
     private var animationVerticalEnabled: Bool?
     
-    private var swipeGestureEnabled = false
-    private let swipeVelocityX: CGFloat = 1500
+    private let swipeVelocityX: CGFloat = 1100
     
     private var startAlpha: CGFloat = 0.2
     private var endAlpha: CGFloat = 1.0
@@ -364,13 +363,11 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
     
     private func listPlayerViewController(controller: ListPlayerViewController, didRecognizeByPanGestureRecognizer panGestureRecognizer: UIPanGestureRecognizer) {
         // Swipe Gesture
-        if swipeGestureEnabled { return }
-        
         if panGestureRecognizer.velocityInView(self.view).x < -swipeVelocityX {
-            swipeGestureEnabled = true
+            panGestureRecognizer.enabled = false
             self.changeChildPlayerViewFromPosition(.Left, toPosition: .Middle) {
                 self.setPropertiesForEndedStateAtPosition(self.position)
-                self.swipeGestureEnabled = false
+                panGestureRecognizer.enabled = true
             }
             return
         }
@@ -424,23 +421,21 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
         
         func moveHorizontally() {
             // Swipe Gesture
-            if swipeGestureEnabled { return }
-            
             let velocityX = panGestureRecognizer.velocityInView(self.view).x
             
             if velocityX > swipeVelocityX {
-                swipeGestureEnabled = true
+                panGestureRecognizer.enabled = false
                 self.changeChildPlayerViewFromPosition(.Middle, toPosition: .Left) {
                     self.setPropertiesForEndedStateAtPosition(self.position)
-                    self.swipeGestureEnabled = false
+                    panGestureRecognizer.enabled = true
                     self.animationVerticalEnabled = nil
                 }
                 return
             } else if velocityX < -swipeVelocityX {
-                swipeGestureEnabled = true
+                panGestureRecognizer.enabled = false
                 self.changeChildPlayerViewFromPosition(.Middle, toPosition: .Right) {
                     self.setPropertiesForEndedStateAtPosition(self.position)
-                    self.swipeGestureEnabled = false
+                    panGestureRecognizer.enabled = true
                     self.animationVerticalEnabled = nil
                 }
                 return
@@ -535,13 +530,11 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
     
     private func lyricPlayerViewController(controller: LyricPlayerViewController, didRecognizeByPanGestureRecognizer panGestureRecognizer: UIPanGestureRecognizer) {
         // Swipe Gesture
-        if swipeGestureEnabled { return }
-        
         if panGestureRecognizer.velocityInView(self.view).x > swipeVelocityX {
-            swipeGestureEnabled = true
+            panGestureRecognizer.enabled = false
             self.changeChildPlayerViewFromPosition(.Right, toPosition: .Middle) {
                 self.setPropertiesForEndedStateAtPosition(self.position)
-                self.swipeGestureEnabled = false
+                panGestureRecognizer.enabled = true
             }
             return
         }
@@ -614,10 +607,10 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
         }
         
         switch fromPosition {
-        case .Left where toPosition == .Middle:     setPropertiesForChangedStateFromLeftToMiddle()
-        case .Middle where toPosition == .Left:     setPropertiesForChangedStateFromMiddleToLeft()
-        case .Middle where toPosition == .Right:    setPropertiesForChangedStateFromMiddleToRight()
-        case .Right where toPosition == .Middle:    setPropertiesForChangedStateFromRightToMiddle()
+        case .Left      where toPosition == .Middle:    setPropertiesForChangedStateFromLeftToMiddle()
+        case .Middle    where toPosition == .Left:      setPropertiesForChangedStateFromMiddleToLeft()
+        case .Middle    where toPosition == .Right:     setPropertiesForChangedStateFromMiddleToRight()
+        case .Right     where toPosition == .Middle:    setPropertiesForChangedStateFromRightToMiddle()
         default: break
         }
     }

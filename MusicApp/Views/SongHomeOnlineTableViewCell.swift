@@ -27,5 +27,16 @@ class SongHomeOnlineTableViewCell: UITableViewCell {
     
     @IBOutlet weak var songNameLabel: UILabel!
     @IBOutlet weak var singerNameLabel: UILabel!
+    @IBOutlet weak var headsetImageView: UIImageView!
+    @IBOutlet weak var numberOfListeningLabel: UILabel!
+    
+    // MARK: UITableViewCell Lifecycle
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        let image = headsetImageView.image?.imageWithColor(UIColor(white: 128/255, alpha: 1))
+        headsetImageView.image = image
+    }
 
 }

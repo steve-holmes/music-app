@@ -20,6 +20,7 @@ class HomeOnlineViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
     }
@@ -34,6 +35,7 @@ extension HomeOnlineViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 3 { return 3 }
         return 1
     }
     
@@ -86,6 +88,14 @@ extension HomeOnlineViewController: UITableViewDataSource {
         }
         
         return cell
+    }
+    
+}
+
+extension HomeOnlineViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
 }

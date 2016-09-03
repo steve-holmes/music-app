@@ -29,6 +29,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var playerView: UIView!
     
     @IBOutlet weak var playerViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var middleViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var innerViewBottomConstraint: NSLayoutConstraint!
     
     // MARK: Actions
     
@@ -52,6 +54,12 @@ class HomeViewController: UIViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didRecognizeOnMiddleViewByTapGestureRecognizer(_:)))
         middleView.addGestureRecognizer(tapGestureRecognizer)
         innerView.addGestureRecognizer(tapGestureRecognizer)
+        
+        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didRecognizeOnMiddleViewByPanGestureRecognizer(_:)))
+        tapGestureRecognizer.requireGestureRecognizerToFail(panGestureRecognizer)
+        panGestureRecognizer.enabled = false
+        middleView.addGestureRecognizer(panGestureRecognizer)
+        innerView.addGestureRecognizer(panGestureRecognizer)
         
         setupPlayerView()
         setupPlayButton()
@@ -86,6 +94,10 @@ class HomeViewController: UIViewController {
     
     // MARK: Play Button
     
+    private lazy var centerPointBottomConstant: CGFloat = 7 * self.view.bounds.size.width / 100
+    private lazy var outerRadius: CGFloat = 3 * self.view.bounds.size.width / 100
+    private lazy var bottomConstant: CGFloat = 10
+    
     private func setupPlayButton() {
         middleView.layer.borderColor = ColorConstants.toolbarBorderColor.CGColor
         middleView.layer.borderWidth = 1
@@ -98,6 +110,9 @@ class HomeViewController: UIViewController {
         
         let playImage = playButtonImageView.image?.imageWithColor(UIColor.whiteColor())
         playButtonImageView.image = playImage
+        
+        middleViewBottomConstraint.constant = -bottomConstant
+        innerViewBottomConstraint.constant = outerRadius - bottomConstant
     }
     
     // MARK: Gesture Recognizer
@@ -110,6 +125,7 @@ class HomeViewController: UIViewController {
             playerViewController = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.PlayerController) as! PlayerViewController
             self.displayContentController(playerViewController, inView: self.playerView)
             playerViewController.delegate = self
+            panGestureRecognizer.enabled = true
         }
         
         tapCount += 1
@@ -119,15 +135,12 @@ class HomeViewController: UIViewController {
             UIView.animateWithDuration(transitionDuration) {
                 self.playerViewTopConstraint.constant = 0
                 self.playerView.alpha = 1
-                
                 self.view.layoutIfNeeded()
             }
             UIView.animateWithDuration(
                 transitionDuration,
                 animations: {
-                    self.playerViewTopConstraint.constant = 0
-                    self.playerView.alpha = 1
-                    self.view.layoutIfNeeded()
+                    self.setPropertiesForEndedState()
                 },
                 completion: { finished in
                     guard finished else { return }
@@ -141,6 +154,100 @@ class HomeViewController: UIViewController {
             self.tapCount = 0
             self.maximumNumberOfTap = 2
         }
+    }
+    
+    private var panGestureRecognizer: UIPanGestureRecognizer!
+    
+    func didRecognizeOnMiddleViewByPanGestureRecognizer(gestureRecognizer: UIPanGestureRecognizer) {
+        var offsetY = gestureRecognizer.translationInView(self.view).y
+        guard offsetY < 0 else { return }
+        
+        offsetY = abs(offsetY)
+        let height = self.view.bounds.size.height
+        
+        switch gestureRecognizer.state {
+        case .Changed:
+            setPropertiesForChangedStateAtOffsetY(offsetY, forDirection: .FromBottomToTop)
+        case .Ended:
+            if offsetY < height / 2 {
+                UIView.animateWithDuration(
+                    transitionDuration,
+                    animations: {
+                        self.setPropertiesForBeganState()
+                    },
+                    completion: { finished in
+                        guard finished else { return }
+                        self.statusBarStyle = .Default
+                    }
+                )
+            } else if offsetY < height {
+                UIView.animateWithDuration(
+                    transitionDuration,
+                    animations: {
+                        self.setPropertiesForEndedState()
+                    },
+                    completion: { finished in
+                        guard finished else { return }
+                        self.statusBarStyle = .LightContent
+                    }
+                )
+            }
+        default:
+            break
+        }
+    }
+    
+    // MARK: Set Properties for Changed state or Ended state
+    
+    private enum PlayerViewDirection {
+        case FromTopToBottom
+        case FromBottomToTop
+    }
+    
+    private func setPropertiesForChangedStateAtOffsetY(offsetY: CGFloat, forDirection direction: PlayerViewDirection) {
+        let height = self.view.bounds.size.height
+        var offset = offsetY
+        
+        func setPropertiesForChangedStateFromTopToBottom() {
+            offset = height - offset
+            setPropertiesForChangedStateFromBottomToTop()
+        }
+        
+        func setPropertiesForChangedStateFromBottomToTop() {
+            playerViewTopConstraint.constant = height - offset
+            playerView.alpha = offset / height
+            
+            if offset < centerPointBottomConstant {
+                middleViewBottomConstraint.constant = -bottomConstant
+                innerViewBottomConstraint.constant = outerRadius - bottomConstant
+            } else if offset > centerPointBottomConstant {
+                middleViewBottomConstraint.constant = offset - bottomConstant - centerPointBottomConstant
+                innerViewBottomConstraint.constant = outerRadius - bottomConstant - offset
+            }
+        }
+        
+        switch direction {
+        case .FromTopToBottom: setPropertiesForChangedStateFromTopToBottom()
+        case .FromBottomToTop: setPropertiesForChangedStateFromBottomToTop()
+        }
+    }
+    
+    private func setPropertiesForEndedState() {
+        let height = self.view.bounds.size.height
+        self.playerViewTopConstraint.constant = 0
+        self.playerView.alpha = 1
+        self.middleViewBottomConstraint.constant = height - self.bottomConstant
+        self.innerViewBottomConstraint.constant = self.outerRadius - self.bottomConstant - height
+        self.view.layoutIfNeeded()
+    }
+    
+    private func setPropertiesForBeganState() {
+        let height = self.view.bounds.size.height
+        self.playerViewTopConstraint.constant = height
+        self.playerView.alpha = 0
+        self.middleViewBottomConstraint.constant = -self.bottomConstant
+        self.innerViewBottomConstraint.constant = self.outerRadius - self.bottomConstant
+        self.view.layoutIfNeeded()
     }
     
     // MARK: The Animation of Play Button
@@ -250,25 +357,16 @@ extension HomeViewController: PlayerViewControllerDelegate {
         guard offsetY > 0 else { return }
         
         let height = self.view.bounds.size.height
-        let opacity = 1.0 - offsetY / height
         
         switch gestureRecognizer.state {
         case .Changed:
-            if offsetY > height {
-                playerViewTopConstraint.constant = height
-                playerView.alpha = 0
-            } else {
-                playerViewTopConstraint.constant = offsetY
-                playerView.alpha = opacity
-            }
+            setPropertiesForChangedStateAtOffsetY(offsetY, forDirection: .FromTopToBottom)
         case .Ended:
             if offsetY < height / 2 {
                 UIView.animateWithDuration(
                     transitionDuration,
                     animations: {
-                        self.playerViewTopConstraint.constant = 0
-                        self.playerView.alpha = 1
-                        self.view.layoutIfNeeded()
+                        self.setPropertiesForEndedState()
                     },
                     completion: { finished in
                         guard finished else { return }
@@ -280,9 +378,7 @@ extension HomeViewController: PlayerViewControllerDelegate {
                 UIView.animateWithDuration(
                     transitionDuration,
                     animations: {
-                        self.playerViewTopConstraint.constant = height
-                        self.playerView.alpha = 0
-                        self.view.layoutIfNeeded()
+                        self.setPropertiesForBeganState()
                     },
                     completion: { finished in
                         guard finished else { return }
@@ -300,9 +396,7 @@ extension HomeViewController: PlayerViewControllerDelegate {
         UIView.animateWithDuration(
             transitionDuration,
             animations: {
-                self.playerViewTopConstraint.constant = self.view.bounds.size.height
-                self.playerView.alpha = 0
-                self.view.layoutIfNeeded()
+                self.setPropertiesForBeganState()
             },
             completion: { completed in
                 guard completed else { return }

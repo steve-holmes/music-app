@@ -44,7 +44,7 @@ extension HomeOnlineViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 3 { return 3 }
+        if section == 3 { return 10 }
         return 1
     }
     
@@ -141,6 +141,7 @@ extension HomeOnlineViewController: UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 3 { return 90 }
         return 6
     }
     

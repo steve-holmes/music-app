@@ -10,10 +10,26 @@ import UIKit
 
 class SongOnlineViewController: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        tableView.backgroundColor = ColorConstants.backgroundColor
+        tableView.dataSource = self
     }
 
+}
+
+extension SongOnlineViewController: UITableViewDataSource {
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 20
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(CellsIdentifier.SongOnlineTableCell, forIndexPath: indexPath)
+        return cell
+    }
+    
 }

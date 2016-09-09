@@ -104,6 +104,8 @@ extension HomeOnlineViewController: UITableViewDataSource {
 extension HomeOnlineViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 0 { return nil }
+        
         let width = tableView.bounds.size.width
         let height = width * headerViewRatio
         

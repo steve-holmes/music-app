@@ -19,11 +19,11 @@ struct CellsIdentifier {
     static let VideoHomeOnlineCollectionCell = "VideoHomeOnlineCollectionCell"
     static let SongHomeOnlineTableCell      = "SongHomeOnlineTableCell"
     
-    static let PlaylistOnlineTableCell      = "PlaylistOnlineTableCell"
+    static let PlaylistOnlineCollectionCell = "PlaylistOnlineCollectionCell"
     static let SongOnlineTableCell          = "SongOnlineTableCell"
     static let VideoOnlineCollectionCell    = "VideoOnlineCollectionCell"
     static let RankOnlineTableCell          = "RankOnlineTableCell"
-    static let SingerOnlineTableCell        = "SingerOnlineTableCell"
+    static let SingerOnlineCollectionCell        = "SingerOnlineCollectionCell"
     
     // Offline View Controller
     static let OfflineTableCell             = "OfflineTableCell"

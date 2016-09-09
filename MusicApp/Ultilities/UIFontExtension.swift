@@ -23,4 +23,8 @@ extension UIFont {
         return withTraits()
     }
     
+    class func avenirNextFont() -> UIFont {
+        return UIFont(name: "AvenirNext-Regular", size: 17)!
+    }
+    
 }

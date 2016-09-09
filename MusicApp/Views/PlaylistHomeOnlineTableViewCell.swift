@@ -47,7 +47,11 @@ extension PlaylistHomeOnlineTableViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellsIdentifier.PlaylistHomeOnlineCollectionCell, forIndexPath: indexPath)
+        var cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellsIdentifier.PlaylistHomeOnlineCollectionCell, forIndexPath: indexPath)
+        
+        if indexPath.item == 0 {
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellsIdentifier.MorePlaylistHomeOnlineCollectionCell, forIndexPath: indexPath)
+        }
         
         if let playlistCell = cell as? PlaylistHomeOnlineCollectionViewCell {
             playlistCell.playlistName = "Gui Anh Xa Nho"

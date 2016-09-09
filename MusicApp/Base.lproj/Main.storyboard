@@ -419,7 +419,7 @@
                                                     <collectionViewLayout key="collectionViewLayout" id="2yP-ID-k3o" customClass="PlaylistHomeOnlineCollectionViewLayout" customModule="MusicApp" customModuleProvider="target"/>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlaylistHomeOnlineCollectionCell" id="zhg-6F-O6t" customClass="PlaylistHomeOnlineCollectionViewCell" customModule="MusicApp" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="114" height="114"/>
+                                                            <rect key="frame" x="0.0" y="43" width="114" height="114"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                 <rect key="frame" x="0.0" y="0.0" width="114" height="114"/>
@@ -507,6 +507,98 @@
                                                                 <outlet property="playListNameLabel" destination="T1g-80-40H" id="V3r-Py-dRN"/>
                                                                 <outlet property="playlistImageView" destination="HvI-ga-GHi" id="sI2-sP-Twi"/>
                                                                 <outlet property="singerNameLabel" destination="V1c-Ak-zZr" id="Ek1-H1-p4h"/>
+                                                            </connections>
+                                                        </collectionViewCell>
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MorePlaylistHomeOnlineCollectionCell" id="hW4-SV-x8M" customClass="PlaylistHomeOnlineCollectionViewCell" customModule="MusicApp" customModuleProvider="target">
+                                                            <rect key="frame" x="124" y="0.0" width="200" height="200"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                                <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <subviews>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IAz-1G-N8o">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="20.5"/>
+                                                                        <subviews>
+                                                                            <view alpha="0.64999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kgF-nZ-Fx0">
+                                                                                <rect key="frame" x="150" y="0.0" width="50" height="20.5"/>
+                                                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                            </view>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="185.9K" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBI-7W-4dx">
+                                                                                <rect key="frame" x="155" y="2" width="38.5" height="16.5"/>
+                                                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
+                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="bottom" secondItem="tBI-7W-4dx" secondAttribute="bottom" constant="2" id="18W-XI-C0N"/>
+                                                                            <constraint firstItem="kgF-nZ-Fx0" firstAttribute="width" secondItem="IAz-1G-N8o" secondAttribute="width" multiplier="1:4" id="6h4-rY-aPq"/>
+                                                                            <constraint firstItem="kgF-nZ-Fx0" firstAttribute="top" secondItem="IAz-1G-N8o" secondAttribute="top" id="LDa-OK-OcO"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="tBI-7W-4dx" secondAttribute="trailing" constant="6" id="Lup-bJ-I2t"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="kgF-nZ-Fx0" secondAttribute="bottom" id="aeZ-uv-hFZ"/>
+                                                                            <constraint firstItem="tBI-7W-4dx" firstAttribute="centerY" secondItem="IAz-1G-N8o" secondAttribute="centerY" id="dMD-ee-hSs"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="kgF-nZ-Fx0" secondAttribute="trailing" id="mai-Xw-u7m"/>
+                                                                            <constraint firstItem="tBI-7W-4dx" firstAttribute="top" secondItem="IAz-1G-N8o" secondAttribute="top" constant="2" id="ovS-uk-mCy"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="azl-qk-6op">
+                                                                        <rect key="frame" x="0.0" y="152" width="200" height="47.5"/>
+                                                                        <subviews>
+                                                                            <view alpha="0.64999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vo2-BA-xl7">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="200" height="47.5"/>
+                                                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                            </view>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playlist name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sxg-OH-oRE">
+                                                                                <rect key="frame" x="8" y="0.0" width="190" height="23.5"/>
+                                                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
+                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Singer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HZY-Kw-X4e">
+                                                                                <rect key="frame" x="8" y="27" width="190" height="20.5"/>
+                                                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
+                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="bottom" secondItem="vo2-BA-xl7" secondAttribute="bottom" id="K94-Zh-AA2"/>
+                                                                            <constraint firstItem="sxg-OH-oRE" firstAttribute="leading" secondItem="azl-qk-6op" secondAttribute="leading" constant="8" id="RZ2-T3-ozi"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="HZY-Kw-X4e" secondAttribute="trailing" constant="2" id="Ub5-zX-MSv"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="vo2-BA-xl7" secondAttribute="trailing" id="Zbv-Xk-yb0"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="HZY-Kw-X4e" secondAttribute="bottom" id="bKw-5Z-Eii"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="sxg-OH-oRE" secondAttribute="trailing" constant="2" id="g3e-UF-nUi"/>
+                                                                            <constraint firstItem="vo2-BA-xl7" firstAttribute="leading" secondItem="azl-qk-6op" secondAttribute="leading" id="o8F-bN-ob5"/>
+                                                                            <constraint firstItem="HZY-Kw-X4e" firstAttribute="leading" secondItem="azl-qk-6op" secondAttribute="leading" constant="8" id="s24-mo-KES"/>
+                                                                            <constraint firstItem="sxg-OH-oRE" firstAttribute="top" secondItem="azl-qk-6op" secondAttribute="top" id="tDU-cA-nLL"/>
+                                                                            <constraint firstItem="vo2-BA-xl7" firstAttribute="top" secondItem="azl-qk-6op" secondAttribute="top" id="woy-wB-CGa"/>
+                                                                            <constraint firstItem="HZY-Kw-X4e" firstAttribute="top" secondItem="sxg-OH-oRE" secondAttribute="bottom" constant="4" id="xFk-6d-kdx"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="04A-IW-Pbz">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                                                    </imageView>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            </view>
+                                                            <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="04A-IW-Pbz" secondAttribute="bottom" id="5j7-g6-Qnm"/>
+                                                                <constraint firstAttribute="trailing" secondItem="IAz-1G-N8o" secondAttribute="trailing" id="8Vp-ED-4XC"/>
+                                                                <constraint firstItem="IAz-1G-N8o" firstAttribute="leading" secondItem="hW4-SV-x8M" secondAttribute="leading" id="Bbc-ed-omb"/>
+                                                                <constraint firstItem="04A-IW-Pbz" firstAttribute="leading" secondItem="hW4-SV-x8M" secondAttribute="leading" id="G47-Aw-dH7"/>
+                                                                <constraint firstAttribute="bottom" secondItem="azl-qk-6op" secondAttribute="bottom" id="PiL-G3-VVZ"/>
+                                                                <constraint firstItem="04A-IW-Pbz" firstAttribute="top" secondItem="hW4-SV-x8M" secondAttribute="top" id="aiP-Sx-bC4"/>
+                                                                <constraint firstAttribute="trailing" secondItem="azl-qk-6op" secondAttribute="trailing" id="iMh-oj-HuZ"/>
+                                                                <constraint firstItem="azl-qk-6op" firstAttribute="leading" secondItem="hW4-SV-x8M" secondAttribute="leading" id="jCC-u7-kPo"/>
+                                                                <constraint firstAttribute="trailing" secondItem="04A-IW-Pbz" secondAttribute="trailing" id="lh8-OA-Yke"/>
+                                                                <constraint firstItem="IAz-1G-N8o" firstAttribute="top" secondItem="hW4-SV-x8M" secondAttribute="top" id="qam-pv-GWn"/>
+                                                            </constraints>
+                                                            <size key="customSize" width="200" height="200"/>
+                                                            <connections>
+                                                                <outlet property="numberOfListeningLabel" destination="tBI-7W-4dx" id="1B3-O7-pA9"/>
+                                                                <outlet property="playListNameLabel" destination="sxg-OH-oRE" id="vsC-4a-eRe"/>
+                                                                <outlet property="playlistImageView" destination="04A-IW-Pbz" id="ym2-dR-9iq"/>
+                                                                <outlet property="singerNameLabel" destination="HZY-Kw-X4e" id="Pfr-xT-8R2"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>

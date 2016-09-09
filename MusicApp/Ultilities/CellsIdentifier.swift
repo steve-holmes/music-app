@@ -14,6 +14,7 @@ struct CellsIdentifier {
     static let PageHomeOnlineCollectionCell = "PageHomeOnlineCollectionCell"
     static let PlaylistHomeOnlineTableCell  = "PlaylistHomeOnlineTableCell"
     static let PlaylistHomeOnlineCollectionCell = "PlaylistHomeOnlineCollectionCell"
+    static let MorePlaylistHomeOnlineCollectionCell = "MorePlaylistHomeOnlineCollectionCell"
     static let VideoHomeOnlineTableCell     = "VideoHomeOnlineTableCell"
     static let VideoHomeOnlineCollectionCell = "VideoHomeOnlineCollectionCell"
     static let SongHomeOnlineTableCell      = "SongHomeOnlineTableCell"

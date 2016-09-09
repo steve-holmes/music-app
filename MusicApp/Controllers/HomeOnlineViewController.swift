@@ -26,6 +26,13 @@ class HomeOnlineViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
     }
+    
+    private let headerViewRatio: CGFloat = 0.07 // height = ratio * width
+    
+    func moreButtonTapped(button: UIButton) {
+        let section = Int(button.currentTitle!)!
+        print(section)
+    }
 }
 
 // MARK: UITableViewDataSource
@@ -95,6 +102,47 @@ extension HomeOnlineViewController: UITableViewDataSource {
 }
 
 extension HomeOnlineViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let width = tableView.bounds.size.width
+        let height = width * headerViewRatio
+        
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        
+        let headerLabel = UILabel(frame: CGRect(x: 8, y: 0, width: width / 2 - 8, height: height))
+        headerLabel.font = UIFont.avenirNextFont().fontWithSize(15)
+        headerView.addSubview(headerLabel)
+        
+        let accessoryLabel = UILabel(frame: CGRect(x: width / 2, y: 0, width: width / 2 - 8, height: height))
+        accessoryLabel.text = "More"
+        accessoryLabel.font = UIFont.avenirNextFont().fontWithSize(12)
+        accessoryLabel.textAlignment = .Right
+        headerView.addSubview(accessoryLabel)
+        
+        let accessoryButton = UIButton(frame: CGRect(x: 5 * width / 6, y: 0, width: 5 * width / 6 - 8, height: height))
+        accessoryButton.setTitle("\(section)", forState: .Normal)
+        accessoryButton.setTitleColor(UIColor.clearColor(), forState: .Normal)
+        accessoryButton.addTarget(self, action: #selector(moreButtonTapped(_:)), forControlEvents: .TouchUpInside)
+        headerView.addSubview(accessoryButton)
+        
+        switch section {
+        case 1: headerLabel.text = "Playlist"
+        case 2: headerLabel.text = "Video"
+        case 3: headerLabel.text = "Song"
+        default: break
+        }
+        
+        return headerView
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 { return 0.01 }
+        return tableView.bounds.size.width * headerViewRatio
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 6
+    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)

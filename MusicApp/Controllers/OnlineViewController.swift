@@ -50,6 +50,11 @@ class OnlineViewController: UIViewController {
             childControllers.append(songController)
         }
         
+        if let videoController = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.VideoOnlineController) {
+            videoController.title = "Video"
+            childControllers.append(videoController)
+        }
+        
         if let rankController = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.RankOnlineController) {
             rankController.title = "Rank"
             childControllers.append(rankController)

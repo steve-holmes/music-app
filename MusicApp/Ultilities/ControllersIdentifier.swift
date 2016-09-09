@@ -16,6 +16,7 @@ struct ControllersIdentifiers {
     static let HomeOnlineController         = "HomeOnlineController"
     static let PlaylistOnlineController     = "PlaylistOnlineController"
     static let SongOnlineController         = "SongOnlineController"
+    static let VideoOnlineController        = "VideoOnlineController"
     static let RankOnlineController         = "RankOnlineController"
     static let SingerOnlineController       = "SingerOnlineController"
     

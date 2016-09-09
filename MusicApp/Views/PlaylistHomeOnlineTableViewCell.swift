@@ -10,15 +10,64 @@ import UIKit
 
 class PlaylistHomeOnlineTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        let layout = collectionView.collectionViewLayout as? PlaylistHomeOnlineCollectionViewLayout
+        layout?.delegate = self
+        
+        collectionView.backgroundColor = ColorConstants.backgroundColor
+        
+        let itemSize = (collectionView.bounds.size.width - itemPadding * 4) / 3
+        let height = itemSize * 3 + itemPadding * 2
+        
+        collectionView.addConstraint(NSLayoutConstraint(
+            item: collectionView,
+            attribute: .Height,
+            relatedBy: .Equal,
+            toItem: nil,
+            attribute: .Height,
+            multiplier: 1,
+            constant: height
+        ))
+        
+        collectionView.dataSource = self
     }
+    
+    private let itemPadding: CGFloat = 8
 
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+}
 
-        // Configure the view for the selected state
+extension PlaylistHomeOnlineTableViewCell: UICollectionViewDataSource {
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 6
     }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellsIdentifier.PlaylistHomeOnlineCollectionCell, forIndexPath: indexPath)
+        
+        if let playlistCell = cell as? PlaylistHomeOnlineCollectionViewCell {
+            playlistCell.playlistName = "Gui Anh Xa Nho"
+            playlistCell.singerName = "Bich Phuong"
+            playlistCell.playlistImage = UIImage(named: "background")
+        }
+        
+        return cell
+    }
+    
+}
 
+extension PlaylistHomeOnlineTableViewCell: PlaylistHomeOnlineCollectionViewLayoutDelegate {
+    
+    func itemSizeForCollectionView(collectionView: UICollectionView) -> CGFloat {
+        return (self.collectionView.bounds.size.width - 4 * self.itemPadding) / 3
+    }
+    
+    func itemPaddingForCollectionView(collectionView: UICollectionView) -> CGFloat {
+        return self.itemPadding
+    }
+    
 }

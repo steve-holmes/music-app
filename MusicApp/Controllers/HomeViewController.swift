@@ -202,6 +202,10 @@ class HomeViewController: UIViewController {
         case FromBottomToTop
     }
     
+    private var startAlpha: CGFloat = 0.2
+    private var endAlpha: CGFloat   = 1
+    private lazy var scaleAlphaFactor: CGFloat = self.endAlpha - self.startAlpha
+    
     private func setPropertiesForChangedStateAtOffsetY(offsetY: CGFloat, forDirection direction: PlayerViewDirection) {
         let height = self.view.bounds.size.height
         var offset = offsetY
@@ -213,7 +217,7 @@ class HomeViewController: UIViewController {
         
         func setPropertiesForChangedStateFromBottomToTop() {
             playerViewTopConstraint.constant = height - offset
-            playerView.alpha = offset / height
+            playerView.alpha = startAlpha + scaleAlphaFactor * offset / height
             
             if offset < centerPointBottomConstant {
                 middleViewBottomConstraint.constant = -bottomConstant
@@ -235,7 +239,7 @@ class HomeViewController: UIViewController {
     private func setPropertiesForEndedState() {
         let height = self.view.bounds.size.height
         playerViewTopConstraint.constant = 0
-        playerView.alpha = 1
+        playerView.alpha = endAlpha
         middleView.alpha = 0
         middleViewBottomConstraint.constant = height - bottomConstant
         innerViewBottomConstraint.constant = outerRadius - bottomConstant - height
@@ -245,7 +249,7 @@ class HomeViewController: UIViewController {
     private func setPropertiesForBeganState() {
         let height = self.view.bounds.size.height
         playerViewTopConstraint.constant = height
-        playerView.alpha = 0
+        playerView.alpha = startAlpha
         middleView.alpha = 1
         middleViewBottomConstraint.constant = -bottomConstant
         innerViewBottomConstraint.constant = outerRadius - bottomConstant

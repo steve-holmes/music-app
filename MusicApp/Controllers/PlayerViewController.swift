@@ -92,6 +92,7 @@ class PlayerViewController: UIViewController {
         case .Left: return 0
         case .Middle: return 1
         case .Right: return 2
+        case .Transitioning: return -1
         }
     }
     
@@ -161,7 +162,9 @@ class PlayerViewController: UIViewController {
     private var animationDuration: NSTimeInterval = 0.35
     private var animationVerticalEnabled: Bool?
     
-    private let swipeVelocityX: CGFloat = 1100
+    private let swipeVelocityX: CGFloat = 950
+    private let swipeTimeoutDuration: NSTimeInterval = 0.4
+    private var swipeTimeoutTimer: NSTimer?
     
     private var startAlpha: CGFloat = 0.2
     private var endAlpha: CGFloat = 1.0
@@ -278,6 +281,7 @@ class PlayerViewController: UIViewController {
                 case .Left:     self.position = .Left
                 case .Middle:   self.position = .Middle
                 case .Right:    self.position = .Right
+                default: break
                 }
                 self.view.layoutIfNeeded()
             },
@@ -294,6 +298,7 @@ class PlayerViewController: UIViewController {
         case Left
         case Middle
         case Right
+        case Transitioning
     }
     
     private var position: Position = .Left {
@@ -312,8 +317,17 @@ class PlayerViewController: UIViewController {
                 self.setConstantOfCenterXConstraintForLeftView(-2 * width, middleView: -width, rightView: 0)
                 self.setAlphaForLeftView(self.startAlpha, middleView: self.startAlpha, rightView: self.endAlpha)
                 self.topVisualEffectView.alpha = 1
+            default: break
             }
         }
+    }
+    
+    // MARK: Swipe Gesture Recognizer - Timeout
+    
+    func swipeTimeoutTimerForSwipeGestureRecognizer(timer: NSTimer) {
+        guard timer === swipeTimeoutTimer else { return }
+        swipeTimeoutTimer?.invalidate()
+        swipeTimeoutTimer = nil
     }
     
     // MARK: Internal struct Date - An helper structure
@@ -363,7 +377,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
     
     private func listPlayerViewController(controller: ListPlayerViewController, didRecognizeByPanGestureRecognizer panGestureRecognizer: UIPanGestureRecognizer) {
         // Swipe Gesture
-        if panGestureRecognizer.velocityInView(self.view).x < -swipeVelocityX {
+        if swipeTimeoutTimer != nil && panGestureRecognizer.velocityInView(self.view).x < -swipeVelocityX {
             panGestureRecognizer.enabled = false
             self.changeChildPlayerViewFromPosition(.Left, toPosition: .Middle) {
                 self.setPropertiesForEndedStateAtPosition(self.position)
@@ -377,6 +391,14 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
         guard offsetX < 0 else { return }
         
         switch panGestureRecognizer.state {
+        case .Possible, .Began where swipeTimeoutTimer == nil:
+            swipeTimeoutTimer = NSTimer.scheduledTimerWithTimeInterval(
+                swipeTimeoutDuration,
+                target: self,
+                selector: #selector(swipeTimeoutTimerForSwipeGestureRecognizer(_:)),
+                userInfo: nil,
+                repeats: false
+            )
         case .Changed:
             self.setPropertiesForChangedStateFromPosition(.Left, toPosition: .Middle, byOffsetX: -offsetX)
         case .Ended:
@@ -423,7 +445,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
             // Swipe Gesture
             let velocityX = panGestureRecognizer.velocityInView(self.view).x
             
-            if velocityX > swipeVelocityX {
+            if swipeTimeoutTimer != nil && velocityX > swipeVelocityX {
                 panGestureRecognizer.enabled = false
                 self.changeChildPlayerViewFromPosition(.Middle, toPosition: .Left) {
                     self.setPropertiesForEndedStateAtPosition(self.position)
@@ -431,7 +453,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
                     self.animationVerticalEnabled = nil
                 }
                 return
-            } else if velocityX < -swipeVelocityX {
+            } else if swipeTimeoutTimer != nil && velocityX < -swipeVelocityX {
                 panGestureRecognizer.enabled = false
                 self.changeChildPlayerViewFromPosition(.Middle, toPosition: .Right) {
                     self.setPropertiesForEndedStateAtPosition(self.position)
@@ -446,6 +468,14 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
             
             if offsetX < 0 {
                 switch panGestureRecognizer.state {
+                case .Possible, .Began where swipeTimeoutTimer == nil:
+                    swipeTimeoutTimer = NSTimer.scheduledTimerWithTimeInterval(
+                        swipeTimeoutDuration,
+                        target: self,
+                        selector: #selector(swipeTimeoutTimerForSwipeGestureRecognizer(_:)),
+                        userInfo: nil,
+                        repeats: false
+                    )
                 case .Changed:
                     self.setPropertiesForChangedStateFromPosition(.Middle, toPosition: .Right, byOffsetX: -offsetX)
                 case .Ended:
@@ -481,6 +511,14 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
                 }
             } else if offsetX > 0 {
                 switch panGestureRecognizer.state {
+                case .Possible, .Began where swipeTimeoutTimer == nil:
+                    swipeTimeoutTimer = NSTimer.scheduledTimerWithTimeInterval(
+                        swipeTimeoutDuration,
+                        target: self,
+                        selector: #selector(swipeTimeoutTimerForSwipeGestureRecognizer(_:)),
+                        userInfo: nil,
+                        repeats: false
+                    )
                 case .Changed:
                     self.setPropertiesForChangedStateFromPosition(.Middle, toPosition: .Left, byOffsetX: offsetX)
                 case .Ended:
@@ -530,7 +568,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
     
     private func lyricPlayerViewController(controller: LyricPlayerViewController, didRecognizeByPanGestureRecognizer panGestureRecognizer: UIPanGestureRecognizer) {
         // Swipe Gesture
-        if panGestureRecognizer.velocityInView(self.view).x > swipeVelocityX {
+        if swipeTimeoutTimer != nil && panGestureRecognizer.velocityInView(self.view).x > swipeVelocityX {
             panGestureRecognizer.enabled = false
             self.changeChildPlayerViewFromPosition(.Right, toPosition: .Middle) {
                 self.setPropertiesForEndedStateAtPosition(self.position)
@@ -544,6 +582,14 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
         guard offsetX > 0 else { return }
         
         switch panGestureRecognizer.state {
+        case .Possible, .Began where swipeTimeoutTimer == nil:
+            swipeTimeoutTimer = NSTimer.scheduledTimerWithTimeInterval(
+                swipeTimeoutDuration,
+                target: self,
+                selector: #selector(swipeTimeoutTimerForSwipeGestureRecognizer(_:)),
+                userInfo: nil,
+                repeats: false
+            )
         case .Changed:
             self.setPropertiesForChangedStateFromPosition(.Right, toPosition: .Middle, byOffsetX: offsetX)
         case .Ended:
@@ -620,6 +666,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
         case .Left:     self.pageControl.currentPage = 0
         case .Middle:   self.pageControl.currentPage = 1
         case .Right:    self.pageControl.currentPage = 2
+        default: break
         }
     }
     

@@ -11,13 +11,16 @@ struct CellsIdentifier {
     // Online View Controller
     static let HomeOnlineTableCell          = "HomeOnlineTableCell"
     static let PageHomeOnlineTableCell      = "PageHomeOnlineTableCell"
+    static let PageHomeOnlineCollectionCell = "PageHomeOnlineCollectionCell"
     static let PlaylistHomeOnlineTableCell  = "PlaylistHomeOnlineTableCell"
+    static let PlaylistHomeOnlineCollectionCell = "PlaylistHomeOnlineCollectionCell"
     static let VideoHomeOnlineTableCell     = "VideoHomeOnlineTableCell"
+    static let VideoHomeOnlineCollectionCell = "VideoHomeOnlineCollectionCell"
     static let SongHomeOnlineTableCell      = "SongHomeOnlineTableCell"
-    static let SongNestedHomeOnlineTableCell = "SongNestedHomeOnlineTableCell"
     
     static let PlaylistOnlineTableCell      = "PlaylistOnlineTableCell"
     static let SongOnlineTableCell          = "SongOnlineTableCell"
+    static let VideoOnlineCollectionCell    = "VideoOnlineCollectionCell"
     static let RankOnlineTableCell          = "RankOnlineTableCell"
     static let SingerOnlineTableCell        = "SingerOnlineTableCell"
     

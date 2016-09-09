@@ -19,6 +19,8 @@ class OfflineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.backgroundColor = ColorConstants.backgroundColor
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.sectionFooterHeight = 0.01

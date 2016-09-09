@@ -16,5 +16,6 @@ struct ColorConstants {
     static let toolbarImageColor = UIColor(red: 179/255,green: 179/255, blue: 179/255, alpha: 1)
     static let textColor = UIColor(red: 102/255, green: 102/255, blue: 102/255, alpha: 1)
     static let toolbarBorderColor = UIColor(red: 76/255, green: 76/255, blue: 76/255, alpha: 1)
+    static let backgroundColor = UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1)
     
 }

@@ -58,7 +58,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        self.view.backgroundColor = ColorConstants.backgroundColor
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didRecognizeByTapGestureRecognizer(_:))))
         
         setupLogo()
@@ -120,12 +120,12 @@ class LoginViewController: UIViewController {
                 loginBarButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
                 loginBarButton.titleLabel?.font = UIFont(name: "AvenirNext-Medium", size: 20)
                 
-                registerBarButton.setTitleColor(UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1), forState: .Normal)
+                registerBarButton.setTitleColor(ColorConstants.backgroundColor, forState: .Normal)
                 registerBarButton.titleLabel?.font = UIFont(name: "AvenirNext-Regular", size: 17)
                 
                 loginButton.setTitle("Login", forState: .Normal)
             case .Register:
-                loginBarButton.setTitleColor(UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1), forState: .Normal)
+                loginBarButton.setTitleColor(ColorConstants.backgroundColor, forState: .Normal)
                 loginBarButton.titleLabel?.font = UIFont(name: "AvenirNext-Regular", size: 17)
                 
                 registerBarButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)

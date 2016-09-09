@@ -12,16 +12,8 @@ class SongHomeOnlineTableViewCell: UITableViewCell {
     
     // MARK: Models
     
-    var songName: String? {
-        didSet {
-            songNameLabel.text = songName
-        }
-    }
-    var singerName: String? {
-        didSet {
-            singerNameLabel.text = singerName
-        }
-    }
+    var songName: String? { didSet { songNameLabel.text = songName } }
+    var singerName: String? { didSet { singerNameLabel.text = singerName } }
     
     // MARK: Outlets
     

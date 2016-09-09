@@ -33,36 +33,17 @@ class OnlineViewController: UIViewController {
     private var pageMenu: CAPSPageMenu!
     
     private func setupPageMenu() {
-        var childControllers = [UIViewController]()
-        
-        if let homeControlller = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.HomeOnlineController) {
-            homeControlller.title = "Home"
-            childControllers.append(homeControlller)
-        }
-        
-        if let playlistController = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.PlaylistOnlineController) {
-            playlistController.title = "Playlist"
-            childControllers.append(playlistController)
-        }
-        
-        if let songController = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.SongOnlineController) {
-            songController.title = "Song"
-            childControllers.append(songController)
-        }
-        
-        if let videoController = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.VideoOnlineController) {
-            videoController.title = "Video"
-            childControllers.append(videoController)
-        }
-        
-        if let rankController = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.RankOnlineController) {
-            rankController.title = "Rank"
-            childControllers.append(rankController)
-        }
-        
-        if let singerController = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.SingerOnlineController) {
-            singerController.title = "Singer"
-            childControllers.append(singerController)
+        let childControllers: [UIViewController] = [
+            (ControllersIdentifiers.HomeOnlineController,       "Home"),
+            (ControllersIdentifiers.PlaylistOnlineController,   "Playlist"),
+            (ControllersIdentifiers.SongOnlineController,       "Song"),
+            (ControllersIdentifiers.VideoOnlineController,      "Video"),
+            (ControllersIdentifiers.RankOnlineController,       "Rank"),
+            (ControllersIdentifiers.SingerOnlineController,     "Singer")
+        ].flatMap { controllerTuple in
+            let controller = self.storyboard?.instantiateViewControllerWithIdentifier(controllerTuple.0)
+            controller?.title = controllerTuple.1
+            return controller
         }
         
         self.pageMenu = CAPSPageMenu(viewControllers: childControllers, frame: self.view.bounds, pageMenuOptions: nil)

@@ -269,6 +269,13 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		9EA017CA1D82E3370033CAD6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		9EBA8E9D1D598D0B0084E44A /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,6 +366,7 @@
 			isa = PBXGroup;
 			children = (
 				9E7CA4E11D6FECF00017B6A7 /* Controllers */,
+				9EA017CA1D82E3370033CAD6 /* Views */,
 			);
 			name = "Offline MVCs";
 			sourceTree = "<group>";

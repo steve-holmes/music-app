@@ -1,11 +1,11 @@
-platform :ios, '9.0'
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '10.0'
 use_frameworks!
 
 target 'MusicApp' do
   
   pod 'PageMenu'
   pod 'FTPopOverMenu'
-  pod 'Alamofire', '~>3.4'
-  pod 'SwiftyJSON'
+  pod 'Alamofire', '~> 4.0'
 
 end

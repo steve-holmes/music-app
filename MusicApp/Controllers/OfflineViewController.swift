@@ -12,7 +12,7 @@ class OfflineViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    @IBAction func settingBarButtonTapped(settingItem: UIBarButtonItem) {
+    @IBAction func settingBarButtonTapped(_ settingItem: UIBarButtonItem) {
         print(#function)
     }
     
@@ -26,12 +26,12 @@ class OfflineViewController: UIViewController {
         tableView.sectionFooterHeight = 0.01
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
@@ -40,11 +40,11 @@ class OfflineViewController: UIViewController {
 
 extension OfflineViewController: UITableViewDataSource {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return 1
         case 1: return 2
@@ -53,11 +53,11 @@ extension OfflineViewController: UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(CellsIdentifier.OfflineTableCell, forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.OfflineTableCell, for: indexPath)
         
-        let section = indexPath.section
-        let row = indexPath.row
+        let section = (indexPath as NSIndexPath).section
+        let row = (indexPath as NSIndexPath).row
         
         switch section {
         case 0:
@@ -81,7 +81,7 @@ extension OfflineViewController: UITableViewDataSource {
         return cell
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 1: return "My Song"
         case 2: return "Offline"
@@ -93,11 +93,11 @@ extension OfflineViewController: UITableViewDataSource {
 
 extension OfflineViewController: UITableViewDelegate {
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let section = indexPath.section
-        let row = indexPath.row
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let section = (indexPath as NSIndexPath).section
+        let row = (indexPath as NSIndexPath).row
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
         switch section {
         case 0:
@@ -127,8 +127,8 @@ extension OfflineViewController: UITableViewDelegate {
         }
     }
     
-    private func pushChildOfflineViewControllerWithIdentifier(identifier: String) {
-        if let controller = self.storyboard?.instantiateViewControllerWithIdentifier(identifier) {
+    fileprivate func pushChildOfflineViewControllerWithIdentifier(_ identifier: String) {
+        if let controller = self.storyboard?.instantiateViewController(withIdentifier: identifier) {
             self.navigationController?.pushViewController(controller, animated: true)
         }
     }

@@ -18,21 +18,21 @@ class OnlineViewController: UIViewController {
         setupPageMenu()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     // MARK: Page Menu
     
-    private var pageMenu: CAPSPageMenu!
+    fileprivate var pageMenu: CAPSPageMenu!
     
-    private func setupPageMenu() {
+    fileprivate func setupPageMenu() {
         let childControllers: [UIViewController] = [
             (ControllersIdentifiers.HomeOnlineController,       "Home"),
             (ControllersIdentifiers.PlaylistOnlineController,   "Playlist"),
@@ -41,7 +41,7 @@ class OnlineViewController: UIViewController {
             (ControllersIdentifiers.RankOnlineController,       "Rank"),
             (ControllersIdentifiers.SingerOnlineController,     "Singer")
         ].flatMap { controllerTuple in
-            let controller = self.storyboard?.instantiateViewControllerWithIdentifier(controllerTuple.0)
+            let controller = self.storyboard?.instantiateViewController(withIdentifier: controllerTuple.0)
             controller?.title = controllerTuple.1
             return controller
         }

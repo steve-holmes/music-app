@@ -1,18 +1,18 @@
 PODS:
-  - Alamofire (3.4.1)
+  - Alamofire (4.0.0)
+  - FTPopOverMenu (1.2.0)
   - PageMenu (1.2.9)
-  - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
-  - Alamofire (~> 3.4)
+  - Alamofire (~> 4.0)
+  - FTPopOverMenu
   - PageMenu
-  - SwiftyJSON
 
 SPEC CHECKSUMS:
-  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
+  FTPopOverMenu: f4c2e004c1b6594e72c71393a54a3f23733a9e72
   PageMenu: ba19ff267f7a19e444e93c20a7847b78954a7011
-  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 828c2cb9dfdca934245d6278396ea3f15f864e2e
+PODFILE CHECKSUM: 815b9a278d81d1cf730b4be6059ac3a8a5222df0
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.0.rc.2

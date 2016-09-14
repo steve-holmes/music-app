@@ -27,9 +27,9 @@ class HomeOnlineViewController: UIViewController {
         tableView.estimatedRowHeight = 100
     }
     
-    private let headerViewRatio: CGFloat = 0.07 // height = ratio * width
+    fileprivate let headerViewRatio: CGFloat = 0.07 // height = ratio * width
     
-    func moreButtonTapped(button: UIButton) {
+    func moreButtonTapped(_ button: UIButton) {
         let section = Int(button.currentTitle!)!
         print(section)
     }
@@ -39,17 +39,17 @@ class HomeOnlineViewController: UIViewController {
 
 extension HomeOnlineViewController: UITableViewDataSource {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 4
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 3 { return 10 }
         return 1
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        switch indexPath.section {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch (indexPath as NSIndexPath).section {
         case 0: return self.tableView(tableView, pageCellForRowAtIndexPath: indexPath)
         case 1: return self.tableView(tableView, playlistCellForRowAtIndexPath: indexPath)
         case 2: return self.tableView(tableView, videoCellForRowAtIndexPath: indexPath)
@@ -58,8 +58,8 @@ extension HomeOnlineViewController: UITableViewDataSource {
         }
     }
     
-    private func tableView(tableView: UITableView, pageCellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(CellsIdentifier.PageHomeOnlineTableCell, forIndexPath: indexPath)
+    fileprivate func tableView(_ tableView: UITableView, pageCellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.PageHomeOnlineTableCell, for: indexPath)
         
 //        if let pageCell = cell as? PageHomeOnlineTableViewCell {
 //            
@@ -68,8 +68,8 @@ extension HomeOnlineViewController: UITableViewDataSource {
         return cell
     }
         
-    private func tableView(tableView: UITableView, playlistCellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(CellsIdentifier.PlaylistHomeOnlineTableCell, forIndexPath: indexPath)
+    fileprivate func tableView(_ tableView: UITableView, playlistCellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.PlaylistHomeOnlineTableCell, for: indexPath)
         
 //        if let playlistCell = cell as? PlaylistHomeOnlineTableViewCell {
 //            
@@ -78,8 +78,8 @@ extension HomeOnlineViewController: UITableViewDataSource {
         return cell
     }
     
-    private func tableView(tableView: UITableView, videoCellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(CellsIdentifier.VideoHomeOnlineTableCell, forIndexPath: indexPath)
+    fileprivate func tableView(_ tableView: UITableView, videoCellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.VideoHomeOnlineTableCell, for: indexPath)
         
 //        if let videoCell = cell as? VideoHomeOnlineTableViewCell {
 //            
@@ -88,8 +88,8 @@ extension HomeOnlineViewController: UITableViewDataSource {
         return cell
     }
     
-    private func tableView(tableView: UITableView, songCellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(CellsIdentifier.SongHomeOnlineTableCell, forIndexPath: indexPath)
+    fileprivate func tableView(_ tableView: UITableView, songCellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.SongHomeOnlineTableCell, for: indexPath)
         
         if let songCell = cell as? SongHomeOnlineTableViewCell {
             songCell.songName = "Gui Anh Xa Nho"
@@ -103,7 +103,7 @@ extension HomeOnlineViewController: UITableViewDataSource {
 
 extension HomeOnlineViewController: UITableViewDelegate {
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 { return nil }
         
         let width = tableView.bounds.size.width
@@ -112,19 +112,19 @@ extension HomeOnlineViewController: UITableViewDelegate {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: height))
         
         let headerLabel = UILabel(frame: CGRect(x: 8, y: 0, width: width / 2 - 8, height: height))
-        headerLabel.font = UIFont.avenirNextFont().fontWithSize(15)
+        headerLabel.font = UIFont.avenirNextFont().withSize(15)
         headerView.addSubview(headerLabel)
         
         let accessoryLabel = UILabel(frame: CGRect(x: width / 2, y: 0, width: width / 2 - 8, height: height))
         accessoryLabel.text = "More"
-        accessoryLabel.font = UIFont.avenirNextFont().fontWithSize(12)
-        accessoryLabel.textAlignment = .Right
+        accessoryLabel.font = UIFont.avenirNextFont().withSize(12)
+        accessoryLabel.textAlignment = .right
         headerView.addSubview(accessoryLabel)
         
         let accessoryButton = UIButton(frame: CGRect(x: 5 * width / 6, y: 0, width: 5 * width / 6 - 8, height: height))
-        accessoryButton.setTitle("\(section)", forState: .Normal)
-        accessoryButton.setTitleColor(UIColor.clearColor(), forState: .Normal)
-        accessoryButton.addTarget(self, action: #selector(moreButtonTapped(_:)), forControlEvents: .TouchUpInside)
+        accessoryButton.setTitle("\(section)", for: UIControlState())
+        accessoryButton.setTitleColor(UIColor.clear, for: UIControlState())
+        accessoryButton.addTarget(self, action: #selector(moreButtonTapped(_:)), for: .touchUpInside)
         headerView.addSubview(accessoryButton)
         
         switch section {
@@ -137,18 +137,18 @@ extension HomeOnlineViewController: UITableViewDelegate {
         return headerView
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 { return 0.01 }
         return tableView.bounds.size.width * headerViewRatio
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 3 { return 90 }
         return 6
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }

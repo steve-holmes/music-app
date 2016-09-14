@@ -10,7 +10,7 @@ import UIKit
 
 class TooltipView: UIView {
     
-    static let sharedTooltipView = TooltipView(frame: CGRectZero)
+    static let sharedTooltipView = TooltipView(frame: CGRect.zero)
 
     init(title: String = "", frame: CGRect) {
         self.title = title
@@ -22,13 +22,13 @@ class TooltipView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func commonInit() {
-        self.backgroundColor = UIColor.clearColor()
+    fileprivate func commonInit() {
+        self.backgroundColor = UIColor.clear
         
         titleLabel = UILabel()
         titleLabel.text = title
-        titleLabel.textAlignment = .Center
-        titleLabel.textColor = UIColor.whiteColor()
+        titleLabel.textAlignment = .center
+        titleLabel.textColor = UIColor.white
         titleLabel.font = UIFont(name: "AvenirNext-Regular", size: 12)
         
         backgroundImageView = UIImageView()
@@ -40,29 +40,29 @@ class TooltipView: UIView {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        let horizontalTitleLabelContraints = NSLayoutConstraint.constraintsWithVisualFormat(
-            "H:|-(10)-[titleLabel]-(10)-|",
+        let horizontalTitleLabelContraints = NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|-(10)-[titleLabel]-(10)-|",
             options: [],
             metrics: nil,
             views: ["titleLabel": titleLabel]
         )
         
-        let verticalTitleLabelConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:|[titleLabel]|",
+        let verticalTitleLabelConstraints = NSLayoutConstraint.constraints(
+            withVisualFormat: "V:|[titleLabel]|",
             options: [],
             metrics: nil,
             views: ["titleLabel": titleLabel]
         )
         
-        let horizontalBackgroundImageViewConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
-            "H:|[backgroundImage]|",
+        let horizontalBackgroundImageViewConstraints = NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|[backgroundImage]|",
             options: [],
             metrics: nil,
             views: ["backgroundImage": backgroundImageView]
         )
         
-        let verticalBackgroundImageViewConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:|[backgroundImage]|",
+        let verticalBackgroundImageViewConstraints = NSLayoutConstraint.constraints(
+            withVisualFormat: "V:|[backgroundImage]|",
             options: [],
             metrics: nil,
             views: ["backgroundImage": backgroundImageView]

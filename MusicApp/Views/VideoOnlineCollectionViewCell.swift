@@ -14,13 +14,13 @@ class VideoOnlineCollectionViewCell: UICollectionViewCell {
     var videoName: String? { didSet { videoNameLabel.text = videoName } }
     var singerName: String? { didSet { singerNameLabel.text = singerName } }
     var numberOfListening: Int? { didSet { numberOfListeningLabel.text = "\(numberOfListening ?? 0)" } }
-    var duration: NSTimeInterval? { didSet { durationLabel.text = "\(duration ?? 0)" } }
+    var duration: TimeInterval? { didSet { durationLabel.text = "\(duration ?? 0)" } }
     
-    @IBOutlet private weak var videoImageView: UIImageView!
-    @IBOutlet private weak var videoNameLabel: UILabel!
-    @IBOutlet private weak var singerNameLabel: UILabel!
-    @IBOutlet private weak var numberOfListeningLabel: UILabel!
-    @IBOutlet private weak var durationLabel: UILabel!
+    @IBOutlet fileprivate weak var videoImageView: UIImageView!
+    @IBOutlet fileprivate weak var videoNameLabel: UILabel!
+    @IBOutlet fileprivate weak var singerNameLabel: UILabel!
+    @IBOutlet fileprivate weak var numberOfListeningLabel: UILabel!
+    @IBOutlet fileprivate weak var durationLabel: UILabel!
     
     @IBOutlet weak var numberOfListeningView: UIView!
     @IBOutlet weak var durationView: UIView!
@@ -32,12 +32,12 @@ class VideoOnlineCollectionViewCell: UICollectionViewCell {
         addGradientLayerForView(durationView)
     }
     
-    private func addGradientLayerForView(view: UIView) {
+    fileprivate func addGradientLayerForView(_ view: UIView) {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = view.bounds
         gradientLayer.colors = [
-            UIColor.blackColor().CGColor,
-            UIColor.clearColor().CGColor
+            UIColor.black.cgColor,
+            UIColor.clear.cgColor
         ]
         gradientLayer.startPoint = CGPoint(x: 1, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 0, y: 0.5)

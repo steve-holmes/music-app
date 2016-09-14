@@ -12,8 +12,8 @@ class CircleButton: UIButton {
     
     // MARK: Public propreties
     
-    var circleColor: UIColor = UIColor.whiteColor() { didSet { updateButton() } }
-    var iconColor: UIColor = UIColor.whiteColor() { didSet { updateButton() } }
+    var circleColor: UIColor = UIColor.white { didSet { updateButton() } }
+    var iconColor: UIColor = UIColor.white { didSet { updateButton() } }
     var circleWidth: CGFloat = 1 { didSet { updateButton() } }
     
     // MARK: Initialization
@@ -28,7 +28,7 @@ class CircleButton: UIButton {
         self.commonInit()
     }
     
-    private func commonInit() {
+    fileprivate func commonInit() {
         self.adjustsImageWhenHighlighted = false
         self.layer.cornerRadius = self.bounds.size.width / 2
         
@@ -37,11 +37,11 @@ class CircleButton: UIButton {
     
     // MARK: Update UI
     
-    private func updateButton() {
-        self.layer.borderColor = circleColor.CGColor
+    fileprivate func updateButton() {
+        self.layer.borderColor = circleColor.cgColor
         self.layer.borderWidth = circleWidth
         
-        let defaultImage = self.imageForState(.Normal)?.imageWithColor(iconColor)
+        let defaultImage = self.image(for: UIControlState())?.imageWithColor(iconColor)
         
         var highlightedImage = UIImage
             .imageWithColor(iconColor, withSize: self.bounds.size)
@@ -57,15 +57,15 @@ class CircleButton: UIButton {
             )
         }
         
-        self.setImage(defaultImage, forState: .Normal)
-        self.setImage(highlightedImage, forState: .Highlighted)
+        self.setImage(defaultImage, for: UIControlState())
+        self.setImage(highlightedImage, for: .highlighted)
     }
 
 }
 
 class SolidCircleButton: CircleButton {
     
-    private override func updateButton() {
+    fileprivate override func updateButton() {
         
     }
     
@@ -73,7 +73,7 @@ class SolidCircleButton: CircleButton {
 
 class AnimatedCircleButton: CircleButton {
     
-    private override func updateButton() {
+    fileprivate override func updateButton() {
         super.updateButton()
     }
     

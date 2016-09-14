@@ -22,26 +22,26 @@ class PageHomeOnlineTableViewCell: UITableViewCell {
         pageCollectionView.delegate = self
     }
 
-    private var pageCollectionView: UICollectionView = {
+    fileprivate var pageCollectionView: UICollectionView = {
         let collectionViewLayout = UICollectionViewFlowLayout()
-        collectionViewLayout.scrollDirection = .Horizontal
-        collectionViewLayout.sectionInset = UIEdgeInsetsZero
+        collectionViewLayout.scrollDirection = .horizontal
+        collectionViewLayout.sectionInset = UIEdgeInsets.zero
         
-        let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: collectionViewLayout)
-        collectionView.backgroundColor = UIColor.clearColor()
+        let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: collectionViewLayout)
+        collectionView.backgroundColor = UIColor.clear
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.bounces = false
-        collectionView.contentInset = UIEdgeInsetsZero
-        collectionView.pagingEnabled = true
+        collectionView.contentInset = UIEdgeInsets.zero
+        collectionView.isPagingEnabled = true
         
-        collectionView.registerClass(PageHomeOnlineCollectionViewCell.self, forCellWithReuseIdentifier: CellsIdentifier.PageHomeOnlineCollectionCell)
+        collectionView.register(PageHomeOnlineCollectionViewCell.self, forCellWithReuseIdentifier: CellsIdentifier.PageHomeOnlineCollectionCell)
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
     
-    private var pageControl: UIPageControl = {
+    fileprivate var pageControl: UIPageControl = {
         let pageControl = UIPageControl()
         
         pageControl.numberOfPages = 5
@@ -51,31 +51,31 @@ class PageHomeOnlineTableViewCell: UITableViewCell {
         return pageControl
     }()
     
-    private func setupConstraints() {
+    fileprivate func setupConstraints() {
         setupConstraintsForPageCollectionView()
         setupConstraintsForPageControl()
     }
     
-    private func setupConstraintsForPageCollectionView() {
+    fileprivate func setupConstraintsForPageCollectionView() {
         let heightConstraint = NSLayoutConstraint(
             item: pageCollectionView,
-            attribute: .Height,
-            relatedBy: .Equal,
+            attribute: .height,
+            relatedBy: .equal,
             toItem: nil,
-            attribute: .Height,
+            attribute: .height,
             multiplier: 1,
             constant: 150
         )
         
-        let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
-            "H:|-(8)-[pageCollectionView]-(8)-|",
+        let horizontalConstraints = NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|-(8)-[pageCollectionView]-(8)-|",
             options: [],
             metrics: nil,
             views: ["pageCollectionView": pageCollectionView]
         )
         
-        let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:|[pageCollectionView]|",
+        let verticalConstraints = NSLayoutConstraint.constraints(
+            withVisualFormat: "V:|[pageCollectionView]|",
             options: [],
             metrics: nil,
             views: ["pageCollectionView": pageCollectionView]
@@ -86,9 +86,9 @@ class PageHomeOnlineTableViewCell: UITableViewCell {
         contentView.addConstraints(verticalConstraints)
     }
     
-    private func setupConstraintsForPageControl() {
-        let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
-            "H:|[pageControl]|",
+    fileprivate func setupConstraintsForPageControl() {
+        let horizontalConstraints = NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|[pageControl]|",
             options: [],
             metrics: nil,
             views: ["pageControl": pageControl]
@@ -96,20 +96,20 @@ class PageHomeOnlineTableViewCell: UITableViewCell {
         
         let bottomConstraint = NSLayoutConstraint(
             item: pageControl,
-            attribute: .Bottom,
-            relatedBy: .Equal,
+            attribute: .bottom,
+            relatedBy: .equal,
             toItem: contentView,
-            attribute: .Bottom,
+            attribute: .bottom,
             multiplier: 1,
             constant: 0
         )
         
         let heightConstraint = NSLayoutConstraint(
             item: pageControl,
-            attribute: .Height,
-            relatedBy: .Equal,
+            attribute: .height,
+            relatedBy: .equal,
             toItem: pageCollectionView,
-            attribute: .Height,
+            attribute: .height,
             multiplier: 1/3,
             constant: 0
         )
@@ -122,12 +122,12 @@ class PageHomeOnlineTableViewCell: UITableViewCell {
 
 extension PageHomeOnlineTableViewCell: UICollectionViewDataSource {
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellsIdentifier.PageHomeOnlineCollectionCell, forIndexPath: indexPath)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsIdentifier.PageHomeOnlineCollectionCell, for: indexPath)
         
         if let pageCell = cell as? PageHomeOnlineCollectionViewCell {
             pageCell.image = UIImage(named: "background")
@@ -140,15 +140,15 @@ extension PageHomeOnlineTableViewCell: UICollectionViewDataSource {
 
 extension PageHomeOnlineTableViewCell: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return collectionView.bounds.size
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
     
@@ -156,7 +156,7 @@ extension PageHomeOnlineTableViewCell: UICollectionViewDelegateFlowLayout {
 
 extension PageHomeOnlineTableViewCell: UIScrollViewDelegate {
     
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         guard scrollView === pageCollectionView else { return }
         
         let offsetX = scrollView.contentOffset.x

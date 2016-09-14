@@ -20,19 +20,19 @@ class PlaylistOnlineViewController: UIViewController {
         collectionView.delegate = self
     }
     
-    private let itemPadding: CGFloat = 8
-    private let itemRatio: CGFloat = 11 / 9 // height = ratio * width
+    fileprivate let itemPadding: CGFloat = 8
+    fileprivate let itemRatio: CGFloat = 11 / 9 // height = ratio * width
 
 }
 
 extension PlaylistOnlineViewController: UICollectionViewDataSource {
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellsIdentifier.PlaylistOnlineCollectionCell, forIndexPath: indexPath)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsIdentifier.PlaylistOnlineCollectionCell, for: indexPath)
         
         if let playlistCell = cell as? PlaylistOnlineCollectionViewCell {
             playlistCell.playlistImage = UIImage(named: "background")
@@ -47,17 +47,17 @@ extension PlaylistOnlineViewController: UICollectionViewDataSource {
 
 extension PlaylistOnlineViewController: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.bounds.size.width - 3 * itemPadding) / 2
         let height = width * itemRatio
         return CGSize(width: width, height: height)
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return itemPadding
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return itemPadding
     }
     

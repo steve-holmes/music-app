@@ -10,26 +10,26 @@ import UIKit
 
 class RankOnlineTableViewCell: UITableViewCell {
 
-    @IBOutlet private weak var rankTitle: UILabel!
-    @IBOutlet private weak var rankImageView: UIImageView!
-    @IBOutlet private weak var firstRankItemLabel: UILabel!
-    @IBOutlet private weak var secondRankItemLabel: UILabel!
-    @IBOutlet private weak var thirdRankItemLabel: UILabel!
-    @IBOutlet private weak var fourRankItemLabel: UILabel!
+    @IBOutlet fileprivate weak var rankTitle: UILabel!
+    @IBOutlet fileprivate weak var rankImageView: UIImageView!
+    @IBOutlet fileprivate weak var firstRankItemLabel: UILabel!
+    @IBOutlet fileprivate weak var secondRankItemLabel: UILabel!
+    @IBOutlet fileprivate weak var thirdRankItemLabel: UILabel!
+    @IBOutlet fileprivate weak var fourRankItemLabel: UILabel!
     
-    @IBOutlet private weak var firstBadgetView: UIView!
-    @IBOutlet private weak var secondBadgetView: UIView!
-    @IBOutlet private weak var thirdBadgetView: UIView!
-    @IBOutlet private weak var fourBadgetView: UIView!
+    @IBOutlet fileprivate weak var firstBadgetView: UIView!
+    @IBOutlet fileprivate weak var secondBadgetView: UIView!
+    @IBOutlet fileprivate weak var thirdBadgetView: UIView!
+    @IBOutlet fileprivate weak var fourBadgetView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         setupBadgets()
     }
     
-    private func setupBadgets() {
+    fileprivate func setupBadgets() {
         
-        func setupBadget(badget: UIView) {
+        func setupBadget(_ badget: UIView) {
             badget.layer.cornerRadius = 5
         }
         

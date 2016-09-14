@@ -10,15 +10,15 @@ import UIKit
 
 extension UIViewController {
     
-    func displayContentController(controller: UIViewController, inView view: UIView) {
+    func displayContentController(_ controller: UIViewController, inView view: UIView) {
         self.addChildViewController(controller)
         controller.view.frame = view.bounds
         view.addSubview(controller.view)
-        controller.didMoveToParentViewController(self)
+        controller.didMove(toParentViewController: self)
     }
     
-    func hideContentController(controller: UIViewController) {
-        controller.willMoveToParentViewController(nil)
+    func hideContentController(_ controller: UIViewController) {
+        controller.willMove(toParentViewController: nil)
         controller.view.removeFromSuperview()
         controller.removeFromParentViewController()
     }

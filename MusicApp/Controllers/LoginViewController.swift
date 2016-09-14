@@ -30,15 +30,15 @@ class LoginViewController: UIViewController {
     // MARK: Actions
     
     @IBAction func backButtonTapped() {
-        self.navigationController?.popViewControllerAnimated(true)
+        let _ = self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func loginBarButtonTapped() {
-        state = .Login
+        state = .login
     }
     
     @IBAction func registerBarButtonTapped() {
-        state = .Register
+        state = .register
     }
     
     @IBAction func loginButtonTapped() {
@@ -66,26 +66,26 @@ class LoginViewController: UIViewController {
         setupConstraints()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     // MARK: Initialization
     
-    private func setupLogo() {
-        let image = logoImageView.image?.imageWithColor(UIColor.whiteColor())
+    fileprivate func setupLogo() {
+        let image = logoImageView.image?.imageWithColor(UIColor.white)
         logoImageView.image = image
     }
     
-    private func setupTextFields() {
-        let emailImage = emailImageView.image?.imageWithColor(UIColor.whiteColor())
-        let passwordImage = passwordImageView.image?.imageWithColor(UIColor.whiteColor())
+    fileprivate func setupTextFields() {
+        let emailImage = emailImageView.image?.imageWithColor(UIColor.white)
+        let passwordImage = passwordImageView.image?.imageWithColor(UIColor.white)
         emailImageView.image = emailImage
         passwordImageView.image = passwordImage
         
@@ -93,7 +93,7 @@ class LoginViewController: UIViewController {
         self.passwordTextField.delegate = self
     }
     
-    private func setupConstraints() {
+    fileprivate func setupConstraints() {
         let width = self.view.bounds.size.width
         self.loginBarButtonCenterXConstraint.constant = -width / 4
         self.registerBarButtonCenterXConstraint.constant = width / 4
@@ -101,37 +101,37 @@ class LoginViewController: UIViewController {
     
     // MARK: Gesture Recognizer
     
-    func didRecognizeByTapGestureRecognizer(gestureRecognizer: UITapGestureRecognizer) {
+    func didRecognizeByTapGestureRecognizer(_ gestureRecognizer: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
     
     // MARK: State
     
-    private enum State {
-        case Login
-        case Register
+    fileprivate enum State {
+        case login
+        case register
     }
     
-    private var state: State = .Login {
+    fileprivate var state: State = .login {
         didSet {
             if state == oldValue { return }
             switch state {
-            case .Login:
-                loginBarButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+            case .login:
+                loginBarButton.setTitleColor(UIColor.white, for: UIControlState())
                 loginBarButton.titleLabel?.font = UIFont(name: "AvenirNext-Medium", size: 20)
                 
-                registerBarButton.setTitleColor(ColorConstants.backgroundColor, forState: .Normal)
+                registerBarButton.setTitleColor(ColorConstants.backgroundColor, for: UIControlState())
                 registerBarButton.titleLabel?.font = UIFont(name: "AvenirNext-Regular", size: 17)
                 
-                loginButton.setTitle("Login", forState: .Normal)
-            case .Register:
-                loginBarButton.setTitleColor(ColorConstants.backgroundColor, forState: .Normal)
+                loginButton.setTitle("Login", for: UIControlState())
+            case .register:
+                loginBarButton.setTitleColor(ColorConstants.backgroundColor, for: UIControlState())
                 loginBarButton.titleLabel?.font = UIFont(name: "AvenirNext-Regular", size: 17)
                 
-                registerBarButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+                registerBarButton.setTitleColor(UIColor.white, for: UIControlState())
                 registerBarButton.titleLabel?.font = UIFont(name: "AvenirNext-Medium", size: 20)
                 
-                loginButton.setTitle("Register", forState: .Normal)
+                loginButton.setTitle("Register", for: UIControlState())
             }
         }
     }
@@ -142,7 +142,7 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: UITextFieldDelegate {
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
@@ -153,8 +153,8 @@ extension LoginViewController: UITextFieldDelegate {
 
 extension LoginViewController {
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
     }
     
 }

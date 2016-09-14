@@ -155,14 +155,7 @@
 		9E1192931D74170E0026349F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				9E1192941D7417420026349F /* PageHomeOnlineTableViewCell.swift */,
-				9EDF5AC91D7FD95000F54CE1 /* PageHomeOnlineCollectionViewCell.swift */,
-				9E1192961D74175C0026349F /* PlaylistHomeOnlineTableViewCell.swift */,
-				9ECB1C011D81C38E00EE02E3 /* PlaylistHomeOnlineCollectionViewCell.swift */,
-				9E9970351D823CAE006BC33D /* PlaylistHomeOnlineCollectionViewLayout.swift */,
-				9E1192981D7417720026349F /* VideoHomeOnlineTableViewCell.swift */,
-				9EDF5ACB1D7FF34400F54CE1 /* VideoHomeOnlineCollectionViewCell.swift */,
-				9E11929A1D74178F0026349F /* SongHomeOnlineTableViewCell.swift */,
+				9EA017CB1D82EC9A0033CAD6 /* HomeOnlineView */,
 				9E9FE1251D82C0FC0016D1DB /* SongOnlineTableViewCell.swift */,
 				9E9FE12B1D82C5A90016D1DB /* PlaylistOnlineCollectionViewCell.swift */,
 				9E789C111D813E9600AF91B1 /* VideoOnlineCollectionViewCell.swift */,
@@ -274,6 +267,21 @@
 			children = (
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		9EA017CB1D82EC9A0033CAD6 /* HomeOnlineView */ = {
+			isa = PBXGroup;
+			children = (
+				9E1192941D7417420026349F /* PageHomeOnlineTableViewCell.swift */,
+				9EDF5AC91D7FD95000F54CE1 /* PageHomeOnlineCollectionViewCell.swift */,
+				9E1192961D74175C0026349F /* PlaylistHomeOnlineTableViewCell.swift */,
+				9ECB1C011D81C38E00EE02E3 /* PlaylistHomeOnlineCollectionViewCell.swift */,
+				9E9970351D823CAE006BC33D /* PlaylistHomeOnlineCollectionViewLayout.swift */,
+				9E1192981D7417720026349F /* VideoHomeOnlineTableViewCell.swift */,
+				9EDF5ACB1D7FF34400F54CE1 /* VideoHomeOnlineCollectionViewCell.swift */,
+				9E11929A1D74178F0026349F /* SongHomeOnlineTableViewCell.swift */,
+			);
+			name = HomeOnlineView;
 			sourceTree = "<group>";
 		};
 		9EBA8E9D1D598D0B0084E44A /* Storyboard */ = {
@@ -410,12 +418,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = HungDo;
 				TargetAttributes = {
 					9E6DFB771D585A7D004EB139 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = WW2DT39PV6;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -463,7 +472,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		615E144B14E4A07AC110ECA1 /* [CP] Copy Pods Resources */ = {
@@ -588,8 +597,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -611,7 +622,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -634,8 +645,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -651,9 +664,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -663,6 +677,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 59F1784B8D13BF1B706C0FB5 /* Pods-MusicApp.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -672,9 +687,11 @@
 					"$(PROJECT_DIR)/MusicApp/Frameworks",
 				);
 				INFOPLIST_FILE = MusicApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hungdo.MusicApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -682,6 +699,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C84D930697B925119F2A5B39 /* Pods-MusicApp.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -691,9 +709,11 @@
 					"$(PROJECT_DIR)/MusicApp/Frameworks",
 				);
 				INFOPLIST_FILE = MusicApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hungdo.MusicApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

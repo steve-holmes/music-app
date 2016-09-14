@@ -13,7 +13,7 @@ class SingerOnlineCollectionViewCell: UICollectionViewCell {
     var singerImage: UIImage? { didSet { singerImageView.image = singerImage } }
     var singerName: String? { didSet { singerNameLabel.text = singerName } }
     
-    @IBOutlet private weak var singerImageView: UIImageView!
-    @IBOutlet private weak var singerNameLabel: UILabel!
+    @IBOutlet fileprivate weak var singerImageView: UIImageView!
+    @IBOutlet fileprivate weak var singerNameLabel: UILabel!
     
 }

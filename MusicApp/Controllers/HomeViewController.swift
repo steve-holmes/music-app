@@ -35,14 +35,14 @@ class HomeViewController: UIViewController {
     // MARK: Actions
     
     @IBAction func mineButtonTapped() {
-        if state == .Online {
-            state = .Mine
+        if state == .online {
+            state = .mine
         }
     }
     
     @IBAction func onlineButtonTapped() {
-        if state == .Mine {
-            state = .Online
+        if state == .mine {
+            state = .online
         }
     }
     
@@ -56,37 +56,37 @@ class HomeViewController: UIViewController {
         innerView.addGestureRecognizer(tapGestureRecognizer)
         
         panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didRecognizeOnMiddleViewByPanGestureRecognizer(_:)))
-        tapGestureRecognizer.requireGestureRecognizerToFail(panGestureRecognizer)
-        panGestureRecognizer.enabled = false
+        tapGestureRecognizer.require(toFail: panGestureRecognizer)
+        panGestureRecognizer.isEnabled = false
         middleView.addGestureRecognizer(panGestureRecognizer)
         innerView.addGestureRecognizer(panGestureRecognizer)
         
         setupPlayerView()
         setupPlayButton()
-        state = .Online
+        state = .online
     }
     
     // MARK: Child View Controllers
     
-    private lazy var mineViewController: UINavigationController = {
-        let controller = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.OfflineController) as! UINavigationController
+    fileprivate lazy var mineViewController: UINavigationController = {
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: ControllersIdentifiers.OfflineController) as! UINavigationController
         self.displayContentController(controller, inView: self.backgroundView)
         return controller
     }()
     
-    private lazy var onlineViewController: UINavigationController = {
-        let controller = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.OnlineController) as! UINavigationController
+    fileprivate lazy var onlineViewController: UINavigationController = {
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: ControllersIdentifiers.OnlineController) as! UINavigationController
         self.displayContentController(controller, inView: self.backgroundView)
         return controller
     }()
     
-    private var playerViewController: PlayerViewController!
+    fileprivate var playerViewController: PlayerViewController!
     
     // MARK: Player View
     
-    private let transitionDuration: NSTimeInterval = 0.35
+    fileprivate let transitionDuration: TimeInterval = 0.35
     
-    private func setupPlayerView() {
+    fileprivate func setupPlayerView() {
         playerView.alpha = 0
         playerViewTopConstraint.constant = self.view.bounds.height
         
@@ -94,21 +94,21 @@ class HomeViewController: UIViewController {
     
     // MARK: Play Button
     
-    private lazy var centerPointBottomConstant: CGFloat = 7 * self.view.bounds.size.width / 100
-    private lazy var outerRadius: CGFloat = 3 * self.view.bounds.size.width / 100
-    private lazy var bottomConstant: CGFloat = 10
+    fileprivate lazy var centerPointBottomConstant: CGFloat = 7 * self.view.bounds.size.width / 100
+    fileprivate lazy var outerRadius: CGFloat = 3 * self.view.bounds.size.width / 100
+    fileprivate lazy var bottomConstant: CGFloat = 10
     
-    private func setupPlayButton() {
-        middleView.layer.borderColor = ColorConstants.toolbarBorderColor.CGColor
+    fileprivate func setupPlayButton() {
+        middleView.layer.borderColor = ColorConstants.toolbarBorderColor.cgColor
         middleView.layer.borderWidth = 1
         middleView.layer.cornerRadius = middleView.frame.size.width / 2
         
-        innerView.layer.borderColor = ColorConstants.mainColor.CGColor
+        innerView.layer.borderColor = ColorConstants.mainColor.cgColor
         innerView.layer.borderWidth = 2
         innerView.layer.cornerRadius = innerView.layer.frame.size.width / 2
         innerView.clipsToBounds = true
         
-        let playImage = playButtonImageView.image?.imageWithColor(UIColor.whiteColor())
+        let playImage = playButtonImageView.image?.imageWithColor(UIColor.white)
         playButtonImageView.image = playImage
         
         middleViewBottomConstraint.constant = -bottomConstant
@@ -117,32 +117,32 @@ class HomeViewController: UIViewController {
     
     // MARK: Gesture Recognizer
     
-    private var tapCount = 0
-    private var maximumNumberOfTap = 2
+    fileprivate var tapCount = 0
+    fileprivate var maximumNumberOfTap = 2
     
-    func didRecognizeOnMiddleViewByTapGestureRecognizer(gestureRecognizer: UITapGestureRecognizer) {
+    func didRecognizeOnMiddleViewByTapGestureRecognizer(_ gestureRecognizer: UITapGestureRecognizer) {
         if playerViewController == nil {
-            playerViewController = self.storyboard?.instantiateViewControllerWithIdentifier(ControllersIdentifiers.PlayerController) as? PlayerViewController
+            playerViewController = self.storyboard?.instantiateViewController(withIdentifier: ControllersIdentifiers.PlayerController) as? PlayerViewController
             self.displayContentController(playerViewController, inView: self.playerView)
             playerViewController.delegate = self
-            panGestureRecognizer.enabled = true
+            panGestureRecognizer.isEnabled = true
         }
         
         tapCount += 1
         if tapCount == maximumNumberOfTap {
             tapCount = 0
             maximumNumberOfTap = 1
-            UIView.animateWithDuration(transitionDuration) {
+            UIView.animate(withDuration: transitionDuration, animations: {
                 self.setPropertiesForEndedState()
-            }
-            UIView.animateWithDuration(
-                transitionDuration,
+            }) 
+            UIView.animate(
+                withDuration: transitionDuration,
                 animations: {
                     self.setPropertiesForEndedState()
                 },
                 completion: { finished in
                     guard finished else { return }
-                    self.statusBarStyle = .LightContent
+                    self.statusBarStyle = .lightContent
                 }
             )
         }
@@ -154,39 +154,39 @@ class HomeViewController: UIViewController {
         }
     }
     
-    private var panGestureRecognizer: UIPanGestureRecognizer!
+    fileprivate var panGestureRecognizer: UIPanGestureRecognizer!
     
-    func didRecognizeOnMiddleViewByPanGestureRecognizer(gestureRecognizer: UIPanGestureRecognizer) {
-        var offsetY = gestureRecognizer.translationInView(self.view).y
+    func didRecognizeOnMiddleViewByPanGestureRecognizer(_ gestureRecognizer: UIPanGestureRecognizer) {
+        var offsetY = gestureRecognizer.translation(in: self.view).y
         guard offsetY < 0 else { return }
         
         offsetY = abs(offsetY)
         let height = self.view.bounds.size.height
         
         switch gestureRecognizer.state {
-        case .Changed:
-            setPropertiesForChangedStateAtOffsetY(offsetY, forDirection: .FromBottomToTop)
-        case .Ended:
+        case .changed:
+            setPropertiesForChangedStateAtOffsetY(offsetY, forDirection: .fromBottomToTop)
+        case .ended:
             if offsetY < height / 2 {
-                UIView.animateWithDuration(
-                    transitionDuration,
+                UIView.animate(
+                    withDuration: transitionDuration,
                     animations: {
                         self.setPropertiesForBeganState()
                     },
                     completion: { finished in
                         guard finished else { return }
-                        self.statusBarStyle = .Default
+                        self.statusBarStyle = .default
                     }
                 )
             } else if offsetY < height {
-                UIView.animateWithDuration(
-                    transitionDuration,
+                UIView.animate(
+                    withDuration: transitionDuration,
                     animations: {
                         self.setPropertiesForEndedState()
                     },
                     completion: { finished in
                         guard finished else { return }
-                        self.statusBarStyle = .LightContent
+                        self.statusBarStyle = .lightContent
                     }
                 )
             }
@@ -197,16 +197,16 @@ class HomeViewController: UIViewController {
     
     // MARK: Set Properties for Changed state or Ended state
     
-    private enum PlayerViewDirection {
-        case FromTopToBottom
-        case FromBottomToTop
+    fileprivate enum PlayerViewDirection {
+        case fromTopToBottom
+        case fromBottomToTop
     }
     
-    private var startAlpha: CGFloat = 0.2
-    private var endAlpha: CGFloat   = 1
-    private lazy var scaleAlphaFactor: CGFloat = self.endAlpha - self.startAlpha
+    fileprivate var startAlpha: CGFloat = 0.2
+    fileprivate var endAlpha: CGFloat   = 1
+    fileprivate lazy var scaleAlphaFactor: CGFloat = self.endAlpha - self.startAlpha
     
-    private func setPropertiesForChangedStateAtOffsetY(offsetY: CGFloat, forDirection direction: PlayerViewDirection) {
+    fileprivate func setPropertiesForChangedStateAtOffsetY(_ offsetY: CGFloat, forDirection direction: PlayerViewDirection) {
         let height = self.view.bounds.size.height
         var offset = offsetY
         
@@ -231,12 +231,12 @@ class HomeViewController: UIViewController {
         }
         
         switch direction {
-        case .FromTopToBottom: setPropertiesForChangedStateFromTopToBottom()
-        case .FromBottomToTop: setPropertiesForChangedStateFromBottomToTop()
+        case .fromTopToBottom: setPropertiesForChangedStateFromTopToBottom()
+        case .fromBottomToTop: setPropertiesForChangedStateFromBottomToTop()
         }
     }
     
-    private func setPropertiesForEndedState() {
+    fileprivate func setPropertiesForEndedState() {
         let height = self.view.bounds.size.height
         playerViewTopConstraint.constant = 0
         playerView.alpha = endAlpha
@@ -246,7 +246,7 @@ class HomeViewController: UIViewController {
         self.view.layoutIfNeeded()
     }
     
-    private func setPropertiesForBeganState() {
+    fileprivate func setPropertiesForBeganState() {
         let height = self.view.bounds.size.height
         playerViewTopConstraint.constant = height
         playerView.alpha = startAlpha
@@ -258,17 +258,17 @@ class HomeViewController: UIViewController {
     
     // MARK: The Animation of Play Button
     
-    private var animationEnabled = false
-    private var animationCount = 0
-    private var animationTotal = 4
-    private var animationDuration: NSTimeInterval = 6
+    fileprivate var animationEnabled = false
+    fileprivate var animationCount = 0
+    fileprivate var animationTotal = 4
+    fileprivate var animationDuration: TimeInterval = 6
     
-    private func animatePlayButton(completion: (() -> Void)? = nil) {
-        playButtonImageView.hidden = true
-        UIView.animateWithDuration(
-            animationDuration / NSTimeInterval(animationTotal),
+    fileprivate func animatePlayButton(_ completion: (() -> Void)? = nil) {
+        playButtonImageView.isHidden = true
+        UIView.animate(
+            withDuration: animationDuration / TimeInterval(animationTotal),
             delay: 0,
-            options: .CurveLinear,
+            options: .curveLinear,
             animations: {
                 self.animationEnabled = true
                 self.animationCount += 1
@@ -279,7 +279,7 @@ class HomeViewController: UIViewController {
                 guard completed else {
                     self.animationEnabled = false
                     self.animationCount = 0
-                    self.playButtonImageView.hidden = false
+                    self.playButtonImageView.isHidden = false
                     return
                 }
                 
@@ -290,7 +290,7 @@ class HomeViewController: UIViewController {
                 
                 self.animationEnabled = false
                 self.animationCount = 0
-                self.playButtonImageView.hidden = false
+                self.playButtonImageView.isHidden = false
                 
                 // The last completion
                 if let completion = completion { completion() }
@@ -300,49 +300,49 @@ class HomeViewController: UIViewController {
     
     // MARK: Status bar
     
-    private var statusBarStyle: UIStatusBarStyle = .Default {
+    fileprivate var statusBarStyle: UIStatusBarStyle = .default {
         didSet {
             self.setNeedsStatusBarAppearanceUpdate()
         }
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+    override var preferredStatusBarStyle : UIStatusBarStyle {
         return self.statusBarStyle
     }
     
     // MARK: State
     
-    private enum State {
-        case Mine
-        case Online
+    fileprivate enum State {
+        case mine
+        case online
     }
     
-    private var state: State = .Online {
+    fileprivate var state: State = .online {
         didSet {
             switch state {
-            case .Mine:
-                backgroundView.bringSubviewToFront(mineViewController.view)
+            case .mine:
+                backgroundView.bringSubview(toFront: mineViewController.view)
                 
-                let mineImage = mineButtonImageView.image?.imageWithColor(UIColor.whiteColor())
+                let mineImage = mineButtonImageView.image?.imageWithColor(UIColor.white)
                 let onlineImage = onlineButtonImageView.image?.imageWithColor(ColorConstants.toolbarImageColor)
                 mineButtonImageView.image = mineImage
                 onlineButtonImageView.image = onlineImage
                 
-                mineButtonLabel.textColor = UIColor.whiteColor()
+                mineButtonLabel.textColor = UIColor.white
                 onlineButtonLabel.textColor = ColorConstants.textColor
                 
                 mineButtonBackgroundView.backgroundColor = ColorConstants.mainColor
                 onlineButtonBackgroundView.backgroundColor = ColorConstants.toolbarNormalBackgroundColor
-            case .Online:
-                backgroundView.bringSubviewToFront(onlineViewController.view)
+            case .online:
+                backgroundView.bringSubview(toFront: onlineViewController.view)
                 
                 let mineImage = mineButtonImageView.image?.imageWithColor(ColorConstants.toolbarImageColor)
-                let onlineImage = onlineButtonImageView.image?.imageWithColor(UIColor.whiteColor())
+                let onlineImage = onlineButtonImageView.image?.imageWithColor(UIColor.white)
                 mineButtonImageView.image = mineImage
                 onlineButtonImageView.image = onlineImage
                 
                 mineButtonLabel.textColor = ColorConstants.textColor
-                onlineButtonLabel.textColor = UIColor.whiteColor()
+                onlineButtonLabel.textColor = UIColor.white
                 
                 mineButtonBackgroundView.backgroundColor = ColorConstants.toolbarNormalBackgroundColor
                 onlineButtonBackgroundView.backgroundColor = ColorConstants.mainColor
@@ -356,39 +356,39 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: PlayerViewControllerDelegate {
     
-    func playerViewController(controller: PlayerViewController, didRecognizeByPanGestureRecognizer gestureRecognizer: UIPanGestureRecognizer, completion: (() -> Void)? = nil) {
+    func playerViewController(_ controller: PlayerViewController, didRecognizeByPanGestureRecognizer gestureRecognizer: UIPanGestureRecognizer, completion: (() -> Void)? = nil) {
         guard playerViewController.isMiddleViewOfScrollView() else { return }
         
-        let offsetY = gestureRecognizer.translationInView(self.view).y
+        let offsetY = gestureRecognizer.translation(in: self.view).y
         guard offsetY > 0 else { return }
         
         let height = self.view.bounds.size.height
         
         switch gestureRecognizer.state {
-        case .Changed:
-            setPropertiesForChangedStateAtOffsetY(offsetY, forDirection: .FromTopToBottom)
-        case .Ended:
+        case .changed:
+            setPropertiesForChangedStateAtOffsetY(offsetY, forDirection: .fromTopToBottom)
+        case .ended:
             if offsetY < height / 2 {
-                UIView.animateWithDuration(
-                    transitionDuration,
+                UIView.animate(
+                    withDuration: transitionDuration,
                     animations: {
                         self.setPropertiesForEndedState()
                     },
                     completion: { finished in
                         guard finished else { return }
-                        self.statusBarStyle = .LightContent
+                        self.statusBarStyle = .lightContent
                         completion?()
                     }
                 )
             } else if offsetY < height {
-                UIView.animateWithDuration(
-                    transitionDuration,
+                UIView.animate(
+                    withDuration: transitionDuration,
                     animations: {
                         self.setPropertiesForBeganState()
                     },
                     completion: { finished in
                         guard finished else { return }
-                        self.statusBarStyle = .Default
+                        self.statusBarStyle = .default
                         completion?()
                     }
                 )
@@ -398,15 +398,15 @@ extension HomeViewController: PlayerViewControllerDelegate {
         }
     }
     
-    func dismissPlayerViewController(controller: PlayerViewController, completion: (() -> Void)?) {
-        UIView.animateWithDuration(
-            transitionDuration,
+    func dismissPlayerViewController(_ controller: PlayerViewController, completion: (() -> Void)?) {
+        UIView.animate(
+            withDuration: transitionDuration,
             animations: {
                 self.setPropertiesForBeganState()
             },
             completion: { completed in
                 guard completed else { return }
-                self.statusBarStyle = .Default
+                self.statusBarStyle = .default
                 completion?()
             }
         )

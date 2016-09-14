@@ -23,12 +23,12 @@ class SongOnlineViewController: UIViewController {
 
 extension SongOnlineViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 20
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(CellsIdentifier.SongOnlineTableCell, forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.SongOnlineTableCell, for: indexPath)
         return cell
     }
     

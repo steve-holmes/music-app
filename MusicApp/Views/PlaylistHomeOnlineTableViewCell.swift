@@ -25,10 +25,10 @@ class PlaylistHomeOnlineTableViewCell: UITableViewCell {
         
         collectionView.addConstraint(NSLayoutConstraint(
             item: collectionView,
-            attribute: .Height,
-            relatedBy: .Equal,
+            attribute: .height,
+            relatedBy: .equal,
             toItem: nil,
-            attribute: .Height,
+            attribute: .height,
             multiplier: 1,
             constant: height
         ))
@@ -36,21 +36,21 @@ class PlaylistHomeOnlineTableViewCell: UITableViewCell {
         collectionView.dataSource = self
     }
     
-    private let itemPadding: CGFloat = 8
+    fileprivate let itemPadding: CGFloat = 8
 
 }
 
 extension PlaylistHomeOnlineTableViewCell: UICollectionViewDataSource {
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 6
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellsIdentifier.PlaylistHomeOnlineCollectionCell, forIndexPath: indexPath)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsIdentifier.PlaylistHomeOnlineCollectionCell, for: indexPath)
         
-        if indexPath.item == 0 {
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellsIdentifier.MorePlaylistHomeOnlineCollectionCell, forIndexPath: indexPath)
+        if (indexPath as NSIndexPath).item == 0 {
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsIdentifier.MorePlaylistHomeOnlineCollectionCell, for: indexPath)
         }
         
         if let playlistCell = cell as? PlaylistHomeOnlineCollectionViewCell {
@@ -66,11 +66,11 @@ extension PlaylistHomeOnlineTableViewCell: UICollectionViewDataSource {
 
 extension PlaylistHomeOnlineTableViewCell: PlaylistHomeOnlineCollectionViewLayoutDelegate {
     
-    func itemSizeForCollectionView(collectionView: UICollectionView) -> CGFloat {
+    func itemSizeForCollectionView(_ collectionView: UICollectionView) -> CGFloat {
         return (self.collectionView.bounds.size.width - 4 * self.itemPadding) / 3
     }
     
-    func itemPaddingForCollectionView(collectionView: UICollectionView) -> CGFloat {
+    func itemPaddingForCollectionView(_ collectionView: UICollectionView) -> CGFloat {
         return self.itemPadding
     }
     

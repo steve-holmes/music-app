@@ -10,19 +10,19 @@ import Foundation
 
 class Authentication {
     
-    private init() { }
+    fileprivate init() { }
     
-    private var sessionUsername: String? {
-        return self.userDefault.valueForKey(UserInfo.username) as? String
+    fileprivate var sessionUsername: String? {
+        return self.userDefault.value(forKey: UserInfo.username) as? String
     }
     
-    private var sessionPassword: String? {
-        return self.userDefault.valueForKey(UserInfo.password) as? String
+    fileprivate var sessionPassword: String? {
+        return self.userDefault.value(forKey: UserInfo.password) as? String
     }
     
-    private let userDefault = NSUserDefaults.standardUserDefaults()
+    fileprivate let userDefault = UserDefaults.standard
     
-    private struct UserInfo {
+    fileprivate struct UserInfo {
         static let username = "username"
         static let password = "password"
     }
@@ -39,13 +39,13 @@ class Authentication {
         return self.username == username && self.password == password
     }
     
-    func login(username: String?, password: String?) -> Bool {
+    func login(_ username: String?, password: String?) -> Bool {
         
         func loginWithoutUserInfo() -> Bool {
             return validated
         }
         
-        func loginWithUserInfo(username username: String, password: String) -> Bool {
+        func loginWithUserInfo(username: String, password: String) -> Bool {
             self.username = username
             self.password = password
             return loginWithoutUserInfo()
@@ -63,13 +63,12 @@ class Authentication {
         return true
     }
     
-    func register(username: String?, password: String?) -> Bool {
+    func register(_ username: String?, password: String?) -> Bool {
         guard let username = username, let password = password else { return false }
         self.userDefault.setValue(username, forKey: UserInfo.username)
         self.userDefault.setValue(password, forKey: UserInfo.password)
         self.userDefault.synchronize()
-        self.login(username, password: password)
-        return true
+        return self.login(username, password: password)
     }
     
     func unregister() -> Bool {
@@ -77,8 +76,7 @@ class Authentication {
         self.userDefault.setValue(nil, forKey: UserInfo.username)
         self.userDefault.setValue(nil, forKey: UserInfo.password)
         self.userDefault.synchronize()
-        self.logout()
-        return true
+        return self.logout()
     }
     
 }

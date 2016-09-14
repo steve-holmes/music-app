@@ -15,9 +15,9 @@ class PlaylistHomeOnlineCollectionViewCell: UICollectionViewCell {
     var singerName: String? { didSet { singerNameLabel.text = singerName } }
     var numberOfListening: Int? { didSet { numberOfListeningLabel.text = "\(numberOfListening ?? 0)" } }
     
-    @IBOutlet private weak var playlistImageView: UIImageView!
-    @IBOutlet private weak var playListNameLabel: UILabel!
-    @IBOutlet private weak var singerNameLabel: UILabel!
-    @IBOutlet private weak var numberOfListeningLabel: UILabel!
+    @IBOutlet fileprivate weak var playlistImageView: UIImageView!
+    @IBOutlet fileprivate weak var playListNameLabel: UILabel!
+    @IBOutlet fileprivate weak var singerNameLabel: UILabel!
+    @IBOutlet fileprivate weak var numberOfListeningLabel: UILabel!
     
 }

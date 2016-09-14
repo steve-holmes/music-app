@@ -22,28 +22,28 @@ class PageHomeOnlineCollectionViewCell: UICollectionViewCell {
         commonInit()
     }
     
-    private func commonInit() {
+    fileprivate func commonInit() {
         contentView.addSubview(pageImageView)
         setupConstraints()
     }
     
-    private var pageImageView: UIImageView = {
+    fileprivate var pageImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .ScaleAspectFill
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    private func setupConstraints() {
-        let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
-            "H:|[imageView]|",
+    fileprivate func setupConstraints() {
+        let horizontalConstraints = NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|[imageView]|",
             options: [],
             metrics: nil,
             views: ["imageView": pageImageView]
         )
         
-        let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:|[imageView]|",
+        let verticalConstraints = NSLayoutConstraint.constraints(
+            withVisualFormat: "V:|[imageView]|",
             options: [],
             metrics: nil,
             views: ["imageView": pageImageView]

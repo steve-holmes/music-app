@@ -96,7 +96,7 @@ class LyricPlayerViewController: UIViewController, PlayerChildViewController {
     
     // MARK: Outlets
     
-    @IBOutlet private weak var lyricTableView: UITableView!
+    @IBOutlet fileprivate weak var lyricTableView: UITableView!
     
     // MARK: Actions
     
@@ -110,7 +110,7 @@ class LyricPlayerViewController: UIViewController, PlayerChildViewController {
     
     // MARK: Gesture Recognizer
     
-    func performPanGestureRecognizer(gestureRecognizer: UIPanGestureRecognizer) {
+    func performPanGestureRecognizer(_ gestureRecognizer: UIPanGestureRecognizer) {
         self.delegate?.playerChildViewController(self, options: .Right, didRecognizeByPanGestureRecognizer: gestureRecognizer)
     }
     
@@ -131,21 +131,21 @@ class LyricPlayerViewController: UIViewController, PlayerChildViewController {
     
     // MARK: Timer
     
-    private var timer: NSTimer?
+    fileprivate var timer: Timer?
     
-    private var timerCount = -1
+    fileprivate var timerCount = -1
     
-    private var timerDurationPerScheduledTimer: NSTimeInterval {
+    fileprivate var timerDurationPerScheduledTimer: TimeInterval {
         if timerCount == -1 {
             let lyricTime = lyricTimes[0]
-            return NSTimeInterval(lyricTime.minute * 60 + lyricTime.second) + NSTimeInterval(Float(lyricTime.milisecond) / 100.0)
+            return TimeInterval(lyricTime.minute * 60 + lyricTime.second) + TimeInterval(Float(lyricTime.milisecond) / 100.0)
         }
         
         let startTimeTuple = lyricTimes[timerCount]
         let endTimeTuple = lyricTimes[timerCount + 1]
         
-        let startTime = NSTimeInterval(startTimeTuple.minute * 60 + startTimeTuple.second) + NSTimeInterval(Float(startTimeTuple.milisecond) / 100.0)
-        let endTime = NSTimeInterval(endTimeTuple.minute * 60 + endTimeTuple.second) + NSTimeInterval(Float(endTimeTuple.milisecond) / 100.0)
+        let startTime = TimeInterval(startTimeTuple.minute * 60 + startTimeTuple.second) + TimeInterval(Float(startTimeTuple.milisecond) / 100.0)
+        let endTime = TimeInterval(endTimeTuple.minute * 60 + endTimeTuple.second) + TimeInterval(Float(endTimeTuple.milisecond) / 100.0)
         
         return endTime - startTime
     }
@@ -154,20 +154,20 @@ class LyricPlayerViewController: UIViewController, PlayerChildViewController {
         guard lyrics.count > 1 else { return }
         timerCount = selectedLyricIndex
         
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(timerDurationPerScheduledTimer, target: self, selector: #selector(executeTimer(_:)), userInfo: nil, repeats: false)
+        self.timer = Timer.scheduledTimer(timeInterval: timerDurationPerScheduledTimer, target: self, selector: #selector(executeTimer(_:)), userInfo: nil, repeats: false)
     }
     
-    func executeTimer(timer: NSTimer) {
+    func executeTimer(_ timer: Timer) {
         timerCount += 1
         if timerCount == lyrics.count {
             stopTimer()
         }
         
-        let indexPath = NSIndexPath(forRow: timerCount, inSection: 0)
-        lyricTableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Middle)
-        self.tableView(lyricTableView, didSelectRowAtIndexPath: indexPath)
+        let indexPath = IndexPath(row: timerCount, section: 0)
+        lyricTableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
+        self.tableView(lyricTableView, didSelectRowAt: indexPath)
         
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(timerDurationPerScheduledTimer, target: self, selector: #selector(executeTimer(_:)), userInfo: nil, repeats: false)
+        self.timer = Timer.scheduledTimer(timeInterval: timerDurationPerScheduledTimer, target: self, selector: #selector(executeTimer(_:)), userInfo: nil, repeats: false)
     }
     
     func stopTimer() {
@@ -181,21 +181,21 @@ class LyricPlayerViewController: UIViewController, PlayerChildViewController {
 
 extension LyricPlayerViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return lyrics.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(CellsIdentifier.LyricPlayerTableCell, forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.LyricPlayerTableCell, for: indexPath)
         
         if let lyricCell = cell as? LyricPlayerTableViewCell {
-            lyricCell.lyric = lyrics[indexPath.row]
+            lyricCell.lyric = lyrics[(indexPath as NSIndexPath).row]
             
             lyricCell.delegate = nil
-            if self.selectedLyricIndex == indexPath.row {
-                lyricCell.lyricStyle = .Bold
+            if self.selectedLyricIndex == (indexPath as NSIndexPath).row {
+                lyricCell.lyricStyle = .bold
             } else {
-                lyricCell.lyricStyle = .Regular
+                lyricCell.lyricStyle = .regular
             }
             
             lyricCell.delegate = self
@@ -210,13 +210,13 @@ extension LyricPlayerViewController: UITableViewDataSource {
 
 extension LyricPlayerViewController: UITableViewDelegate {
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? LyricPlayerTableViewCell {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? LyricPlayerTableViewCell {
             switch cell.lyricStyle {
-            case .Bold:
-                cell.lyricStyle = .Regular
-            case .Regular:
-                cell.lyricStyle = .Bold
+            case .bold:
+                cell.lyricStyle = .regular
+            case .regular:
+                cell.lyricStyle = .bold
             default:
                 break
             }
@@ -229,14 +229,14 @@ extension LyricPlayerViewController: UITableViewDelegate {
 
 extension LyricPlayerViewController: LyricPlayerTableViewCellDelegate {
     
-    func lyricPlayerCell(lyricCell: LyricPlayerTableViewCell, didSelectLyricFontStyle lyricFontStyle: LyricPlayerFontStyle) {
-        if let lyricCellIndexPath = self.lyricTableView.indexPathForCell(lyricCell) {
+    func lyricPlayerCell(_ lyricCell: LyricPlayerTableViewCell, didSelectLyricFontStyle lyricFontStyle: LyricPlayerFontStyle) {
+        if let lyricCellIndexPath = self.lyricTableView.indexPath(for: lyricCell) {
             switch lyricFontStyle {
-            case .Bold where self.selectedLyricIndex == -1:
-                self.selectedLyricIndex = lyricCellIndexPath.row
-            case .Bold:
-                self.lyricPlayerTableView(self.lyricTableView, onLyricPlayerCell: lyricCell, changeFromRow: self.selectedLyricIndex, toRow: lyricCellIndexPath.row)
-            case .Regular where self.selectedLyricIndex != -1:
+            case .bold where self.selectedLyricIndex == -1:
+                self.selectedLyricIndex = (lyricCellIndexPath as NSIndexPath).row
+            case .bold:
+                self.lyricPlayerTableView(self.lyricTableView, onLyricPlayerCell: lyricCell, changeFromRow: self.selectedLyricIndex, toRow: (lyricCellIndexPath as NSIndexPath).row)
+            case .regular where self.selectedLyricIndex != -1:
                 self.lyricPlayerTableView(self.lyricTableView, onLyricPlayerCell: lyricCell, changeFromRow: self.selectedLyricIndex, toRow: -1)
             default:
                 break
@@ -244,10 +244,10 @@ extension LyricPlayerViewController: LyricPlayerTableViewCellDelegate {
         }
     }
     
-    private func lyricPlayerTableView(lyricPlayerTableView: UITableView,onLyricPlayerCell lyricPlayerCell: LyricPlayerTableViewCell, changeFromRow fromRow: Int, toRow: Int) {
+    fileprivate func lyricPlayerTableView(_ lyricPlayerTableView: UITableView,onLyricPlayerCell lyricPlayerCell: LyricPlayerTableViewCell, changeFromRow fromRow: Int, toRow: Int) {
         lyricPlayerCell.delegate = nil
-        if let previousCell = lyricPlayerTableView.cellForRowAtIndexPath(NSIndexPath(forRow: fromRow, inSection: 0)) as? LyricPlayerTableViewCell {
-            previousCell.lyricStyle = .Regular
+        if let previousCell = lyricPlayerTableView.cellForRow(at: IndexPath(row: fromRow, section: 0)) as? LyricPlayerTableViewCell {
+            previousCell.lyricStyle = .regular
         }
         lyricPlayerCell.delegate = self
         

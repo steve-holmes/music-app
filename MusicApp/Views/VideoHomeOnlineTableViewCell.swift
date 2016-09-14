@@ -27,28 +27,28 @@ class VideoHomeOnlineTableViewCell: UITableViewCell {
         
         collectionView.addConstraint(NSLayoutConstraint(
             item: collectionView,
-            attribute: .Height,
-            relatedBy: .Equal,
+            attribute: .height,
+            relatedBy: .equal,
             toItem: nil,
-            attribute: .Height,
+            attribute: .height,
             multiplier: 1,
             constant: (layout?.itemSize.height ?? 0) * 2
         ))
     }
     
-    private let itemPadding: CGFloat = 8
-    private let itemRatio: CGFloat = 1
+    fileprivate let itemPadding: CGFloat = 8
+    fileprivate let itemRatio: CGFloat = 1
 
 }
 
 extension VideoHomeOnlineTableViewCell: UICollectionViewDataSource {
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellsIdentifier.VideoHomeOnlineCollectionCell, forIndexPath: indexPath)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsIdentifier.VideoHomeOnlineCollectionCell, for: indexPath)
         
         if let videoCell = cell as? VideoHomeOnlineCollectionViewCell {
             videoCell.videoName = "Gui Anh Xa Nho"
@@ -63,17 +63,17 @@ extension VideoHomeOnlineTableViewCell: UICollectionViewDataSource {
 
 extension VideoHomeOnlineTableViewCell: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemWidth = (collectionView.bounds.size.width - itemPadding * 3) / 2
         let itemHeight = itemRatio * itemWidth
         return CGSize(width: itemWidth, height: itemHeight)
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return itemPadding
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return itemPadding
     }
     

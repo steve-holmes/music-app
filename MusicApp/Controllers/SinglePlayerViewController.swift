@@ -14,7 +14,7 @@ class SinglePlayerViewController: UIViewController, PlayerChildViewController {
     
     // MARK: Gesture Recognizer
     
-    func performPanGestureRecognizer(gestureRecognizer: UIPanGestureRecognizer) {
+    func performPanGestureRecognizer(_ gestureRecognizer: UIPanGestureRecognizer) {
         self.delegate?.playerChildViewController(self, options: .All, didRecognizeByPanGestureRecognizer: gestureRecognizer)
     }
     

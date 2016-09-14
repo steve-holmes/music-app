@@ -27,7 +27,7 @@ class ListPlayerViewController: UIViewController, PlayerChildViewController {
     
     // MARK: Gesture Recognizer
     
-    func performPanGestureRecognizer(gestureRecognizer: UIPanGestureRecognizer) {
+    func performPanGestureRecognizer(_ gestureRecognizer: UIPanGestureRecognizer) {
         self.delegate?.playerChildViewController(self, options: .Left, didRecognizeByPanGestureRecognizer: gestureRecognizer)
     }
     
@@ -50,15 +50,15 @@ class ListPlayerViewController: UIViewController, PlayerChildViewController {
 
 extension ListPlayerViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return songs.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(CellsIdentifier.ListPlayerTableCell, forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.ListPlayerTableCell, for: indexPath)
         
         if let listCell = cell as? ListPlayerTableViewCell {
-            listCell.backgroundColor = UIColor.clearColor()
+            listCell.backgroundColor = UIColor.clear
         }
         
         return cell

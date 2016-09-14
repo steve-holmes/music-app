@@ -11,16 +11,16 @@ import UIKit
 // MARK: Enum LyricPlayerFontStyle
 
 enum LyricPlayerFontStyle {
-    case Bold
-    case Regular
-    case Other // never use
+    case bold
+    case regular
+    case other // never use
 }
 
 // MARK: Procotol LyricPlayerTableViewCellDelegate
 
 protocol LyricPlayerTableViewCellDelegate {
     
-    func lyricPlayerCell(lyricCell: LyricPlayerTableViewCell, didSelectLyricFontStyle lyricFontStyle: LyricPlayerFontStyle)
+    func lyricPlayerCell(_ lyricCell: LyricPlayerTableViewCell, didSelectLyricFontStyle lyricFontStyle: LyricPlayerFontStyle)
     
 }
 
@@ -40,15 +40,15 @@ class LyricPlayerTableViewCell: UITableViewCell {
         }
     }
     
-    var lyricStyle: LyricPlayerFontStyle = .Regular {
+    var lyricStyle: LyricPlayerFontStyle = .regular {
         didSet {
             switch lyricStyle {
-            case .Bold:
-                lyricLabel.font = lyricLabel.font.boldTrait().fontWithSize(15)
-                delegate?.lyricPlayerCell(self, didSelectLyricFontStyle: .Bold)
-            case .Regular:
-                lyricLabel.font = lyricLabel.font.regularTrait().fontWithSize(14)
-                delegate?.lyricPlayerCell(self, didSelectLyricFontStyle: .Regular)
+            case .bold:
+                lyricLabel.font = lyricLabel.font.boldTrait().withSize(15)
+                delegate?.lyricPlayerCell(self, didSelectLyricFontStyle: .bold)
+            case .regular:
+                lyricLabel.font = lyricLabel.font.regularTrait().withSize(14)
+                delegate?.lyricPlayerCell(self, didSelectLyricFontStyle: .regular)
             default:
                 break
             }

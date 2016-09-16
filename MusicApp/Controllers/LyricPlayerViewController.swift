@@ -111,7 +111,7 @@ class LyricPlayerViewController: UIViewController, PlayerChildViewController {
     // MARK: Gesture Recognizer
     
     func performPanGestureRecognizer(_ gestureRecognizer: UIPanGestureRecognizer) {
-        self.delegate?.playerChildViewController(self, options: .Right, didRecognizeByPanGestureRecognizer: gestureRecognizer)
+        self.delegate?.playerChildViewController(self, options: .right, didRecognizeByPanGestureRecognizer: gestureRecognizer)
     }
     
     // MARK: View Controller life cycle
@@ -186,7 +186,7 @@ extension LyricPlayerViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.LyricPlayerTableCell, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.lyricPlayerTable, for: indexPath)
         
         if let lyricCell = cell as? LyricPlayerTableViewCell {
             lyricCell.lyric = lyrics[(indexPath as NSIndexPath).row]

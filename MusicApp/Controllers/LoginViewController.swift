@@ -58,7 +58,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = ColorConstants.backgroundColor
+        self.view.backgroundColor = ColorConstants.background
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didRecognizeByTapGestureRecognizer(_:))))
         
         setupLogo()
@@ -79,13 +79,13 @@ class LoginViewController: UIViewController {
     // MARK: Initialization
     
     fileprivate func setupLogo() {
-        let image = logoImageView.image?.imageWithColor(UIColor.white)
+        let image = logoImageView.image?.image(withColor: UIColor.white)
         logoImageView.image = image
     }
     
     fileprivate func setupTextFields() {
-        let emailImage = emailImageView.image?.imageWithColor(UIColor.white)
-        let passwordImage = passwordImageView.image?.imageWithColor(UIColor.white)
+        let emailImage = emailImageView.image?.image(withColor: UIColor.white)
+        let passwordImage = passwordImageView.image?.image(withColor: UIColor.white)
         emailImageView.image = emailImage
         passwordImageView.image = passwordImage
         
@@ -120,12 +120,12 @@ class LoginViewController: UIViewController {
                 loginBarButton.setTitleColor(UIColor.white, for: UIControlState())
                 loginBarButton.titleLabel?.font = UIFont(name: "AvenirNext-Medium", size: 20)
                 
-                registerBarButton.setTitleColor(ColorConstants.backgroundColor, for: UIControlState())
+                registerBarButton.setTitleColor(ColorConstants.background, for: UIControlState())
                 registerBarButton.titleLabel?.font = UIFont(name: "AvenirNext-Regular", size: 17)
                 
                 loginButton.setTitle("Login", for: UIControlState())
             case .register:
-                loginBarButton.setTitleColor(ColorConstants.backgroundColor, for: UIControlState())
+                loginBarButton.setTitleColor(ColorConstants.background, for: UIControlState())
                 loginBarButton.titleLabel?.font = UIFont(name: "AvenirNext-Regular", size: 17)
                 
                 registerBarButton.setTitleColor(UIColor.white, for: UIControlState())

@@ -18,7 +18,7 @@ class PlaylistHomeOnlineTableViewCell: UITableViewCell {
         let layout = collectionView.collectionViewLayout as? PlaylistHomeOnlineCollectionViewLayout
         layout?.delegate = self
         
-        collectionView.backgroundColor = ColorConstants.backgroundColor
+        collectionView.backgroundColor = ColorConstants.background
         
         let itemSize = (collectionView.bounds.size.width - itemPadding * 4) / 3
         let height = itemSize * 3 + itemPadding * 2
@@ -47,10 +47,10 @@ extension PlaylistHomeOnlineTableViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsIdentifier.PlaylistHomeOnlineCollectionCell, for: indexPath)
+        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsIdentifier.playlistHomeOnlineCollection, for: indexPath)
         
         if (indexPath as NSIndexPath).item == 0 {
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsIdentifier.MorePlaylistHomeOnlineCollectionCell, for: indexPath)
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsIdentifier.morePlaylistHomeOnlineCollection, for: indexPath)
         }
         
         if let playlistCell = cell as? PlaylistHomeOnlineCollectionViewCell {

@@ -15,7 +15,7 @@ class SingerOnlineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        collectionView.backgroundColor = ColorConstants.backgroundColor
+        collectionView.backgroundColor = ColorConstants.background
         collectionView.dataSource = self
         collectionView.delegate = self
     }
@@ -32,7 +32,7 @@ extension SingerOnlineViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsIdentifier.SingerOnlineCollectionCell, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsIdentifier.singerOnlineCollection, for: indexPath)
         
         if let singerCell = cell as? SingerOnlineCollectionViewCell {
             singerCell.singerImage = UIImage(named: "background")

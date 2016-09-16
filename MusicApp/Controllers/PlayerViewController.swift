@@ -13,7 +13,7 @@ import UIKit
 protocol PlayerViewControllerDelegate {
     
     func playerViewController(_ controller: PlayerViewController, didRecognizeByPanGestureRecognizer gestureRecognizer: UIPanGestureRecognizer, completion: (() -> Void)?)
-    func dismissPlayerViewController(_ controller: PlayerViewController, completion: (() -> Void)?)
+    func dismiss(playerViewController controller: PlayerViewController, completion: (() -> Void)?)
     
 }
 
@@ -37,12 +37,12 @@ protocol PlayerChildViewController {
 
 struct PlayerChildViewControllerPanGestureRecognizerDirection: OptionSet {
     
-    static let Left     = PlayerChildViewControllerPanGestureRecognizerDirection(rawValue: 1)
-    static let Right    = PlayerChildViewControllerPanGestureRecognizerDirection(rawValue: 2)
-    static let Top      = PlayerChildViewControllerPanGestureRecognizerDirection(rawValue: 4)
-    static let Bottom   = PlayerChildViewControllerPanGestureRecognizerDirection(rawValue: 8)
+    static let left     = PlayerChildViewControllerPanGestureRecognizerDirection(rawValue: 1)
+    static let right    = PlayerChildViewControllerPanGestureRecognizerDirection(rawValue: 2)
+    static let top      = PlayerChildViewControllerPanGestureRecognizerDirection(rawValue: 4)
+    static let bottom   = PlayerChildViewControllerPanGestureRecognizerDirection(rawValue: 8)
     
-    static let All: PlayerChildViewControllerPanGestureRecognizerDirection = [Left, Right, Top, Bottom]
+    static let all: PlayerChildViewControllerPanGestureRecognizerDirection = [left, right, top, bottom]
     
     let rawValue: Int
     init(rawValue: Int) { self.rawValue = rawValue }
@@ -136,7 +136,7 @@ class PlayerViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func dismissButtonTapped() {
-        self.delegate?.dismissPlayerViewController(self) {
+        self.delegate?.dismiss(playerViewController: self) {
             self.animationVerticalEnabled = nil
         }
     }
@@ -197,14 +197,14 @@ class PlayerViewController: UIViewController {
     // MARK: Initialization and Configuration
     
     fileprivate func setupDetails() {
-        self.displayContentController(listPlayerViewController, inView: leftView)
-        self.displayContentController(singlePlayerViewController, inView: middleView)
-        self.displayContentController(lyricPlayerViewController, inView: rightView)
+        self.display(contentController: listPlayerViewController, in: leftView)
+        self.display(contentController: singlePlayerViewController, in: middleView)
+        self.display(contentController: lyricPlayerViewController, in: rightView)
  
-        self.setAlphaForLeftView(self.endAlpha, middleView: self.startAlpha, rightView: self.startAlpha)
+        self.setAlphaFor(leftView: self.endAlpha, middleView: self.startAlpha, rightView: self.startAlpha)
         
         let width = self.view.bounds.size.width
-        self.setConstantOfCenterXConstraintForLeftView(0, middleView: width, rightView: 2 * width)
+        self.setConstantOfCenterXConstraintFor(leftView: 0, middleView: width, rightView: 2 * width)
     }
     
     fileprivate func setupProgressBar() {
@@ -234,8 +234,8 @@ class PlayerViewController: UIViewController {
         self.playButton.circleWidth = 2
         self.playButton.circleColor = UIColor.white.withAlphaComponent(0.5)
         
-        let backImage = self.backwardButton.image(for: UIControlState())?.imageWithColor(UIColor.white)
-        let forwardImage = self.forwardButton.image(for: UIControlState())?.imageWithColor(UIColor.white)
+        let backImage = self.backwardButton.image(for: UIControlState())?.image(withColor: UIColor.white)
+        let forwardImage = self.forwardButton.image(for: UIControlState())?.image(withColor: UIColor.white)
         
         self.backwardButton.setImage(backImage, for: UIControlState())
         self.forwardButton.setImage(forwardImage, for: UIControlState())
@@ -249,27 +249,27 @@ class PlayerViewController: UIViewController {
     // MARK: Child View Controllers
     
     fileprivate lazy var listPlayerViewController: ListPlayerViewController = {
-        let controller = self.storyboard?.instantiateViewController(withIdentifier: ControllersIdentifiers.ListPlayerController) as! ListPlayerViewController
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: ControllersIdentifiers.listPlayer) as! ListPlayerViewController
         controller.delegate = self
         return controller
     }()
     
     fileprivate lazy var singlePlayerViewController: SinglePlayerViewController = {
-        let controller = self.storyboard?.instantiateViewController(withIdentifier: ControllersIdentifiers.SinglePlayerController) as! SinglePlayerViewController
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: ControllersIdentifiers.singlePlayer) as! SinglePlayerViewController
         controller.delegate = self
         return controller
     }()
     
     
     fileprivate lazy var lyricPlayerViewController: LyricPlayerViewController = {
-        let controller = self.storyboard?.instantiateViewController(withIdentifier: ControllersIdentifiers.LyricPlayerController) as! LyricPlayerViewController
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: ControllersIdentifiers.lyricPlayer) as! LyricPlayerViewController
         controller.delegate = self
         return controller
     }()
     
     // MARK: Change Detail Player Subviews
     
-    fileprivate func changeChildPlayerViewFromPosition(_ fromPosition: Position, toPosition: Position, completion: (() -> Void)? = nil) {
+    fileprivate func changeChildPlayerView(fromPosition: Position, toPosition: Position, completion: (() -> Void)? = nil) {
         if (fromPosition == .left && toPosition == .right) || (fromPosition == .right && toPosition == .left) {
             return
         }
@@ -306,16 +306,16 @@ class PlayerViewController: UIViewController {
             let width = self.view.bounds.size.width
             switch position {
             case .left:
-                self.setConstantOfCenterXConstraintForLeftView(0, middleView: width, rightView: 2 * width)
-                self.setAlphaForLeftView(self.endAlpha, middleView: self.startAlpha, rightView: self.startAlpha)
+                self.setConstantOfCenterXConstraintFor(leftView: 0, middleView: width, rightView: 2 * width)
+                self.setAlphaFor(leftView: self.endAlpha, middleView: self.startAlpha, rightView: self.startAlpha)
                 self.topVisualEffectView.alpha = 1
             case .middle:
-                self.setConstantOfCenterXConstraintForLeftView(-width, middleView: 0, rightView: width)
-                self.setAlphaForLeftView(self.startAlpha, middleView: self.endAlpha, rightView: self.startAlpha)
+                self.setConstantOfCenterXConstraintFor(leftView: -width, middleView: 0, rightView: width)
+                self.setAlphaFor(leftView: self.startAlpha, middleView: self.endAlpha, rightView: self.startAlpha)
                 self.topVisualEffectView.alpha = 0
             case .right:
-                self.setConstantOfCenterXConstraintForLeftView(-2 * width, middleView: -width, rightView: 0)
-                self.setAlphaForLeftView(self.startAlpha, middleView: self.startAlpha, rightView: self.endAlpha)
+                self.setConstantOfCenterXConstraintFor(leftView: -2 * width, middleView: -width, rightView: 0)
+                self.setAlphaFor(leftView: self.startAlpha, middleView: self.startAlpha, rightView: self.endAlpha)
                 self.topVisualEffectView.alpha = 1
             default: break
             }
@@ -363,14 +363,14 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
     func playerChildViewController(_ controller: PlayerChildViewController, options: PlayerChildViewControllerPanGestureRecognizerDirection?, didRecognizeByPanGestureRecognizer panGestureRecognizer: UIPanGestureRecognizer) {
         guard let options = options else { return }
         
-        if let controller = controller as? ListPlayerViewController , !options.isEmpty && options.isSubset(of: PlayerChildViewControllerPanGestureRecognizerDirection.Left) {
+        if let controller = controller as? ListPlayerViewController , !options.isEmpty && options.isSubset(of: PlayerChildViewControllerPanGestureRecognizerDirection.left) {
             self.listPlayerViewController(controller, didRecognizeByPanGestureRecognizer: panGestureRecognizer)
         }
         
-        if let controller = controller as? SinglePlayerViewController , PlayerChildViewControllerPanGestureRecognizerDirection.All.subtracting(options).isEmpty {
+        if let controller = controller as? SinglePlayerViewController , PlayerChildViewControllerPanGestureRecognizerDirection.all.subtracting(options).isEmpty {
             self.singlePlayerViewController(controller, didRecognizeByPanGestureRecognizer: panGestureRecognizer)
         }
-        if let controller = controller as? LyricPlayerViewController , !options.isEmpty && options.isSubset(of: PlayerChildViewControllerPanGestureRecognizerDirection.Right) {
+        if let controller = controller as? LyricPlayerViewController , !options.isEmpty && options.isSubset(of: PlayerChildViewControllerPanGestureRecognizerDirection.right) {
             self.lyricPlayerViewController(controller, didRecognizeByPanGestureRecognizer: panGestureRecognizer)
         }
     }
@@ -379,8 +379,8 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
         // Swipe Gesture
         if swipeTimeoutTimer != nil && panGestureRecognizer.velocity(in: self.view).x < -swipeVelocityX {
             panGestureRecognizer.isEnabled = false
-            self.changeChildPlayerViewFromPosition(.left, toPosition: .middle) {
-                self.setPropertiesForEndedStateAtPosition(self.position)
+            self.changeChildPlayerView(fromPosition: .left, toPosition: .middle) {
+                self.setPropertiesForEndedState(atPosition: self.position)
                 panGestureRecognizer.isEnabled = true
             }
             return
@@ -400,7 +400,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
                 repeats: false
             )
         case .changed:
-            self.setPropertiesForChangedStateFromPosition(.left, toPosition: .middle, byOffsetX: -offsetX)
+            self.setPropertiesForChangedState(fromPosition: .left, toPosition: .middle, byOffsetX: -offsetX)
         case .ended:
             if -offsetX < self.view.bounds.size.width / 2 {
                 UIView.animate(
@@ -411,7 +411,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
                     },
                     completion: { finished in
                         guard finished else { return }
-                        self.setPropertiesForEndedStateAtPosition(.left)
+                        self.setPropertiesForEndedState(atPosition: .left)
                     }
                 )
             } else {
@@ -423,7 +423,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
                     },
                     completion: { finished in
                         guard finished else { return }
-                        self.setPropertiesForEndedStateAtPosition(.middle)
+                        self.setPropertiesForEndedState(atPosition: .middle)
                     }
                 )
             }
@@ -447,16 +447,16 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
             
             if swipeTimeoutTimer != nil && velocityX > swipeVelocityX {
                 panGestureRecognizer.isEnabled = false
-                self.changeChildPlayerViewFromPosition(.middle, toPosition: .left) {
-                    self.setPropertiesForEndedStateAtPosition(self.position)
+                self.changeChildPlayerView(fromPosition: .middle, toPosition: .left) {
+                    self.setPropertiesForEndedState(atPosition: self.position)
                     panGestureRecognizer.isEnabled = true
                     self.animationVerticalEnabled = nil
                 }
                 return
             } else if swipeTimeoutTimer != nil && velocityX < -swipeVelocityX {
                 panGestureRecognizer.isEnabled = false
-                self.changeChildPlayerViewFromPosition(.middle, toPosition: .right) {
-                    self.setPropertiesForEndedStateAtPosition(self.position)
+                self.changeChildPlayerView(fromPosition: .middle, toPosition: .right) {
+                    self.setPropertiesForEndedState(atPosition: self.position)
                     panGestureRecognizer.isEnabled = true
                     self.animationVerticalEnabled = nil
                 }
@@ -477,7 +477,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
                         repeats: false
                     )
                 case .changed:
-                    self.setPropertiesForChangedStateFromPosition(.middle, toPosition: .right, byOffsetX: -offsetX)
+                    self.setPropertiesForChangedState(fromPosition: .middle, toPosition: .right, byOffsetX: -offsetX)
                 case .ended:
                     if -offsetX < self.view.bounds.size.width / 2 {
                         UIView.animate(
@@ -489,7 +489,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
                             completion: { finished in
                                 guard finished else { return }
                                 self.animationVerticalEnabled = nil
-                                self.setPropertiesForEndedStateAtPosition(.middle)
+                                self.setPropertiesForEndedState(atPosition: .middle)
                             }
                         )
                     } else {
@@ -502,7 +502,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
                             completion: { finished in
                                 guard finished else { return }
                                 self.animationVerticalEnabled = nil
-                                self.setPropertiesForEndedStateAtPosition(.right)
+                                self.setPropertiesForEndedState(atPosition: .right)
                             }
                         )
                     }
@@ -520,7 +520,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
                         repeats: false
                     )
                 case .changed:
-                    self.setPropertiesForChangedStateFromPosition(.middle, toPosition: .left, byOffsetX: offsetX)
+                    self.setPropertiesForChangedState(fromPosition: .middle, toPosition: .left, byOffsetX: offsetX)
                 case .ended:
                     if offsetX < self.view.bounds.size.width / 2 {
                         UIView.animate(
@@ -532,7 +532,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
                             completion: { finished in
                                 guard finished else { return }
                                 self.animationVerticalEnabled = nil
-                                self.setPropertiesForEndedStateAtPosition(.middle)
+                                self.setPropertiesForEndedState(atPosition: .middle)
                             }
                         )
                     } else {
@@ -545,7 +545,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
                             completion: { finished in
                                 guard finished else { return }
                                 self.animationVerticalEnabled = nil
-                                self.setPropertiesForEndedStateAtPosition(.left)
+                                self.setPropertiesForEndedState(atPosition: .left)
                             }
                         )
                     }
@@ -570,8 +570,8 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
         // Swipe Gesture
         if swipeTimeoutTimer != nil && panGestureRecognizer.velocity(in: self.view).x > swipeVelocityX {
             panGestureRecognizer.isEnabled = false
-            self.changeChildPlayerViewFromPosition(.right, toPosition: .middle) {
-                self.setPropertiesForEndedStateAtPosition(self.position)
+            self.changeChildPlayerView(fromPosition: .right, toPosition: .middle) {
+                self.setPropertiesForEndedState(atPosition: self.position)
                 panGestureRecognizer.isEnabled = true
             }
             return
@@ -591,7 +591,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
                 repeats: false
             )
         case .changed:
-            self.setPropertiesForChangedStateFromPosition(.right, toPosition: .middle, byOffsetX: offsetX)
+            self.setPropertiesForChangedState(fromPosition: .right, toPosition: .middle, byOffsetX: offsetX)
         case .ended:
             if offsetX < self.view.bounds.size.width / 2 {
                 UIView.animate(
@@ -602,7 +602,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
                     },
                     completion: { finished in
                         guard finished else { return }
-                        self.setPropertiesForEndedStateAtPosition(.right)
+                        self.setPropertiesForEndedState(atPosition: .right)
                     }
                 )
             } else {
@@ -614,7 +614,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
                     },
                     completion: { finished in
                         guard finished else { return }
-                        self.setPropertiesForEndedStateAtPosition(.middle)
+                        self.setPropertiesForEndedState(atPosition: .middle)
                     }
                 )
             }
@@ -623,32 +623,32 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
         }
     }
     
-    fileprivate func setPropertiesForChangedStateFromPosition(_ fromPosition: Position, toPosition: Position, byOffsetX offsetX: CGFloat) {
+    fileprivate func setPropertiesForChangedState(fromPosition: Position, toPosition: Position, byOffsetX offsetX: CGFloat) {
         let width = self.view.bounds.size.width
         let multiplier = offsetX / width
         let alphaDuration = self.scaleAlphaFactor * multiplier
         
         func setPropertiesForChangedStateFromLeftToMiddle() {
-            self.setConstantOfCenterXConstraintForLeftView(-offsetX, middleView: width - offsetX, rightView: 2 * width - offsetX)
-            self.setAlphaForLeftView(self.endAlpha - alphaDuration, middleView: self.startAlpha + alphaDuration, rightView: self.startAlpha)
+            self.setConstantOfCenterXConstraintFor(leftView: -offsetX, middleView: width - offsetX, rightView: 2 * width - offsetX)
+            self.setAlphaFor(leftView: self.endAlpha - alphaDuration, middleView: self.startAlpha + alphaDuration, rightView: self.startAlpha)
             self.topVisualEffectView.alpha = 1.0 - multiplier
         }
         
         func setPropertiesForChangedStateFromMiddleToLeft() {
-            self.setConstantOfCenterXConstraintForLeftView(-width + offsetX, middleView: offsetX, rightView: width + offsetX)
-            self.setAlphaForLeftView(self.startAlpha + alphaDuration, middleView: self.endAlpha - alphaDuration, rightView: self.startAlpha)
+            self.setConstantOfCenterXConstraintFor(leftView: -width + offsetX, middleView: offsetX, rightView: width + offsetX)
+            self.setAlphaFor(leftView: self.startAlpha + alphaDuration, middleView: self.endAlpha - alphaDuration, rightView: self.startAlpha)
             self.topVisualEffectView.alpha = multiplier
         }
         
         func setPropertiesForChangedStateFromMiddleToRight() {
-            self.setConstantOfCenterXConstraintForLeftView(-width - offsetX, middleView: -offsetX, rightView: width - offsetX)
-            self.setAlphaForLeftView(self.startAlpha, middleView: self.endAlpha - alphaDuration, rightView: self.startAlpha + alphaDuration)
+            self.setConstantOfCenterXConstraintFor(leftView: -width - offsetX, middleView: -offsetX, rightView: width - offsetX)
+            self.setAlphaFor(leftView: self.startAlpha, middleView: self.endAlpha - alphaDuration, rightView: self.startAlpha + alphaDuration)
             self.topVisualEffectView.alpha = multiplier
         }
         
         func setPropertiesForChangedStateFromRightToMiddle() {
-            self.setConstantOfCenterXConstraintForLeftView(-2 * width + offsetX, middleView: -width + offsetX, rightView: offsetX)
-            self.setAlphaForLeftView(self.startAlpha, middleView: self.startAlpha + alphaDuration, rightView: self.endAlpha - alphaDuration)
+            self.setConstantOfCenterXConstraintFor(leftView: -2 * width + offsetX, middleView: -width + offsetX, rightView: offsetX)
+            self.setAlphaFor(leftView: self.startAlpha, middleView: self.startAlpha + alphaDuration, rightView: self.endAlpha - alphaDuration)
             self.topVisualEffectView.alpha = 1.0 - multiplier
         }
         
@@ -661,7 +661,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
         }
     }
     
-    fileprivate func setPropertiesForEndedStateAtPosition(_ position: Position) {
+    fileprivate func setPropertiesForEndedState(atPosition position: Position) {
         switch position {
         case .left:     self.pageControl.currentPage = 0
         case .middle:   self.pageControl.currentPage = 1
@@ -670,13 +670,13 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
         }
     }
     
-    fileprivate func setConstantOfCenterXConstraintForLeftView(_ leftConstant: CGFloat, middleView middleConstant: CGFloat, rightView rightConstant: CGFloat) {
+    fileprivate func setConstantOfCenterXConstraintFor(leftView leftConstant: CGFloat, middleView middleConstant: CGFloat, rightView rightConstant: CGFloat) {
         self.leftViewCenterXConstraint.constant     = leftConstant
         self.middleViewCenterXConstraint.constant   = middleConstant
         self.rightViewCenterXConstraint.constant    = rightConstant
     }
     
-    fileprivate func setAlphaForLeftView(_ leftAlpha: CGFloat, middleView middleAlpha: CGFloat, rightView rightAlpha: CGFloat) {
+    fileprivate func setAlphaFor(leftView leftAlpha: CGFloat, middleView middleAlpha: CGFloat, rightView rightAlpha: CGFloat) {
         self.leftView.alpha     = leftAlpha
         self.middleView.alpha   = middleAlpha
         self.rightView.alpha    = rightAlpha
@@ -724,8 +724,8 @@ extension PlayerViewController {
         }
         
         func getTooltip() {
-            let image = UIImage.imageWithColor(UIColor.black, withSize: self.sliderView.frame.size)
-            self.tooltip.backgroundImageView.image = image.imageWithRadius(self.sliderView.frame.size.height / 2)
+            let image = UIImage.image(withColor: UIColor.black, withSize: self.sliderView.frame.size)
+            self.tooltip.backgroundImageView.image = image.image(withRadius: self.sliderView.frame.size.height / 2)
             
             marginTooltipConstraint = NSLayoutConstraint(
                 item: self.sliderView,

@@ -18,7 +18,7 @@ class VideoHomeOnlineTableViewCell: UITableViewCell {
         let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.sectionInset = UIEdgeInsets(top: 0, left: itemPadding, bottom: 0, right: itemPadding)
         
-        collectionView.backgroundColor = ColorConstants.backgroundColor
+        collectionView.backgroundColor = ColorConstants.background
         collectionView.showsVerticalScrollIndicator = false
         collectionView.bounces = false
         
@@ -48,7 +48,7 @@ extension VideoHomeOnlineTableViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsIdentifier.VideoHomeOnlineCollectionCell, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsIdentifier.videoHomeOnlineCollection, for: indexPath)
         
         if let videoCell = cell as? VideoHomeOnlineCollectionViewCell {
             videoCell.videoName = "Gui Anh Xa Nho"

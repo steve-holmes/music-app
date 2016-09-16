@@ -28,7 +28,7 @@ class ListPlayerViewController: UIViewController, PlayerChildViewController {
     // MARK: Gesture Recognizer
     
     func performPanGestureRecognizer(_ gestureRecognizer: UIPanGestureRecognizer) {
-        self.delegate?.playerChildViewController(self, options: .Left, didRecognizeByPanGestureRecognizer: gestureRecognizer)
+        self.delegate?.playerChildViewController(self, options: .left, didRecognizeByPanGestureRecognizer: gestureRecognizer)
     }
     
     // MARK: - View Controller Lifecycle
@@ -55,7 +55,7 @@ extension ListPlayerViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.ListPlayerTableCell, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.listPlayerTable, for: indexPath)
         
         if let listCell = cell as? ListPlayerTableViewCell {
             listCell.backgroundColor = UIColor.clear

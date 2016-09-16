@@ -10,7 +10,7 @@ import UIKit
 
 extension UIImage {
     
-    func imageWithColor(_ color: UIColor) -> UIImage {
+    func image(withColor color: UIColor) -> UIImage {
         let rect = CGRect(x: 0.0, y: 0.0, width: size.width, height: size.height)
         UIGraphicsBeginImageContextWithOptions(self.size, false, 0.0)
         draw(in: rect)
@@ -23,7 +23,7 @@ extension UIImage {
         return image!
     }
     
-    func imageWithRadius(_ radius: CGFloat, byRoundingCorners corners: UIRectCorner? = nil) -> UIImage {
+    func image(withRadius radius: CGFloat, byRoundingCorners corners: UIRectCorner? = nil) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(self.size, false, 0.0)
         let rect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
         
@@ -39,7 +39,7 @@ extension UIImage {
         return image!
     }
     
-    func imageWithInnerImage(_ innerImage: UIImage, inRect rect: CGRect) -> UIImage {
+    func image(withInnerImage innerImage: UIImage, inRect rect: CGRect) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(self.size, false, 0.0)
         draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
         
@@ -56,7 +56,7 @@ extension UIImage {
         return image!
     }
     
-    func imageWithoutInnerImage(_ innerImage: UIImage, inRect rect: CGRect) -> UIImage {
+    func image(withoutInnerImage innerImage: UIImage, inRect rect: CGRect) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(self.size, false, 0.0)
         self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
         innerImage.draw(in: rect, blendMode: .destinationIn, alpha: 1.0)
@@ -65,27 +65,27 @@ extension UIImage {
         return image!
     }
     
-    func imageWithInnerImage(_ innerImage: UIImage, atCenter center: CGPoint) -> UIImage {
+    func image(withInnerImage innerImage: UIImage, atCenter center: CGPoint) -> UIImage {
         let rect = CGRect(
             x: center.x - innerImage.size.width / 2,
             y: center.y - innerImage.size.height / 2,
             width: innerImage.size.width,
             height: innerImage.size.height
         )
-        return imageWithInnerImage(innerImage, inRect: rect)
+        return image(withInnerImage: innerImage, inRect: rect)
     }
     
-    func imageWithoutInnerImage(_ innerImage: UIImage, atCenter center: CGPoint) -> UIImage {
+    func image(withoutInnerImage innerImage: UIImage, atCenter center: CGPoint) -> UIImage {
         let rect = CGRect(
             x: center.x - innerImage.size.width / 2,
             y: center.y - innerImage.size.height / 2,
             width: innerImage.size.width,
             height: innerImage.size.height
         )
-        return imageWithoutInnerImage(innerImage, inRect: rect)
+        return image(withoutInnerImage: innerImage, inRect: rect)
     }
     
-    class func imageWithColor(_ color: UIColor, withSize size: CGSize) -> UIImage {
+    class func image(withColor color: UIColor, withSize size: CGSize) -> UIImage {
         let rect = CGRect(x: 0.0, y: 0.0, width: size.width, height: size.height)
         UIGraphicsBeginImageContext(size)
         let context = UIGraphicsGetCurrentContext()

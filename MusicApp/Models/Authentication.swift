@@ -39,7 +39,7 @@ class Authentication {
         return self.username == username && self.password == password
     }
     
-    func login(_ username: String?, password: String?) -> Bool {
+    func login(username: String?, password: String?) -> Bool {
         
         func loginWithoutUserInfo() -> Bool {
             return validated
@@ -63,12 +63,12 @@ class Authentication {
         return true
     }
     
-    func register(_ username: String?, password: String?) -> Bool {
+    func register(username: String?, password: String?) -> Bool {
         guard let username = username, let password = password else { return false }
         self.userDefault.setValue(username, forKey: UserInfo.username)
         self.userDefault.setValue(password, forKey: UserInfo.password)
         self.userDefault.synchronize()
-        return self.login(username, password: password)
+        return self.login(username: username, password: password)
     }
     
     func unregister() -> Bool {

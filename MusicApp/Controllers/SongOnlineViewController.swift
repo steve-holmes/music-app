@@ -15,7 +15,7 @@ class SongOnlineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.backgroundColor = ColorConstants.backgroundColor
+        tableView.backgroundColor = ColorConstants.background
         tableView.dataSource = self
     }
 
@@ -28,7 +28,7 @@ extension SongOnlineViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.SongOnlineTableCell, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.songOnlineTable, for: indexPath)
         return cell
     }
     

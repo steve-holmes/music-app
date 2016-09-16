@@ -9,33 +9,33 @@
 struct ControllersIdentifiers {
     
     // Home View Controller
-    static let HomeController               = "HomeController"
+    static let home             = "HomeController"
     
     // Online View Controller
-    static let OnlineController             = "OnlineController"
-    static let HomeOnlineController         = "HomeOnlineController"
-    static let PlaylistOnlineController     = "PlaylistOnlineController"
-    static let SongOnlineController         = "SongOnlineController"
-    static let VideoOnlineController        = "VideoOnlineController"
-    static let RankOnlineController         = "RankOnlineController"
-    static let SingerOnlineController       = "SingerOnlineController"
+    static let online           = "OnlineController"
+    static let homeOnline       = "HomeOnlineController"
+    static let playlistOnline   = "PlaylistOnlineController"
+    static let songOnline       = "SongOnlineController"
+    static let videoOnline      = "VideoOnlineController"
+    static let rankOnline       = "RankOnlineController"
+    static let singerOnline     = "SingerOnlineController"
     
     // Offline View Controller
-    static let OfflineController            = "OfflineController"
-    static let PlaylistMineController       = "PlaylistMineController"
-    static let VideoMineController          = "VideoMineController"
-    static let SongOfflineController        = "SongOfflineController"
-    static let PlaylistOfflineController    = "PlaylistOfflineController"
-    static let VideoOfflineController       = "VideoOfflineController"
+    static let offline          = "OfflineController"
+    static let playlistMine     = "PlaylistMineController"
+    static let videoMine        = "VideoMineController"
+    static let songOffline      = "SongOfflineController"
+    static let playlistOffline  = "PlaylistOfflineController"
+    static let videoOffline     = "VideoOfflineController"
     
     // Player View Controller
-    static let PlayerController             = "PlayerController"
-    static let ListPlayerController         = "ListPlayerController"
-    static let SinglePlayerController       = "SinglePlayerController"
-    static let LyricPlayerController        = "LyricPlayerController"
-    static let VideoPlayerController        = "VideoPlayerController"
+    static let player           = "PlayerController"
+    static let listPlayer       = "ListPlayerController"
+    static let singlePlayer     = "SinglePlayerController"
+    static let lyricPlayer      = "LyricPlayerController"
+    static let videoPlayer      = "VideoPlayerController"
     
     // Login View Controller
-    static let LoginController              = "LoginController"
+    static let login            = "LoginController"
     
 }

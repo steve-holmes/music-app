@@ -26,11 +26,11 @@ class VideoHomeOnlineCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        addGradientLayerForView(numberOfListeningView)
-        addGradientLayerForView(durationView)
+        addGradientLayer(forView: numberOfListeningView)
+        addGradientLayer(forView: durationView)
     }
     
-    fileprivate func addGradientLayerForView(_ view: UIView) {
+    fileprivate func addGradientLayer(forView view: UIView) {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = view.bounds
         gradientLayer.colors = [

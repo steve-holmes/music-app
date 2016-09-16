@@ -27,7 +27,7 @@ class SongHomeOnlineTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        let image = headsetImageView.image?.imageWithColor(UIColor(white: 128/255, alpha: 1))
+        let image = headsetImageView.image?.image(withColor: UIColor(white: 128/255, alpha: 1))
         headsetImageView.image = image
     }
 

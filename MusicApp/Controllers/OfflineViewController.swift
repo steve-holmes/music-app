@@ -19,7 +19,7 @@ class OfflineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.backgroundColor = ColorConstants.backgroundColor
+        tableView.backgroundColor = ColorConstants.background
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -54,7 +54,7 @@ extension OfflineViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.OfflineTableCell, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.offlineTable, for: indexPath)
         
         let section = (indexPath as NSIndexPath).section
         let row = (indexPath as NSIndexPath).row
@@ -105,21 +105,21 @@ extension OfflineViewController: UITableViewDelegate {
         case 1:
             if Authentication.sharedAuthentication.validated {
                 switch row {
-                case 0: self.pushChildOfflineViewControllerWithIdentifier(ControllersIdentifiers.PlaylistMineController)
-                case 1: self.pushChildOfflineViewControllerWithIdentifier(ControllersIdentifiers.VideoMineController)
+                case 0: self.pushChildOfflineViewController(withIdentifier: ControllersIdentifiers.playlistMine)
+                case 1: self.pushChildOfflineViewController(withIdentifier: ControllersIdentifiers.videoMine)
                 default: break
                 }
             } else {
                 switch row {
-                case 0, 1: self.pushChildOfflineViewControllerWithIdentifier(ControllersIdentifiers.LoginController)
+                case 0, 1: self.pushChildOfflineViewController(withIdentifier: ControllersIdentifiers.login)
                 default: break
                 }
             }
         case 2:
             switch row {
-            case 0: self.pushChildOfflineViewControllerWithIdentifier(ControllersIdentifiers.SongOfflineController)
-            case 1: self.pushChildOfflineViewControllerWithIdentifier(ControllersIdentifiers.PlaylistOfflineController)
-            case 2: self.pushChildOfflineViewControllerWithIdentifier(ControllersIdentifiers.VideoOfflineController)
+            case 0: self.pushChildOfflineViewController(withIdentifier: ControllersIdentifiers.songOffline)
+            case 1: self.pushChildOfflineViewController(withIdentifier: ControllersIdentifiers.playlistOffline)
+            case 2: self.pushChildOfflineViewController(withIdentifier: ControllersIdentifiers.videoOffline)
             default: break
             }
         default:
@@ -127,7 +127,7 @@ extension OfflineViewController: UITableViewDelegate {
         }
     }
     
-    fileprivate func pushChildOfflineViewControllerWithIdentifier(_ identifier: String) {
+    fileprivate func pushChildOfflineViewController(withIdentifier identifier: String) {
         if let controller = self.storyboard?.instantiateViewController(withIdentifier: identifier) {
             self.navigationController?.pushViewController(controller, animated: true)
         }

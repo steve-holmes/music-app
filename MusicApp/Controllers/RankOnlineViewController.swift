@@ -15,7 +15,7 @@ class RankOnlineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.backgroundColor = ColorConstants.backgroundColor
+        tableView.backgroundColor = ColorConstants.background
         tableView.dataSource = self
     }
 
@@ -28,7 +28,7 @@ extension RankOnlineViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.RankOnlineTableCell, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.rankOnlineTable, for: indexPath)
         return cell
     }
     

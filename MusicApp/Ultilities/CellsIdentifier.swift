@@ -9,27 +9,27 @@
 struct CellsIdentifier {
     
     // Online View Controller
-    static let HomeOnlineTableCell          = "HomeOnlineTableCell"
-    static let PageHomeOnlineTableCell      = "PageHomeOnlineTableCell"
-    static let PageHomeOnlineCollectionCell = "PageHomeOnlineCollectionCell"
-    static let PlaylistHomeOnlineTableCell  = "PlaylistHomeOnlineTableCell"
-    static let PlaylistHomeOnlineCollectionCell = "PlaylistHomeOnlineCollectionCell"
-    static let MorePlaylistHomeOnlineCollectionCell = "MorePlaylistHomeOnlineCollectionCell"
-    static let VideoHomeOnlineTableCell     = "VideoHomeOnlineTableCell"
-    static let VideoHomeOnlineCollectionCell = "VideoHomeOnlineCollectionCell"
-    static let SongHomeOnlineTableCell      = "SongHomeOnlineTableCell"
+    static let homeOnlineTable          = "HomeOnlineTableCell"
+    static let pageHomeOnlineTable      = "PageHomeOnlineTableCell"
+    static let pageHomeOnlineCollection = "PageHomeOnlineCollectionCell"
+    static let playlistHomeOnlineTable  = "PlaylistHomeOnlineTableCell"
+    static let playlistHomeOnlineCollection = "PlaylistHomeOnlineCollectionCell"
+    static let morePlaylistHomeOnlineCollection = "MorePlaylistHomeOnlineCollectionCell"
+    static let videoHomeOnlineTable     = "VideoHomeOnlineTableCell"
+    static let videoHomeOnlineCollection = "VideoHomeOnlineCollectionCell"
+    static let songHomeOnlineTable      = "SongHomeOnlineTableCell"
     
-    static let PlaylistOnlineCollectionCell = "PlaylistOnlineCollectionCell"
-    static let SongOnlineTableCell          = "SongOnlineTableCell"
-    static let VideoOnlineCollectionCell    = "VideoOnlineCollectionCell"
-    static let RankOnlineTableCell          = "RankOnlineTableCell"
-    static let SingerOnlineCollectionCell        = "SingerOnlineCollectionCell"
+    static let playlistOnlineCollection = "PlaylistOnlineCollectionCell"
+    static let songOnlineTable          = "SongOnlineTableCell"
+    static let videoOnlineCollection    = "VideoOnlineCollectionCell"
+    static let rankOnlineTable          = "RankOnlineTableCell"
+    static let singerOnlineCollection   = "SingerOnlineCollectionCell"
     
     // Offline View Controller
-    static let OfflineTableCell             = "OfflineTableCell"
+    static let offlineTable             = "OfflineTableCell"
     
     // Player View Controller
-    static let ListPlayerTableCell          = "ListPlayerTableCell"
-    static let LyricPlayerTableCell         = "LyricPlayerTableCell"
+    static let listPlayerTable          = "ListPlayerTableCell"
+    static let lyricPlayerTable         = "LyricPlayerTableCell"
     
 }

@@ -35,7 +35,7 @@ class PageHomeOnlineTableViewCell: UITableViewCell {
         collectionView.contentInset = UIEdgeInsets.zero
         collectionView.isPagingEnabled = true
         
-        collectionView.register(PageHomeOnlineCollectionViewCell.self, forCellWithReuseIdentifier: CellsIdentifier.PageHomeOnlineCollectionCell)
+        collectionView.register(PageHomeOnlineCollectionViewCell.self, forCellWithReuseIdentifier: CellsIdentifier.pageHomeOnlineCollection)
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
@@ -127,7 +127,7 @@ extension PageHomeOnlineTableViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsIdentifier.PageHomeOnlineCollectionCell, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsIdentifier.pageHomeOnlineCollection, for: indexPath)
         
         if let pageCell = cell as? PageHomeOnlineCollectionViewCell {
             pageCell.image = UIImage(named: "background")

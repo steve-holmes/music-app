@@ -10,17 +10,17 @@ import UIKit
 
 extension UIFont {
     
-    func withTraits(_ traits:UIFontDescriptorSymbolicTraits...) -> UIFont {
+    func traits(_ traits:UIFontDescriptorSymbolicTraits...) -> UIFont {
         let descriptor = self.fontDescriptor.withSymbolicTraits(UIFontDescriptorSymbolicTraits(traits))
         return UIFont(descriptor: descriptor!, size: 0)
     }
     
     func boldTrait() -> UIFont {
-        return withTraits(.traitBold)
+        return traits(.traitBold)
     }
     
     func regularTrait() -> UIFont {
-        return withTraits()
+        return traits()
     }
     
     class func avenirNextFont() -> UIFont {

@@ -15,7 +15,7 @@ class PlaylistOnlineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        collectionView.backgroundColor = ColorConstants.backgroundColor
+        collectionView.backgroundColor = ColorConstants.background
         collectionView.dataSource = self
         collectionView.delegate = self
     }
@@ -32,7 +32,7 @@ extension PlaylistOnlineViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsIdentifier.PlaylistOnlineCollectionCell, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsIdentifier.playlistOnlineCollection, for: indexPath)
         
         if let playlistCell = cell as? PlaylistOnlineCollectionViewCell {
             playlistCell.playlistImage = UIImage(named: "background")

@@ -69,14 +69,14 @@ class HomeViewController: UIViewController {
     // MARK: Child View Controllers
     
     fileprivate lazy var mineViewController: UINavigationController = {
-        let controller = self.storyboard?.instantiateViewController(withIdentifier: ControllersIdentifiers.OfflineController) as! UINavigationController
-        self.displayContentController(controller, inView: self.backgroundView)
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: ControllersIdentifiers.offline) as! UINavigationController
+        self.display(contentController: controller, in: self.backgroundView)
         return controller
     }()
     
     fileprivate lazy var onlineViewController: UINavigationController = {
-        let controller = self.storyboard?.instantiateViewController(withIdentifier: ControllersIdentifiers.OnlineController) as! UINavigationController
-        self.displayContentController(controller, inView: self.backgroundView)
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: ControllersIdentifiers.online) as! UINavigationController
+        self.display(contentController: controller, in: self.backgroundView)
         return controller
     }()
     
@@ -99,16 +99,16 @@ class HomeViewController: UIViewController {
     fileprivate lazy var bottomConstant: CGFloat = 10
     
     fileprivate func setupPlayButton() {
-        middleView.layer.borderColor = ColorConstants.toolbarBorderColor.cgColor
+        middleView.layer.borderColor = ColorConstants.toolbarBorder.cgColor
         middleView.layer.borderWidth = 1
         middleView.layer.cornerRadius = middleView.frame.size.width / 2
         
-        innerView.layer.borderColor = ColorConstants.mainColor.cgColor
+        innerView.layer.borderColor = ColorConstants.main.cgColor
         innerView.layer.borderWidth = 2
         innerView.layer.cornerRadius = innerView.layer.frame.size.width / 2
         innerView.clipsToBounds = true
         
-        let playImage = playButtonImageView.image?.imageWithColor(UIColor.white)
+        let playImage = playButtonImageView.image?.image(withColor: UIColor.white)
         playButtonImageView.image = playImage
         
         middleViewBottomConstraint.constant = -bottomConstant
@@ -122,8 +122,8 @@ class HomeViewController: UIViewController {
     
     func didRecognizeOnMiddleViewByTapGestureRecognizer(_ gestureRecognizer: UITapGestureRecognizer) {
         if playerViewController == nil {
-            playerViewController = self.storyboard?.instantiateViewController(withIdentifier: ControllersIdentifiers.PlayerController) as? PlayerViewController
-            self.displayContentController(playerViewController, inView: self.playerView)
+            playerViewController = self.storyboard?.instantiateViewController(withIdentifier: ControllersIdentifiers.player) as? PlayerViewController
+            self.display(contentController: playerViewController, in: self.playerView)
             playerViewController.delegate = self
             panGestureRecognizer.isEnabled = true
         }
@@ -165,7 +165,7 @@ class HomeViewController: UIViewController {
         
         switch gestureRecognizer.state {
         case .changed:
-            setPropertiesForChangedStateAtOffsetY(offsetY, forDirection: .fromBottomToTop)
+            setPropertiesForChangedState(atOffsetY: offsetY, forDirection: .fromBottomToTop)
         case .ended:
             if offsetY < height / 2 {
                 UIView.animate(
@@ -206,7 +206,7 @@ class HomeViewController: UIViewController {
     fileprivate var endAlpha: CGFloat   = 1
     fileprivate lazy var scaleAlphaFactor: CGFloat = self.endAlpha - self.startAlpha
     
-    fileprivate func setPropertiesForChangedStateAtOffsetY(_ offsetY: CGFloat, forDirection direction: PlayerViewDirection) {
+    fileprivate func setPropertiesForChangedState(atOffsetY offsetY: CGFloat, forDirection direction: PlayerViewDirection) {
         let height = self.view.bounds.size.height
         var offset = offsetY
         
@@ -293,7 +293,7 @@ class HomeViewController: UIViewController {
                 self.playButtonImageView.isHidden = false
                 
                 // The last completion
-                if let completion = completion { completion() }
+                completion?()
             }
         )
     }
@@ -323,29 +323,29 @@ class HomeViewController: UIViewController {
             case .mine:
                 backgroundView.bringSubview(toFront: mineViewController.view)
                 
-                let mineImage = mineButtonImageView.image?.imageWithColor(UIColor.white)
-                let onlineImage = onlineButtonImageView.image?.imageWithColor(ColorConstants.toolbarImageColor)
+                let mineImage = mineButtonImageView.image?.image(withColor: UIColor.white)
+                let onlineImage = onlineButtonImageView.image?.image(withColor: ColorConstants.toolbarImage)
                 mineButtonImageView.image = mineImage
                 onlineButtonImageView.image = onlineImage
                 
                 mineButtonLabel.textColor = UIColor.white
-                onlineButtonLabel.textColor = ColorConstants.textColor
+                onlineButtonLabel.textColor = ColorConstants.text
                 
-                mineButtonBackgroundView.backgroundColor = ColorConstants.mainColor
-                onlineButtonBackgroundView.backgroundColor = ColorConstants.toolbarNormalBackgroundColor
+                mineButtonBackgroundView.backgroundColor = ColorConstants.main
+                onlineButtonBackgroundView.backgroundColor = ColorConstants.toolbarNormalBackground
             case .online:
                 backgroundView.bringSubview(toFront: onlineViewController.view)
                 
-                let mineImage = mineButtonImageView.image?.imageWithColor(ColorConstants.toolbarImageColor)
-                let onlineImage = onlineButtonImageView.image?.imageWithColor(UIColor.white)
+                let mineImage = mineButtonImageView.image?.image(withColor: ColorConstants.toolbarImage)
+                let onlineImage = onlineButtonImageView.image?.image(withColor: UIColor.white)
                 mineButtonImageView.image = mineImage
                 onlineButtonImageView.image = onlineImage
                 
-                mineButtonLabel.textColor = ColorConstants.textColor
+                mineButtonLabel.textColor = ColorConstants.text
                 onlineButtonLabel.textColor = UIColor.white
                 
-                mineButtonBackgroundView.backgroundColor = ColorConstants.toolbarNormalBackgroundColor
-                onlineButtonBackgroundView.backgroundColor = ColorConstants.mainColor
+                mineButtonBackgroundView.backgroundColor = ColorConstants.toolbarNormalBackground
+                onlineButtonBackgroundView.backgroundColor = ColorConstants.main
             }
         }
     }
@@ -366,7 +366,7 @@ extension HomeViewController: PlayerViewControllerDelegate {
         
         switch gestureRecognizer.state {
         case .changed:
-            setPropertiesForChangedStateAtOffsetY(offsetY, forDirection: .fromTopToBottom)
+            setPropertiesForChangedState(atOffsetY: offsetY, forDirection: .fromTopToBottom)
         case .ended:
             if offsetY < height / 2 {
                 UIView.animate(
@@ -398,7 +398,7 @@ extension HomeViewController: PlayerViewControllerDelegate {
         }
     }
     
-    func dismissPlayerViewController(_ controller: PlayerViewController, completion: (() -> Void)?) {
+    func dismiss(playerViewController controller: PlayerViewController, completion: (() -> Void)?) {
         UIView.animate(
             withDuration: transitionDuration,
             animations: {

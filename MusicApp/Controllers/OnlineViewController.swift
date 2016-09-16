@@ -34,12 +34,12 @@ class OnlineViewController: UIViewController {
     
     fileprivate func setupPageMenu() {
         let childControllers: [UIViewController] = [
-            (ControllersIdentifiers.HomeOnlineController,       "Home"),
-            (ControllersIdentifiers.PlaylistOnlineController,   "Playlist"),
-            (ControllersIdentifiers.SongOnlineController,       "Song"),
-            (ControllersIdentifiers.VideoOnlineController,      "Video"),
-            (ControllersIdentifiers.RankOnlineController,       "Rank"),
-            (ControllersIdentifiers.SingerOnlineController,     "Singer")
+            (ControllersIdentifiers.homeOnline,       "Home"),
+            (ControllersIdentifiers.playlistOnline,   "Playlist"),
+            (ControllersIdentifiers.songOnline,       "Song"),
+            (ControllersIdentifiers.videoOnline,      "Video"),
+            (ControllersIdentifiers.rankOnline,       "Rank"),
+            (ControllersIdentifiers.singerOnline,     "Singer")
         ].flatMap { controllerTuple in
             let controller = self.storyboard?.instantiateViewController(withIdentifier: controllerTuple.0)
             controller?.title = controllerTuple.1

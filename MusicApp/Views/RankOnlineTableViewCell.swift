@@ -29,14 +29,14 @@ class RankOnlineTableViewCell: UITableViewCell {
     
     fileprivate func setupBadgets() {
         
-        func setupBadget(_ badget: UIView) {
+        func setup(badget: UIView) {
             badget.layer.cornerRadius = 5
         }
         
-        setupBadget(firstBadgetView)
-        setupBadget(secondBadgetView)
-        setupBadget(thirdBadgetView)
-        setupBadget(fourBadgetView)
+        setup(badget: firstBadgetView)
+        setup(badget: secondBadgetView)
+        setup(badget: thirdBadgetView)
+        setup(badget: fourBadgetView)
     }
 
 }

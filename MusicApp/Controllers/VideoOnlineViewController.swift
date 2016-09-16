@@ -15,7 +15,7 @@ class VideoOnlineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        collectionView.backgroundColor = ColorConstants.backgroundColor
+        collectionView.backgroundColor = ColorConstants.background
         collectionView.dataSource = self
         collectionView.delegate = self
     }
@@ -32,7 +32,7 @@ extension VideoOnlineViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsIdentifier.VideoOnlineCollectionCell, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsIdentifier.videoOnlineCollection, for: indexPath)
         
         if let videoCell = cell as? VideoOnlineCollectionViewCell {
             videoCell.videoName = "Gui Anh Xa Nho"

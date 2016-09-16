@@ -12,9 +12,9 @@ class CircleButton: UIButton {
     
     // MARK: Public propreties
     
-    var circleColor: UIColor = UIColor.white { didSet { updateButton() } }
-    var iconColor: UIColor = UIColor.white { didSet { updateButton() } }
-    var circleWidth: CGFloat = 1 { didSet { updateButton() } }
+    var circleColor: UIColor = UIColor.white { didSet { update() } }
+    var iconColor: UIColor = UIColor.white { didSet { update() } }
+    var circleWidth: CGFloat = 1 { didSet { update() } }
     
     // MARK: Initialization
     
@@ -32,24 +32,24 @@ class CircleButton: UIButton {
         self.adjustsImageWhenHighlighted = false
         self.layer.cornerRadius = self.bounds.size.width / 2
         
-        updateButton()
+        update()
     }
     
     // MARK: Update UI
     
-    fileprivate func updateButton() {
+    fileprivate func update() {
         self.layer.borderColor = circleColor.cgColor
         self.layer.borderWidth = circleWidth
         
-        let defaultImage = self.image(for: UIControlState())?.imageWithColor(iconColor)
+        let defaultImage = self.image(for: UIControlState())?.image(withColor: iconColor)
         
         var highlightedImage = UIImage
-            .imageWithColor(iconColor, withSize: self.bounds.size)
-            .imageWithRadius(self.bounds.size.width)
+            .image(withColor: iconColor, withSize: self.bounds.size)
+            .image(withRadius: self.bounds.size.width)
         
         if let innerImage = defaultImage {
-            highlightedImage = highlightedImage.imageWithoutInnerImage(
-                innerImage,
+            highlightedImage = highlightedImage.image(
+                withoutInnerImage: innerImage,
                 atCenter: CGPoint(
                     x: highlightedImage.size.width / 2,
                     y: highlightedImage.size.height / 2
@@ -65,7 +65,7 @@ class CircleButton: UIButton {
 
 class SolidCircleButton: CircleButton {
     
-    fileprivate override func updateButton() {
+    fileprivate override func update() {
         
     }
     
@@ -73,8 +73,8 @@ class SolidCircleButton: CircleButton {
 
 class AnimatedCircleButton: CircleButton {
     
-    fileprivate override func updateButton() {
-        super.updateButton()
+    fileprivate override func update() {
+        super.update()
     }
     
 }

@@ -19,7 +19,7 @@ class HomeOnlineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.backgroundColor = ColorConstants.backgroundColor
+        tableView.backgroundColor = ColorConstants.background
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -59,7 +59,7 @@ extension HomeOnlineViewController: UITableViewDataSource {
     }
     
     fileprivate func tableView(_ tableView: UITableView, pageCellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.PageHomeOnlineTableCell, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.pageHomeOnlineTable, for: indexPath)
         
 //        if let pageCell = cell as? PageHomeOnlineTableViewCell {
 //            
@@ -69,7 +69,7 @@ extension HomeOnlineViewController: UITableViewDataSource {
     }
         
     fileprivate func tableView(_ tableView: UITableView, playlistCellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.PlaylistHomeOnlineTableCell, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.playlistHomeOnlineTable, for: indexPath)
         
 //        if let playlistCell = cell as? PlaylistHomeOnlineTableViewCell {
 //            
@@ -79,7 +79,7 @@ extension HomeOnlineViewController: UITableViewDataSource {
     }
     
     fileprivate func tableView(_ tableView: UITableView, videoCellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.VideoHomeOnlineTableCell, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.videoHomeOnlineTable, for: indexPath)
         
 //        if let videoCell = cell as? VideoHomeOnlineTableViewCell {
 //            
@@ -89,7 +89,7 @@ extension HomeOnlineViewController: UITableViewDataSource {
     }
     
     fileprivate func tableView(_ tableView: UITableView, songCellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.SongHomeOnlineTableCell, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.songHomeOnlineTable, for: indexPath)
         
         if let songCell = cell as? SongHomeOnlineTableViewCell {
             songCell.songName = "Gui Anh Xa Nho"

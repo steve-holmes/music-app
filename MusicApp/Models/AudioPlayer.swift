@@ -1,5 +1,5 @@
 //
-//  AudioPlayerDataSource.swift
+//  AudioPlayer.swift
 //  MusicApp
 //
 //  Created by HungDo on 9/20/16.
@@ -7,7 +7,15 @@
 //
 
 import Foundation
-import AVFoundation
+
+// MARK: Audio Player
+
+class AudioPlayer {
+    
+    var dataSource: AudioPlayerDataSource?
+    var delegate: AudioPlayerDelegate?
+    
+}
 
 // MARK: Data Type
 
@@ -20,11 +28,15 @@ enum AudioPlayerDataType {
 
 protocol AudioPlayerDataSource {
     
-    func audioPlayerDataType(forAudioPlayerDataSource dataSource: AudioPlayerDataSource) -> AudioPlayerDataType
+    func audioPlayerDataType(forAudioPlayer audioPlayer: AudioPlayer) -> AudioPlayerDataType
+    
+    func numberOfSongs(ofAudioPlayer audioPlayer: AudioPlayer) -> Int
+    func audioPlayer(_ audioPlayer: AudioPlayer, songAtIndex index: Int) -> Song?
     
 }
 
 protocol AudioPlayerOnlineDataSource: AudioPlayerDataSource {
+    
     
 }
 
@@ -52,6 +64,9 @@ extension AudioPlayerOfflineDataSource {
 
 protocol AudioPlayerDelegate {
     
+    func audioPlayer(_ audioPlayer: AudioPlayer, didSelectAtIndex: Int)
+    func audioPlayer(_ audioPlayer: AudioPlayer, willTransitionFromIndex fromIndex: Int, toIndex: Int)
+    
 }
 
 protocol AudioPlayerOnlineDelegate: AudioPlayerDelegate {
@@ -72,18 +87,10 @@ extension AudioPlayerOfflineDelegate {
 
 // MARK: Default Classes
 
-class AudioPlayerOnlineDefaultDataSource: AudioPlayerOnlineDataSource {
-    
-}
-
-class AudioPlayerOfflineDefaultDataSource: AudioPlayerOfflineDataSource {
-    
-}
-
 class AudioPlayerDefaultDataSource: AudioPlayerDataSource {
     
-    private let defaultOnlineDataSource: AudioPlayerOnlineDataSource! = AudioPlayerOnlineDefaultDataSource()
-    private let defaultOfflineDataSource: AudioPlayerOfflineDataSource! = AudioPlayerOfflineDefaultDataSource()
+    var defaultOnlineDataSource: AudioPlayerOnlineDataSource!
+    var defaultOfflineDataSource: AudioPlayerOfflineDataSource!
     
     private lazy var dataSource: AudioPlayerDataSource! = self.defaultOnlineDataSource
     
@@ -96,8 +103,16 @@ class AudioPlayerDefaultDataSource: AudioPlayerDataSource {
         }
     }
     
-    func audioPlayerDataType(forAudioPlayerDataSource dataSource: AudioPlayerDataSource) -> AudioPlayerDataType {
+    func audioPlayerDataType(forAudioPlayer audioPlayer: AudioPlayer) -> AudioPlayerDataType {
         return self.type
+    }
+    
+    func numberOfSongs(ofAudioPlayer audioPlayer: AudioPlayer) -> Int {
+        return dataSource.numberOfSongs(ofAudioPlayer: audioPlayer)
+    }
+    
+    func audioPlayer(_ audioPlayer: AudioPlayer, songAtIndex index: Int) -> Song? {
+        return dataSource.audioPlayer(audioPlayer, songAtIndex: index)
     }
     
 }

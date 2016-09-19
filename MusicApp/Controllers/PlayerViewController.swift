@@ -177,8 +177,7 @@ class PlayerViewController: UIViewController {
     
     // MARK: Private properties
     
-    fileprivate var audioPlayerDataSource: AudioPlayerDataSource? = AudioPlayerDefaultDataSource()
-    fileprivate var audioPlayerDelegate: AudioPlayerDelegate?
+    fileprivate var audioPlayer = AudioPlayer()
     
     fileprivate var animationDuration: TimeInterval = 0.35
     fileprivate var animationVerticalEnabled: Bool?
@@ -206,7 +205,8 @@ class PlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.audioPlayerDataSource = self
+        audioPlayer.dataSource = AudioPlayerDefaultDataSource()
+        audioPlayer.delegate = self
         
         // 238DFF
         pageControl.currentPageIndicatorTintColor = UIColor(red: 35/255, green: 141/255, blue: 1, alpha: 1)
@@ -852,6 +852,20 @@ extension PlayerViewController {
         default:
             break
         }
+    }
+    
+}
+
+// MARK: Audio Player Delegate
+
+extension PlayerViewController: AudioPlayerDelegate {
+    
+    func audioPlayer(_ audioPlayer: AudioPlayer, didSelectAtIndex: Int) {
+        
+    }
+    
+    func audioPlayer(_ audioPlayer: AudioPlayer, willTransitionFromIndex fromIndex: Int, toIndex: Int) {
+        
     }
     
 }

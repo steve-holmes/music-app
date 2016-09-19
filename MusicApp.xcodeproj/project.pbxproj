@@ -40,6 +40,7 @@
 		9E7CA4F11D6FEF370017B6A7 /* RankOnlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7CA4F01D6FEF370017B6A7 /* RankOnlineViewController.swift */; };
 		9E7CA4F31D6FEF6D0017B6A7 /* SingerOnlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7CA4F21D6FEF6D0017B6A7 /* SingerOnlineViewController.swift */; };
 		9E7CA4F51D6FEFBC0017B6A7 /* CellsIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7CA4F41D6FEFBC0017B6A7 /* CellsIdentifier.swift */; };
+		9E8EC5901D90616700CA9D05 /* AudioPlayerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8EC58F1D90616700CA9D05 /* AudioPlayerDataSource.swift */; };
 		9E9004EA1D817D70006A3FAE /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9004E91D817D70006A3FAE /* Bolts.framework */; };
 		9E97D7BA1D6D8EF4006675D3 /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E97D7B91D6D8EF4006675D3 /* VideoPlayerViewController.swift */; };
 		9E97D7BC1D6D8F20006675D3 /* NSNumberExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E97D7BB1D6D8F20006675D3 /* NSNumberExtension.swift */; };
@@ -100,6 +101,7 @@
 		9E7CA4F01D6FEF370017B6A7 /* RankOnlineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RankOnlineViewController.swift; path = Controllers/RankOnlineViewController.swift; sourceTree = "<group>"; };
 		9E7CA4F21D6FEF6D0017B6A7 /* SingerOnlineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingerOnlineViewController.swift; path = Controllers/SingerOnlineViewController.swift; sourceTree = "<group>"; };
 		9E7CA4F41D6FEFBC0017B6A7 /* CellsIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CellsIdentifier.swift; path = Ultilities/CellsIdentifier.swift; sourceTree = "<group>"; };
+		9E8EC58F1D90616700CA9D05 /* AudioPlayerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioPlayerDataSource.swift; path = Models/AudioPlayerDataSource.swift; sourceTree = "<group>"; };
 		9E9004E91D817D70006A3FAE /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = MusicApp/Frameworks/Bolts.framework; sourceTree = "<group>"; };
 		9E97D7B91D6D8EF4006675D3 /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoPlayerViewController.swift; path = Controllers/VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		9E97D7BB1D6D8F20006675D3 /* NSNumberExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSNumberExtension.swift; path = Ultilities/NSNumberExtension.swift; sourceTree = "<group>"; };
@@ -262,6 +264,14 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		9E8EC58E1D9060D500CA9D05 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9E8EC58F1D90616700CA9D05 /* AudioPlayerDataSource.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		9EA017CA1D82E3370033CAD6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -326,6 +336,7 @@
 		9EF377B51D67F4E900B07266 /* Player MVCs */ = {
 			isa = PBXGroup;
 			children = (
+				9E8EC58E1D9060D500CA9D05 /* Models */,
 				9EF377B71D67F51C00B07266 /* Controllers */,
 				9EF377B61D67F51500B07266 /* Views */,
 			);
@@ -519,6 +530,7 @@
 				9EBA8E9F1D598D250084E44A /* LyricPlayerTableViewCell.swift in Sources */,
 				9EBA8EAE1D5994900084E44A /* UIFontExtension.swift in Sources */,
 				9E1A5AC31D729564000336B9 /* PlaylistMineViewController.swift in Sources */,
+				9E8EC5901D90616700CA9D05 /* AudioPlayerDataSource.swift in Sources */,
 				9E7CA4F11D6FEF370017B6A7 /* RankOnlineViewController.swift in Sources */,
 				9E9B89541D699C5E00EC0DBF /* SinglePlayerViewController.swift in Sources */,
 				9E789C121D813E9600AF91B1 /* VideoOnlineCollectionViewCell.swift in Sources */,

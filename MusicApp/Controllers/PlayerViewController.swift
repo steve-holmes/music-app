@@ -19,6 +19,9 @@ protocol PlayerViewControllerDelegate {
 
 protocol PlayerChildViewControllerDelegate {
     
+    var duration: Int { get }
+    var currentTime: Int { get }
+    
     func playerChildViewController(
         _ controller: PlayerChildViewController,
         options: PlayerChildViewControllerPanGestureRecognizerDirection?,
@@ -30,6 +33,21 @@ protocol PlayerChildViewControllerDelegate {
 protocol PlayerChildViewController {
     
     var delegate: PlayerChildViewControllerDelegate? { get }
+    
+    func play()
+    func pause()
+    func moveForward()
+    func moveBackward()
+    
+    var duration: Int { get }
+    var currentTime: Int { get }
+    
+}
+
+extension PlayerChildViewController {
+    
+    var duration: Int { get { return self.delegate?.duration ?? 0 } }
+    var currentTime: Int { get { return self.delegate?.currentTime ?? 0 } }
     
 }
 
@@ -142,15 +160,15 @@ class PlayerViewController: UIViewController {
     }
     
     @IBAction func playPauseButtonTapped(_ button: UIButton) {
-        print(#function)
+        playerChildViewControllers.forEach { $0.play() }
     }
     
     @IBAction func backwardButtonTapped() {
-        print(#function)
+        playerChildViewControllers.forEach { $0.moveBackward() }
     }
     
     @IBAction func forwardButtonTapped() {
-        print(#function)
+        playerChildViewControllers.forEach { $0.moveForward() }
     }
     
     // MARK: Delegation
@@ -158,6 +176,9 @@ class PlayerViewController: UIViewController {
     var delegate: PlayerViewControllerDelegate?
     
     // MARK: Private properties
+    
+    fileprivate var audioPlayerDataSource: AudioPlayerDataSource? = AudioPlayerDefaultDataSource()
+    fileprivate var audioPlayerDelegate: AudioPlayerDelegate?
     
     fileprivate var animationDuration: TimeInterval = 0.35
     fileprivate var animationVerticalEnabled: Bool?
@@ -184,6 +205,8 @@ class PlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        self.audioPlayerDataSource = self
         
         // 238DFF
         pageControl.currentPageIndicatorTintColor = UIColor(red: 35/255, green: 141/255, blue: 1, alpha: 1)
@@ -267,6 +290,10 @@ class PlayerViewController: UIViewController {
         return controller
     }()
     
+    fileprivate lazy var playerChildViewControllers: [PlayerChildViewController] = [
+        self.listPlayerViewController, self.singlePlayerViewController, self.lyricPlayerViewController
+    ]
+    
     // MARK: Change Detail Player Subviews
     
     fileprivate func changeChildPlayerView(fromPosition: Position, toPosition: Position, completion: (() -> Void)? = nil) {
@@ -294,11 +321,16 @@ class PlayerViewController: UIViewController {
     
     // MARK: Detail Player View Position
     
-    fileprivate enum Position {
-        case left
-        case middle
-        case right
-        case transitioning
+    fileprivate enum Position: Int {
+        case left           = 0
+        case middle         = 1
+        case right          = 2
+        case transitioning  = 3
+        
+        fileprivate static func isInvalidTransition(fromPosition: Position, toPosition: Position) -> Bool {
+            return fromPosition == .transitioning || toPosition == .transitioning ||
+                abs(fromPosition.rawValue - toPosition.rawValue) == 2
+        }
     }
     
     fileprivate var position: Position = .left {
@@ -380,7 +412,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
         if swipeTimeoutTimer != nil && panGestureRecognizer.velocity(in: self.view).x < -swipeVelocityX {
             panGestureRecognizer.isEnabled = false
             self.changeChildPlayerView(fromPosition: .left, toPosition: .middle) {
-                self.setPropertiesForEndedState(atPosition: self.position)
+                self.setPropertiesForEndedState(fromPosition: .left, toPosition: self.position)
                 panGestureRecognizer.isEnabled = true
             }
             return
@@ -423,7 +455,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
                     },
                     completion: { finished in
                         guard finished else { return }
-                        self.setPropertiesForEndedState(atPosition: .middle)
+                        self.setPropertiesForEndedState(fromPosition: .left, toPosition: .middle)
                     }
                 )
             }
@@ -448,7 +480,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
             if swipeTimeoutTimer != nil && velocityX > swipeVelocityX {
                 panGestureRecognizer.isEnabled = false
                 self.changeChildPlayerView(fromPosition: .middle, toPosition: .left) {
-                    self.setPropertiesForEndedState(atPosition: self.position)
+                    self.setPropertiesForEndedState(fromPosition: .middle, toPosition: self.position)
                     panGestureRecognizer.isEnabled = true
                     self.animationVerticalEnabled = nil
                 }
@@ -456,7 +488,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
             } else if swipeTimeoutTimer != nil && velocityX < -swipeVelocityX {
                 panGestureRecognizer.isEnabled = false
                 self.changeChildPlayerView(fromPosition: .middle, toPosition: .right) {
-                    self.setPropertiesForEndedState(atPosition: self.position)
+                    self.setPropertiesForEndedState(fromPosition: .middle, toPosition: self.position)
                     panGestureRecognizer.isEnabled = true
                     self.animationVerticalEnabled = nil
                 }
@@ -502,7 +534,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
                             completion: { finished in
                                 guard finished else { return }
                                 self.animationVerticalEnabled = nil
-                                self.setPropertiesForEndedState(atPosition: .right)
+                                self.setPropertiesForEndedState(fromPosition: .middle, toPosition: .right)
                             }
                         )
                     }
@@ -545,7 +577,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
                             completion: { finished in
                                 guard finished else { return }
                                 self.animationVerticalEnabled = nil
-                                self.setPropertiesForEndedState(atPosition: .left)
+                                self.setPropertiesForEndedState(fromPosition: .middle, toPosition: .left)
                             }
                         )
                     }
@@ -571,7 +603,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
         if swipeTimeoutTimer != nil && panGestureRecognizer.velocity(in: self.view).x > swipeVelocityX {
             panGestureRecognizer.isEnabled = false
             self.changeChildPlayerView(fromPosition: .right, toPosition: .middle) {
-                self.setPropertiesForEndedState(atPosition: self.position)
+                self.setPropertiesForEndedState(fromPosition: .right, toPosition: self.position)
                 panGestureRecognizer.isEnabled = true
             }
             return
@@ -614,7 +646,7 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
                     },
                     completion: { finished in
                         guard finished else { return }
-                        self.setPropertiesForEndedState(atPosition: .middle)
+                        self.setPropertiesForEndedState(fromPosition: .right, toPosition: .middle)
                     }
                 )
             }
@@ -624,6 +656,8 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
     }
     
     fileprivate func setPropertiesForChangedState(fromPosition: Position, toPosition: Position, byOffsetX offsetX: CGFloat) {
+        if Position.isInvalidTransition(fromPosition: fromPosition, toPosition: toPosition) { return }
+        
         let width = self.view.bounds.size.width
         let multiplier = offsetX / width
         let alphaDuration = self.scaleAlphaFactor * multiplier
@@ -661,7 +695,26 @@ extension PlayerViewController: PlayerChildViewControllerDelegate {
         }
     }
     
+    fileprivate func setPropertiesForEndedState(fromPosition: Position, toPosition: Position) {
+        if Position.isInvalidTransition(fromPosition: fromPosition, toPosition: toPosition) { return }
+        
+        if fromPosition == toPosition {
+            self.setPropertiesForEndedState(atPosition: toPosition)
+            return
+        }
+        
+        if fromPosition == .right {
+            lyricPlayerViewController.stopTimer()
+        } else if toPosition == .right {
+            lyricPlayerViewController.startTimer()
+        }
+        
+        self.setPropertiesForEndedState(atPosition: toPosition)
+    }
+    
     fileprivate func setPropertiesForEndedState(atPosition position: Position) {
+        if Position.isInvalidTransition(fromPosition: position, toPosition: position) { return }
+        
         switch position {
         case .left:     self.pageControl.currentPage = 0
         case .middle:   self.pageControl.currentPage = 1

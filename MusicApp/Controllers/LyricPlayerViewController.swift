@@ -120,7 +120,7 @@ class LyricPlayerViewController: UIViewController, PlayerChildViewController {
         super.viewDidLoad()
         
         lyricTableView.dataSource = self
-        lyricTableView.delegate = self
+//        lyricTableView.delegate = self
         
         lyricTableView.rowHeight = UITableViewAutomaticDimension
         lyricTableView.estimatedRowHeight = 20
@@ -150,7 +150,7 @@ class LyricPlayerViewController: UIViewController, PlayerChildViewController {
         return endTime - startTime
     }
     
-    func setupTimer() {
+    func startTimer() {
         guard lyrics.count > 1 else { return }
         timerCount = selectedLyricIndex
         
@@ -173,6 +173,20 @@ class LyricPlayerViewController: UIViewController, PlayerChildViewController {
     func stopTimer() {
         timer?.invalidate()
         timer = nil
+    }
+    
+    // MARK: Audio Player
+    
+    func play() {
+    }
+    
+    func pause() {
+    }
+    
+    func moveForward() {
+    }
+    
+    func moveBackward() {
     }
 
 }

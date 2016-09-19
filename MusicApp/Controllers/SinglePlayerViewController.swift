@@ -26,5 +26,19 @@ class SinglePlayerViewController: UIViewController, PlayerChildViewController {
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(performPanGestureRecognizer(_:)))
         self.view.addGestureRecognizer(panGestureRecognizer)
     }
+    
+    // MARK: Audio Player
+    
+    func play() {
+    }
+    
+    func pause() {
+    }
+    
+    func moveForward() {
+    }
+    
+    func moveBackward() {
+    }
 
 }

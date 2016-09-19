@@ -87,7 +87,83 @@ extension AudioPlayerOfflineDelegate {
 
 // MARK: Default Classes
 
+class AudioPlayerOnlineDefaultDataSource: AudioPlayerOnlineDataSource {
+    
+    fileprivate init(songs: [Song]) {
+        self.songs = songs
+    }
+    
+    fileprivate init() { }
+    
+    private var songs = [Song]()
+    
+    func audioPlayerDataType(forAudioPlayer audioPlayer: AudioPlayer) -> AudioPlayerDataType {
+        return .online
+    }
+    
+    func numberOfSongs(ofAudioPlayer audioPlayer: AudioPlayer) -> Int {
+        return songs.count
+    }
+    
+    func audioPlayer(_ audioPlayer: AudioPlayer, songAtIndex index: Int) -> Song? {
+        return songs[index]
+    }
+    
+}
+
+class AudioPlayerOfflineDefaultDataSource: AudioPlayerOfflineDataSource {
+    
+    fileprivate init(songs: [Song]) {
+        self.songs = songs
+    }
+    
+    fileprivate init() { }
+    
+    private var songs = [Song]()
+    
+    func audioPlayerDataType(forAudioPlayer audioPlayer: AudioPlayer) -> AudioPlayerDataType {
+        return .offline
+    }
+    
+    func numberOfSongs(ofAudioPlayer audioPlayer: AudioPlayer) -> Int {
+        return songs.count
+    }
+    
+    func audioPlayer(_ audioPlayer: AudioPlayer, songAtIndex index: Int) -> Song? {
+        return songs[index]
+    }
+    
+}
+
 class AudioPlayerDefaultDataSource: AudioPlayerDataSource {
+    
+    init(onlineDataSource: AudioPlayerOnlineDataSource?, offlineDataSource: AudioPlayerOfflineDataSource?) {
+        defaultOnlineDataSource = onlineDataSource
+        defaultOfflineDataSource = offlineDataSource
+        
+        if offlineDataSource != nil { self.type = .offline }
+        if onlineDataSource != nil { self.type = .online }
+    }
+    
+    convenience init(onlineDataSource: AudioPlayerOnlineDataSource) {
+        self.init(onlineDataSource: onlineDataSource, offlineDataSource: nil)
+    }
+    
+    convenience init(offlineDataSource: AudioPlayerOfflineDataSource) {
+        self.init(onlineDataSource: nil, offlineDataSource: offlineDataSource)
+    }
+    
+    convenience init(onlineSongs: [Song]) {
+        self.init(onlineDataSource: AudioPlayerOnlineDefaultDataSource(songs: onlineSongs))
+    }
+    
+    convenience init(offlineSongs: [Song]) {
+        self.init(offlineDataSource: AudioPlayerOfflineDefaultDataSource(songs: offlineSongs))
+    }
+    
+    convenience init() {
+        self.init(onlineSongs: [])
+    }
     
     var defaultOnlineDataSource: AudioPlayerOnlineDataSource!
     var defaultOfflineDataSource: AudioPlayerOfflineDataSource!

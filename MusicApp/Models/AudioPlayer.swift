@@ -7,13 +7,64 @@
 //
 
 import Foundation
+import AVFoundation
 
 // MARK: Audio Player
 
 class AudioPlayer {
     
+    fileprivate init() { }
+    
     var dataSource: AudioPlayerDataSource?
     var delegate: AudioPlayerDelegate?
+    
+    var type: AudioPlayerDataType? {
+        didSet {
+            guard let type = type else { return }
+            (dataSource as? AudioPlayerDefaultDataSource)?.type = type
+        }
+    }
+    
+    func playSong(atIndex index: Int) {
+        guard let song = self.dataSource?.audioPlayer(self, songAtIndex: index) else { return }
+        self.play(song: song)
+    }
+    
+    func play() {
+        self.playSong(atIndex: 0)
+    }
+    
+    fileprivate func play(song: Song) {
+    
+    }
+    
+}
+
+class OnlineAudioPlayer: AudioPlayer {
+    
+    override convenience init() {
+        self.init(songs: [])
+    }
+    
+    init(songs: [Song]) {
+        super.init()
+        self.type = .online
+        self.dataSource = AudioPlayerDefaultDataSource(onlineSongs: songs)
+    }
+    
+}
+
+class OfflineAudioPlayer: AudioPlayer {
+    
+    override convenience init() {
+        self.init(songs: [])
+    }
+    
+    init(songs: [Song]) {
+        super.init()
+        self.type = .offline
+        self.dataSource = AudioPlayerDefaultDataSource(offlineSongs: songs)
+    }
     
 }
 
@@ -37,7 +88,6 @@ protocol AudioPlayerDataSource {
 
 protocol AudioPlayerOnlineDataSource: AudioPlayerDataSource {
     
-    
 }
 
 protocol AudioPlayerOfflineDataSource: AudioPlayerDataSource {
@@ -46,7 +96,7 @@ protocol AudioPlayerOfflineDataSource: AudioPlayerDataSource {
 
 extension AudioPlayerOnlineDataSource {
     
-    func audioPlayerDataType(forAudioPlayerDataSource dataSource: AudioPlayerDataSource) -> AudioPlayerDataType {
+    func audioPlayerDataType(forAudioPlayer audioPlayer: AudioPlayer) -> AudioPlayerDataType {
         return .online
     }
     
@@ -54,7 +104,7 @@ extension AudioPlayerOnlineDataSource {
 
 extension AudioPlayerOfflineDataSource {
     
-    func audioPlayerDataType(forAudioPlayerDataSource dataSource: AudioPlayerDataSource) -> AudioPlayerDataType {
+    func audioPlayerDataType(forAudioPlayer audioPlayer: AudioPlayer) -> AudioPlayerDataType {
         return .offline
     }
     
@@ -69,37 +119,17 @@ protocol AudioPlayerDelegate {
     
 }
 
-protocol AudioPlayerOnlineDelegate: AudioPlayerDelegate {
-    
-}
-
-protocol AudioPlayerOfflineDelegate: AudioPlayerDelegate {
-    
-}
-
-extension AudioPlayerOnlineDelegate {
-    
-}
-
-extension AudioPlayerOfflineDelegate {
-    
-}
-
 // MARK: Default Classes
 
 class AudioPlayerOnlineDefaultDataSource: AudioPlayerOnlineDataSource {
     
-    fileprivate init(songs: [Song]) {
+    init(songs: [Song]) {
         self.songs = songs
     }
     
-    fileprivate init() { }
+    init() { }
     
     private var songs = [Song]()
-    
-    func audioPlayerDataType(forAudioPlayer audioPlayer: AudioPlayer) -> AudioPlayerDataType {
-        return .online
-    }
     
     func numberOfSongs(ofAudioPlayer audioPlayer: AudioPlayer) -> Int {
         return songs.count
@@ -113,17 +143,13 @@ class AudioPlayerOnlineDefaultDataSource: AudioPlayerOnlineDataSource {
 
 class AudioPlayerOfflineDefaultDataSource: AudioPlayerOfflineDataSource {
     
-    fileprivate init(songs: [Song]) {
+    init(songs: [Song]) {
         self.songs = songs
     }
     
-    fileprivate init() { }
+    init() { }
     
     private var songs = [Song]()
-    
-    func audioPlayerDataType(forAudioPlayer audioPlayer: AudioPlayer) -> AudioPlayerDataType {
-        return .offline
-    }
     
     func numberOfSongs(ofAudioPlayer audioPlayer: AudioPlayer) -> Int {
         return songs.count
@@ -138,8 +164,8 @@ class AudioPlayerOfflineDefaultDataSource: AudioPlayerOfflineDataSource {
 class AudioPlayerDefaultDataSource: AudioPlayerDataSource {
     
     init(onlineDataSource: AudioPlayerOnlineDataSource?, offlineDataSource: AudioPlayerOfflineDataSource?) {
-        defaultOnlineDataSource = onlineDataSource
-        defaultOfflineDataSource = offlineDataSource
+        self.onlineDataSource = onlineDataSource
+        self.offlineDataSource = offlineDataSource
         
         if offlineDataSource != nil { self.type = .offline }
         if onlineDataSource != nil { self.type = .online }
@@ -165,16 +191,16 @@ class AudioPlayerDefaultDataSource: AudioPlayerDataSource {
         self.init(onlineSongs: [])
     }
     
-    var defaultOnlineDataSource: AudioPlayerOnlineDataSource!
-    var defaultOfflineDataSource: AudioPlayerOfflineDataSource!
+    var onlineDataSource: AudioPlayerOnlineDataSource!
+    var offlineDataSource: AudioPlayerOfflineDataSource!
     
-    private lazy var dataSource: AudioPlayerDataSource! = self.defaultOnlineDataSource
+    private lazy var dataSource: AudioPlayerDataSource! = self.onlineDataSource
     
     var type: AudioPlayerDataType = .online {
         didSet {
             switch type {
-            case .online:  dataSource = self.defaultOnlineDataSource
-            case .offline: dataSource = self.defaultOfflineDataSource
+            case .online:  dataSource = self.onlineDataSource
+            case .offline: dataSource = self.offlineDataSource
             }
         }
     }

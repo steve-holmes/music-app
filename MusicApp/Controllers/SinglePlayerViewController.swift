@@ -10,6 +10,24 @@ import UIKit
 
 class SinglePlayerViewController: UIViewController, PlayerChildViewController {
     
+    // MARK: Actions
+    
+    @IBAction private func shareButtonTapped(_ button: UIButton) {
+        
+    }
+    
+    @IBAction private func addButtonTapped(_ button: UIButton) {
+        
+    }
+    
+    @IBAction private func favoriateButtonTapped(_ button: UIButton) {
+    
+    }
+    
+    @IBAction private func donwloadButtonTapped(_ button: UIButton) {
+        
+    }
+    
     var delegate: PlayerChildViewControllerDelegate?
     
     // MARK: Gesture Recognizer

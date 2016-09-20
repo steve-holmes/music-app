@@ -60,7 +60,10 @@ class LoginViewController: UIViewController {
         
         self.view.backgroundColor = ColorConstants.background
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didRecognizeByTapGestureRecognizer(_:))))
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         setupLogo()
         setupTextFields()
         setupConstraints()

@@ -177,7 +177,7 @@ class PlayerViewController: UIViewController {
     
     // MARK: Private properties
     
-    fileprivate var audioPlayer = AudioPlayer()
+    fileprivate var audioPlayer: AudioPlayer = OnlineAudioPlayer()
     
     fileprivate var animationDuration: TimeInterval = 0.35
     fileprivate var animationVerticalEnabled: Bool?
@@ -211,7 +211,10 @@ class PlayerViewController: UIViewController {
         // 238DFF
         pageControl.currentPageIndicatorTintColor = UIColor(red: 35/255, green: 141/255, blue: 1, alpha: 1)
         pageControl.pageIndicatorTintColor = UIColor.white
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         setupDetails()
         setupProgressBar()
         setupButtons()
@@ -257,11 +260,11 @@ class PlayerViewController: UIViewController {
         self.playButton.circleWidth = 2
         self.playButton.circleColor = UIColor.white.withAlphaComponent(0.5)
         
-        let backImage = self.backwardButton.image(for: UIControlState())?.image(withColor: UIColor.white)
-        let forwardImage = self.forwardButton.image(for: UIControlState())?.image(withColor: UIColor.white)
+        let backImage = self.backwardButton.image(for: .normal)?.image(withColor: UIColor.white)
+        let forwardImage = self.forwardButton.image(for: .normal)?.image(withColor: UIColor.white)
         
-        self.backwardButton.setImage(backImage, for: UIControlState())
-        self.forwardButton.setImage(forwardImage, for: UIControlState())
+        self.backwardButton.setImage(backImage, for: .normal)
+        self.forwardButton.setImage(forwardImage, for: .normal)
         
         let width = self.view.bounds.size.width
         let buttonWidth = self.backwardButton.frame.size.width

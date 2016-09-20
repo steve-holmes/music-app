@@ -60,7 +60,10 @@ class HomeViewController: UIViewController {
         panGestureRecognizer.isEnabled = false
         middleView.addGestureRecognizer(panGestureRecognizer)
         innerView.addGestureRecognizer(panGestureRecognizer)
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         setupPlayerView()
         setupPlayButton()
         state = .online

@@ -2028,7 +2028,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="Vfg-bp-luO" firstAttribute="leading" secondItem="exv-1a-QWK" secondAttribute="leading" constant="3" id="05q-HI-lks"/>
                                     <constraint firstAttribute="bottom" secondItem="Vfg-bp-luO" secondAttribute="bottom" id="ZKs-Yo-LMc"/>

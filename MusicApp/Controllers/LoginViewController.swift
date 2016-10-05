@@ -60,10 +60,7 @@ class LoginViewController: UIViewController {
         
         self.view.backgroundColor = ColorConstants.background
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didRecognizeByTapGestureRecognizer(_:))))
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        
         setupLogo()
         setupTextFields()
         setupConstraints()
@@ -92,8 +89,8 @@ class LoginViewController: UIViewController {
         emailImageView.image = emailImage
         passwordImageView.image = passwordImage
         
-        self.emailTextField.delegate = self
-        self.passwordTextField.delegate = self
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
     }
     
     fileprivate func setupConstraints() {

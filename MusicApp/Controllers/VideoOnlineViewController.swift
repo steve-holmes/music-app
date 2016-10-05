@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VideoOnlineViewController: UIViewController {
+class VideoOnlineViewController: OnlineChildViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     

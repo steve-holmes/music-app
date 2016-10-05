@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SingerOnlineViewController: UIViewController {
+class SingerOnlineViewController: OnlineChildViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     

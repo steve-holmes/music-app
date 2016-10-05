@@ -301,6 +301,44 @@ class HomeViewController: UIViewController {
         )
     }
     
+    // MARK: Tab Bar
+    
+    private var toolbarState: BarState = .visible
+    
+    fileprivate func tabBarDidMoveToTop(distance: CGFloat) {
+        switch toolbarState {
+        case .visible: break
+        default: break
+        }
+    }
+    
+    fileprivate func tabBarDidMoveToBottom(distance: CGFloat) {
+        switch toolbarState {
+        case .hidden: break
+        default: break
+        }
+    }
+    
+    private func tabBarSetPropertiesForChangedState(distance: CGFloat, toState state: BarState) {
+        
+    }
+    
+    private func tabBarSetPropertiesForEndedState(distance: CGFloat, toState state: BarState) {
+        switch state {
+        case .visible:  self.tabBarDidVisible()
+        case .hidden:   self.tabBarDidHidden()
+        default: break
+        }
+    }
+    
+    private func tabBarDidHidden() {
+        
+    }
+    
+    private func tabBarDidVisible() {
+        
+    }
+    
     // MARK: Status bar
     
     fileprivate var statusBarStyle: UIStatusBarStyle = .default {
@@ -413,6 +451,26 @@ extension HomeViewController: PlayerViewControllerDelegate {
                 completion?()
             }
         )
+    }
+    
+}
+
+extension HomeViewController: OnlineChildViewControllerDelegate {
+    
+    func onlineChildViewController(_ controller: OnlineChildViewController, didMoveUpByOffset offset: CGFloat) {
+        
+    }
+    
+    func onlineChildViewController(_ controller: OnlineChildViewController, didMoveDownByOffset offset: CGFloat) {
+        
+    }
+    
+    func onlineChildViewController(_ controller: OnlineChildViewController, didMoveUpByVelocity velocity: CGFloat) {
+        
+    }
+    
+    func onlineChildViewController(_ controller: OnlineChildViewController, didMoveDownByVelocity velocity: CGFloat) {
+        
     }
     
 }

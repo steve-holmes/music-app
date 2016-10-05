@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RankOnlineViewController: UIViewController {
+class RankOnlineViewController: OnlineChildViewController {
 
     @IBOutlet weak var tableView: UITableView!
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SongOnlineViewController: UIViewController {
+class SongOnlineViewController: OnlineChildViewController {
 
     @IBOutlet weak var tableView: UITableView!
     

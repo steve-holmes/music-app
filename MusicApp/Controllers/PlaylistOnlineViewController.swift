@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlaylistOnlineViewController: UIViewController {
+class PlaylistOnlineViewController: OnlineChildViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeOnlineViewController: UIViewController {
+class HomeOnlineViewController: OnlineChildViewController {
 
     // MARK: Outlets
     
@@ -20,11 +20,8 @@ class HomeOnlineViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.backgroundColor = ColorConstants.background
-        
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 100
     }
     
     fileprivate let headerViewRatio: CGFloat = 0.07 // height = ratio * width
@@ -49,7 +46,7 @@ extension HomeOnlineViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch (indexPath as NSIndexPath).section {
+        switch indexPath.section {
         case 0: return self.tableView(tableView, pageCellForRowAtIndexPath: indexPath)
         case 1: return self.tableView(tableView, playlistCellForRowAtIndexPath: indexPath)
         case 2: return self.tableView(tableView, videoCellForRowAtIndexPath: indexPath)
@@ -72,7 +69,7 @@ extension HomeOnlineViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.playlistHomeOnlineTable, for: indexPath)
         
 //        if let playlistCell = cell as? PlaylistHomeOnlineTableViewCell {
-//            
+//
 //        }
         
         return cell
@@ -135,6 +132,19 @@ extension HomeOnlineViewController: UITableViewDelegate {
         }
         
         return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 1 {
+            let itemPadding = (tableView.cellForRow(at: indexPath) as? PlaylistHomeOnlineTableViewCell)?.itemPadding ?? 8
+            return ScreenSize.screenWidth - 2 * itemPadding
+        }
+        
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

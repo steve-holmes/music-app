@@ -30,18 +30,17 @@ class CircleButton: UIButton {
     
     fileprivate func commonInit() {
         self.adjustsImageWhenHighlighted = false
-        self.layer.cornerRadius = self.bounds.size.width / 2
-        
         update()
     }
     
     // MARK: Update UI
     
     fileprivate func update() {
+        self.layer.cornerRadius = self.bounds.size.width / 2
         self.layer.borderColor = circleColor.cgColor
         self.layer.borderWidth = circleWidth
         
-        let defaultImage = self.image(for: UIControlState())?.image(withColor: iconColor)
+        let defaultImage = self.image(for: .normal)?.image(withColor: iconColor)
         
         var highlightedImage = UIImage
             .image(withColor: iconColor, withSize: self.bounds.size)
@@ -57,7 +56,7 @@ class CircleButton: UIButton {
             )
         }
         
-        self.setImage(defaultImage, for: UIControlState())
+        self.setImage(defaultImage, for: .normal)
         self.setImage(highlightedImage, for: .highlighted)
     }
 

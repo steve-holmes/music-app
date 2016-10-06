@@ -16,8 +16,10 @@ class OnlineViewController: UIViewController {
     @IBOutlet fileprivate weak var topView: UIView!
     @IBOutlet fileprivate weak var headerView: UIView!
     @IBOutlet fileprivate weak var searchView: UIView!
+    @IBOutlet fileprivate weak var indicatorView: UIView!
     @IBOutlet fileprivate weak var contentView: UIView!
 
+    @IBOutlet weak var topViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var searchViewTopConstraint: NSLayoutConstraint!
     
     // MARK: View Controller Lifecycle
@@ -25,8 +27,7 @@ class OnlineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        topView.backgroundColor = ColorConstants.background
-        
+        setupSearchViews()
 //        setupSearchController()
         setupPageMenu()
         
@@ -74,6 +75,14 @@ class OnlineViewController: UIViewController {
     
     // MARK: Search Controller
     
+    private func setupSearchViews() {
+        topView.backgroundColor = ColorConstants.background
+        headerView.backgroundColor = ColorConstants.background
+        headerView.clipsToBounds = true
+        searchView.backgroundColor = ColorConstants.background
+        indicatorView.backgroundColor = ColorConstants.main
+    }
+    
     fileprivate var searchController: UISearchController!
     
     private func setupSearchController() {
@@ -118,9 +127,20 @@ class OnlineViewController: UIViewController {
     // MARK: Search Bar
     
     private var searchState: BarState = .visible
+    private let durationForSearchBar: TimeInterval = 0.5
+    private lazy var searchSize: CGFloat = self.searchView.bounds.size.height
     
     fileprivate func searchBarDidMoveToTop(distance: CGFloat) {
         switch searchState {
+        case .visible:
+            searchState = .changed
+            fallthrough
+        case .changed:
+            if distance < searchSize {
+                self.searchBarSetPropertiesForChangedState(distance: distance, toState: .hidden)
+            } else {
+                self.searchBarSetPropertiesForEndState(state: .hidden)
+            }
         case .hidden: break
         default: break
         }
@@ -128,37 +148,89 @@ class OnlineViewController: UIViewController {
     
     fileprivate func searchBarDidMoveToBottom(distance: CGFloat) {
         switch searchState {
+        case .hidden:
+            searchState = .changed
+            fallthrough
+        case .changed:
+            if distance < searchSize {
+                self.searchBarSetPropertiesForChangedState(distance: distance, toState: .visible)
+            } else {
+                self.searchBarSetPropertiesForEndState(state: .visible)
+            }
         case .visible: break
         default: break
         }
     }
     
     fileprivate func searchBarMoveUp(velocity: CGFloat, animated: Bool) {
-        print(#function)
+        if !animated {
+            return
+        }
+        
+        switch searchState {
+        case .visible:
+            UIView.animate(withDuration: durationForSearchBar) {
+                self.searchBarDidHidden()
+            }
+            searchState = .hidden
+        case .hidden: break
+        default: break
+        }
     }
     
     fileprivate func searchBarMoveDown(velocity: CGFloat, animated: Bool) {
-        print(#function)
+        if !animated {
+            return
+        }
+        
+        switch searchState {
+        case .hidden:
+            UIView.animate(withDuration: durationForSearchBar) {
+                self.searchBarDidVisible()
+            }
+            searchState = .visible
+        case .visible: break
+        default: break
+        }
     }
     
-    private func searchBarSetPropertiesForChangedState(distance: CGFloat) {
+    private func searchBarSetPropertiesForChangedState(distance: CGFloat, toState state: BarState) {
     
-    }
-    
-    private func searchBarSetPropertiesForEndState(distance: CGFloat, toState state: BarState) {
+        func setPropertiesToVisible() {
+            searchViewTopConstraint.constant = distance - searchSize
+            topViewBottomConstraint.constant = -searchViewTopConstraint.constant
+        }
+        
+        func setPropertiesToHidden() {
+            searchViewTopConstraint.constant = -distance
+            topViewBottomConstraint.constant = distance
+        }
+        
         switch state {
-        case .visible:  self.searchBarDidVisible()
-        case .hidden:   self.searchBarDidHidden()
+        case .visible: setPropertiesToVisible()
+        case .hidden:  setPropertiesToHidden()
+        default: break
+        }
+    }
+    
+    private func searchBarSetPropertiesForEndState(state: BarState) {
+        switch state {
+        case .visible:  self.searchState = .visible; self.searchBarDidVisible()
+        case .hidden:   self.searchState = .hidden; self.searchBarDidHidden()
         default: break
         }
     }
     
     private func searchBarDidHidden() {
-        
+        searchViewTopConstraint.constant = -searchSize
+        topViewBottomConstraint.constant = searchSize
+        view.layoutIfNeeded()
     }
     
     private func searchBarDidVisible() {
-        
+        searchViewTopConstraint.constant = 0
+        topViewBottomConstraint.constant = 0
+        view.layoutIfNeeded()
     }
 
 }

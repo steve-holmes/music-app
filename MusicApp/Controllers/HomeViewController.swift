@@ -31,6 +31,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var playerViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var middleViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var innerViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomViewBottomContraint: NSLayoutConstraint!
     
     // MARK: Actions
     
@@ -51,6 +52,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupNotifications()
+        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didRecognizeOnMiddleViewByTapGestureRecognizer(_:)))
         middleView.addGestureRecognizer(tapGestureRecognizer)
         innerView.addGestureRecognizer(tapGestureRecognizer)
@@ -67,6 +70,35 @@ class HomeViewController: UIViewController {
         setupPlayerView()
         setupPlayButton()
         state = .online
+    }
+    
+    // MARK: Notifications
+    
+    private func setupNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didReceiveDidMoveByOffsetNotification(_:)),
+            name: OnlineChildViewController.didMoveByOffsetNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didReceiveDidMoveByVelocityNotification(_:)),
+            name: OnlineChildViewController.didMoveByVelocityNotification,
+            object: nil
+        )
+    }
+    
+    func didReceiveDidMoveByOffsetNotification(_ notification: Notification) {
+        guard let offset = notification.userInfo?["offset"] as? CGFloat,
+            let controller = notification.object as? OnlineChildViewController else { return }
+        self.onlineChildViewController(controller, didMoveByOffset: offset)
+    }
+    
+    func didReceiveDidMoveByVelocityNotification(_ notification: Notification) {
+        guard let velocity = notification.userInfo?["velocity"] as? CGFloat,
+            let controller = notification.object as? OnlineChildViewController else { return }
+        self.onlineChildViewController(controller, didMoveByVelocity: velocity)
     }
     
     // MARK: Child View Controllers
@@ -99,6 +131,7 @@ class HomeViewController: UIViewController {
     
     fileprivate lazy var centerPointBottomConstant: CGFloat = 7 * self.view.bounds.size.width / 100
     fileprivate lazy var outerRadius: CGFloat = 3 * self.view.bounds.size.width / 100
+    fileprivate lazy var middleSize: CGFloat = self.view.bounds.size.width / 5
     fileprivate lazy var bottomConstant: CGFloat = 10
     
     fileprivate func setupPlayButton() {
@@ -303,17 +336,68 @@ class HomeViewController: UIViewController {
     
     // MARK: Tab Bar
     
-    private var toolbarState: BarState = .visible
+    private var tabbarState: BarState = .visible
+    private let durationForTabbar: TimeInterval = 0.5
     
     fileprivate func tabBarDidMoveToTop(distance: CGFloat) {
-        switch toolbarState {
+        switch tabbarState {
+        case .hidden:
+            tabbarState = .changed
+            fallthrough
+        case .changed:
+            if distance < self.middleSize {
+                self.tabBarSetPropertiesForChangedState(distance: distance, toState: .visible)
+            } else {
+                self.tabBarSetPropertiesForEndedState(.visible)
+            }
         case .visible: break
         default: break
         }
     }
     
     fileprivate func tabBarDidMoveToBottom(distance: CGFloat) {
-        switch toolbarState {
+        switch tabbarState {
+        case .visible:
+            tabbarState = .changed
+            fallthrough
+        case .changed:
+            if distance < self.middleSize {
+                self.tabBarSetPropertiesForChangedState(distance: distance, toState: .hidden)
+            } else {
+                self.tabBarSetPropertiesForEndedState(.hidden)
+            }
+        case .hidden: break
+        default: break
+        }
+    }
+    
+    fileprivate func tabBarMoveUp(velocity: CGFloat, animated: Bool) {
+        if !animated {
+            return
+        }
+        
+        switch tabbarState {
+        case .hidden:
+            UIView.animate(withDuration: durationForTabbar) {
+                self.tabBarDidVisible()
+            }
+            tabbarState = .visible
+        case .visible: break
+        default: break
+        }
+    }
+    
+    fileprivate func tabBarMoveDown(velocity: CGFloat, animated: Bool) {
+        if !animated {
+            return
+        }
+        
+        switch tabbarState {
+        case .visible:
+            UIView.animate(withDuration: durationForTabbar) {
+                self.tabBarDidHidden()
+            }
+            tabbarState = .hidden
         case .hidden: break
         default: break
         }
@@ -321,22 +405,46 @@ class HomeViewController: UIViewController {
     
     private func tabBarSetPropertiesForChangedState(distance: CGFloat, toState state: BarState) {
         
+        func setPropertiesToVisibleState() {
+            bottomViewBottomContraint.constant = distance - middleSize
+            middleViewBottomConstraint.constant = distance - middleSize - bottomConstant
+            innerViewBottomConstraint.constant = distance + outerRadius - middleSize - bottomConstant
+            
+        }
+        
+        func setPropertiesToHiddenState() {
+            bottomViewBottomContraint.constant = -distance
+            middleViewBottomConstraint.constant = -distance - bottomConstant
+            innerViewBottomConstraint.constant = outerRadius - distance - bottomConstant
+        }
+        
+        switch state {
+        case .visible: setPropertiesToVisibleState()
+        case .hidden: setPropertiesToHiddenState()
+        default: break
+        }
     }
     
-    private func tabBarSetPropertiesForEndedState(distance: CGFloat, toState state: BarState) {
+    private func tabBarSetPropertiesForEndedState(_ state: BarState) {
         switch state {
-        case .visible:  self.tabBarDidVisible()
-        case .hidden:   self.tabBarDidHidden()
+        case .visible:  self.tabbarState = .visible; self.tabBarDidVisible()
+        case .hidden:   self.tabbarState = .hidden;  self.tabBarDidHidden()
         default: break
         }
     }
     
     private func tabBarDidHidden() {
-        
+        bottomViewBottomContraint.constant = -middleSize
+        middleViewBottomConstraint.constant = -middleSize - bottomConstant
+        innerViewBottomConstraint.constant = outerRadius - middleSize - bottomConstant
+        view.layoutIfNeeded()
     }
     
     private func tabBarDidVisible() {
-        
+        bottomViewBottomContraint.constant = 0
+        middleViewBottomConstraint.constant = -bottomConstant
+        innerViewBottomConstraint.constant = outerRadius - bottomConstant
+        view.layoutIfNeeded()
     }
     
     // MARK: Status bar
@@ -458,19 +566,19 @@ extension HomeViewController: PlayerViewControllerDelegate {
 extension HomeViewController: OnlineChildViewControllerDelegate {
     
     func onlineChildViewController(_ controller: OnlineChildViewController, didMoveUpByOffset offset: CGFloat) {
-        
+        self.tabBarDidMoveToTop(distance: offset)
     }
     
     func onlineChildViewController(_ controller: OnlineChildViewController, didMoveDownByOffset offset: CGFloat) {
-        
+        self.tabBarDidMoveToBottom(distance: offset)
     }
     
     func onlineChildViewController(_ controller: OnlineChildViewController, didMoveUpByVelocity velocity: CGFloat) {
-        
+        self.tabBarMoveUp(velocity: velocity, animated: true)
     }
     
     func onlineChildViewController(_ controller: OnlineChildViewController, didMoveDownByVelocity velocity: CGFloat) {
-        
+        self.tabBarMoveDown(velocity: velocity, animated: true)
     }
     
 }

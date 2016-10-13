@@ -9,39 +9,43 @@
 import UIKit
 
 class TempViewController: UIViewController {
-
-    @IBOutlet weak var bottomView: CircleButton!
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    
+    let session = URLSession.shared
+    let baseURL = "http://localhost:3000/songs"
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        bottomView.image = UIImage(named: "background")
-        bottomView.borderWidth = 2
-        bottomView.circleColor = UIColor.red
-        bottomView.type = .border
-        bottomView.type = .inner
-        bottomView.type = .border
-        
-        let size = min(self.view.bounds.size.width, self.view.bounds.size.height)
-        let sampleButton = CircleButton(frame: CGRect(x: 0, y: 0, width: size, height: size))
-        
-        self.view.addSubview(sampleButton)
-        sampleButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        sampleButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-        sampleButton.widthAnchor.constraint(equalToConstant: size).isActive = true
-        sampleButton.heightAnchor.constraint(equalToConstant: size).isActive = true
-        self.view.layoutIfNeeded()
-        
-        sampleButton.image = UIImage(named: "background")
-        sampleButton.borderWidth = 2
-        sampleButton.circleColor = UIColor.red
-        sampleButton.type = .border
-        
-        bottomView.addTarget(self, action: #selector(handleEvent), forEvent: .touchUpInside)
-        sampleButton.addTarget(self, action: #selector(handleEvent), forEvent: .touchUpInside)
+        getSongs()
+        getSongById(1)
+        getSongs(title: "Samsung")
     }
     
-    func handleEvent() {
-        print(#function)
+    private func getData(url: URL) {
+        let request = URLRequest(url: url)
+        session.dataTask(with: request) { (data, response, error) in
+            print(#function)
+            guard let rawData = data else { return }
+            do {
+                let jsonData = try JSONSerialization.jsonObject(with: rawData, options: .allowFragments)
+                print(jsonData)
+            } catch {}
+            }.resume()
+    }
+    
+    private func getSongs() {
+        let url = URL(string: baseURL)!
+        getData(url: url)
+    }
+    
+    private func getSongById(_ id: Int) {
+        let url = URL(string: baseURL + "/\(id)")!
+        getData(url: url)
+    }
+    
+    private func getSongs(title: String) {
+        let url = URL(string: baseURL + "/title/\(title)")!
+        getData(url: url)
     }
 
 }

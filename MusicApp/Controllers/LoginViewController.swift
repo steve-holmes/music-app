@@ -16,6 +16,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginBarButton: UIButton!
     @IBOutlet weak var registerBarButton: UIButton!
     
+    @IBOutlet weak var dismissButton: CircleButton!
+    
     @IBOutlet weak var emailImageView: UIImageView!
     @IBOutlet weak var passwordImageView: UIImageView!
     
@@ -61,6 +63,7 @@ class LoginViewController: UIViewController {
         self.view.backgroundColor = ColorConstants.background
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didRecognizeByTapGestureRecognizer(_:))))
         
+        setupDismissButton()
         setupLogo()
         setupTextFields()
         setupConstraints()
@@ -78,12 +81,21 @@ class LoginViewController: UIViewController {
     
     // MARK: Initialization
     
-    fileprivate func setupLogo() {
+    private func setupDismissButton() {
+        let dismissColor = UIColor.white.withAlphaComponent(0.7)
+        dismissButton.image = UIImage(named: "LeftArrow")?.image(withColor: dismissColor)
+        dismissButton.borderWidth = 1
+        dismissButton.circleColor = dismissColor
+        dismissButton.type = .inner
+        dismissButton.addTarget(self, action: #selector(backButtonTapped), forEvent: .touchUpInside)
+    }
+    
+    private func setupLogo() {
         let image = logoImageView.image?.image(withColor: UIColor.white)
         logoImageView.image = image
     }
     
-    fileprivate func setupTextFields() {
+    private func setupTextFields() {
         let emailImage = emailImageView.image?.image(withColor: UIColor.white)
         let passwordImage = passwordImageView.image?.image(withColor: UIColor.white)
         emailImageView.image = emailImage
@@ -93,7 +105,7 @@ class LoginViewController: UIViewController {
         passwordTextField.delegate = self
     }
     
-    fileprivate func setupConstraints() {
+    private func setupConstraints() {
         let width = self.view.bounds.size.width
         self.loginBarButtonCenterXConstraint.constant = -width / 4
         self.registerBarButtonCenterXConstraint.constant = width / 4

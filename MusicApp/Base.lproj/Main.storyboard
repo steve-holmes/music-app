@@ -111,24 +111,8 @@
                     <view key="view" contentMode="scaleToFill" id="Hjb-Ne-IUa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xDR-E6-KVa" customClass="SecondCircleButton" customModule="MusicApp" customModuleProvider="target">
-                                <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="133.5" id="orc-Pe-ZU7"/>
-                                </constraints>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="xDR-E6-KVa" firstAttribute="leading" secondItem="Hjb-Ne-IUa" secondAttribute="leading" id="2xK-JG-PGp"/>
-                            <constraint firstItem="wew-Z5-78D" firstAttribute="top" secondItem="xDR-E6-KVa" secondAttribute="bottom" id="Z5f-fP-xJa"/>
-                            <constraint firstAttribute="trailing" secondItem="xDR-E6-KVa" secondAttribute="trailing" id="lEz-ta-OVo"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="bottomView" destination="xDR-E6-KVa" id="fAh-vQ-v64"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pej-aS-6yE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -404,7 +388,7 @@
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PageHomeOnlineTableCell" id="gBu-3h-M0z" customClass="PageHomeOnlineTableViewCell" customModule="MusicApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gBu-3h-M0z" id="AfM-ew-voH">
                                             <frame key="frameInset" width="375" height="44"/>
@@ -413,7 +397,7 @@
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlaylistHomeOnlineTableCell" rowHeight="205" id="0WQ-6I-bzV" customClass="PlaylistHomeOnlineTableViewCell" customModule="MusicApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="100" width="375" height="205"/>
+                                        <rect key="frame" x="0.0" y="99.5" width="375" height="205"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0WQ-6I-bzV" id="PwN-S4-CRD">
                                             <frame key="frameInset" width="375" height="205"/>
@@ -600,7 +584,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VideoHomeOnlineTableCell" rowHeight="183" id="ExD-sa-NPf" customClass="VideoHomeOnlineTableViewCell" customModule="MusicApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="305" width="375" height="183"/>
+                                        <rect key="frame" x="0.0" y="304.5" width="375" height="183"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ExD-sa-NPf" id="7Wb-mF-GGo">
                                             <frame key="frameInset" width="375" height="183"/>
@@ -725,7 +709,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SongHomeOnlineTableCell" id="9Ai-e8-Ctg" customClass="SongHomeOnlineTableViewCell" customModule="MusicApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="488" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="487.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9Ai-e8-Ctg" id="gnt-Pq-nrt">
                                             <frame key="frameInset" width="375" height="44"/>
@@ -939,7 +923,7 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SongOnlineTableCell" id="3M2-G3-CXs">
-                                        <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3M2-G3-CXs" id="ul1-pd-uPa">
                                             <frame key="frameInset" width="375" height="44"/>
@@ -1036,7 +1020,7 @@
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RankOnlineTableCell" rowHeight="181" id="zD7-fq-QOS" customClass="RankOnlineTableViewCell" customModule="MusicApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="56" width="375" height="181"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="181"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zD7-fq-QOS" id="pjT-Qx-lHU">
                                             <frame key="frameInset" width="375" height="181"/>
@@ -1372,7 +1356,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="VideoOnlineCollectionCell" id="JiB-l2-pf3" customClass="VideoOnlineCollectionViewCell" customModule="MusicApp" customModuleProvider="target">
-                                        <rect key="frame" x="13" y="0.0" width="350" height="200"/>
+                                        <rect key="frame" x="12.5" y="0.0" width="350" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="350" height="200"/>
@@ -1579,14 +1563,14 @@
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OfflineTableCell" textLabel="nwd-FC-0Vi" style="IBUITableViewCellStyleDefault" id="N0v-mE-pjA">
-                                        <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="N0v-mE-pjA" id="sVx-vc-ocj">
-                                            <frame key="frameInset" width="375" height="43"/>
+                                            <frame key="frameInset" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nwd-FC-0Vi">
-                                                    <frame key="frameInset" minX="15" width="345" height="43"/>
+                                                    <frame key="frameInset" minX="15" width="345" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                     <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1716,14 +1700,6 @@
                                             <constraint firstItem="u48-kb-WeV" firstAttribute="leading" secondItem="eQh-N8-4Et" secondAttribute="leading" id="gYJ-vn-5X0"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VmA-K5-T9e">
-                                        <state key="normal" title="Back">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="backButtonTapped" destination="hAi-PC-ozi" eventType="touchUpInside" id="CBk-Uz-rgr"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v1N-7A-sVv">
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="21"/>
                                         <state key="normal" title="LOGIN">
@@ -1742,21 +1718,28 @@
                                             <action selector="registerBarButtonTapped" destination="hAi-PC-ozi" eventType="touchUpInside" id="uuG-cO-cFV"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P2h-ae-i7g" customClass="CircleButton" customModule="MusicApp" customModuleProvider="target">
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="0fj-Vi-9N6"/>
+                                            <constraint firstAttribute="width" secondItem="P2h-ae-i7g" secondAttribute="height" multiplier="1:1" id="Sbq-FE-8vC"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="R06-KN-44E" secondAttribute="bottom" id="11X-2t-Mml"/>
                                     <constraint firstAttribute="bottom" secondItem="XOM-3Y-42h" secondAttribute="bottom" id="14i-e7-Hei"/>
+                                    <constraint firstItem="P2h-ae-i7g" firstAttribute="leading" secondItem="o1u-5r-Tfv" secondAttribute="leading" constant="20" id="3Ze-BO-JjV"/>
                                     <constraint firstItem="u6a-bB-0mA" firstAttribute="top" secondItem="o1u-5r-Tfv" secondAttribute="top" constant="20" id="AC0-Dc-Wk5"/>
                                     <constraint firstItem="v1N-7A-sVv" firstAttribute="centerX" secondItem="o1u-5r-Tfv" secondAttribute="centerX" constant="-100" id="Ftd-8l-qnc"/>
                                     <constraint firstItem="qgP-a1-GMT" firstAttribute="leading" secondItem="o1u-5r-Tfv" secondAttribute="leading" id="IRU-f7-zIi"/>
-                                    <constraint firstItem="VmA-K5-T9e" firstAttribute="top" secondItem="o1u-5r-Tfv" secondAttribute="top" constant="20" id="Ksb-5w-fS2"/>
                                     <constraint firstItem="R06-KN-44E" firstAttribute="leading" secondItem="o1u-5r-Tfv" secondAttribute="leading" id="Lst-tY-aY9"/>
                                     <constraint firstItem="eQh-N8-4Et" firstAttribute="centerX" secondItem="o1u-5r-Tfv" secondAttribute="centerX" id="OhX-7b-ivX"/>
+                                    <constraint firstItem="P2h-ae-i7g" firstAttribute="top" secondItem="o1u-5r-Tfv" secondAttribute="top" constant="20" id="P5J-LQ-0ji"/>
                                     <constraint firstItem="eQh-N8-4Et" firstAttribute="top" secondItem="u6a-bB-0mA" secondAttribute="bottom" constant="10" id="Qaq-Uo-97Q"/>
                                     <constraint firstItem="R06-KN-44E" firstAttribute="top" secondItem="o1u-5r-Tfv" secondAttribute="top" id="ez0-Ck-tlp"/>
                                     <constraint firstAttribute="trailing" secondItem="qgP-a1-GMT" secondAttribute="trailing" id="hwQ-ar-fbl"/>
-                                    <constraint firstItem="VmA-K5-T9e" firstAttribute="leading" secondItem="o1u-5r-Tfv" secondAttribute="leading" constant="20" id="hyf-Ae-JqD"/>
                                     <constraint firstAttribute="bottom" secondItem="v1N-7A-sVv" secondAttribute="bottom" id="iqG-73-rcV"/>
                                     <constraint firstAttribute="trailing" secondItem="R06-KN-44E" secondAttribute="trailing" id="jiR-xN-RDl"/>
                                     <constraint firstAttribute="bottom" secondItem="qgP-a1-GMT" secondAttribute="bottom" id="pxV-A6-ff1"/>
@@ -1971,6 +1954,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="dismissButton" destination="P2h-ae-i7g" id="5at-ww-nPi"/>
                         <outlet property="emailImageView" destination="QsT-EC-Qa1" id="CEv-AW-Oaf"/>
                         <outlet property="emailTextField" destination="IFf-r9-Cze" id="LyW-DU-R9o"/>
                         <outlet property="loginBarButton" destination="v1N-7A-sVv" id="CRd-Yf-zfP"/>
@@ -2227,7 +2211,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tmL-X0-Hgx" id="Ypb-R2-vAg">
-                                            <frame key="frameInset" width="375" height="43"/>
+                                            <frame key="frameInset" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>

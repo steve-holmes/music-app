@@ -28,7 +28,7 @@ class OnlineViewController: UIViewController {
         super.viewDidLoad()
         
         setupSearchViews()
-//        setupSearchController()
+        setupSearchController()
         setupPageMenu()
         
         setupNotifications()
@@ -86,19 +86,25 @@ class OnlineViewController: UIViewController {
     fileprivate var searchController: UISearchController!
     
     private func setupSearchController() {
-        searchController = UISearchController()
-        self.display(contentController: searchController, in: self.headerView)
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        self.definesPresentationContext = true
         
-        if let searchView = searchController.view {
-            searchView.translatesAutoresizingMaskIntoConstraints = false
-            
-            self.headerView.addConstraints([
-                searchView.topAnchor.constraint(equalTo: self.headerView.topAnchor),
-                searchView.bottomAnchor.constraint(equalTo: self.headerView.bottomAnchor),
-                searchView.leadingAnchor.constraint(equalTo: self.headerView.leadingAnchor),
-                searchView.trailingAnchor.constraint(equalTo: self.headerView.trailingAnchor)
-            ])
-        }
+        searchController.searchBar.placeholder = "Search..."
+        searchController.searchBar.isTranslucent = false
+        searchController.searchBar.searchBarStyle = .prominent
+        searchController.searchBar.barTintColor = ColorConstants.background
+        
+        let searchTextField = UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self])
+        searchTextField.font = UIFont.avenirNextFont().withSize(15)
+        let searchBarButton = UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self])
+        searchBarButton.setTitleTextAttributes([
+            NSFontAttributeName: UIFont.avenirNextFont().withSize(15),
+            NSForegroundColorAttributeName: ColorConstants.text
+        ], for: .normal)
+        
+        searchView.addSubview(searchController.searchBar)
     }
     
     
@@ -120,7 +126,34 @@ class OnlineViewController: UIViewController {
             return controller
         }
         
-        self.pageMenu = CAPSPageMenu(viewControllers: childControllers, frame: self.contentView.bounds, pageMenuOptions: nil)
+        let bottomColor = UIColor(white: 200/255, alpha: 1)
+        let menuColor = UIColor(white: 250/255, alpha: 1)
+        
+        let colorOptions: [CAPSPageMenuOption] = [
+            .viewBackgroundColor(ColorConstants.background),
+            .scrollMenuBackgroundColor(menuColor),
+            .selectionIndicatorColor(ColorConstants.main),
+            .selectedMenuItemLabelColor(ColorConstants.main),
+            .unselectedMenuItemLabelColor(ColorConstants.text),
+            .bottomMenuHairlineColor(bottomColor)
+        ]
+        
+        let dimensionOptions: [CAPSPageMenuOption] = [
+            .menuHeight(35),
+            .menuMargin(0),
+            .selectionIndicatorHeight(1.5)
+        ]
+        
+        let otherOptions: [CAPSPageMenuOption] = [
+            .menuItemFont(UIFont.avenirNextFont().withSize(15)),
+            .scrollAnimationDurationOnMenuItemTap(300)
+        ]
+        
+        self.pageMenu = CAPSPageMenu(
+            viewControllers: childControllers,
+            frame: self.contentView.bounds,
+            pageMenuOptions: colorOptions + dimensionOptions + otherOptions
+        )
         self.contentView.addSubview(self.pageMenu.view)
     }
     
@@ -131,6 +164,8 @@ class OnlineViewController: UIViewController {
     private lazy var searchSize: CGFloat = self.searchView.bounds.size.height
     
     fileprivate func searchBarDidMoveToTop(distance: CGFloat) {
+        if searchController.isActive { return }
+        
         switch searchState {
         case .visible:
             searchState = .changed
@@ -163,6 +198,8 @@ class OnlineViewController: UIViewController {
     }
     
     fileprivate func searchBarMoveUp(velocity: CGFloat, animated: Bool) {
+        if searchController.isActive { return }
+        
         if !animated {
             return
         }
@@ -233,6 +270,16 @@ class OnlineViewController: UIViewController {
         view.layoutIfNeeded()
     }
 
+}
+
+// MARK: UISearchResultsUpdating
+
+extension OnlineViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        print(#function)
+    }
+    
 }
 
 // MARK: OnlineChildViewController

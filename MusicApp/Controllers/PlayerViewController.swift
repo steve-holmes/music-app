@@ -257,7 +257,9 @@ class PlayerViewController: UIViewController {
     }
     
     fileprivate func setupButtons() {
-        self.playButton.circleWidth = 2
+        let playImage = UIImage(named: "Play")
+        self.playButton.image = playImage?.image(withColor: UIColor.white)
+        self.playButton.borderWidth = 2
         self.playButton.circleColor = UIColor.white.withAlphaComponent(0.5)
         
         let backImage = self.backwardButton.image(for: .normal)?.image(withColor: UIColor.white)

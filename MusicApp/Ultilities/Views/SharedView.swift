@@ -65,10 +65,10 @@ class SharedView: UIView {
         containerView.addSubview(emailButton)
         containerView.addSubview(copyLinkButton)
         
-        facebookButton.setTitle("Facebook", for: .normal)
-        smsButton.setTitle("SMS", for: .normal)
-        emailButton.setTitle("Email", for: .normal)
-        copyLinkButton.setTitle("Copy Link", for: .normal)
+        facebookButton.image = UIImage(named: "Facebook")
+        smsButton.image = UIImage(named: "SMS")
+        emailButton.image = UIImage(named: "email")
+        copyLinkButton.image = UIImage(named: "CopyLink")
         titleLabel.text = "Hello World"
         
         self.backgroundColor = UIColor.white
@@ -165,20 +165,20 @@ class SharedView: UIView {
     
     // MARK: Target-Action Methods
     
-    func addTargetForFacebookButton(_ target: Any?, action: Selector, for events: UIControlEvents) {
-        facebookButton.addTarget(target, action: action, for: events)
+    func addTargetForFacebookButton(_ target: NSObjectProtocol?, action: Selector, for events: UIControlEvents) {
+        facebookButton.addTarget(target, action: action, forEvent: events)
     }
     
-    func addTargetForSMSButton(_ target: Any?, action: Selector, for events: UIControlEvents) {
-        smsButton.addTarget(target, action: action, for: events)
+    func addTargetForSMSButton(_ target: NSObjectProtocol?, action: Selector, for events: UIControlEvents) {
+        smsButton.addTarget(target, action: action, forEvent: events)
     }
     
-    func addTargetForEmailButton(_ target: Any?, action: Selector, for events: UIControlEvents) {
-        emailButton.addTarget(target, action: action, for: events)
+    func addTargetForEmailButton(_ target: NSObjectProtocol?, action: Selector, for events: UIControlEvents) {
+        emailButton.addTarget(target, action: action, forEvent: events)
     }
     
-    func addTargetForCopyLinkButton(_ target: Any?, action: Selector, for events: UIControlEvents) {
-        copyLinkButton.addTarget(target, action: action, for: events)
+    func addTargetForCopyLinkButton(_ target: NSObjectProtocol?, action: Selector, for events: UIControlEvents) {
+        copyLinkButton.addTarget(target, action: action, forEvent: events)
     }
 
 }
@@ -187,24 +187,8 @@ class SharedView: UIView {
 
 fileprivate class SharedButton: CircleButton {
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
-    }
-    
     convenience init(width: CGFloat) {
-        self.init(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width)))
-    }
-    
-    private func commonInit() {
-        self.setTitleColor(ColorConstants.text, for: .normal)
-        self.titleLabel?.font = UIFont.avenirNextFont()
-        self.translatesAutoresizingMaskIntoConstraints = false
+        self.init(frame: CGRect(x: 0, y: 0, width: width, height: width))
     }
     
 }

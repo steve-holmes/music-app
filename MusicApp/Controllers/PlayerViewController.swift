@@ -123,6 +123,7 @@ class PlayerViewController: UIViewController {
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var topVisualEffectView: UIVisualEffectView!
     @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var dismissButton: CircleButton!
     
     @IBOutlet weak var outerView: UIView!
     @IBOutlet fileprivate weak var leftView: UIView!
@@ -257,10 +258,20 @@ class PlayerViewController: UIViewController {
     }
     
     fileprivate func setupButtons() {
+        let dismissColor = UIColor.white.withAlphaComponent(0.7)
+        dismissButton.backgroundColor = UIColor.clear
+        dismissButton.image = UIImage(named: "BottomArrow")?.image(withColor: dismissColor)
+        dismissButton.circleColor = dismissColor
+        dismissButton.borderWidth = 1
+        dismissButton.type = .inner
+        dismissButton.addTarget(self, action: #selector(dismissButtonTapped), forEvent: .touchUpInside)
+        
         let playImage = UIImage(named: "Play")
         self.playButton.image = playImage?.image(withColor: UIColor.white)
+        self.playButton.scale = 0.65
         self.playButton.borderWidth = 2
         self.playButton.circleColor = UIColor.white.withAlphaComponent(0.5)
+        self.playButton.type = .border
         
         let backImage = self.backwardButton.image(for: .normal)?.image(withColor: UIColor.white)
         let forwardImage = self.forwardButton.image(for: .normal)?.image(withColor: UIColor.white)

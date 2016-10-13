@@ -2040,23 +2040,21 @@
                                     <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="aAO-55-Yg7">
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </pageControl>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="25q-l2-r3f">
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <state key="normal" title="Dismiss">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="dismissButtonTapped" destination="EJ1-Jo-al4" eventType="touchUpInside" id="4Uc-U9-4ds"/>
-                                        </connections>
-                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FKM-x4-0Hf" customClass="CircleButton" customModule="MusicApp" customModuleProvider="target">
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="5tc-uX-nXG"/>
+                                            <constraint firstAttribute="width" secondItem="FKM-x4-0Hf" secondAttribute="height" multiplier="1:1" id="H3a-dX-phW"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="25q-l2-r3f" firstAttribute="top" secondItem="BQJ-wv-D1E" secondAttribute="top" constant="25" id="BdV-GA-sbO"/>
                                     <constraint firstAttribute="bottom" secondItem="aAO-55-Yg7" secondAttribute="bottom" id="JH6-W1-6Is"/>
                                     <constraint firstAttribute="trailing" secondItem="aAO-55-Yg7" secondAttribute="trailing" id="Pnh-Yu-FGc"/>
-                                    <constraint firstItem="25q-l2-r3f" firstAttribute="leading" secondItem="BQJ-wv-D1E" secondAttribute="leading" constant="20" id="dUk-Vt-ntj"/>
+                                    <constraint firstItem="FKM-x4-0Hf" firstAttribute="top" secondItem="BQJ-wv-D1E" secondAttribute="top" constant="25" id="afH-aK-RvG"/>
                                     <constraint firstItem="aAO-55-Yg7" firstAttribute="top" secondItem="BQJ-wv-D1E" secondAttribute="top" constant="10" id="dkJ-7X-vc2"/>
                                     <constraint firstItem="aAO-55-Yg7" firstAttribute="leading" secondItem="BQJ-wv-D1E" secondAttribute="leading" id="exh-Wa-gfp"/>
+                                    <constraint firstItem="FKM-x4-0Hf" firstAttribute="leading" secondItem="BQJ-wv-D1E" secondAttribute="leading" constant="20" id="lOc-Zn-V4w"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AgI-rR-kQe">
@@ -2183,6 +2181,7 @@
                         <outlet property="backwardButton" destination="QOx-OP-thn" id="JQi-h6-6r6"/>
                         <outlet property="backwardButtonLeadingSpaceConstraint" destination="QoT-YL-mcd" id="lDp-74-DRd"/>
                         <outlet property="currentTimeLabel" destination="Vfg-bp-luO" id="Tii-RI-xSh"/>
+                        <outlet property="dismissButton" destination="FKM-x4-0Hf" id="hoA-p0-gOL"/>
                         <outlet property="durationLabel" destination="d06-oB-3VN" id="AT8-9x-yVn"/>
                         <outlet property="forwardButton" destination="55d-aI-cwT" id="Sdu-iN-Qi6"/>
                         <outlet property="forwardButtonTrailingConstraint" destination="9gA-eA-rJK" id="wj7-vl-kBY"/>

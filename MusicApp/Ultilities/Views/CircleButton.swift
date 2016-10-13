@@ -17,7 +17,7 @@ class CircleButton: UIView {
     
     // MARK: Properties
 
-    var type: CircleButtonType = .border
+    var type: CircleButtonType = .border { didSet { update() } }
     
     var image: UIImage? = nil {
         didSet {
@@ -29,6 +29,7 @@ class CircleButton: UIView {
     var borderWidth: CGFloat = 1 { didSet { update() } }
     var circleColor: UIColor = UIColor.white { didSet { update() } }
     var innerColor: UIColor? = UIColor.black.withAlphaComponent(0.7) { didSet { update() } }
+    var scale: CGFloat = 0.5 { didSet { update() } }
     
     // MARK: Subviews
     
@@ -149,8 +150,8 @@ class CircleButton: UIView {
         imageViewConstraints = [
             imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            imageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
-            imageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.7)
+            imageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: scale),
+            imageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: scale)
         ]
         self.addConstraints(imageViewConstraints)
         

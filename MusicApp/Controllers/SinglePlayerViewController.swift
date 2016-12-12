@@ -28,7 +28,7 @@ class SinglePlayerViewController: UIViewController, PlayerChildViewController {
         
     }
     
-    var delegate: PlayerChildViewControllerDelegate?
+    weak var delegate: PlayerChildViewControllerDelegate?
     
     // MARK: Gesture Recognizer
     

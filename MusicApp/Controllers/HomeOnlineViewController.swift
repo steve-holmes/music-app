@@ -28,8 +28,20 @@ class HomeOnlineViewController: OnlineChildViewController {
     
     func moreButtonTapped(_ button: UIButton) {
         let section = Int(button.currentTitle!)!
-        print(section)
+        NotificationCenter.default.post(
+            name: HomeOnlineViewController.moreButtonTappedNotification,
+            object: self,
+            userInfo: ["section": section]
+        )
     }
+    
+    // MARK: Notifications
+    
+    static let moreButtonTappedNotification = NSNotification.Name("HomeOnlineViewControllerMoreButtonTappedNotification");
+    
+    // MARK: Section Footer
+    
+    fileprivate let footerHeight: CGFloat = 6
 }
 
 // MARK: UITableViewDataSource
@@ -107,6 +119,7 @@ extension HomeOnlineViewController: UITableViewDelegate {
         let height = width * headerViewRatio
         
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        headerView.backgroundColor = ColorConstants.background
         
         let headerLabel = UILabel(frame: CGRect(x: 8, y: 0, width: width / 2 - 8, height: height))
         headerLabel.font = UIFont.avenirNextFont().withSize(15)
@@ -134,6 +147,17 @@ extension HomeOnlineViewController: UITableViewDelegate {
         return headerView
     }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView(frame: CGRect(
+            x: 0,
+            y: 0,
+            width: tableView.bounds.size.width,
+            height: self.tableView(tableView, heightForFooterInSection: section)
+        ))
+        footerView.backgroundColor = ColorConstants.background
+        return footerView
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 1 {
             let itemPadding = (tableView.cellForRow(at: indexPath) as? PlaylistHomeOnlineTableViewCell)?.itemPadding ?? 8
@@ -154,7 +178,7 @@ extension HomeOnlineViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 3 { return 90 }
-        return 6
+        return footerHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

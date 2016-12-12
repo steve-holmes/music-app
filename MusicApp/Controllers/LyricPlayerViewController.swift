@@ -106,7 +106,7 @@ class LyricPlayerViewController: UIViewController, PlayerChildViewController {
     
     // MARK: Delegation
     
-    var delegate: PlayerChildViewControllerDelegate?
+    weak var delegate: PlayerChildViewControllerDelegate?
     
     // MARK: Gesture Recognizer
     

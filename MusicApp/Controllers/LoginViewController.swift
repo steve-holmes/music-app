@@ -18,13 +18,17 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var dismissButton: CircleButton!
     
+    @IBOutlet weak var emailContainerView: UIView!
     @IBOutlet weak var emailImageView: UIImageView!
-    @IBOutlet weak var passwordImageView: UIImageView!
-    
     @IBOutlet weak var emailTextField: UITextField!
+    
+    @IBOutlet weak var passwordContainerView: UIView!
+    @IBOutlet weak var passwordImageView: UIImageView!
     @IBOutlet weak var passwordTextField: UITextField!
     
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var facebookButton: UIButton!
+    @IBOutlet weak var googleButton: UIButton!
     
     @IBOutlet weak var loginBarButtonCenterXConstraint: NSLayoutConstraint!
     @IBOutlet weak var registerBarButtonCenterXConstraint: NSLayoutConstraint!
@@ -64,6 +68,7 @@ class LoginViewController: UIViewController {
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didRecognizeByTapGestureRecognizer(_:))))
         
         setupDismissButton()
+        setupButtons()
         setupLogo()
         setupTextFields()
         setupConstraints()
@@ -90,6 +95,14 @@ class LoginViewController: UIViewController {
         dismissButton.addTarget(self, action: #selector(backButtonTapped), forEvent: .touchUpInside)
     }
     
+    private func setupButtons() {
+        let radius: CGFloat = 5
+        
+        loginButton.layer.cornerRadius = radius
+        facebookButton.layer.cornerRadius = radius
+        googleButton.layer.cornerRadius = radius
+    }
+    
     private func setupLogo() {
         let image = logoImageView.image?.image(withColor: UIColor.white)
         logoImageView.image = image
@@ -103,6 +116,13 @@ class LoginViewController: UIViewController {
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        
+        let radius = ScreenSize.borderRadius
+        emailContainerView.layer.cornerRadius = radius
+        passwordContainerView.layer.cornerRadius = radius
+        
+        emailContainerView.clipsToBounds = true
+        passwordContainerView.clipsToBounds = true
     }
     
     private func setupConstraints() {

@@ -18,7 +18,7 @@ enum LyricPlayerFontStyle {
 
 // MARK: Procotol LyricPlayerTableViewCellDelegate
 
-protocol LyricPlayerTableViewCellDelegate {
+protocol LyricPlayerTableViewCellDelegate: class {
     
     func lyricPlayerCell(_ lyricCell: LyricPlayerTableViewCell, didSelectLyricFontStyle lyricFontStyle: LyricPlayerFontStyle)
     
@@ -57,6 +57,6 @@ class LyricPlayerTableViewCell: UITableViewCell {
     
     // MARK: Delegation
     
-    var delegate: LyricPlayerTableViewCellDelegate?
+    weak var delegate: LyricPlayerTableViewCellDelegate?
 
 }

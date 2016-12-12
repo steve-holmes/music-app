@@ -17,6 +17,7 @@ class SongOnlineViewController: OnlineChildViewController {
 
         tableView.backgroundColor = ColorConstants.background
         tableView.dataSource = self
+        tableView.delegate = self
     }
 
 }
@@ -30,6 +31,14 @@ extension SongOnlineViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.songOnlineTable, for: indexPath)
         return cell
+    }
+    
+}
+
+extension SongOnlineViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 5
     }
     
 }

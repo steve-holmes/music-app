@@ -10,14 +10,14 @@ import UIKit
 
 // MARK: Protocols
 
-protocol PlayerViewControllerDelegate {
+protocol PlayerViewControllerDelegate: class {
     
     func playerViewController(_ controller: PlayerViewController, didRecognizeByPanGestureRecognizer gestureRecognizer: UIPanGestureRecognizer, completion: (() -> Void)?)
     func dismiss(playerViewController controller: PlayerViewController, completion: (() -> Void)?)
     
 }
 
-protocol PlayerChildViewControllerDelegate {
+protocol PlayerChildViewControllerDelegate: class {
     
     var duration: Int { get }
     var currentTime: Int { get }
@@ -174,7 +174,7 @@ class PlayerViewController: UIViewController {
     
     // MARK: Delegation
     
-    var delegate: PlayerViewControllerDelegate?
+    weak var delegate: PlayerViewControllerDelegate?
     
     // MARK: Private properties
     

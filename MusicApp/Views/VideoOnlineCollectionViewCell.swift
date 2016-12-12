@@ -30,6 +30,9 @@ class VideoOnlineCollectionViewCell: UICollectionViewCell {
         
         addGradientLayer(forView: numberOfListeningView)
         addGradientLayer(forView: durationView)
+        
+        self.layer.cornerRadius = ScreenSize.borderRadius
+        self.clipsToBounds = true
     }
     
     fileprivate func addGradientLayer(forView view: UIView) {

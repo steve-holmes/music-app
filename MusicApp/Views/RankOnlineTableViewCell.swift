@@ -10,6 +10,8 @@ import UIKit
 
 class RankOnlineTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var containerView: UIView!
+    
     @IBOutlet fileprivate weak var rankTitle: UILabel!
     @IBOutlet fileprivate weak var rankImageView: UIImageView!
     @IBOutlet fileprivate weak var firstRankItemLabel: UILabel!
@@ -25,6 +27,9 @@ class RankOnlineTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupBadgets()
+        
+        containerView.layer.cornerRadius = ScreenSize.borderRadius
+        containerView.clipsToBounds = true
     }
     
     fileprivate func setupBadgets() {

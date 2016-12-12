@@ -13,6 +13,8 @@ struct ScreenSize {
     static let screenHeight         = UIScreen.main.bounds.size.height
     static let screenMaxLength      = max(ScreenSize.screenWidth, ScreenSize.screenHeight)
     static let screenMinLength      = min(ScreenSize.screenWidth, ScreenSize.screenHeight)
+    
+    static let borderRadius: CGFloat = 2.5
 }
 
 struct DeviceType {

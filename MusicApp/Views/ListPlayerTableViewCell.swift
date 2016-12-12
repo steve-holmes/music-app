@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ListPlayerTableViewCellDelegate {
+protocol ListPlayerTableViewCellDelegate: class {
     
     
     
@@ -18,7 +18,7 @@ class ListPlayerTableViewCell: UITableViewCell {
     
     // MARK: Delegation
     
-    var delegate: ListPlayerTableViewCellDelegate?
+    weak var delegate: ListPlayerTableViewCellDelegate?
 
     // MARK: Table View Cell Lifecycle
     

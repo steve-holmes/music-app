@@ -17,6 +17,7 @@ class RankOnlineViewController: OnlineChildViewController {
 
         tableView.backgroundColor = ColorConstants.background
         tableView.dataSource = self
+        tableView.delegate = self
     }
 
 }
@@ -31,5 +32,9 @@ extension RankOnlineViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.rankOnlineTable, for: indexPath)
         return cell
     }
+    
+}
+
+extension RankOnlineViewController: UITableViewDelegate {
     
 }

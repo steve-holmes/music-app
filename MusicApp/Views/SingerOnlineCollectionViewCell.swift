@@ -16,4 +16,9 @@ class SingerOnlineCollectionViewCell: UICollectionViewCell {
     @IBOutlet fileprivate weak var singerImageView: UIImageView!
     @IBOutlet fileprivate weak var singerNameLabel: UILabel!
     
+    override func awakeFromNib() {
+        self.layer.cornerRadius = ScreenSize.borderRadius
+        self.clipsToBounds = true
+    }
+    
 }

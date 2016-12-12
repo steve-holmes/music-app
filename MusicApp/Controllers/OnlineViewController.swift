@@ -59,6 +59,12 @@ class OnlineViewController: UIViewController {
             name: OnlineChildViewController.didMoveByVelocityNotification,
             object: nil
         )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didReceiveMoreButtonTappedNotification(_:)),
+            name: HomeOnlineViewController.moreButtonTappedNotification,
+            object: nil
+        )
     }
     
     func didReceiveDidMoveByOffsetNotification(_ notification: Notification) {
@@ -71,6 +77,11 @@ class OnlineViewController: UIViewController {
         guard let velocity = notification.userInfo?["velocity"] as? CGFloat,
             let controller = notification.object as? OnlineChildViewController else { return }
         self.onlineChildViewController(controller, didMoveByVelocity: velocity)
+    }
+    
+    func didReceiveMoreButtonTappedNotification(_ notification: Notification) {
+        guard let section = notification.userInfo?["section"] as? Int else { return }
+        moveToPageAtHomeIndex(section)
     }
     
     // MARK: Search Controller
@@ -141,11 +152,11 @@ class OnlineViewController: UIViewController {
         let dimensionOptions: [CAPSPageMenuOption] = [
             .menuHeight(35),
             .menuMargin(0),
-            .selectionIndicatorHeight(1.5)
+            .selectionIndicatorHeight(3)
         ]
         
         let otherOptions: [CAPSPageMenuOption] = [
-            .menuItemFont(UIFont.avenirNextFont().withSize(15)),
+            .menuItemFont(UIFont(name: "AvenirNext-Medium", size: 15)!),
             .scrollAnimationDurationOnMenuItemTap(300)
         ]
         
@@ -155,6 +166,18 @@ class OnlineViewController: UIViewController {
             pageMenuOptions: colorOptions + dimensionOptions + otherOptions
         )
         self.contentView.addSubview(self.pageMenu.view)
+    }
+    
+    func moveToPageAtHomeIndex(_ index: Int) {
+        var pageIndex = 0
+        switch index {
+        case 1: pageIndex = 1
+        case 2: pageIndex = 3
+        case 3: pageIndex = 2
+        default: break
+        }
+        
+        pageMenu.moveToPage(pageIndex)
     }
     
     // MARK: Search Bar
@@ -304,15 +327,15 @@ class OnlineChildViewController: UIViewController, UIScrollViewDelegate {
             NotificationCenter.default.post(
                 name: OnlineChildViewController.didMoveByOffsetNotification,
                 object: self,
-                userInfo: ["offset": offset]
+                userInfo: ["offset": offset * 0.4]
             )
         }
     }
     
     // MARK: OnlineChildViewController - Velocity and Translation
     
-    private var maximumVelocityY: CGFloat = 2000
-    private var maximumTranslationY: CGFloat = 200
+    private var maximumVelocityY: CGFloat = 1000
+    private var maximumTranslationY: CGFloat = 150
     
     // MARK: OnlineChildViewController - Notification Names
     

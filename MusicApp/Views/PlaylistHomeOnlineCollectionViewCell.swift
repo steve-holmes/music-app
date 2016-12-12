@@ -20,4 +20,9 @@ class PlaylistHomeOnlineCollectionViewCell: UICollectionViewCell {
     @IBOutlet fileprivate weak var singerNameLabel: UILabel!
     @IBOutlet fileprivate weak var numberOfListeningLabel: UILabel!
     
+    override func awakeFromNib() {
+        self.layer.cornerRadius = ScreenSize.borderRadius
+        self.clipsToBounds = true
+    }
+    
 }

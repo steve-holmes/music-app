@@ -566,19 +566,19 @@ extension HomeViewController: PlayerViewControllerDelegate {
 extension HomeViewController: OnlineChildViewControllerDelegate {
     
     func onlineChildViewController(_ controller: OnlineChildViewController, didMoveUpByOffset offset: CGFloat) {
-        self.tabBarDidMoveToTop(distance: offset)
-    }
-    
-    func onlineChildViewController(_ controller: OnlineChildViewController, didMoveDownByOffset offset: CGFloat) {
         self.tabBarDidMoveToBottom(distance: offset)
     }
     
+    func onlineChildViewController(_ controller: OnlineChildViewController, didMoveDownByOffset offset: CGFloat) {
+        self.tabBarDidMoveToTop(distance: offset)
+    }
+    
     func onlineChildViewController(_ controller: OnlineChildViewController, didMoveUpByVelocity velocity: CGFloat) {
-        self.tabBarMoveUp(velocity: velocity, animated: true)
+        self.tabBarMoveDown(velocity: velocity, animated: true)
     }
     
     func onlineChildViewController(_ controller: OnlineChildViewController, didMoveDownByVelocity velocity: CGFloat) {
-        self.tabBarMoveDown(velocity: velocity, animated: true)
+        self.tabBarMoveUp(velocity: velocity, animated: true)
     }
     
 }

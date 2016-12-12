@@ -16,7 +16,7 @@ class AudioPlayer {
     fileprivate init() { }
     
     var dataSource: AudioPlayerDataSource?
-    var delegate: AudioPlayerDelegate?
+    weak var delegate: AudioPlayerDelegate?
     
     var type: AudioPlayerDataType? {
         didSet {
@@ -112,7 +112,7 @@ extension AudioPlayerOfflineDataSource {
 
 // MARK: Delegate
 
-protocol AudioPlayerDelegate {
+protocol AudioPlayerDelegate: class {
     
     func audioPlayer(_ audioPlayer: AudioPlayer, didSelectAtIndex: Int)
     func audioPlayer(_ audioPlayer: AudioPlayer, willTransitionFromIndex fromIndex: Int, toIndex: Int)
